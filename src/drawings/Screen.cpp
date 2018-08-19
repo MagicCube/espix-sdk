@@ -4,6 +4,10 @@ Screen::Screen(OLEDDisplay *display) {
   _display = display;
 }
 
+OLEDDisplay *Screen::getDisplay() {
+  return _display;
+}
+
 uint8_t Screen::getBrightness() {
   return _brightness;
 }
@@ -41,18 +45,31 @@ int Screen::getHeight() {
   return _display->getHeight();
 }
 
+void Screen::setDirty() {
+  _dirty = true;
+}
+
 void Screen::begin() {
   _display->init();
   setBrightness(100);
   clear();
 }
 
+void Screen::update() {
+  if (_dirty) {
+    _display->display();
+    _dirty = false;
+    Serial.println("Screen::update(");
+  }
+}
+
 void Screen::clear() {
   _display->clear();
+  _dirty = false;
 }
 
 DrawingContext *Screen::createDrawingContext() {
-  DrawingContext *context = new DrawingContext(_display);
+  DrawingContext *context = new DrawingContext(this);
   context->setSize(getWidth(), getHeight());
   return context;
 }

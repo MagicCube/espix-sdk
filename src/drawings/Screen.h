@@ -12,6 +12,9 @@ public:
   // Construct a Screen object by passing an OLEDDisplay object.
   Screen(OLEDDisplay *_display);
 
+  // Get internal OLEDDisplay object.
+  OLEDDisplay *getDisplay();
+
   // Get brightness percentage of the screen. The range of percentage is 0-100.
   uint8_t getBrightness();
 
@@ -33,8 +36,14 @@ public:
   // Get height of the screen.
   int getHeight();
 
+  // Marks screen as dirty.
+  void setDirty();
+
   // Initialize screen.
   void begin();
+
+  // Update in loop().
+  void update();
 
   // Clear screen.
   void clear();
@@ -47,4 +56,5 @@ private:
   int _brightness;
   bool _flipped;
   bool _mirrored;
+  bool _dirty;
 };
