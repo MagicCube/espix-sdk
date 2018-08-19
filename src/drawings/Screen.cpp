@@ -60,14 +60,19 @@ void Screen::begin() {
 
 void Screen::update() {
   if (_dirty) {
-    _display->clear();
     _display->display();
     _dirty = false;
   }
 }
 
-void Screen::clear() {
+void Screen::clearBuffer() {
   _display->clear();
+  _dirty = true;
+}
+
+void Screen::clear() {
+  clearBuffer();
+  _display->display();
   _dirty = false;
 }
 

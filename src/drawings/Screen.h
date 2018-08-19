@@ -45,7 +45,10 @@ public:
   // Update in loop().
   void update();
 
-  // Clear screen.
+  // Clear buffer of screen.
+  void clearBuffer();
+
+  // Clear screen immediately.
   void clear();
 
   // Create a new DrawingContext object.
