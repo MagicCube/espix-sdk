@@ -8,15 +8,18 @@ Application app(&display);
 DrawingContext *context;
 
 void setup() {
+  Serial.begin(115200);
+
   app.begin();
   app.getScreen()->setOrientation(true);
+
   context = app.getScreen()->createDrawingContext();
+  context->setTextAlign(TEXT_ALIGN_CENTER_BOTH);
+  context->setFontSize(FONT_SIZE_H1);
+  context->drawString("Henry");
 }
 
 void loop() {
-  context->setOffset(20, 0);
-  context->setFontSize(FONT_SIZE_H1);
-  context->drawString("Henry");
-  context->redraw();
+  app.update();
   delay(500);
 }
