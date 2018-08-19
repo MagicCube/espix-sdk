@@ -8,6 +8,14 @@ void AnimationLoop::onTick(AnimationTickEventHandler handler) {
   _onTick = handler;
 }
 
+AnimationOptions AnimationLoop::getOptions() {
+  return _options;
+}
+
+AnimationState AnimationLoop::getState() {
+  return _state;
+}
+
 void AnimationLoop::begin() {
   _state.updateStart = millis();
   _state.lastUpdate = millis();

@@ -13,6 +13,9 @@ class AnimationLoop {
 public:
   AnimationLoop();
 
+  AnimationOptions getOptions();
+  AnimationState getState();
+
   void onTick(AnimationTickEventHandler handler);
 
   void begin();
