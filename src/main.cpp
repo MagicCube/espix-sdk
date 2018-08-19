@@ -1,7 +1,8 @@
 #include <Arduino.h>
 
-#include "espix.h"
 #include <SH1106Wire.h>
+
+#include "espix.h"
 
 SH1106Wire display(0x3c, D1, D2);
 Application app(&display);
