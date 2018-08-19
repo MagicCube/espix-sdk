@@ -60,6 +60,7 @@ void Screen::begin() {
 
 void Screen::update() {
   if (_dirty) {
+    _display->clear();
     _display->display();
     _dirty = false;
   }
