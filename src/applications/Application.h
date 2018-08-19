@@ -4,7 +4,7 @@
 
 #include <OLEDDisplay.h>
 
-#include "drawings/Screen.h"
+#include "../drawings/Screen.h"
 
 // Represent the application of Expix.
 class Application {
