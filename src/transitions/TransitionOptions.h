@@ -3,9 +3,9 @@
 #include <Arduino.h>
 
 enum TRANSITION_DIRECTION {
+  TRANSITION_TO_LEFT = 1,
   TRANSITION_DIRECTION_NONE = 0,
-  TRANSITION_TO_RIGHT = 1,
-  TRANSITION_TO_LEFT = -1
+  TRANSITION_TO_RIGHT = -1
 };
 
 struct TransitionOptions {

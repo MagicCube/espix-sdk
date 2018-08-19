@@ -1,11 +1,11 @@
 #include "Transition.h"
 
-void Transition::start(int startValue, int endValue, int duration) {
+void Transition::start(int startValue, int endValue, TransitionOptions options) {
   _isRunning = true;
   _startValue = startValue;
   _endValue = endValue;
-  _duration = duration;
   _startTime = millis();
+  _options = options;
 }
 
 void Transition::stop() {
@@ -14,10 +14,10 @@ void Transition::stop() {
 
 int Transition::getValue() {
   int elapsedTime = millis() - _startTime;
-  if (elapsedTime >= _duration) {
+  if (elapsedTime >= getDuration()) {
     return _endValue;
   }
-  float percentage = (float)elapsedTime / _duration;
+  float percentage = (float)elapsedTime / getDuration();
   return _startValue + percentage * (_endValue - _startValue);
 }
 
@@ -34,7 +34,11 @@ int Transition::getEndValue() {
 }
 
 int Transition::getDuration() {
-  return _duration;
+  return _options.duration;
+}
+
+TransitionOptions Transition::getOptions() {
+  return _options;
 }
 
 bool Transition::isRunning() {
@@ -42,9 +46,9 @@ bool Transition::isRunning() {
 }
 
 bool Transition::isTimeout() {
-  if (_duration == 0) {
+  if (getDuration() == 0) {
     return false;
   }
   int elapsedTime = millis() - _startTime;
-  return elapsedTime >= _duration;
+  return elapsedTime >= getDuration();
 }

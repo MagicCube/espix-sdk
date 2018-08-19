@@ -12,6 +12,9 @@ public:
   // Construct a Screen object by passing an OLEDDisplay object.
   Screen(OLEDDisplay *_display);
 
+  // Get singlton of Screen.
+  static Screen *getInstance();
+
   // Get internal OLEDDisplay object.
   OLEDDisplay *getDisplay();
 

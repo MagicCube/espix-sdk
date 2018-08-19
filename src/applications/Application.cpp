@@ -7,6 +7,7 @@ Application::Application(OLEDDisplay *display) {
   _screenContext = _screen->createDrawingContext();
   _keyboard = new Keyboard();
   _mainLoop = new AnimationLoop();
+  _rootViewContainer = new ViewContainer();
   __instance = this;
 }
 
@@ -22,6 +23,16 @@ Keyboard *Application::getKeyboard() {
   return _keyboard;
 }
 
+ViewContainer *Application::getRootViewContainer() {
+  return _rootViewContainer;
+}
+
+void Application::setRootView(View *view, TransitionOptions transitionOptions) {
+  if (_rootViewContainer) {
+    _rootViewContainer->setView(view, transitionOptions);
+  }
+}
+
 void Application::onKeyPress(KeyEventHandler onKeyPress) {
   _onKeyPress = onKeyPress;
 }
@@ -34,6 +45,10 @@ void Application::begin() {
 
   _mainLoop->onTick([=](AnimationLoop *target) { _handleTick(); });
   _mainLoop->begin();
+
+  _rootViewContainer->willMount();
+  _rootViewContainer->render(_rootViewContainer->getDrawingContext());
+  _rootViewContainer->didMount();
 }
 
 int Application::update() {
@@ -48,6 +63,14 @@ int Application::update() {
 }
 
 void Application::_handleTick() {
+  if (_rootViewContainer != NULL) {
+    ViewUpdateOptions options;
+    if (_rootViewContainer->shouldUpdate(options)) {
+      _rootViewContainer->update(options);
+      _rootViewContainer->redraw(true);
+      _screen->update();
+    }
+  }
 }
 
 void Application::_handleKeyPress(KeyCode keyCode) {

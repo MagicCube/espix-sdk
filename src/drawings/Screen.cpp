@@ -1,7 +1,14 @@
 #include "Screen.h"
 
+static Screen *__instance = NULL;
+
 Screen::Screen(OLEDDisplay *display) {
   _display = display;
+  __instance = this;
+}
+
+Screen *Screen::getInstance() {
+  return __instance;
 }
 
 OLEDDisplay *Screen::getDisplay() {

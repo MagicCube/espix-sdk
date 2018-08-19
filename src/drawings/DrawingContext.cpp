@@ -36,6 +36,29 @@ void DrawingContext::setOffset(int x, int y) {
   _offsetY = y;
 }
 
+void DrawingContext::setTextAlign(TEXT_ALIGN align) {
+  if (_display == NULL)
+    return;
+  _textAlign = align;
+  _display->setTextAlignment(align);
+}
+
+void DrawingContext::setFont(const uint8_t *fontData) {
+  _display->setFont(fontData);
+}
+
+void DrawingContext::setFontSize(FONT_SIZE size) {
+  if (_display == NULL)
+    return;
+  if (size == FONT_SIZE_H1) {
+    _display->setFont(ArialMT_Plain_24);
+  } else if (size == FONT_SIZE_H2) {
+    _display->setFont(ArialMT_Plain_16);
+  } else {
+    _display->setFont(ArialMT_Plain_10);
+  }
+}
+
 void DrawingContext::drawPixel(int x, int y) {
   if (_display == NULL)
     return;
@@ -167,33 +190,8 @@ int DrawingContext::getStringWidth(String text) {
   return _display->getStringWidth(text);
 }
 
-void DrawingContext::setTextAlign(TEXT_ALIGN align) {
-  if (_display == NULL)
-    return;
-  _textAlign = align;
-  _display->setTextAlignment(align);
-}
-
-void DrawingContext::setFont(const uint8_t *fontData) {
-  _display->setFont(fontData);
-}
-
-void DrawingContext::setFontSize(FONT_SIZE size) {
-  if (_display == NULL)
-    return;
-  if (size == FONT_SIZE_H1) {
-    _display->setFont(ArialMT_Plain_24);
-  } else if (size == FONT_SIZE_H2) {
-    _display->setFont(ArialMT_Plain_16);
-  } else {
-    _display->setFont(ArialMT_Plain_10);
-  }
-}
-
 void DrawingContext::clear() {
-  if (_display == NULL)
-    return;
-  _display->clear();
+  return _display->clear();
 }
 
 int DrawingContext::_x(int value) {

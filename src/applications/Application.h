@@ -7,6 +7,7 @@
 #include "../animations/AnimationLoop.h"
 #include "../drawings/Screen.h"
 #include "../hmis/Keyboard.h"
+#include "../views/ViewContainer.h"
 
 // Represent the application of Expix.
 class Application {
@@ -21,6 +22,13 @@ public:
 
   // Get a Keyboard object represent the current keyboard.
   Keyboard *getKeyboard();
+
+  // Get root ViewContainer of application.
+  ViewContainer *getRootViewContainer();
+
+  // Set root view of application.
+  // It is the shortcut for getRootViewContainer()->setView().
+  void setRootView(View *view, TransitionOptions transitionOptions = TRANSITION_OPTIONS_NONE);
 
   // Fires when key pressed.
   void onKeyPress(KeyEventHandler onKeyPress);
@@ -38,6 +46,7 @@ private:
   DrawingContext *_screenContext;
   Keyboard *_keyboard;
   AnimationLoop *_mainLoop;
+  ViewContainer *_rootViewContainer;
 
   KeyEventHandler _onKeyPress;
 

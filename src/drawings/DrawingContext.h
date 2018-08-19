@@ -34,6 +34,18 @@ public:
   // Set offsetY of context
   void setOffset(int x = 0, int y = 0);
 
+  // Specifies relative to which anchor point
+  // the text is rendered. Available constants:
+  // TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER_BOTH
+  void setTextAlign(TEXT_ALIGN textAlign);
+
+  // Change font
+  void setFont(const uint8_t *fontData);
+
+  // Sets the current font. Available default fonts
+  // ArialMT_Plain_10, ArialMT_Plain_16, ArialMT_Plain_24
+  void setFontSize(FONT_SIZE size);
+
   // Draw a pixel at given position
   void drawPixel(int x, int y);
 
@@ -75,19 +87,7 @@ public:
   // The text will be wrapped to the next line at a space or dash
   void drawMultilineString(String text, int x = -1, int y = -1, int maxLineWidth = -1);
 
-  // Specifies relative to which anchor point
-  // the text is rendered. Available constants:
-  // TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER_BOTH
-  void setTextAlign(TEXT_ALIGN textAlign);
-
-  // Change font
-  void setFont(const uint8_t *fontData);
-
-  // Sets the current font. Available default fonts
-  // ArialMT_Plain_10, ArialMT_Plain_16, ArialMT_Plain_24
-  void setFontSize(FONT_SIZE size);
-
-  // Clear the local pixel buffer
+  // Clear buffer
   void clear();
 
 private:
