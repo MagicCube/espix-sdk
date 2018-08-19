@@ -19,6 +19,9 @@ void Keyboard::registerKey(KeyCode keyCode, uint8_t pin) {
   }
 }
 
+void Keyboard::begin() {
+}
+
 void Keyboard::update() {
   for (int i = 0; i < _keyCount; i++) {
     _keys[i]->update();

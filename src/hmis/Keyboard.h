@@ -3,14 +3,23 @@
 
 #include "Key.h"
 
+// Represent a keyboard.
 class Keyboard {
 public:
+  // Construct a new Keyboard.
   Keyboard();
 
+  // Fires when key pressed.
   void onKeyPress(KeyEventHandler handler);
 
-  void registerKey(KeyCode keyCode, uint8_t pin);
+  // Initialize keyboard.
+  void begin();
+
+  // Update in loop().
   void update();
+
+  // Register keyCode and its mapping pin.
+  void registerKey(KeyCode keyCode, uint8_t pin);
 
 private:
   void _handleKeyPress(KeyCode keyCode);
