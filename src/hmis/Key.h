@@ -25,7 +25,7 @@ public:
   uint8_t getPin();
   KeyState getState();
 
-  void onKeyPress(KeyEventHandler handle);
+  void onKeyPress(KeyEventHandler handler);
 
   void disableRepeat();
   void enableRepeat();
