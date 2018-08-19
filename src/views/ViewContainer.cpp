@@ -34,7 +34,7 @@ void ViewContainer::setView(View *view, TransitionOptions transitionOptions) {
       }
     }
     _viewTransition->start(startValue, 0, transitionOptions);
-    _mountView(view);
+    _mountView(view, startValue);
   } else {
     _unmountingView = NULL;
     _mountView(view);
@@ -96,6 +96,7 @@ void ViewContainer::_mountView(View *view, int offsetX, int offsetY) {
   DrawingContext *viewContainerContext = getDrawingContext();
   DrawingContext *viewContext = _view->getDrawingContext();
   viewContext->setSize(viewContainerContext->getWidth(), viewContainerContext->getHeight());
+  viewContext->setOffset(offsetX, offsetY);
   redraw(true);
   _view->didMount();
 }
