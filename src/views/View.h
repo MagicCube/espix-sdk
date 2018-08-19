@@ -12,10 +12,14 @@ public:
   View();
 
   DrawingContext *getDrawingContext();
-
-  void redraw(bool clearBeforeRendering = false);
   int getWidth();
   int getHeight();
+  bool isDirty();
+  void setDirty();
+  unsigned long getLastUpdate();
+
+  bool tryUpdate(ViewUpdateOptions options);
+  void redraw(bool clearBeforeRendering = false);
 
   // Lifecycle
   virtual void willMount();
@@ -27,12 +31,6 @@ public:
 
   // Event Handlers
   virtual void handleKeyPress(KeyCode keyCode);
-
-protected:
-  unsigned long getLastUpdate();
-  bool isDirty();
-  void setDirty();
-  bool tryUpdate(ViewUpdateOptions options);
 
 private:
   DrawingContext *_drawingContext;

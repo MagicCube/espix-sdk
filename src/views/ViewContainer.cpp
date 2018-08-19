@@ -66,21 +66,18 @@ void ViewContainer::update(ViewUpdateOptions options) {
         _viewTransition->stop();
       }
     }
-    _view->update(options);
+    _view->tryUpdate(options);
   }
 }
 
 void ViewContainer::render(DrawingContext *context) {
-  DrawingContext *viewContext;
   if (_unmountingView) {
-    viewContext = _unmountingView->getDrawingContext();
-    viewContext->setOffset(_unmountingViewOffset);
-    _unmountingView->render(viewContext);
+    _unmountingView->getDrawingContext()->setOffset(_unmountingViewOffset);
+    _unmountingView->redraw();
   }
   if (_view) {
-    viewContext = _view->getDrawingContext();
-    viewContext->setOffset(_viewOffset);
-    _view->render(viewContext);
+    _view->getDrawingContext()->setOffset(_viewOffset);
+    _view->redraw();
   }
 }
 

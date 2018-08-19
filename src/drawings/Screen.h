@@ -4,7 +4,7 @@
 
 #include <OLEDDisplay.h>
 
-#include "DrawingContext.h"
+class DrawingContext;
 
 // Represent an OLED screen, you use this class to get screen resolution or set brightness.
 class Screen {

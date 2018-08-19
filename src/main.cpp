@@ -8,13 +8,13 @@
 
 unsigned long lastUpdate = 0;
 unsigned long lastViewChange = 0;
-int viewIndex = 0;
-int viewCount = 2;
 
 SH1106Wire display(0x3c, D1, D2);
 Application app(&display);
 DrawingContext *context;
 
+int viewCount = 2;
+int viewIndex = 0;
 View *views[] = {new TextView("Hello."), new TextView("Think Different.", FONT_SIZE_H2)};
 
 void setView(int index, TransitionOptions options = TRANSITION_OPTIONS_NONE) {

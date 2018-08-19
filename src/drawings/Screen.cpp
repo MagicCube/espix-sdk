@@ -1,5 +1,7 @@
 #include "Screen.h"
 
+#include "DrawingContext.h"
+
 static Screen *__instance = NULL;
 
 Screen::Screen(OLEDDisplay *display) {

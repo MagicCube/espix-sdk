@@ -18,11 +18,33 @@ int View::getHeight() {
   return _drawingContext->getHeight();
 }
 
+bool View::isDirty() {
+  return _dirty;
+}
+
+void View::setDirty() {
+  _dirty = true;
+}
+
+unsigned long View::getLastUpdate() {
+  return _lastUpdate;
+}
+
+bool View::tryUpdate(ViewUpdateOptions options) {
+  if (options.forceUpdate || isDirty() || shouldUpdate(options)) {
+    update(options);
+    _dirty = false;
+    return true;
+  }
+  return false;
+}
+
 void View::redraw(bool clearBeforeRendering) {
   DrawingContext *context = getDrawingContext();
   if (clearBeforeRendering) {
     context->clear();
   }
+  _lastUpdate = millis();
   render(context);
 }
 
@@ -46,26 +68,4 @@ void View::willUnmount() {
 }
 
 void View::handleKeyPress(KeyCode keyCode) {
-}
-
-unsigned long View::getLastUpdate() {
-  return _lastUpdate;
-}
-
-bool View::isDirty() {
-  return _dirty;
-}
-
-void View::setDirty() {
-  _dirty = true;
-}
-
-bool View::tryUpdate(ViewUpdateOptions options) {
-  if (options.forceUpdate || isDirty() || shouldUpdate(options)) {
-    update(options);
-    _dirty = false;
-    _lastUpdate = millis();
-    return true;
-  }
-  return false;
 }

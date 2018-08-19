@@ -47,7 +47,7 @@ void Application::begin() {
   _mainLoop->begin();
 
   _rootViewContainer->willMount();
-  _rootViewContainer->render(_rootViewContainer->getDrawingContext());
+  _rootViewContainer->redraw(true);
   _rootViewContainer->didMount();
 }
 
