@@ -12,14 +12,11 @@ void setup() {
 
   app.begin();
   app.getScreen()->setOrientation(true);
-
-  context = app.getScreen()->createDrawingContext();
-  context->setTextAlign(TEXT_ALIGN_CENTER_BOTH);
-  context->setFontSize(FONT_SIZE_H1);
-  context->drawString("Henry");
 }
 
 void loop() {
-  app.update();
-  delay(500);
+  int timeBudget = app.update();
+  if (timeBudget > 0) {
+    delay(timeBudget);
+  }
 }
