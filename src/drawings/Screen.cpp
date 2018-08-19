@@ -51,6 +51,9 @@ void Screen::setDirty() {
 
 void Screen::begin() {
   _display->init();
+  _display->resetDisplay();
+  _display->resetOrientation();
+  _display->normalDisplay();
   setBrightness(100);
   clear();
 }
@@ -59,7 +62,6 @@ void Screen::update() {
   if (_dirty) {
     _display->display();
     _dirty = false;
-    Serial.println("Screen::update(");
   }
 }
 
