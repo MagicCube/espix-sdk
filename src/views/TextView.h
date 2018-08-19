@@ -21,7 +21,6 @@ public:
   }
 
   void render(DrawingContext *context) {
-    Serial.println("TextView::render()");
     context->setFontSize(_fontSize);
     context->setTextAlign(_textAlign);
     context->drawString(_text);
