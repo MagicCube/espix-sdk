@@ -1,6 +1,7 @@
 #include "AnimationLoop.h"
 
 AnimationLoop::AnimationLoop() {
+  begin();
 }
 
 void AnimationLoop::onTick(AnimationTickEventHandler handler) {
