@@ -2,7 +2,7 @@
 
 #include <Arduino.h>
 
-#include "View.h"
+#include "espix-core.h"
 
 class TextView : public View {
 public:

@@ -2,9 +2,8 @@
 
 #include <SH1106Wire.h>
 
-#include "espix.h"
-
-#include "views/TextView.h"
+#include "espix-core.h"
+#include "espix-deisgn.h"
 
 unsigned long lastUpdate = 0;
 unsigned long lastViewChange = 0;

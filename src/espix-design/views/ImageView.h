@@ -2,7 +2,7 @@
 
 #include <Arduino.h>
 
-#include "View.h"
+#include "espix-core.h"
 
 class ImageView : public View {
 public:
