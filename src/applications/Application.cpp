@@ -1,13 +1,17 @@
 #include "Application.h"
 
-int x = 0;
-int offsetX = 1;
+static Application *__instance = NULL;
 
 Application::Application(OLEDDisplay *display) {
   _screen = new Screen(display);
   _screenContext = _screen->createDrawingContext();
   _keyboard = new Keyboard();
   _mainLoop = new AnimationLoop();
+  __instance = this;
+}
+
+Application *Application::getInstance() {
+  return __instance;
 }
 
 Screen *Application::getScreen() {
@@ -44,16 +48,6 @@ int Application::update() {
 }
 
 void Application::_handleTick() {
-  x += offsetX;
-  if (x < 0 && offsetX < 0) {
-    offsetX = 1;
-  } else if (x > 70 && offsetX > 0) {
-    offsetX = -1;
-  }
-  _screenContext->clear();
-  _screenContext->setFontSize(FONT_SIZE_H1);
-  _screenContext->setOffset(x, 0);
-  _screenContext->drawString("Hello");
 }
 
 void Application::_handleKeyPress(KeyCode keyCode) {

@@ -14,6 +14,8 @@ public:
   // Construct an Espix application.
   Application(OLEDDisplay *display);
 
+  static Application *getInstance();
+
   // Get a Screen object represent the current screen.
   Screen *getScreen();
 
