@@ -25,6 +25,8 @@ void Application::begin() {
 }
 
 int Application::update() {
+  _keyboard->update();
+  _screen->update();
   return 100;
 }
 
