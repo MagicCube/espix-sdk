@@ -19,7 +19,7 @@ public:
   void onTick(AnimationTickEventHandler handler);
 
   void begin();
-  int update();
+  void update();
 
 private:
   AnimationOptions _options;
