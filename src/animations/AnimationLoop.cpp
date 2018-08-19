@@ -25,17 +25,17 @@ void AnimationLoop::begin() {
 void AnimationLoop::update() {
   unsigned long updateStart = millis();
   unsigned long lastUpdate = _state.lastUpdate;
-  int sinceLastUpdate = updateStart - _state.lastUpdate;
-  int timeBudget = _options.updateInterval - sinceLastUpdate;
+  int elapsedSinceLastUpdate = updateStart - _state.lastUpdate;
+  int timeBudget = _options.updateInterval - elapsedSinceLastUpdate;
   if (timeBudget <= 0) {
     _state.lastUpdate = _state.updateStart;
     _state.updateStart = updateStart;
-    _state.sinceLastUpdate = sinceLastUpdate;
+    _state.elapsedSinceLastUpdate = elapsedSinceLastUpdate;
     _state.timeBudget = timeBudget;
     _fireTickEvent();
     // Recalculate time after tick event has done.
-    _state.sinceLastUpdate = millis() - lastUpdate;
-    _state.timeBudget = _options.updateInterval - _state.sinceLastUpdate;
+    _state.elapsedSinceLastUpdate = millis() - lastUpdate;
+    _state.timeBudget = _options.updateInterval - _state.elapsedSinceLastUpdate;
   }
   _state.timeBudget = timeBudget;
 }

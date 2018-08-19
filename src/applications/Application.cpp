@@ -37,8 +37,8 @@ int Application::update() {
   _keyboard->update();
   _mainLoop->update();
   _screen->update();
-  unsigned long sinceLastUpdate = millis() - _lastUpdate;
-  int timeBudget = _mainLoop->getOptions().updateInterval - sinceLastUpdate;
+  unsigned long elapsedSinceLastUpdate = millis() - _lastUpdate;
+  int timeBudget = _mainLoop->getOptions().updateInterval - elapsedSinceLastUpdate;
   _lastUpdate = updateStart;
   return timeBudget;
 }
