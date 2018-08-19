@@ -31,7 +31,9 @@ public:
 
 
 private:
+  unsigned long _lastUpdate;
   Screen *_screen;
+  DrawingContext *_screenContext;
   Keyboard *_keyboard;
   AnimationLoop *_mainLoop;
 

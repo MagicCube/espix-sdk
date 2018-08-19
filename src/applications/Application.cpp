@@ -1,7 +1,11 @@
 #include "Application.h"
 
+int x = 0;
+int offsetX = 1;
+
 Application::Application(OLEDDisplay *display) {
   _screen = new Screen(display);
+  _screenContext = _screen->createDrawingContext();
   _keyboard = new Keyboard();
   _mainLoop = new AnimationLoop();
 }
@@ -29,14 +33,27 @@ void Application::begin() {
 }
 
 int Application::update() {
+  unsigned long updateStart = millis();
   _keyboard->update();
+  _mainLoop->update();
   _screen->update();
-
-  return _mainLoop->update();
+  unsigned long sinceLastUpdate = millis() - _lastUpdate;
+  int timeBudget = _mainLoop->getOptions().updateInterval - sinceLastUpdate;
+  _lastUpdate = updateStart;
+  return timeBudget;
 }
 
 void Application::_handleTick() {
-  Serial.println("Tick");
+  x += offsetX;
+  if (x < 0 && offsetX < 0) {
+    offsetX = 1;
+  } else if (x > 70 && offsetX > 0) {
+    offsetX = -1;
+  }
+  _screenContext->clear();
+  _screenContext->setFontSize(FONT_SIZE_H1);
+  _screenContext->setOffset(x, 0);
+  _screenContext->drawString("Hello");
 }
 
 void Application::_handleKeyPress(KeyCode keyCode) {
