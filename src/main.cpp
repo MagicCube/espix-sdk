@@ -3,7 +3,7 @@
 #include <SH1106Wire.h>
 
 #include "espix-core.h"
-#include "espix-deisgn.h"
+#include "espix-design.h"
 
 unsigned long lastUpdate = 0;
 unsigned long lastViewChange = 0;
