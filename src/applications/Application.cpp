@@ -3,6 +3,7 @@
 Application::Application(OLEDDisplay *display) {
   _screen = new Screen(display);
   _keyboard = new Keyboard();
+  _mainLoop = new AnimationLoop();
 }
 
 Screen *Application::getScreen() {
@@ -20,16 +21,23 @@ void Application::onKeyPress(KeyEventHandler onKeyPress) {
 void Application::begin() {
   _screen->begin();
 
-  _keyboard->begin();
   _keyboard->onKeyPress([=](KeyCode keyCode) { _handleKeyPress(keyCode); });
+  _keyboard->begin();
+
+  _mainLoop->onTick([=](AnimationLoop *target) { _handleTick(); });
+  _mainLoop->begin();
 }
 
 int Application::update() {
   _keyboard->update();
   _screen->update();
-  return 100;
+
+  return _mainLoop->update();
 }
 
+void Application::_handleTick() {
+  Serial.println("Tick");
+}
 
 void Application::_handleKeyPress(KeyCode keyCode) {
   _fireKeyPressEvent(keyCode);

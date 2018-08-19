@@ -4,6 +4,7 @@
 
 #include <OLEDDisplay.h>
 
+#include "../animations/AnimationLoop.h"
 #include "../drawings/Screen.h"
 #include "../hmis/Keyboard.h"
 
@@ -32,9 +33,11 @@ public:
 private:
   Screen *_screen;
   Keyboard *_keyboard;
+  AnimationLoop *_mainLoop;
 
   KeyEventHandler _onKeyPress;
 
+  void _handleTick();
   void _handleKeyPress(KeyCode keyCode);
   void _fireKeyPressEvent(KeyCode keyCode);
 };
