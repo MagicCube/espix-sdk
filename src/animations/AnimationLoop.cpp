@@ -1,6 +1,7 @@
 #include "AnimationLoop.h"
 
-AnimationLoop::AnimationLoop() {
+AnimationLoop::AnimationLoop(AnimationOptions options) {
+  _options = options;
   begin();
 }
 

@@ -11,7 +11,7 @@ typedef std::function<void(AnimationLoop *target)> AnimationTickEventHandler;
 
 class AnimationLoop {
 public:
-  AnimationLoop();
+  AnimationLoop(AnimationOptions options = AnimationOptions());
 
   AnimationOptions getOptions();
   AnimationState getState();
