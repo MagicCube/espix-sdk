@@ -4,6 +4,8 @@
 
 #include <OLEDDisplay.h>
 
+class Screen;
+
 #define TEXT_ALIGN OLEDDISPLAY_TEXT_ALIGNMENT
 
 enum FONT_SIZE { FONT_SIZE_H1 = 1, FONT_SIZE_H2 = 2, FONT_SIZE_NORMAL = 3 };
@@ -12,8 +14,7 @@ class DrawingContext {
 public:
   // Do NOT use this constructor directly.
   // Use Screen.createDrawingContext() instead.
-  DrawingContext(OLEDDisplay *display, int width = 0, int height = 0, int offsetX = 0,
-                 int offsetY = 0);
+  DrawingContext(Screen *screen, int width = 0, int height = 0, int offsetX = 0, int offsetY = 0);
 
   // Get width of context
   int getWidth();
@@ -89,10 +90,8 @@ public:
   // Clear the local pixel buffer
   void clear();
 
-  // Write the buffer to the display memory
-  void redraw();
-
 private:
+  Screen *_screen;
   OLEDDisplay *_display;
 
   int _x(int value);

@@ -1,9 +1,11 @@
 
 #include "DrawingContext.h"
 
-DrawingContext::DrawingContext(OLEDDisplay *display, int width, int height, int offsetX,
-                               int offsetY) {
-  _display = display;
+#include "Screen.h"
+
+DrawingContext::DrawingContext(Screen *screen, int width, int height, int offsetX, int offsetY) {
+  _screen = screen;
+  _display = screen->getDisplay();
   setSize(width, height);
   setOffset(offsetX, offsetY);
 }
@@ -38,42 +40,49 @@ void DrawingContext::drawPixel(int x, int y) {
   if (_display == NULL)
     return;
   _display->setPixel(_x(x), _y(y));
+  _screen->setDirty();
 }
 
 void DrawingContext::drawLine(int x0, int y0, int x1, int y1) {
   if (_display == NULL)
     return;
   _display->drawLine(_x(x0), _y(y0), _x(x1), _y(y1));
+  _screen->setDirty();
 }
 
 void DrawingContext::drawRect(int x, int y, int width, int height) {
   if (_display == NULL)
     return;
   _display->drawRect(_x(x), _y(y), width, height);
+  _screen->setDirty();
 }
 
 void DrawingContext::fillRect(int x, int y, int width, int height) {
   if (_display == NULL)
     return;
   _display->drawRect(_x(x), _y(y), width, height);
+  _screen->setDirty();
 }
 
 void DrawingContext::drawCircle(int x, int y, int radius) {
   if (_display == NULL)
     return;
   _display->drawCircle(_x(x), _y(y), radius);
+  _screen->setDirty();
 }
 
 void DrawingContext::drawCircleQuads(int x, int y, int radius, int quads) {
   if (_display == NULL)
     return;
   _display->drawCircleQuads(_x(x), _y(y), radius, quads);
+  _screen->setDirty();
 }
 
 void DrawingContext::fillCircle(int x, int y, int radius) {
   if (_display == NULL)
     return;
   _display->fillCircle(_x(x), _y(y), radius);
+  _screen->setDirty();
 }
 
 void DrawingContext::drawHorizontalLine(int x, int y, int length) {
@@ -83,6 +92,7 @@ void DrawingContext::drawHorizontalLine(int x, int y, int length) {
     length = getWidth();
   }
   _display->drawHorizontalLine(_x(x), _y(y), length);
+  _screen->setDirty();
 }
 
 void DrawingContext::drawVerticalLine(int x, int y, int length) {
@@ -92,12 +102,14 @@ void DrawingContext::drawVerticalLine(int x, int y, int length) {
     length = getHeight();
   }
   _display->drawVerticalLine(_x(x), _y(y), length);
+  _screen->setDirty();
 }
 
 void DrawingContext::drawXBM(const uint8_t *xbm, int width, int height, int x, int y) {
   if (_display == NULL)
     return;
   _display->drawXbm(_x(x), _y(y), width, height, xbm);
+  _screen->setDirty();
 }
 
 void DrawingContext::drawString(String text, int x, int y) {
@@ -121,6 +133,7 @@ void DrawingContext::drawString(String text, int x, int y) {
     }
   }
   _display->drawString(_x(x), _y(y), text);
+  _screen->setDirty();
 }
 
 void DrawingContext::drawMultilineString(String text, int x, int y, int maxLineWidth) {
@@ -147,6 +160,7 @@ void DrawingContext::drawMultilineString(String text, int x, int y, int maxLineW
     maxLineWidth = getWidth();
   }
   _display->drawStringMaxWidth(_x(x), _y(y), maxLineWidth, text);
+  _screen->setDirty();
 }
 
 int DrawingContext::getStringWidth(String text) {
@@ -180,12 +194,6 @@ void DrawingContext::clear() {
   if (_display == NULL)
     return;
   _display->clear();
-}
-
-void DrawingContext::redraw() {
-  if (_display == NULL)
-    return;
-  _display->display();
 }
 
 int DrawingContext::_x(int value) {
