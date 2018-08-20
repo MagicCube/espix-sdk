@@ -27,6 +27,10 @@ wl_status_t Application::getWiFiStatus() {
   return WiFi.status();
 }
 
+String Application::getWiFiLocalIP() {
+  return WiFi.localIP().toString();
+}
+
 bool Application::isWiFiConnected() {
   return WiFi.status() == WL_CONNECTED;
 }
@@ -72,7 +76,7 @@ int Application::update() {
 
 void Application::connectToWiFi(WiFiConnectionSetting setting) {
   WiFi.mode(WIFI_STA);
-  WiFi.begin(setting.ssid, setting.password);
+  WiFi.begin(setting.ssid.c_str(), setting.password.c_str());
 }
 
 void Application::_handleTick() {

@@ -2,13 +2,19 @@
 
 #include <Arduino.h>
 
-#include "espix-core.h"
+#include "../../espix-core.h"
 
 class TextView : public View {
 public:
   TextView(String text, FONT_SIZE fontSize = FONT_SIZE_H1,
            TEXT_ALIGN textAlign = TEXT_ALIGN_CENTER_BOTH) {
     _text = text;
+    _fontSize = fontSize;
+    _textAlign = textAlign;
+  }
+
+  TextView(FONT_SIZE fontSize = FONT_SIZE_H1, TEXT_ALIGN textAlign = TEXT_ALIGN_CENTER_BOTH) {
+    _text = "";
     _fontSize = fontSize;
     _textAlign = textAlign;
   }

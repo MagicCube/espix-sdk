@@ -10,6 +10,10 @@ DrawingContext::DrawingContext(Screen *screen, int width, int height, int offset
   setOffset(offsetX, offsetY);
 }
 
+void DrawingContext::setColor(OLEDDISPLAY_COLOR color) {
+  _display->setColor(color);
+}
+
 int DrawingContext::getWidth() {
   return _width;
 }
@@ -83,7 +87,7 @@ void DrawingContext::drawRect(int x, int y, int width, int height) {
 void DrawingContext::fillRect(int x, int y, int width, int height) {
   if (_display == NULL)
     return;
-  _display->drawRect(_x(x), _y(y), width, height);
+  _display->fillRect(_x(x), _y(y), width, height);
   _screen->setDirty();
 }
 

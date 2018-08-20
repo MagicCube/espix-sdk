@@ -11,13 +11,13 @@
 #include "../views/ViewContainer.h"
 
 struct WiFiConnectionSetting {
-  WiFiConnectionSetting(char *p_ssid, char *p_password = "") {
+  WiFiConnectionSetting(String p_ssid, String p_password = "") {
     ssid = p_ssid;
     password = p_password;
   }
 
-  char *ssid;
-  char *password;
+  String ssid;
+  String password;
 };
 
 // Represent the application of Expix.
@@ -36,6 +36,9 @@ public:
 
   // Get WiFi status.
   wl_status_t getWiFiStatus();
+
+  // Get local IP Address of WiFi if connected.
+  String getWiFiLocalIP();
 
   // Returns whether WiFi is now connected.
   bool isWiFiConnected();

@@ -8,54 +8,35 @@
 unsigned long lastUpdate = 0;
 unsigned long lastViewChange = 0;
 
-SH1106Wire display(0x3c, D1, D2);
-Application app(&display);
-DrawingContext *context;
+SH1106Wire *display = new SH1106Wire(0x3c, D1, D2);
+Application *app = new Application(display);
 
-int viewCount = 2;
-int viewIndex = 0;
-View *views[] = {new TextView("Hello."), new TextView("Think Different.", FONT_SIZE_H2)};
+bool connecting = false;
 
-void setView(int index, TransitionOptions options = TRANSITION_OPTIONS_NONE) {
-  viewIndex = index;
-  app.setRootView(views[viewIndex], options);
-  lastViewChange = millis();
-}
-
-void nextView() {
-  viewIndex++;
-  if (viewIndex >= viewCount) {
-    viewIndex = 0;
-  }
-  setView(viewIndex, TransitionOptions(TRANSITION_TO_LEFT));
-}
-
-void previousView() {
-  viewIndex--;
-  if (viewIndex < 0) {
-    viewIndex = viewCount - 1;
-  }
-  setView(viewIndex, TransitionOptions(TRANSITION_TO_RIGHT));
-}
+ProgressView *progressView = new ProgressView("Connecting to WiFi...", PROGRESS_INFINITY);
+TextView *textView = new TextView(FONT_SIZE_H2);
 
 void setup() {
   Serial.begin(115200);
   Serial.println();
 
-  app.begin();
+  app->begin();
   // Settings
-  app.getScreen()->setBrightness(100);
-  app.getScreen()->setOrientation(true);
-
-  setView(0);
+  app->getScreen()->setBrightness(100);
+  app->getScreen()->setOrientation(false);
+  connecting = true;
+  app->connectToWiFi(WiFiConnectionSetting("Henry's Living Room 2.4GHz", "13913954971"));
+  app->setRootView(progressView);
 }
 
 void loop() {
-  if (millis() - lastViewChange > 3000) {
-    nextView();
-  }
-  int timeBudget = app.update();
+  int timeBudget = app->update();
   if (timeBudget > 0) {
     delay(timeBudget);
+    if (connecting && app->isWiFiConnected()) {
+      connecting = false;
+      textView->setText(app->getWiFiLocalIP());
+      app->setRootView(textView, TransitionOptions(TRANSITION_TO_LEFT));
+    }
   }
 }

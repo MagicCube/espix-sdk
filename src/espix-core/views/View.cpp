@@ -58,7 +58,7 @@ void View::didMount() {
 }
 
 bool View::shouldUpdate(ViewUpdateOptions options) {
-  return false;
+  return options.forceUpdate || isDirty();
 }
 
 void View::update(ViewUpdateOptions options) {
