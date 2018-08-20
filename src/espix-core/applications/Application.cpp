@@ -1,5 +1,7 @@
 #include "Application.h"
 
+#include <ESP8266WiFi.h>
+
 static Application *__instance = NULL;
 
 Application::Application(OLEDDisplay *display) {
@@ -21,6 +23,14 @@ Screen *Application::getScreen() {
 
 Keyboard *Application::getKeyboard() {
   return _keyboard;
+}
+
+wl_status_t Application::getWiFiStatus() {
+  return WiFi.status();
+}
+
+bool Application::isWiFiConnected() {
+  return WiFi.status() == WL_CONNECTED;
 }
 
 ViewContainer *Application::getRootViewContainer() {
@@ -60,6 +70,11 @@ int Application::update() {
   int timeBudget = _mainLoop->getOptions().updateInterval - elapsedSinceLastUpdate;
   _lastUpdate = updateStart;
   return timeBudget;
+}
+
+void Application::connectToWiFi(WiFiConnectionSetting setting) {
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(setting.ssid, setting.ssid);
 }
 
 void Application::_handleTick() {

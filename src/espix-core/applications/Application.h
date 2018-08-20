@@ -9,6 +9,16 @@
 #include "../hmis/Keyboard.h"
 #include "../views/ViewContainer.h"
 
+struct WiFiConnectionSetting {
+  WiFiConnectionSetting(char *p_ssid, char *p_password = "") {
+    ssid = p_ssid;
+    password = p_password;
+  }
+
+  char *ssid;
+  char *password;
+};
+
 // Represent the application of Expix.
 class Application {
 public:
@@ -22,6 +32,12 @@ public:
 
   // Get a Keyboard object represent the current keyboard.
   Keyboard *getKeyboard();
+
+  // Get WiFi status.
+  wl_status_t getWiFiStatus();
+
+  // Returns whether WiFi is now connected.
+  bool isWiFiConnected();
 
   // Get root ViewContainer of application.
   ViewContainer *getRootViewContainer();
@@ -39,6 +55,8 @@ public:
   // Update application in the Arduino loop. Place this method in your loop().
   int update();
 
+  // Connect to WiFi using given setting include ssid and password.
+  void connectToWiFi(WiFiConnectionSetting setting);
 
 private:
   unsigned long _lastUpdate;
