@@ -1,7 +1,5 @@
 #include "Application.h"
 
-#include <ESP8266WiFi.h>
-
 static Application *__instance = NULL;
 
 Application::Application(OLEDDisplay *display) {
@@ -74,7 +72,7 @@ int Application::update() {
 
 void Application::connectToWiFi(WiFiConnectionSetting setting) {
   WiFi.mode(WIFI_STA);
-  WiFi.begin(setting.ssid, setting.ssid);
+  WiFi.begin(setting.ssid, setting.password);
 }
 
 void Application::_handleTick() {
