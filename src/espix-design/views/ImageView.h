@@ -13,7 +13,6 @@ public:
   }
 
   void render(DrawingContext *context) {
-    Serial.println("ImageView::render()");
     context->drawXBM(_xbm, _width, _height, (getWidth() - _width) / 2, (getHeight() - _height) / 2);
   }
 
