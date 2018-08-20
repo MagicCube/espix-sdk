@@ -74,10 +74,9 @@ void Application::_handleTick() {
 }
 
 void Application::_handleKeyPress(KeyCode keyCode) {
+  _fireKeyPressEvent(keyCode);
   if (_rootViewContainer) {
     _rootViewContainer->handleKeyPress(keyCode);
-  } else {
-    _fireKeyPressEvent(keyCode);
   }
 }
 
