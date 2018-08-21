@@ -922,7 +922,7 @@ void inline OLEDDisplay::drawInternal(int16_t xMove, int16_t yMove, int16_t widt
       }
 
       // WARN: Remove the following line by Henry
-      // yield();
+      yield();
     }
   }
 }
