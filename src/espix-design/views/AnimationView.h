@@ -20,6 +20,9 @@ public:
   }
 
   bool shouldUpdate() {
+    if (isDirty()) {
+      return true;
+    }
     return millis() - getLastUpdate() > uint8_t(1000 / _fps);
   }
 
