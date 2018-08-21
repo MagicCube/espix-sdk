@@ -30,9 +30,9 @@ unsigned long View::getLastUpdate() {
   return _lastUpdate;
 }
 
-bool View::tryUpdate(ViewUpdateOptions options) {
-  if (options.forceUpdate || isDirty() || shouldUpdate(options)) {
-    update(options);
+bool View::tryUpdate() {
+  if (isDirty() || shouldUpdate()) {
+    update();
     _dirty = false;
     return true;
   }
@@ -57,11 +57,11 @@ void View::render(DrawingContext *context) {
 void View::didMount() {
 }
 
-bool View::shouldUpdate(ViewUpdateOptions options) {
-  return options.forceUpdate || isDirty();
+bool View::shouldUpdate() {
+  return isDirty();
 }
 
-void View::update(ViewUpdateOptions options) {
+void View::update() {
 }
 
 void View::willUnmount() {

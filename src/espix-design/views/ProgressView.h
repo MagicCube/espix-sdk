@@ -27,17 +27,17 @@ public:
     }
   }
 
-  bool shouldUpdate(ViewUpdateOptions options) {
-    if (options.forceUpdate || isDirty()) {
+  bool shouldUpdate() {
+    if (isDirty()) {
       return true;
     }
     if (_mode == PROGRESS_INFINITY) {
-      return options.now - getLastUpdate() > 16;
+      return millis() - getLastUpdate() > 16;
     }
     return false;
   }
 
-  void update(ViewUpdateOptions options) {
+  void update() {
     if (_mode == PROGRESS_INFINITY) {
       _progress += _progressOffset;
       if ((_progress >= 100 && _progressOffset > 0) || (_progress <= 0 && _progressOffset < 0)) {

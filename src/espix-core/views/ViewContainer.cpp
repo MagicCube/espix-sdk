@@ -41,14 +41,17 @@ void ViewContainer::setView(View *view, TransitionOptions transitionOptions) {
   }
 }
 
-bool ViewContainer::shouldUpdate(ViewUpdateOptions options) {
+bool ViewContainer::shouldUpdate() {
+  if (isDirty()) {
+    return true;
+  }
   if (_view) {
-    return isTransitioning() || _view->shouldUpdate(options);
+    return isTransitioning() || _view->shouldUpdate();
   }
   return false;
 }
 
-void ViewContainer::update(ViewUpdateOptions options) {
+void ViewContainer::update() {
   if (_view) {
     if (_viewTransition->isRunning()) {
       _viewOffset = _viewTransition->getValue();
@@ -66,7 +69,7 @@ void ViewContainer::update(ViewUpdateOptions options) {
         _viewTransition->stop();
       }
     }
-    _view->tryUpdate(options);
+    _view->tryUpdate();
   }
 }
 

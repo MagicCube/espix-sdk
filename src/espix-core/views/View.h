@@ -5,8 +5,6 @@
 #include "../drawings/DrawingContext.h"
 #include "../hmis/Keyboard.h"
 
-#include "ViewUpdateOptions.h"
-
 class View {
 public:
   View();
@@ -18,15 +16,15 @@ public:
   void setDirty();
   unsigned long getLastUpdate();
 
-  bool tryUpdate(ViewUpdateOptions options);
+  bool tryUpdate();
   void redraw(bool clearBeforeRendering = false);
 
   // Lifecycle
   virtual void willMount();
   virtual void render(DrawingContext *context);
   virtual void didMount();
-  virtual bool shouldUpdate(ViewUpdateOptions options);
-  virtual void update(ViewUpdateOptions options);
+  virtual bool shouldUpdate();
+  virtual void update();
   virtual void willUnmount();
 
   // Event Handlers

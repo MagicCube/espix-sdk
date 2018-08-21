@@ -19,11 +19,11 @@ public:
     _frameIndex = 0;
   }
 
-  bool shouldUpdate(ViewUpdateOptions options) {
+  bool shouldUpdate() {
     return millis() - getLastUpdate() > uint8_t(1000 / _fps);
   }
 
-  void update(ViewUpdateOptions options) {
+  void update() {
     _frameIndex++;
     if (_frameIndex >= _frameCount) {
       _frameIndex = 0;

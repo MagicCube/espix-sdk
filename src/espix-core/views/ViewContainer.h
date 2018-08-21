@@ -13,8 +13,8 @@ public:
   void setView(View *view, TransitionOptions transitionOptions = TRANSITION_OPTIONS_NONE);
   bool isTransitioning();
 
-  bool shouldUpdate(ViewUpdateOptions options);
-  void update(ViewUpdateOptions);
+  bool shouldUpdate();
+  void update();
   void render(DrawingContext *context);
   void handleKeyPress(KeyCode keyCode);
 
