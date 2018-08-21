@@ -6,6 +6,8 @@
 
 #include "WiFiConnectionSetting.h"
 
+typedef std::function<void()> NetworkConnectionCallback;
+
 class WiFiNetwork {
 public:
   WiFiNetwork();
@@ -14,11 +16,12 @@ public:
   wl_status_t getStatus();
   String getLocalIP();
 
-  void connect(WiFiConnectionSetting setting);
-  void connect(String ssid, String password) {
+  void connect(WiFiConnectionSetting setting, NetworkConnectionCallback callback = NULL);
+  void connect(String ssid, String password, NetworkConnectionCallback callback = NULL) {
     WiFiConnectionSetting setting(ssid, password);
-    connect(setting);
+    connect(setting, callback);
   }
+  void disconnect(bool wifiOff = false);
 
 private:
 };
