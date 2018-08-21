@@ -21,23 +21,19 @@ void ViewContainer::setView(View *view, TransitionOptions transitionOptions) {
   }
   if (transitionOptions.direction != TRANSITION_DIRECTION_NONE) {
     int startValue = 0;
-    if (isTransitioning()) {
-      startValue = _viewOffset;
-    } else {
-      switch (transitionOptions.direction) {
-      case TRANSITION_TO_LEFT:
-      case TRANSITION_TO_RIGHT:
-        startValue = transitionOptions.direction * getWidth();
-        _mountView(view, startValue, 0);
-        break;
-      case TRANSITION_TO_TOP:
-      case TRANSITION_TO_BOTTOM:
-        startValue = transitionOptions.direction / 2 * getHeight();
-        _mountView(view, 0, startValue);
-        break;
-      default:
-        break;
-      }
+    switch (transitionOptions.direction) {
+    case TRANSITION_TO_LEFT:
+    case TRANSITION_TO_RIGHT:
+      startValue = transitionOptions.direction * getWidth();
+      _mountView(view, startValue, 0);
+      break;
+    case TRANSITION_TO_TOP:
+    case TRANSITION_TO_BOTTOM:
+      startValue = transitionOptions.direction / 2 * getHeight();
+      _mountView(view, 0, startValue);
+      break;
+    default:
+      break;
     }
     _viewTransition->start(startValue, 0, transitionOptions);
   } else {
