@@ -25,7 +25,7 @@ void setup() {
   app->getScreen()->setBrightness(100);
   app->getScreen()->setOrientation(false);
   connecting = true;
-  app->connectToWiFi(WiFiConnectionSetting("Henry's Living Room 2.4GHz", "13913954971"));
+  app->getNetwork()->connect("Henry's Living Room 2.4GHz", "13913954971");
   app->setRootView(progressView);
 }
 
@@ -33,9 +33,9 @@ void loop() {
   int timeBudget = app->update();
   if (timeBudget > 0) {
     delay(timeBudget);
-    if (connecting && app->isWiFiConnected()) {
+    if (connecting && app->getNetwork()->isConnected()) {
       connecting = false;
-      textView->setText(app->getWiFiLocalIP());
+      textView->setText(app->getNetwork()->getLocalIP());
       app->setRootView(textView, TransitionOptions(TRANSITION_TO_LEFT));
     }
   }

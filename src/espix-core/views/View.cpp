@@ -1,6 +1,6 @@
 #include "View.h"
 
-#include "../drawings/Screen.h"
+#include "../drawing/Screen.h"
 
 View::View() {
   _drawingContext = Screen::getInstance()->createDrawingContext();

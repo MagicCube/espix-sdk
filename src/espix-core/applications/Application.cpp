@@ -7,6 +7,7 @@ Application::Application(OLEDDisplay *display) {
   _screenContext = _screen->createDrawingContext();
   _keyboard = new Keyboard();
   _mainLoop = new AnimationLoop();
+  _network = new WiFiNetwork();
   _rootViewContainer = new ViewContainer();
   __instance = this;
 }
@@ -23,16 +24,8 @@ Keyboard *Application::getKeyboard() {
   return _keyboard;
 }
 
-wl_status_t Application::getWiFiStatus() {
-  return WiFi.status();
-}
-
-String Application::getWiFiLocalIP() {
-  return WiFi.localIP().toString();
-}
-
-bool Application::isWiFiConnected() {
-  return WiFi.status() == WL_CONNECTED;
+WiFiNetwork *Application::getNetwork() {
+  return _network;
 }
 
 ViewContainer *Application::getRootViewContainer() {
@@ -72,11 +65,6 @@ int Application::update() {
   int timeBudget = _mainLoop->getOptions().updateInterval - elapsedSinceLastUpdate;
   _lastUpdate = updateStart;
   return timeBudget;
-}
-
-void Application::connectToWiFi(WiFiConnectionSetting setting) {
-  WiFi.mode(WIFI_STA);
-  WiFi.begin(setting.ssid.c_str(), setting.password.c_str());
 }
 
 void Application::_handleTick() {

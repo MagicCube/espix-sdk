@@ -2,23 +2,13 @@
 
 #include <Arduino.h>
 
-#include <ESP8266WiFi.h>
 #include <OLEDDisplay.h>
 
 #include "../animations/AnimationLoop.h"
-#include "../drawings/Screen.h"
+#include "../drawing/Screen.h"
 #include "../hmis/Keyboard.h"
+#include "../networking/WiFiNetwork.h"
 #include "../views/ViewContainer.h"
-
-struct WiFiConnectionSetting {
-  WiFiConnectionSetting(String p_ssid, String p_password = "") {
-    ssid = p_ssid;
-    password = p_password;
-  }
-
-  String ssid;
-  String password;
-};
 
 // Represent the application of Expix.
 class Application {
@@ -34,8 +24,8 @@ public:
   // Get a Keyboard object represent the current keyboard.
   Keyboard *getKeyboard();
 
-  // Get WiFi status.
-  wl_status_t getWiFiStatus();
+  // Get WiFi network.
+  WiFiNetwork *getNetwork();
 
   // Get local IP Address of WiFi if connected.
   String getWiFiLocalIP();
@@ -67,6 +57,7 @@ private:
   Screen *_screen;
   DrawingContext *_screenContext;
   Keyboard *_keyboard;
+  WiFiNetwork *_network;
   AnimationLoop *_mainLoop;
   ViewContainer *_rootViewContainer;
 

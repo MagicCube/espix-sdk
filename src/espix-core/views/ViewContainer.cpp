@@ -1,6 +1,6 @@
 #include "ViewContainer.h"
 
-#include "../drawings/Screen.h"
+#include "../drawing/Screen.h"
 
 ViewContainer::ViewContainer() {
   _viewTransition = new Transition();
