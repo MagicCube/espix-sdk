@@ -52,6 +52,9 @@ public:
   // Update application in the Arduino loop. Place this method in your loop().
   int update();
 
+  // Update and wait in Arduino's loop.
+  void loop();
+
   // Connect to WiFi using given setting include ssid and password.
   void connectToWiFi(WiFiConnectionSetting setting);
 

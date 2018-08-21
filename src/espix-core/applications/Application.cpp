@@ -74,6 +74,13 @@ int Application::update() {
   return timeBudget;
 }
 
+void Application::loop() {
+  int timeBudget = app->update();
+  if (timeBudget > 0) {
+    delay(timeBudget);
+  }
+}
+
 void Application::_handleTick() {
   if (_rootViewContainer != NULL) {
     if (_rootViewContainer->tryUpdate()) {
