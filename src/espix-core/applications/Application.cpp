@@ -81,8 +81,7 @@ void Application::connectToWiFi(WiFiConnectionSetting setting) {
 
 void Application::_handleTick() {
   if (_rootViewContainer != NULL) {
-    if (_rootViewContainer->shouldUpdate()) {
-      _rootViewContainer->update();
+    if (_rootViewContainer->tryUpdate()) {
       _rootViewContainer->redraw(true);
       _screen->update();
     }
