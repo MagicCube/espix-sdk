@@ -2,7 +2,7 @@
 
 #include <Arduino.h>
 
-#include "../../NTPClient/NTPClient.h"
+#include <NTPClient.h>
 
 class TimeClient {
 public:

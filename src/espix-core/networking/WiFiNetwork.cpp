@@ -1,6 +1,6 @@
 #include "WiFiNetwork.h"
 
-#include "../../espix-core/applications/Application.h"
+#include "../applications/Application.h"
 
 WiFiNetwork::WiFiNetwork() {
 }

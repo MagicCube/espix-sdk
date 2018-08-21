@@ -2,7 +2,7 @@
 
 #include <Arduino.h>
 
-#include "../../ESP8266_SSD1306/OLEDDisplay.h"
+#include <OLEDDisplay.h>
 
 class Screen;
 

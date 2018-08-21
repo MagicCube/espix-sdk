@@ -2,7 +2,7 @@
 
 #include <Arduino.h>
 
-#include "../../ESP8266_SSD1306/OLEDDisplay.h"
+#include <OLEDDisplay.h>
 
 #include "../../espix-design/views/ProgressView.h"
 #include "../animations/AnimationLoop.h"
