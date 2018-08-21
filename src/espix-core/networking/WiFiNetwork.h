@@ -17,9 +17,9 @@ public:
   wl_status_t getStatus();
   String getLocalIP();
 
-  void connect(WiFiConnectionSetting setting, bool showProgress,
+  void connect(WiFiConnectionSetting setting, bool showProgress = false,
                NetworkConnectionCallback callback = NULL);
-  void connect(String ssid, String password, bool showProgress,
+  void connect(String ssid, String password, bool showProgress = false,
                NetworkConnectionCallback callback = NULL) {
     WiFiConnectionSetting setting(ssid, password);
     connect(setting, showProgress, callback);
