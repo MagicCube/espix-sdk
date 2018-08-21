@@ -4,6 +4,7 @@
 
 #include "../../ESP8266_SSD1306/OLEDDisplay.h"
 
+#include "../../espix-design/views/ProgressView.h"
 #include "../animations/AnimationLoop.h"
 #include "../drawing/Screen.h"
 #include "../hmis/Keyboard.h"
@@ -43,6 +44,12 @@ public:
   // It is the shortcut for getRootViewContainer()->setView().
   void setRootView(View *view, TransitionOptions transitionOptions = TRANSITION_OPTIONS_NONE);
 
+  // Get current active view.
+  View *getActiveView();
+
+  // Enable OTA.
+  void enableOTA();
+
   // Fires when key pressed.
   void onKeyPress(KeyEventHandler onKeyPress);
 
@@ -60,15 +67,19 @@ public:
 
 private:
   unsigned long _lastUpdate;
+  bool _otaEnabled;
+  bool _otaUpgrading;
   Screen *_screen;
   DrawingContext *_screenContext;
   Keyboard *_keyboard;
   WiFiNetwork *_network;
   AnimationLoop *_mainLoop;
   ViewContainer *_rootViewContainer;
+  ProgressView *_otaUpgradingView;
 
   KeyEventHandler _onKeyPress;
 
+  ProgressView *_getOtaUpgradingView();
   void _handleTick();
   void _handleKeyPress(KeyCode keyCode);
   void _fireKeyPressEvent(KeyCode keyCode);

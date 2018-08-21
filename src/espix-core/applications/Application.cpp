@@ -1,5 +1,7 @@
 #include "Application.h"
 
+#include <ArduinoOTA.h>
+
 static Application *__instance = NULL;
 
 Application::Application(OLEDDisplay *display) {
@@ -45,6 +47,44 @@ void Application::setRootView(View *view, TransitionOptions transitionOptions) {
   }
 }
 
+View *Application::getActiveView() {
+  View *activeView = NULL;
+  if (_otaUpgrading) {
+    activeView = _getOtaUpgradingView();
+  } else if (_rootViewContainer != NULL) {
+    activeView = _rootViewContainer;
+  }
+  return activeView;
+}
+
+void Application::enableOTA() {
+  if (_otaEnabled) {
+    return;
+  }
+  ArduinoOTA.begin();
+  _otaEnabled = true;
+  ArduinoOTA.onStart([=]() {
+    Serial.println("Start OTA...");
+    _otaUpgrading = true;
+    _getOtaUpgradingView()->setProgress(0);
+  });
+  ArduinoOTA.onProgress([=](unsigned int progress, unsigned int total) {
+    Serial.print("Uploading firmware ");
+    Serial.print(progress);
+    Serial.print("/");
+    Serial.print(total);
+    Serial.println("...");
+    _getOtaUpgradingView()->setProgress(progress / total);
+  });
+  ArduinoOTA.onEnd([=]() {
+    Serial.println("Firmware has been updated.");
+    _getOtaUpgradingView()->setText("Firmware has been updated.");
+    _getOtaUpgradingView()->setProgress(100);
+    delay(400);
+    _getOtaUpgradingView()->setText("Restarting...");
+  });
+}
+
 void Application::onKeyPress(KeyEventHandler onKeyPress) {
   _onKeyPress = onKeyPress;
 }
@@ -64,10 +104,16 @@ void Application::begin() {
 }
 
 int Application::update() {
+  if (_otaEnabled) {
+    ArduinoOTA.handle();
+    _mainLoop->update();
+    if (_otaUpgrading) {
+      return 0;
+    }
+  }
   unsigned long updateStart = millis();
   _keyboard->update();
   _mainLoop->update();
-  _screen->update();
   unsigned long elapsedSinceLastUpdate = millis() - _lastUpdate;
   int timeBudget = _mainLoop->getOptions().updateInterval - elapsedSinceLastUpdate;
   _lastUpdate = updateStart;
@@ -81,10 +127,19 @@ void Application::loop() {
   }
 }
 
+ProgressView *Application::_getOtaUpgradingView() {
+  if (_otaUpgradingView == NULL) {
+    _otaUpgradingView = new ProgressView("Upgrading firmware...");
+  }
+  return _otaUpgradingView;
+}
+
 void Application::_handleTick() {
-  if (_rootViewContainer != NULL) {
-    if (_rootViewContainer->tryUpdate()) {
-      _rootViewContainer->redraw(true);
+  View *activeView = getActiveView();
+
+  if (activeView != NULL) {
+    if (activeView->tryUpdate()) {
+      activeView->redraw(true);
       _screen->update();
     }
   }
