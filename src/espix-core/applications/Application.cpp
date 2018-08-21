@@ -36,6 +36,7 @@ View *Application::getRootView() {
   if (_rootViewContainer != NULL) {
     return _rootViewContainer->getView();
   }
+  return NULL;
 }
 
 void Application::setRootView(View *view, TransitionOptions transitionOptions) {
