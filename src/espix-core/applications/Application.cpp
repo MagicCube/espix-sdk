@@ -75,7 +75,7 @@ int Application::update() {
 }
 
 void Application::loop() {
-  int timeBudget = app->update();
+  int timeBudget = update();
   if (timeBudget > 0) {
     delay(timeBudget);
   }
