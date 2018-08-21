@@ -2,19 +2,32 @@
 
 #include <Arduino.h>
 
-#include "../../espix-core.h"
+#include "../../espix-core/views/View.h"
 
-enum PROGRESS_MODE { PROGRESS_NORMAL, PROGRESS_INFINITY };
+enum PROGRESS_MODE { PROGRESS_MODE_NORMAL, PROGRESS_MODE_INFINITY };
 
 class ProgressView : public View {
 public:
-  ProgressView(String text = "", PROGRESS_MODE mode = PROGRESS_NORMAL) {
+  ProgressView(String text = "", PROGRESS_MODE mode = PROGRESS_MODE_NORMAL) {
     _text = text;
     _mode = mode;
   }
 
+  ProgressView(PROGRESS_MODE mode) {
+    _text = "";
+    _mode = mode;
+  }
+
+  void setMode(PROGRESS_MODE mode) {
+    if (mode != _mode) {
+      _mode = mode;
+      _progress = 0;
+      setDirty();
+    }
+  }
+
   void setText(String text) {
-    if (text.equals(_text)) {
+    if (!text.equals(_text)) {
       _text = text;
       setDirty();
     }
@@ -31,14 +44,14 @@ public:
     if (isDirty()) {
       return true;
     }
-    if (_mode == PROGRESS_INFINITY) {
+    if (_mode == PROGRESS_MODE_INFINITY) {
       return millis() - getLastUpdate() > 16;
     }
     return false;
   }
 
   void update() {
-    if (_mode == PROGRESS_INFINITY) {
+    if (_mode == PROGRESS_MODE_INFINITY) {
       _progress += _progressOffset;
       if ((_progress >= 100 && _progressOffset > 0) || (_progress <= 0 && _progressOffset < 0)) {
         _progressOffset = -_progressOffset;
@@ -70,12 +83,12 @@ public:
     context->drawHorizontalLine(xRadius, y + height, width - doubleRadius + 1);
     context->drawCircleQuads(x + width - radius, yRadius, radius, 0b00001001);
 
-    if (_mode == PROGRESS_NORMAL) {
+    if (_mode == PROGRESS_MODE_NORMAL) {
       uint16_t maxProgressWidth = (width - doubleRadius + 1) * _progress / 100;
       context->fillCircle(xRadius, yRadius, innerRadius);
       context->fillRect(xRadius + 1, y + 2, maxProgressWidth, height - 3);
       context->fillCircle(xRadius + maxProgressWidth, yRadius, innerRadius);
-    } else if (_mode == PROGRESS_INFINITY) {
+    } else if (_mode == PROGRESS_MODE_INFINITY) {
       uint16_t length = width / 10;
       uint16_t offset = (width - length - doubleRadius + 1) * _progress / 100;
       context->fillCircle(xRadius + offset, yRadius, innerRadius);

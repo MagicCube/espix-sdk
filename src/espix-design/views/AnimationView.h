@@ -2,7 +2,7 @@
 
 #include <Arduino.h>
 
-#include "../../espix-core.h"
+#include "../../espix-core/views/View.h"
 
 class AnimationView : public View {
 public:
