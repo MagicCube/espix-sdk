@@ -28,13 +28,18 @@ void ViewContainer::setView(View *view, TransitionOptions transitionOptions) {
       case TRANSITION_TO_LEFT:
       case TRANSITION_TO_RIGHT:
         startValue = transitionOptions.direction * getWidth();
+        _mountView(view, startValue, 0);
+        break;
+      case TRANSITION_TO_TOP:
+      case TRANSITION_TO_BOTTOM:
+        startValue = transitionOptions.direction / 2 * getHeight();
+        _mountView(view, 0, startValue);
         break;
       default:
         break;
       }
     }
     _viewTransition->start(startValue, 0, transitionOptions);
-    _mountView(view, startValue);
   } else {
     _unmountingView = NULL;
     _mountView(view);
@@ -55,11 +60,15 @@ void ViewContainer::update() {
   if (_view) {
     if (_viewTransition->isRunning()) {
       _viewOffset = _viewTransition->getValue();
-      TRANSITION_DIRECTION direction = _viewTransition->getOptions().direction;
+      auto direction = _viewTransition->getOptions().direction;
       switch (direction) {
       case TRANSITION_TO_LEFT:
       case TRANSITION_TO_RIGHT:
         _unmountingViewOffset = _viewOffset - direction * getWidth();
+        break;
+      case TRANSITION_TO_TOP:
+      case TRANSITION_TO_BOTTOM:
+        _unmountingViewOffset = _viewOffset - direction / 2 * getHeight();
         break;
       default:
         break;
@@ -75,11 +84,21 @@ void ViewContainer::update() {
 
 void ViewContainer::render(DrawingContext *context) {
   if (_unmountingView) {
-    _unmountingView->getDrawingContext()->setOffset(_unmountingViewOffset);
+    auto direction = _viewTransition->getDirection();
+    if (direction == TRANSITION_TO_LEFT || direction == TRANSITION_TO_RIGHT) {
+      _unmountingView->getDrawingContext()->setOffset(_unmountingViewOffset);
+    } else if (direction == TRANSITION_TO_TOP || direction == TRANSITION_TO_BOTTOM) {
+      _unmountingView->getDrawingContext()->setOffset(0, _unmountingViewOffset);
+    }
     _unmountingView->redraw();
   }
   if (_view) {
-    _view->getDrawingContext()->setOffset(_viewOffset);
+    auto direction = _viewTransition->getDirection();
+    if (direction == TRANSITION_TO_LEFT || direction == TRANSITION_TO_RIGHT) {
+      _view->getDrawingContext()->setOffset(_viewOffset);
+    } else if (direction == TRANSITION_TO_TOP || direction == TRANSITION_TO_BOTTOM) {
+      _view->getDrawingContext()->setOffset(0, _viewOffset);
+    }
     _view->redraw();
   }
 }
@@ -93,8 +112,8 @@ void ViewContainer::handleKeyPress(KeyCode keyCode) {
 void ViewContainer::_mountView(View *view, int offsetX, int offsetY) {
   _view = view;
   _view->willMount();
-  DrawingContext *viewContainerContext = getDrawingContext();
-  DrawingContext *viewContext = _view->getDrawingContext();
+  auto *viewContainerContext = getDrawingContext();
+  auto *viewContext = _view->getDrawingContext();
   viewContext->setSize(viewContainerContext->getWidth(), viewContainerContext->getHeight());
   viewContext->setOffset(offsetX, offsetY);
   redraw(true);

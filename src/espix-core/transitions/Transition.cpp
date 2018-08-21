@@ -33,6 +33,10 @@ int Transition::getEndValue() {
   return _endValue;
 }
 
+TRANSITION_DIRECTION Transition::getDirection() {
+  return _options.direction;
+}
+
 int Transition::getDuration() {
   return _options.duration;
 }

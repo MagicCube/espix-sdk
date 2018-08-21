@@ -9,6 +9,7 @@ public:
   int getStartTime();
   int getStartValue();
   int getEndValue();
+  TRANSITION_DIRECTION getDirection();
   int getDuration();
   TransitionOptions getOptions();
   bool isRunning();
