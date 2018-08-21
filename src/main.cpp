@@ -11,6 +11,12 @@ Application *app = new Application(display);
 
 TextView *textView = new TextView(FONT_SIZE_H2);
 
+void onConnected() {
+  app->enableOTA();
+  textView->setText(app->getNetwork()->getLocalIP());
+  app->setRootView(textView, TransitionOptions(TRANSITION_TO_LEFT));
+}
+
 void setup() {
   Serial.begin(115200);
   Serial.println();
@@ -20,10 +26,7 @@ void setup() {
   app->getScreen()->setBrightness(100);
   app->getScreen()->setOrientation(false);
   // app->getNetwork()->connect("Henry's Living Room 2.4GHz", "13913954971");
-  app->getNetwork()->connect("Henry's iPhone 6", "13913954971", true, [=]() {
-    textView->setText(app->getNetwork()->getLocalIP());
-    app->setRootView(textView, TransitionOptions(TRANSITION_TO_LEFT));
-  });
+  app->getNetwork()->connect("Henry's iPhone 6", "13913954971", true, onConnected);
 }
 
 void loop() {
