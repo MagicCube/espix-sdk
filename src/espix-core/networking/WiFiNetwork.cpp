@@ -20,7 +20,7 @@ String WiFiNetwork::getLocalIP() {
 void WiFiNetwork::connect(WiFiConnectionSetting setting, bool showProgress,
                           NetworkConnectionCallback callback) {
   if (showProgress) {
-    _getProgressView()->setMode(PROGRESS_MODE_INFINITY);
+    _getProgressView()->setMode(PROGRESS_INFINITY);
     _getProgressView()->setText("Connecting to WiFi...");
     Application::getInstance()->setRootView(_getProgressView());
   }
