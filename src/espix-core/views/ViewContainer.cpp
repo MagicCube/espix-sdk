@@ -20,6 +20,7 @@ void ViewContainer::setView(View *view, TransitionOptions transitionOptions) {
     _view->willUnmount();
   }
   if (transitionOptions.direction != TRANSITION_DIRECTION_NONE) {
+    Serial.println(4);
     int startValue = 0;
     if (isTransitioning()) {
       startValue = _viewOffset;

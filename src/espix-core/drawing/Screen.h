@@ -2,7 +2,7 @@
 
 #include <Arduino.h>
 
-#include <OLEDDisplay.h>
+#include "../../ESP8266_SSD1306/OLEDDisplay.h"
 
 class DrawingContext;
 
