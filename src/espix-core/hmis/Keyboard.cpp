@@ -9,7 +9,7 @@ void Keyboard::onKeyPress(KeyEventHandler handler) {
 }
 
 void Keyboard::registerKey(KeyCode keyCode, uint8_t pin) {
-  Key *key = new Key(keyCode, pin);
+  auto key = new Key(keyCode, pin);
   key->onKeyPress(_keyPressHandler);
   _keys[_keyCount] = key;
   if (_keyCount < 10) {

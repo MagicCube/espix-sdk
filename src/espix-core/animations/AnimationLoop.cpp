@@ -24,8 +24,8 @@ void AnimationLoop::begin() {
 }
 
 void AnimationLoop::update() {
-  unsigned long updateStart = millis();
-  unsigned long lastUpdate = _state.lastUpdate;
+  auto updateStart = millis();
+  auto lastUpdate = _state.lastUpdate;
   int elapsedSinceLastUpdate = updateStart - _state.lastUpdate;
   int timeBudget = _options.updateInterval - elapsedSinceLastUpdate;
   if (timeBudget <= 0) {

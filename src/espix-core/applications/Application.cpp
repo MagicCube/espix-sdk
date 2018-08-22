@@ -111,10 +111,10 @@ int Application::update() {
       return 0;
     }
   }
-  unsigned long updateStart = millis();
+  auto updateStart = millis();
   _keyboard->update();
   _mainLoop->update();
-  unsigned long elapsedSinceLastUpdate = millis() - _lastUpdate;
+  auto elapsedSinceLastUpdate = millis() - _lastUpdate;
   int timeBudget = _mainLoop->getOptions().updateInterval - elapsedSinceLastUpdate;
   _lastUpdate = updateStart;
   return timeBudget;
@@ -135,7 +135,7 @@ ProgressView *Application::_getOtaUpgradingView() {
 }
 
 void Application::_handleTick() {
-  View *activeView = getActiveView();
+  auto activeView = getActiveView();
 
   if (activeView != NULL) {
     if (activeView->tryUpdate()) {

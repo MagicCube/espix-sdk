@@ -40,7 +40,7 @@ bool View::tryUpdate() {
 }
 
 void View::redraw(bool clearBeforeRendering) {
-  DrawingContext *context = getDrawingContext();
+  auto context = getDrawingContext();
   if (clearBeforeRendering) {
     context->clear();
   }
