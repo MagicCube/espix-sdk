@@ -6,7 +6,7 @@ static TimeClient *__instance = NULL;
 
 TimeClient::TimeClient() {
   static WiFiUDP ntpUDP;
-  _client = new NTPClient(ntpUDP, "1.cn.pool.ntp.org");
+  _client = new NTPClient(ntpUDP, "1.cn.pool.ntp.org", 8 * 60 * 60);
 }
 
 TimeClient *TimeClient::getInstance() {
