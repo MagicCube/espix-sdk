@@ -2,6 +2,8 @@
 
 #include <ArduinoOTA.h>
 
+#include "../timing/TimeClient.h"
+
 static Application *__instance = NULL;
 
 Application::Application(OLEDDisplay *display) {
@@ -112,6 +114,7 @@ int Application::update() {
     }
   }
   auto updateStart = millis();
+  TimeClient::getInstance()->update();
   _keyboard->update();
   _mainLoop->update();
   auto elapsedSinceLastUpdate = millis() - _lastUpdate;
