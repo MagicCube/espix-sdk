@@ -14,7 +14,6 @@ Application *app = new Application(display);
 TextView *textView = new TextView("Hello.", FONT_SIZE_H2);
 
 void onConnected() {
-  app->enableOTA();
   app->setRootView(textView, TransitionOptions(TRANSITION_TO_LEFT));
   textView->setText(app->getNetwork()->getLocalIP());
 }
@@ -28,7 +27,7 @@ void setup() {
   app->getScreen()->setBrightness(100);
   app->getScreen()->setOrientation(false);
   // app->getNetwork()->connect("Henry's Living Room 2.4GHz", "13913954971", true, onConnected);
-  app->getNetwork()->connect("Henry's iPhone 6", "13913954971", true);
+  app->getNetwork()->connect("Henry's iPhone 6", "13913954971", true, onConnected);
 }
 
 void loop() {
