@@ -2,19 +2,21 @@
 
 #include <Arduino.h>
 
-#include <NTPClient.h>
+#include <time.h>
 
 class TimeClient {
 public:
   static TimeClient *getInstance();
-  unsigned long getTime();
-  String getFormattedTime();
+  time_t now();
+
+  // Get formatted time.
+  // http://www.cplusplus.com/reference/ctime/strftime/
+  String getFormattedTime(String format = "%T");
 
   void begin();
   void update();
 
 private:
-  TimeClient();
-  NTPClient *_client;
-  bool _hasBegun;
+  TimeClient(time_t timeOffset = 8 * 60 * 60);
+  time_t _timeOffset;
 };

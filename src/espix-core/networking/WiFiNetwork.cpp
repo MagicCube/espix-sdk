@@ -32,12 +32,12 @@ void WiFiNetwork::connect(WiFiConnectionSetting setting, bool showProgress,
     handler = NULL;
     WiFi.onStationModeGotIP(NULL);
     schedule_function([=]() {
-      TimeClient::getInstance()->begin();
       if (showProgress) {
         _getProgressView()->setText("WiFi connected.");
       }
+      TimeClient::getInstance()->begin();
       if (callback != NULL) {
-        schedule_function(callback);
+        callback();
       }
     });
   });
