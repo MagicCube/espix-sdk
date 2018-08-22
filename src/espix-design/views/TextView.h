@@ -22,6 +22,10 @@ public:
     _textAlign = textAlign;
   }
 
+  String getText() {
+    return _text;
+  }
+
   void setText(String text) {
     if (text == NULL) {
       text = "";
