@@ -1,6 +1,9 @@
 #include "WiFiNetwork.h"
 
+#include <Schedule.h>
+
 #include "../applications/Application.h"
+#include "../timing/TimeClient.h"
 
 WiFiNetwork::WiFiNetwork() {
 }
@@ -24,15 +27,21 @@ void WiFiNetwork::connect(WiFiConnectionSetting setting, bool showProgress,
     _getProgressView()->setText("Connecting to WiFi...");
     Application::getInstance()->setRootView(_getProgressView());
   }
-  static auto handler = WiFi.onStationModeGotIP([=](const WiFiEventStationModeGotIP &e) {
-    if (showProgress) {
-      _getProgressView()->setText("WiFi connected.");
-    }
+
+  static WiFiEventHandler handler = WiFi.onStationModeGotIP([=](const WiFiEventStationModeGotIP e) {
+    handler = NULL;
     WiFi.onStationModeGotIP(NULL);
-    if (callback != NULL) {
-      callback();
-    }
+    schedule_function([=]() {
+      TimeClient::getInstance()->begin();
+      if (showProgress) {
+        _getProgressView()->setText("WiFi connected.");
+      }
+      if (callback != NULL) {
+        schedule_function(callback);
+      }
+    });
   });
+
   WiFi.mode(WIFI_STA);
   WiFi.begin(setting.ssid.c_str(), setting.password.c_str());
 }
