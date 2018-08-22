@@ -112,6 +112,6 @@ void ViewContainer::_mountView(View *view, int offsetX, int offsetY) {
   auto viewContext = _view->getDrawingContext();
   viewContext->setSize(viewContainerContext->getWidth(), viewContainerContext->getHeight());
   viewContext->setOffset(offsetX, offsetY);
-  viewContainerContext->clear();
+  _view->redraw(true);
   _view->didMount();
 }
