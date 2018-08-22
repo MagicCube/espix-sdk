@@ -33,6 +33,7 @@ unsigned long View::getLastUpdate() {
 bool View::tryUpdate() {
   if (isDirty() || shouldUpdate()) {
     update();
+    _lastUpdate = millis();
     _dirty = false;
     return true;
   }
@@ -44,7 +45,6 @@ void View::redraw(bool clearBeforeRendering) {
   if (clearBeforeRendering) {
     context->clear();
   }
-  _lastUpdate = millis();
   render(context);
 }
 
