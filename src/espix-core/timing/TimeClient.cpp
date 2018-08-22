@@ -26,11 +26,12 @@ String TimeClient::getFormattedTime() {
 
 void TimeClient::begin() {
   _client->begin();
-  _hasBegan = true;
+  _hasBegun = true;
+  update();
 }
 
 void TimeClient::update() {
-  if (_hasBegan) {
+  if (_hasBegun) {
     _client->update();
   }
 }
