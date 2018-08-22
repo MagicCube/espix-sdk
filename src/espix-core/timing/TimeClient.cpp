@@ -5,8 +5,8 @@
 static TimeClient *__instance = NULL;
 
 TimeClient::TimeClient() {
-  WiFiUDP ntpUDP;
-  _client = new NTPClient(ntpUDP, "cn.pool.ntp.org");
+  static WiFiUDP ntpUDP;
+  _client = new NTPClient(ntpUDP, "1.cn.pool.ntp.org");
 }
 
 TimeClient *TimeClient::getInstance() {
@@ -26,8 +26,11 @@ String TimeClient::getFormattedTime() {
 
 void TimeClient::begin() {
   _client->begin();
+  _hasBegan = true;
 }
 
 void TimeClient::update() {
-  _client->forceUpdate();
+  if (_hasBegan) {
+    _client->update();
+  }
 }

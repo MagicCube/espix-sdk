@@ -16,4 +16,5 @@ public:
 private:
   TimeClient();
   NTPClient *_client;
+  bool _hasBegan;
 };
