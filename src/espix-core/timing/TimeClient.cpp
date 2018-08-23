@@ -38,7 +38,6 @@ String TimeClient::getLocalTimeStrig() {
 
 void TimeClient::begin() {
   _hasBegun = true;
-  Serial.println("TimeClient: Update for the first time");
   forceUpdate();
 }
 
@@ -52,7 +51,6 @@ void TimeClient::update() {
       if (millis() - _updateStart >= UPDATE_TIMEOUT) {
         // Retry again after timeout
         _updateRetries++;
-        Serial.println("TimeClient: retry");
         _internalUpdate();
       } else {
         long now = time(nullptr);
@@ -67,7 +65,6 @@ void TimeClient::update() {
       // Stop retrying after 10 times
       _isUpdating = false;
       _lastUpdate = millis();
-      Serial.println("TimeClient: fail");
     }
   } else {
     if (_lastUpdate > 0 && millis() - _lastUpdate >= UPDATE_INTERVAL) {
@@ -91,6 +88,5 @@ void TimeClient::_internalUpdate() {
     return;
   }
   _updateStart = millis();
-  Serial.println("TimeClient: Internal update...");
   configTime(0, 0, "0.cn.pool.ntp.org", "1.cn.pool.ntp.org", "2.cn.pool.ntp.org");
 }
