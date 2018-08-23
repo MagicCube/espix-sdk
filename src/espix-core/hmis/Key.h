@@ -40,9 +40,9 @@ private:
   unsigned long _lastKeyPressing;
 
   KeyCode _keyCode;
-  bool _keyPressed;
+  bool _keyPressed = false;
   uint8_t _pin;
   KeyState _state = KEY_UP;
 
-  KeyEventHandler _onKeyPress;
+  KeyEventHandler _onKeyPress = NULL;
 };

@@ -26,7 +26,7 @@ private:
   void _fireKeyPressEvent(KeyCode keyCode);
 
   Key *_keys[10];
-  int _keyCount;
-  KeyEventHandler _keyPressHandler;
-  KeyEventHandler _onKeyPress;
+  int _keyCount = 0;
+  KeyEventHandler _keyPressHandler = NULL;
+  KeyEventHandler _onKeyPress = NULL;
 };

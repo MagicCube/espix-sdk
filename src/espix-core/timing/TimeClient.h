@@ -25,9 +25,9 @@ private:
   void _internalUpdate();
   unsigned long UPDATE_TIMEOUT = 2000;
   unsigned long UPDATE_INTERVAL = 60 * 60 * 1000;
-  bool _hasBegun;
-  bool _isReady;
-  bool _isUpdating;
+  bool _hasBegun = false;
+  bool _isReady = false;
+  bool _isUpdating = false;
   unsigned long _timeOffset;
   uint8_t _updateRetries = 0;
   unsigned long _updateStart = 0;

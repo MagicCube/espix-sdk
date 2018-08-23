@@ -32,6 +32,6 @@ public:
 
 private:
   DrawingContext *_drawingContext;
-  bool _dirty;
+  bool _dirty = false;
   unsigned long _lastUpdate;
 };

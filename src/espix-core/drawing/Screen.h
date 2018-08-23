@@ -60,7 +60,7 @@ public:
 private:
   OLEDDisplay *_display;
   int _brightness;
-  bool _flipped;
-  bool _mirrored;
-  bool _dirty;
+  bool _flipped = false;
+  bool _mirrored = false;
+  bool _dirty = false;
 };
