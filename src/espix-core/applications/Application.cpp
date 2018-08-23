@@ -114,9 +114,10 @@ int Application::update() {
     }
   }
   auto updateStart = millis();
-  TimeClient::getInstance()->update();
+  _network->update();
   _keyboard->update();
   _mainLoop->update();
+  TimeClient::getInstance()->update();
   auto elapsedSinceLastUpdate = millis() - _lastUpdate;
   int timeBudget = _mainLoop->getOptions().updateInterval - elapsedSinceLastUpdate;
   _lastUpdate = updateStart;

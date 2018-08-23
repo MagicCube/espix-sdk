@@ -20,7 +20,7 @@ String WiFiNetwork::getLocalIP() {
   return WiFi.localIP().toString();
 }
 
-void WiFiNetwork::connect(WiFiConnectionSetting setting, bool showProgress,
+void WiFiNetwork::connect(WiFiConnectionSetting settings[], int settingsCount, bool showProgress,
                           NetworkConnectionCallback callback) {
   if (showProgress) {
     _getProgressView()->setMode(PROGRESS_INFINITY);
@@ -29,6 +29,7 @@ void WiFiNetwork::connect(WiFiConnectionSetting setting, bool showProgress,
   }
 
   static WiFiEventHandler handler = WiFi.onStationModeGotIP([=](const WiFiEventStationModeGotIP e) {
+    _connecting = false;
     handler = NULL;
     WiFi.onStationModeGotIP(NULL);
     schedule_function([=]() {
@@ -43,11 +44,22 @@ void WiFiNetwork::connect(WiFiConnectionSetting setting, bool showProgress,
   });
 
   WiFi.mode(WIFI_STA);
-  WiFi.begin(setting.ssid.c_str(), setting.password.c_str());
+  for (int i = 0; i < settingsCount; i++) {
+    auto setting = settings[i];
+    _wifiMulti.addAP(setting.ssid.c_str(), setting.password.c_str());
+  }
+  _wifiMulti.run();
+  _connecting = true;
 }
 
 void WiFiNetwork::disconnect(bool wifiOff) {
   WiFi.disconnect(wifiOff);
+}
+
+void WiFiNetwork::update() {
+  if (_connecting) {
+    _wifiMulti.run();
+  }
 }
 
 ProgressView *WiFiNetwork::_getProgressView() {

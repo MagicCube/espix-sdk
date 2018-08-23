@@ -67,8 +67,8 @@ public:
 
 private:
   unsigned long _lastUpdate;
-  bool _otaEnabled;
-  bool _otaUpgrading;
+  bool _otaEnabled = false;
+  bool _otaUpgrading = false;
   Screen *_screen;
   DrawingContext *_screenContext;
   Keyboard *_keyboard;
@@ -77,7 +77,7 @@ private:
   ViewContainer *_rootViewContainer;
   ProgressView *_otaUpgradingView;
 
-  KeyEventHandler _onKeyPress;
+  KeyEventHandler _onKeyPress = NULL;
 
   ProgressView *_getOtaUpgradingView();
   void _handleTick();
