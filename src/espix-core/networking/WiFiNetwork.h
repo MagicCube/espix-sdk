@@ -37,6 +37,7 @@ public:
 
 private:
   bool _connecting = false;
+  unsigned long _lastUpdate;
   ESP8266WiFiMulti _wifiMulti;
   ProgressView *_getProgressView();
   ProgressView *_progressView;
