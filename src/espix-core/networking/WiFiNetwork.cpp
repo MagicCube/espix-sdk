@@ -58,7 +58,7 @@ void WiFiNetwork::disconnect(bool wifiOff) {
 
 void WiFiNetwork::update() {
   if (_connecting) {
-    if (millis() - _lastUpdate > 100) {
+    if (millis() - _lastUpdate > 200) {
       _lastUpdate = millis();
       _wifiMulti.run();
     }
