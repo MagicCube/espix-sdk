@@ -2,7 +2,7 @@
 
 static TimeClient *__instance = NULL;
 
-TimeClient::TimeClient(time_t timeOffset) {
+TimeClient::TimeClient(unsigned long timeOffset) {
   _timeOffset = timeOffset;
 }
 
@@ -13,38 +13,69 @@ TimeClient *TimeClient::getInstance() {
   return __instance;
 }
 
-time_t TimeClient::now() {
+unsigned long TimeClient::now() {
   return time(nullptr) * 1000;
 }
 
-String TimeClient::getFormattedTime(String format) {
+String TimeClient::getLocalTimeStrig() {
   time_t rawTime = time(nullptr);
   time_t localTime = rawTime + _timeOffset;
   struct tm *timeInfo;
   timeInfo = localtime(&localTime);
-  char buffer[64];
-  strftime(buffer, 64, format.c_str(), timeInfo);
+  char buffer[8];
+  strftime(buffer, 9, "%T", timeInfo);
   return buffer;
 }
 
 void TimeClient::begin() {
-  update();
+  _hasBegun = true;
+  forceUpdate();
 }
 
 void TimeClient::update() {
-  int retryCount = 0;
-  unsigned timeout = 1000;
-  time_t now = 0;
-  while (now == 0 || retryCount > 10) {
-    retryCount++;
-    configTime(0, 0, "0.cn.pool.ntp.org", "1.cn.pool.ntp.org", "2.cn.pool.ntp.org");
-    unsigned start = millis();
-    while (millis() - start < timeout) {
-      now = time(nullptr);
-      if (now > (2016 - 1970) * 365 * 24 * 3600) {
-        break;
+  if (!_hasBegun) {
+    return;
+  }
+  if (_isUpdating) {
+    if (_updateRetries < 10) {
+      if (millis() - _updateStart >= UPDATE_TIMEOUT) {
+        // Retry again after timeout
+        _updateRetries++;
+        _internalUpdate();
+      } else {
+        long now = time(nullptr);
+        if (now > (2016 - 1970) * 365 * 24 * 60 * 60) {
+          // Successful
+          _isUpdating = false;
+          _lastUpdate = millis();
+        }
       }
-      delay(50);
+    } else {
+      // Stop retrying after 10 times
+      _isUpdating = false;
+      _lastUpdate = millis();
+    }
+  } else {
+    if (_lastUpdate > 0 && millis() - _lastUpdate >= UPDATE_INTERVAL) {
+      // Routine update
+      forceUpdate();
     }
   }
+}
+
+void TimeClient::forceUpdate() {
+  if (!_hasBegun) {
+    return;
+  }
+  _isUpdating = true;
+  _updateRetries = 1;
+  _internalUpdate();
+}
+
+void TimeClient::_internalUpdate() {
+  if (!_hasBegun) {
+    return;
+  }
+  _updateStart = millis();
+  configTime(0, 0, "0.cn.pool.ntp.org", "1.cn.pool.ntp.org", "2.cn.pool.ntp.org");
 }

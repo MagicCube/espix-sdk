@@ -7,16 +7,25 @@
 class TimeClient {
 public:
   static TimeClient *getInstance();
-  time_t now();
+  unsigned long now();
 
-  // Get formatted time.
+  // Get formatted local time.
   // http://www.cplusplus.com/reference/ctime/strftime/
-  String getFormattedTime(String format = "%T");
+  String getLocalTimeStrig();
 
   void begin();
   void update();
+  void forceUpdate();
 
 private:
-  TimeClient(time_t timeOffset = 8 * 60 * 60);
-  time_t _timeOffset;
+  TimeClient(unsigned long timeOffset = 8 * 60 * 60);
+  void _internalUpdate();
+  unsigned long UPDATE_TIMEOUT = 2000;
+  unsigned long UPDATE_INTERVAL = 60 * 60 * 1000;
+  bool _hasBegun;
+  bool _isUpdating;
+  unsigned long _timeOffset;
+  uint8_t _updateRetries = 0;
+  unsigned long _updateStart = 0;
+  unsigned long _lastUpdate = 0;
 };
