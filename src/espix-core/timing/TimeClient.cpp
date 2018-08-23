@@ -1,16 +1,34 @@
 #include "TimeClient.h"
 
-TimeClientClass::TimeClientClass(unsigned long timeOffset) {
+TimeClient *__instance = NULL;
+
+TimeClient::TimeClient(unsigned long timeOffset) {
   _timeOffset = timeOffset;
 }
 
-unsigned long TimeClientClass::now() {
+TimeClient *TimeClient::getInstance() {
+  if (__instance == NULL) {
+    __instance = new TimeClient(8 * 60 * 60 * 1000);
+  }
+  return __instance;
+}
+
+unsigned long TimeClient::now() {
   return time(nullptr) * 1000;
 }
 
-String TimeClientClass::getLocalTimeStrig() {
+bool TimeClient::isReady() {
+  return _isReady;
+}
+
+DateTime TimeClient::getLocalTime() {
+  long t = now();
+  return DateTime(t, _timeOffset);
+}
+
+String TimeClient::getLocalTimeStrig() {
   time_t rawTime = time(nullptr);
-  time_t localTime = rawTime + _timeOffset;
+  time_t localTime = rawTime + _timeOffset / 1000;
   struct tm *timeInfo;
   timeInfo = localtime(&localTime);
   char buffer[8];
@@ -18,25 +36,29 @@ String TimeClientClass::getLocalTimeStrig() {
   return buffer;
 }
 
-void TimeClientClass::begin() {
+void TimeClient::begin() {
   _hasBegun = true;
+  Serial.println("TimeClient: Update for the first time");
   forceUpdate();
 }
 
-void TimeClientClass::update() {
+void TimeClient::update() {
   if (!_hasBegun) {
     return;
   }
   if (_isUpdating) {
+
     if (_updateRetries < 10) {
       if (millis() - _updateStart >= UPDATE_TIMEOUT) {
         // Retry again after timeout
         _updateRetries++;
+        Serial.println("TimeClient: retry");
         _internalUpdate();
       } else {
         long now = time(nullptr);
         if (now > (2016 - 1970) * 365 * 24 * 60 * 60) {
           // Successful
+          _isReady = true;
           _isUpdating = false;
           _lastUpdate = millis();
         }
@@ -45,6 +67,7 @@ void TimeClientClass::update() {
       // Stop retrying after 10 times
       _isUpdating = false;
       _lastUpdate = millis();
+      Serial.println("TimeClient: fail");
     }
   } else {
     if (_lastUpdate > 0 && millis() - _lastUpdate >= UPDATE_INTERVAL) {
@@ -54,7 +77,7 @@ void TimeClientClass::update() {
   }
 }
 
-void TimeClientClass::forceUpdate() {
+void TimeClient::forceUpdate() {
   if (!_hasBegun) {
     return;
   }
@@ -63,10 +86,11 @@ void TimeClientClass::forceUpdate() {
   _internalUpdate();
 }
 
-void TimeClientClass::_internalUpdate() {
+void TimeClient::_internalUpdate() {
   if (!_hasBegun) {
     return;
   }
   _updateStart = millis();
+  Serial.println("TimeClient: Internal update...");
   configTime(0, 0, "0.cn.pool.ntp.org", "1.cn.pool.ntp.org", "2.cn.pool.ntp.org");
 }
