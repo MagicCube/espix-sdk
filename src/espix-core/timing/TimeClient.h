@@ -4,9 +4,9 @@
 
 #include <time.h>
 
-class TimeClient {
+class TimeClientClass {
 public:
-  static TimeClient *getInstance();
+  TimeClientClass(unsigned long timeOffset);
   unsigned long now();
 
   // Get formatted local time.
@@ -18,7 +18,6 @@ public:
   void forceUpdate();
 
 private:
-  TimeClient(unsigned long timeOffset = 8 * 60 * 60);
   void _internalUpdate();
   unsigned long UPDATE_TIMEOUT = 2000;
   unsigned long UPDATE_INTERVAL = 60 * 60 * 1000;
@@ -29,3 +28,5 @@ private:
   unsigned long _updateStart = 0;
   unsigned long _lastUpdate = 0;
 };
+
+static TimeClientClass TimeClient(8 * 60 * 60);

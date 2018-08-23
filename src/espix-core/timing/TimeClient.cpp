@@ -1,23 +1,14 @@
 #include "TimeClient.h"
 
-static TimeClient *__instance = NULL;
-
-TimeClient::TimeClient(unsigned long timeOffset) {
+TimeClientClass::TimeClientClass(unsigned long timeOffset) {
   _timeOffset = timeOffset;
 }
 
-TimeClient *TimeClient::getInstance() {
-  if (__instance == NULL) {
-    __instance = new TimeClient();
-  }
-  return __instance;
-}
-
-unsigned long TimeClient::now() {
+unsigned long TimeClientClass::now() {
   return time(nullptr) * 1000;
 }
 
-String TimeClient::getLocalTimeStrig() {
+String TimeClientClass::getLocalTimeStrig() {
   time_t rawTime = time(nullptr);
   time_t localTime = rawTime + _timeOffset;
   struct tm *timeInfo;
@@ -27,12 +18,12 @@ String TimeClient::getLocalTimeStrig() {
   return buffer;
 }
 
-void TimeClient::begin() {
+void TimeClientClass::begin() {
   _hasBegun = true;
   forceUpdate();
 }
 
-void TimeClient::update() {
+void TimeClientClass::update() {
   if (!_hasBegun) {
     return;
   }
@@ -63,7 +54,7 @@ void TimeClient::update() {
   }
 }
 
-void TimeClient::forceUpdate() {
+void TimeClientClass::forceUpdate() {
   if (!_hasBegun) {
     return;
   }
@@ -72,7 +63,7 @@ void TimeClient::forceUpdate() {
   _internalUpdate();
 }
 
-void TimeClient::_internalUpdate() {
+void TimeClientClass::_internalUpdate() {
   if (!_hasBegun) {
     return;
   }

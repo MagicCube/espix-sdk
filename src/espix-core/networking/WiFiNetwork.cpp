@@ -35,7 +35,7 @@ void WiFiNetwork::connect(WiFiConnectionSetting setting, bool showProgress,
       if (showProgress) {
         _getProgressView()->setText("WiFi connected.");
       }
-      TimeClient::getInstance()->begin();
+      TimeClient.begin();
       if (callback != NULL) {
         callback();
       }
