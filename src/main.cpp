@@ -14,6 +14,7 @@ Application *app = new Application(display);
 TextView *textView = new TextView("Hello.", FONT_SIZE_H2);
 
 void onConnected() {
+  app->enableOTA();
   app->setRootView(textView, TransitionOptions(TRANSITION_TO_LEFT));
   textView->setText(app->getNetwork()->getLocalIP());
 }
