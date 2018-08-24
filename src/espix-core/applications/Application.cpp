@@ -52,7 +52,7 @@ void Application::setRootView(View *view, TransitionOptions transitionOptions) {
 View *Application::getActiveView() {
   View *activeView = NULL;
   if (_otaUpgrading) {
-    activeView = _getOtaUpgradingView();
+    activeView = _getFirmwareUpgradingView();
   } else if (_rootViewContainer != NULL) {
     activeView = _rootViewContainer;
   }
@@ -67,16 +67,16 @@ void Application::enableOTA() {
   _otaEnabled = true;
   ArduinoOTA.onStart([=]() {
     _otaUpgrading = true;
-    _getOtaUpgradingView()->setProgress(0);
+    _getFirmwareUpgradingView()->setProgress(0);
     _loop();
   });
   ArduinoOTA.onProgress([=](unsigned int progress, unsigned int total) {
-    _getOtaUpgradingView()->setProgress(progress * 100 / total);
+    _getFirmwareUpgradingView()->setProgress(progress * 100 / total);
     _loop();
   });
   ArduinoOTA.onEnd([=]() {
-    _getOtaUpgradingView()->setProgress(100);
-    _getOtaUpgradingView()->setText("Restarting...");
+    _getFirmwareUpgradingView()->setProgress(100);
+    _getFirmwareUpgradingView()->setText("Restarting...");
     _loop();
   });
 }
@@ -117,11 +117,11 @@ int Application::update() {
   return timeBudget;
 }
 
-ProgressView *Application::_getOtaUpgradingView() {
-  if (_otaUpgradingView == NULL) {
-    _otaUpgradingView = new ProgressView("Upgrading firmware...");
+ProgressView *Application::_getFirmwareUpgradingView() {
+  if (_firmwareUpgradingView == NULL) {
+    _firmwareUpgradingView = new ProgressView("Upgrading firmware...");
   }
-  return _otaUpgradingView;
+  return _firmwareUpgradingView;
 }
 
 void Application::_loop() {

@@ -72,11 +72,11 @@ private:
   WiFiNetwork *_network;
   AnimationLoop *_mainLoop;
   ViewContainer *_rootViewContainer;
-  ProgressView *_otaUpgradingView;
+  ProgressView *_firmwareUpgradingView;
 
   KeyEventHandler _onKeyPress = NULL;
 
-  ProgressView *_getOtaUpgradingView();
+  ProgressView *_getFirmwareUpgradingView();
   void _loop();
   void _handleKeyPress(KeyCode keyCode);
   void _fireKeyPressEvent(KeyCode keyCode);
