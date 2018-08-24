@@ -66,24 +66,18 @@ void Application::enableOTA() {
   ArduinoOTA.begin();
   _otaEnabled = true;
   ArduinoOTA.onStart([=]() {
-    Serial.println("Start OTA...");
     _otaUpgrading = true;
     _getOtaUpgradingView()->setProgress(0);
+    _loop();
   });
   ArduinoOTA.onProgress([=](unsigned int progress, unsigned int total) {
-    Serial.print("Uploading firmware ");
-    Serial.print(progress);
-    Serial.print("/");
-    Serial.print(total);
-    Serial.println("...");
-    _getOtaUpgradingView()->setProgress(progress / total);
+    _getOtaUpgradingView()->setProgress(progress * 100 / total);
+    _loop();
   });
   ArduinoOTA.onEnd([=]() {
-    Serial.println("Firmware has been updated.");
-    _getOtaUpgradingView()->setText("Firmware has been updated.");
     _getOtaUpgradingView()->setProgress(100);
-    delay(400);
     _getOtaUpgradingView()->setText("Restarting...");
+    _loop();
   });
 }
 
@@ -97,7 +91,7 @@ void Application::begin() {
   _keyboard->onKeyPress([=](KeyCode keyCode) { _handleKeyPress(keyCode); });
   _keyboard->begin();
 
-  _mainLoop->onTick([=](AnimationLoop *target) { _handleTick(); });
+  _mainLoop->onTick([=](AnimationLoop *target) { _loop(); });
   _mainLoop->begin();
 
   _rootViewContainer->willMount();
@@ -108,27 +102,19 @@ void Application::begin() {
 int Application::update() {
   if (_otaEnabled) {
     ArduinoOTA.handle();
-    _mainLoop->update();
-    if (_otaUpgrading) {
-      return 0;
-    }
   }
   auto updateStart = millis();
   _network->update();
   _keyboard->update();
   _mainLoop->update();
-  TimeClient::getInstance()->update();
+  if (_network->isConnected()) {
+    // Update time only when network is available.
+    TimeClient::getInstance()->update();
+  }
   auto elapsedSinceLastUpdate = millis() - _lastUpdate;
   int timeBudget = _mainLoop->getOptions().updateInterval - elapsedSinceLastUpdate;
   _lastUpdate = updateStart;
   return timeBudget;
-}
-
-void Application::loop() {
-  int timeBudget = update();
-  if (timeBudget > 0) {
-    delay(timeBudget);
-  }
 }
 
 ProgressView *Application::_getOtaUpgradingView() {
@@ -138,7 +124,7 @@ ProgressView *Application::_getOtaUpgradingView() {
   return _otaUpgradingView;
 }
 
-void Application::_handleTick() {
+void Application::_loop() {
   auto activeView = getActiveView();
 
   if (activeView != NULL) {
