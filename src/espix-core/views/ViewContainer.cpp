@@ -6,7 +6,7 @@ ViewContainer::ViewContainer() {
   _viewTransition = new Transition();
 }
 
-View *ViewContainer::getView() {
+View *ViewContainer::getCurrentView() {
   return _view;
 }
 

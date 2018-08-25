@@ -38,7 +38,7 @@ ViewContainer *Application::getRootViewContainer() {
 
 View *Application::getRootView() {
   if (_rootViewContainer != NULL) {
-    return _rootViewContainer->getView();
+    return _rootViewContainer->getCurrentView();
   }
   return NULL;
 }

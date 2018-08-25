@@ -9,7 +9,7 @@
 class ViewContainer : public View {
 public:
   ViewContainer();
-  View *getView();
+  View *getCurrentView();
   void setView(View *view, TransitionOptions transitionOptions = TRANSITION_OPTIONS_NONE);
   bool isTransitioning();
 
