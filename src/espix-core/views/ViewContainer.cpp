@@ -7,7 +7,7 @@ ViewContainer::ViewContainer() {
 }
 
 View *ViewContainer::getCurrentView() {
-  return _view;
+  return _currentView;
 }
 
 bool ViewContainer::isTransitioning() {
@@ -15,9 +15,9 @@ bool ViewContainer::isTransitioning() {
 }
 
 void ViewContainer::setView(View *view, TransitionOptions transitionOptions) {
-  if (_view != NULL) {
-    _unmountingView = _view;
-    _view->willUnmount();
+  if (_currentView != NULL) {
+    _unmountingView = _currentView;
+    _currentView->willUnmount();
   }
   if (transitionOptions.direction != TRANSITION_DIRECTION_NONE) {
     int startValue = 0;
@@ -46,14 +46,14 @@ bool ViewContainer::shouldUpdate() {
   if (isDirty()) {
     return true;
   }
-  if (_view) {
-    return isTransitioning() || _view->shouldUpdate();
+  if (_currentView) {
+    return isTransitioning() || _currentView->shouldUpdate();
   }
   return false;
 }
 
 void ViewContainer::update() {
-  if (_view) {
+  if (_currentView) {
     if (_viewTransition->isRunning()) {
       _viewOffset = _viewTransition->getValue();
       auto direction = _viewTransition->getOptions().direction;
@@ -74,7 +74,7 @@ void ViewContainer::update() {
         _viewTransition->stop();
       }
     }
-    _view->tryUpdate();
+    _currentView->tryUpdate();
   }
 }
 
@@ -88,30 +88,30 @@ void ViewContainer::render(DrawingContext *context) {
     }
     _unmountingView->redraw();
   }
-  if (_view) {
+  if (_currentView) {
     auto direction = _viewTransition->getDirection();
     if (direction == TRANSITION_TO_LEFT || direction == TRANSITION_TO_RIGHT) {
-      _view->getDrawingContext()->setOffset(_viewOffset);
+      _currentView->getDrawingContext()->setOffset(_viewOffset);
     } else if (direction == TRANSITION_TO_TOP || direction == TRANSITION_TO_BOTTOM) {
-      _view->getDrawingContext()->setOffset(0, _viewOffset);
+      _currentView->getDrawingContext()->setOffset(0, _viewOffset);
     }
-    _view->redraw();
+    _currentView->redraw();
   }
 }
 
 void ViewContainer::handleKeyPress(KeyCode keyCode) {
-  if (_view) {
-    _view->handleKeyPress(keyCode);
+  if (_currentView) {
+    _currentView->handleKeyPress(keyCode);
   }
 }
 
 void ViewContainer::_mountView(View *view, int offsetX, int offsetY) {
-  _view = view;
-  _view->willMount();
+  _currentView = view;
+  _currentView->willMount();
   auto viewContainerContext = getDrawingContext();
-  auto viewContext = _view->getDrawingContext();
+  auto viewContext = _currentView->getDrawingContext();
   viewContext->setSize(viewContainerContext->getWidth(), viewContainerContext->getHeight());
   viewContext->setOffset(offsetX, offsetY);
-  _view->redraw(true);
-  _view->didMount();
+  _currentView->redraw(true);
+  _currentView->didMount();
 }

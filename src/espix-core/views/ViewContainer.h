@@ -23,7 +23,7 @@ private:
 
   int _viewOffset = 0;
   int _unmountingViewOffset = 0;
-  View *_view;
+  View *_currentView;
   View *_unmountingView;
   Transition *_viewTransition;
 };
