@@ -13,7 +13,7 @@ enum TRANSITION_DIRECTION {
 struct TransitionOptions {
   TransitionOptions() {
     direction = TRANSITION_DIRECTION_NONE;
-    duration = 250;
+    duration = 200;
   }
 
   TransitionOptions(int duration) {
@@ -23,7 +23,7 @@ struct TransitionOptions {
 
   TransitionOptions(TRANSITION_DIRECTION p_direction) {
     direction = p_direction;
-    duration = 250;
+    duration = 200;
   }
 
   TransitionOptions(TRANSITION_DIRECTION p_direction, int p_duration) {
