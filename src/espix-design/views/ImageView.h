@@ -10,7 +10,7 @@ public:
   void render(DrawingContext *context);
 
 private:
-  const uint8_t *_xbm;
-  int _width;
-  int _height;
+  const uint8_t *_xbm = NULL;
+  int _width = 0;
+  int _height = 0;
 };

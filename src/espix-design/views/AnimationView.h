@@ -14,10 +14,10 @@ public:
   void render(DrawingContext *context);
 
 private:
-  const uint8_t **_xbmFrames;
+  const uint8_t **_xbmFrames = NULL;
   int _frameIndex = -1;
-  int _frameCount;
-  int _fps;
-  int _width;
-  int _height;
+  int _frameCount = 0;
+  int _fps = 0;
+  int _width = 0;
+  int _height = 0;
 };
