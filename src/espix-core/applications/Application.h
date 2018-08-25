@@ -65,18 +65,18 @@ public:
 private:
   unsigned long _lastUpdate;
   bool _otaEnabled = false;
-  bool _otaUpgrading = false;
+  bool _otaUpdating = false;
   Screen *_screen;
   DrawingContext *_screenContext;
   Keyboard *_keyboard;
   WiFiNetwork *_network;
   AnimationLoop *_mainLoop;
   ViewContainer *_rootViewContainer;
-  ProgressView *_firmwareUpgradingView;
+  ProgressView *_firmwareUpdatingView;
 
   KeyEventHandler _onKeyPress = NULL;
 
-  ProgressView *_getFirmwareUpgradingView();
+  ProgressView *_getFirmwareUpdatingView();
   void _loop();
   void _handleKeyPress(KeyCode keyCode);
   void _fireKeyPressEvent(KeyCode keyCode);
