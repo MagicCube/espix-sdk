@@ -36,7 +36,7 @@ ViewContainer *Application::getRootViewContainer() {
 }
 
 View *Application::getRootView() {
-  if (_rootViewContainer != NULL) {
+  if (_rootViewContainer) {
     return _rootViewContainer->getCurrentView();
   }
   return NULL;
@@ -52,7 +52,7 @@ View *Application::getCurrentView() {
   View *activeView = NULL;
   if (_otaUpdating) {
     activeView = _getFirmwareUpdatingView();
-  } else if (_rootViewContainer != NULL) {
+  } else if (_rootViewContainer) {
     activeView = _rootViewContainer;
   }
   return activeView;
@@ -126,7 +126,7 @@ ProgressView *Application::_getFirmwareUpdatingView() {
 void Application::_loop() {
   auto currentView = getCurrentView();
 
-  if (currentView != NULL) {
+  if (currentView) {
     if (currentView->tryUpdate()) {
       currentView->redraw(true);
       _screen->update();
@@ -142,7 +142,7 @@ void Application::_handleKeyPress(KeyCode keyCode) {
 }
 
 void Application::_fireKeyPressEvent(KeyCode keyCode) {
-  if (_onKeyPress != NULL) {
+  if (_onKeyPress) {
     _onKeyPress(keyCode);
   }
 }

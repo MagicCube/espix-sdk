@@ -42,7 +42,7 @@ void AnimationLoop::update() {
 }
 
 void AnimationLoop::_fireTickEvent() {
-  if (_onTick != NULL) {
+  if (_onTick) {
     _onTick(this);
   }
 }

@@ -14,7 +14,7 @@ bool ViewContainer::isTransitioning() {
 }
 
 void ViewContainer::setView(View *view, TransitionOptions transitionOptions) {
-  if (_currentView != NULL) {
+  if (_currentView) {
     _unmountingView = _currentView;
     _currentView->willUnmount();
   }

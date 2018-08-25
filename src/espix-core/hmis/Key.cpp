@@ -56,7 +56,7 @@ void Key::_setState(KeyState state) {
 }
 
 void Key::_fireKeyPressEvent() {
-  if (_onKeyPress != NULL) {
+  if (_onKeyPress) {
     if (millis() - _lastEvent > 100) {
       _lastEvent = millis();
       _onKeyPress(_keyCode);

@@ -33,7 +33,7 @@ void Keyboard::_handleKeyPress(uint8_t keyCode) {
 }
 
 void Keyboard::_fireKeyPressEvent(KeyCode keyCode) {
-  if (_onKeyPress != NULL) {
+  if (_onKeyPress) {
     _onKeyPress(keyCode);
   }
 }
