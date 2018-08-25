@@ -13,5 +13,5 @@ public:
   void addSubview(View *subview);
 
 protected:
-  std::vector<View *> *_subviews;
+  std::vector<View *> _subviews;
 };

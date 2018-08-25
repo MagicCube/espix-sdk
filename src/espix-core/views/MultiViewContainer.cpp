@@ -3,7 +3,6 @@
 using namespace std;
 
 MultiViewContainer::MultiViewContainer() {
-  _subviews = new vector<View *>();
 }
 
 int MultiViewContainer::indexOfSubview(View *subview) {
@@ -12,5 +11,5 @@ int MultiViewContainer::indexOfSubview(View *subview) {
 }
 
 void MultiViewContainer::addSubview(View *subview) {
-  _subviews->push_back(subview);
+  _subviews.push_back(subview);
 }
