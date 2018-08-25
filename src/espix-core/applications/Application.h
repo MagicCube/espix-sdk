@@ -45,7 +45,7 @@ public:
   void setRootView(View *view, TransitionOptions transitionOptions = TRANSITION_OPTIONS_NONE);
 
   // Get current active view.
-  View *getActiveView();
+  View *getCurrentView();
 
   // Enable OTA.
   void enableOTA();

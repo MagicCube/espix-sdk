@@ -49,7 +49,7 @@ void Application::setRootView(View *view, TransitionOptions transitionOptions) {
   }
 }
 
-View *Application::getActiveView() {
+View *Application::getCurrentView() {
   View *activeView = NULL;
   if (_otaUpgrading) {
     activeView = _getFirmwareUpgradingView();
@@ -125,11 +125,11 @@ ProgressView *Application::_getFirmwareUpgradingView() {
 }
 
 void Application::_loop() {
-  auto activeView = getActiveView();
+  auto currentView = getCurrentView();
 
-  if (activeView != NULL) {
-    if (activeView->tryUpdate()) {
-      activeView->redraw(true);
+  if (currentView != NULL) {
+    if (currentView->tryUpdate()) {
+      currentView->redraw(true);
       _screen->update();
     }
   }
