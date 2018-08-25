@@ -63,11 +63,10 @@ public:
   void connectToWiFi(WiFiConnectionSetting setting);
 
 private:
-  unsigned long _lastUpdate;
+  unsigned long _lastUpdate = 0;
   bool _otaEnabled = false;
   bool _otaUpdating = false;
-  Screen *_screen;
-  DrawingContext *_screenContext;
+  Screen *_screen = NULL;
   Keyboard *_keyboard;
   WiFiNetwork *_network;
   AnimationLoop *_mainLoop;

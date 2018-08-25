@@ -25,7 +25,7 @@ private:
   AnimationOptions _options;
   AnimationState _state;
 
-  AnimationTickEventHandler _onTick;
+  AnimationTickEventHandler _onTick = NULL;
 
   void _fireTickEvent();
 };

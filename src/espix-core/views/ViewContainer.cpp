@@ -3,7 +3,6 @@
 #include "../drawing/Screen.h"
 
 ViewContainer::ViewContainer() {
-  _viewTransition = new Transition();
 }
 
 View *ViewContainer::getCurrentView() {
@@ -11,7 +10,7 @@ View *ViewContainer::getCurrentView() {
 }
 
 bool ViewContainer::isTransitioning() {
-  return _viewTransition->isRunning();
+  return _viewTransition.isRunning();
 }
 
 void ViewContainer::setView(View *view, TransitionOptions transitionOptions) {
@@ -35,7 +34,7 @@ void ViewContainer::setView(View *view, TransitionOptions transitionOptions) {
     default:
       break;
     }
-    _viewTransition->start(startValue, 0, transitionOptions);
+    _viewTransition.start(startValue, 0, transitionOptions);
   } else {
     _unmountingView = NULL;
     _mountView(view);
@@ -54,9 +53,9 @@ bool ViewContainer::shouldUpdate() {
 
 void ViewContainer::update() {
   if (_currentView) {
-    if (_viewTransition->isRunning()) {
-      _viewOffset = _viewTransition->getValue();
-      auto direction = _viewTransition->getOptions().direction;
+    if (_viewTransition.isRunning()) {
+      _viewOffset = _viewTransition.getValue();
+      auto direction = _viewTransition.getOptions().direction;
       switch (direction) {
       case TRANSITION_TO_LEFT:
       case TRANSITION_TO_RIGHT:
@@ -69,9 +68,9 @@ void ViewContainer::update() {
       default:
         break;
       }
-      if (_viewTransition->isTimeout()) {
+      if (_viewTransition.isTimeout()) {
         _unmountingView = NULL;
-        _viewTransition->stop();
+        _viewTransition.stop();
       }
     }
     _currentView->tryUpdate();
@@ -80,7 +79,7 @@ void ViewContainer::update() {
 
 void ViewContainer::render(DrawingContext *context) {
   if (_unmountingView) {
-    auto direction = _viewTransition->getDirection();
+    auto direction = _viewTransition.getDirection();
     if (direction == TRANSITION_TO_LEFT || direction == TRANSITION_TO_RIGHT) {
       _unmountingView->getDrawingContext()->setOffset(_unmountingViewOffset);
     } else if (direction == TRANSITION_TO_TOP || direction == TRANSITION_TO_BOTTOM) {
@@ -89,7 +88,7 @@ void ViewContainer::render(DrawingContext *context) {
     _unmountingView->redraw();
   }
   if (_currentView) {
-    auto direction = _viewTransition->getDirection();
+    auto direction = _viewTransition.getDirection();
     if (direction == TRANSITION_TO_LEFT || direction == TRANSITION_TO_RIGHT) {
       _currentView->getDrawingContext()->setOffset(_viewOffset);
     } else if (direction == TRANSITION_TO_TOP || direction == TRANSITION_TO_BOTTOM) {

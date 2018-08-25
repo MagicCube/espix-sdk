@@ -36,12 +36,12 @@ private:
   void _fireKeyPressEvent();
 
   bool _allowRepeat = true;
-  unsigned long _lastEvent;
-  unsigned long _lastKeyPressing;
+  unsigned long _lastEvent = 0;
+  unsigned long _lastKeyPressing = 0;
 
   KeyCode _keyCode;
   bool _keyPressed = false;
-  uint8_t _pin;
+  uint8_t _pin = 0;
   KeyState _state = KEY_UP;
 
   KeyEventHandler _onKeyPress = NULL;

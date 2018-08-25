@@ -6,6 +6,10 @@ View::View() {
   _drawingContext = Screen::getInstance()->createDrawingContext();
 }
 
+View::~View() {
+  delete _drawingContext;
+}
+
 DrawingContext *View::getDrawingContext() {
   return _drawingContext;
 }

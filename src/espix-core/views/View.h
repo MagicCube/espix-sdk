@@ -8,6 +8,7 @@
 class View {
 public:
   View();
+  ~View();
 
   DrawingContext *getDrawingContext();
   int getWidth();
@@ -33,5 +34,5 @@ public:
 private:
   DrawingContext *_drawingContext;
   bool _dirty = false;
-  unsigned long _lastUpdate;
+  unsigned long _lastUpdate = 0;
 };

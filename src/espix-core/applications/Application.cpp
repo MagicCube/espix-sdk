@@ -8,7 +8,6 @@ static Application *__instance = NULL;
 
 Application::Application(OLEDDisplay *display) {
   _screen = new Screen(display);
-  _screenContext = _screen->createDrawingContext();
   _keyboard = new Keyboard();
   _mainLoop = new AnimationLoop();
   _network = new WiFiNetwork();
