@@ -14,7 +14,7 @@ class DrawingContext {
 public:
   // Do NOT use this constructor directly.
   // Use Screen.createDrawingContext() instead.
-  DrawingContext(Screen *screen, int width = 0, int height = 0, int offsetX = 0, int offsetY = 0);
+  DrawingContext(int width = 0, int height = 0, int offsetX = 0, int offsetY = 0);
 
   OLEDDisplay *getCanvas();
 

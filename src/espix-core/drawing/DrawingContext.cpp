@@ -3,18 +3,17 @@
 
 #include "../devices/Screen.h"
 
-DrawingContext::DrawingContext(Screen *screen, int width, int height, int offsetX, int offsetY) {
-  _screen = screen;
+DrawingContext::DrawingContext(int width, int height, int offsetX, int offsetY) {
   setSize(width, height);
   setOffset(offsetX, offsetY);
 }
 
 OLEDDisplay *DrawingContext::getCanvas() {
-  return _screen->getDisplay();
+  return Screen::getInstance()->getDisplay();
 }
 
 void DrawingContext::setDirty() {
-  _screen->setDirty();
+  Screen::getInstance()->setDirty();
 }
 
 void DrawingContext::setColor(OLEDDISPLAY_COLOR color) {

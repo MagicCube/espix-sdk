@@ -88,7 +88,7 @@ void Screen::clear() {
 }
 
 DrawingContext *Screen::createDrawingContext() {
-  auto context = new DrawingContext(this);
+  auto context = new DrawingContext();
   context->setSize(getWidth(), getHeight());
   return context;
 }
