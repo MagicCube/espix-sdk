@@ -11,7 +11,6 @@ static Application *__instance = NULL;
 
 Application::Application(OLEDDisplay *display) {
   _screen = new Screen(display);
-  _mainLoop = new AnimationLoop();
   _rootViewContainer = new ViewContainer();
   __instance = this;
 }
@@ -82,8 +81,8 @@ void Application::begin() {
 
   Keyboard.onKeyPress([=](KeyCode keyCode) { _handleKeyPress(keyCode); });
 
-  _mainLoop->onTick([=](AnimationLoop *target) { _loop(); });
-  _mainLoop->begin();
+  _mainLoop.onTick([=](AnimationLoop *target) { _loop(); });
+  _mainLoop.begin();
 
   _rootViewContainer->willMount();
   _rootViewContainer->redraw(true);
@@ -97,13 +96,13 @@ int Application::update() {
   auto updateStart = millis();
   WiFiNetwork.update();
   Keyboard.update();
-  _mainLoop->update();
+  _mainLoop.update();
   if (WiFiNetwork.isConnected()) {
     // Update time only when network is available.
     TimeClient.update();
   }
   auto elapsedSinceLastUpdate = millis() - _lastUpdate;
-  int timeBudget = _mainLoop->getOptions().updateInterval - elapsedSinceLastUpdate;
+  int timeBudget = _mainLoop.getOptions().updateInterval - elapsedSinceLastUpdate;
   _lastUpdate = updateStart;
   return timeBudget;
 }

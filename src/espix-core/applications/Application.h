@@ -50,7 +50,7 @@ private:
   bool _otaEnabled = false;
   bool _otaUpdating = false;
   Screen *_screen = NULL;
-  AnimationLoop *_mainLoop;
+  AnimationLoop _mainLoop;
   ViewContainer *_rootViewContainer;
   ProgressView *_firmwareUpdatingView;
 
