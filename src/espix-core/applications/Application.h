@@ -13,7 +13,7 @@
 class Application {
 public:
   // Construct an Espix application.
-  Application(OLEDDisplay *display);
+  Application();
 
   static Application *getInstance();
 

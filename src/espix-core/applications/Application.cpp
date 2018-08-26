@@ -9,7 +9,7 @@
 
 static Application *__instance = NULL;
 
-Application::Application(OLEDDisplay *display) {
+Application::Application() {
   _rootViewContainer = new ViewContainer();
   __instance = this;
 }

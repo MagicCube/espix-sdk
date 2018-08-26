@@ -12,7 +12,7 @@ unsigned long lastUpdate = 0;
 unsigned long lastViewChange = 0;
 
 SH1106Wire display(0x3c, OLED_SDA, OLED_CLK);
-Application application(&display);
+Application application;
 TextView textView("Hello.", FONT_SIZE_H2);
 
 void onConnected() {
