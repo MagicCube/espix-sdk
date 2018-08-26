@@ -6,8 +6,8 @@
 
 #include "../../espix-design/views/ProgressView.h"
 #include "../animations/AnimationLoop.h"
+#include "../devices/Keyboard.h"
 #include "../drawing/Screen.h"
-#include "../hmis/Keyboard.h"
 #include "../networking/WiFiNetwork.h"
 #include "../views/ViewContainer.h"
 

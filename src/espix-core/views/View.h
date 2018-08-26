@@ -2,8 +2,8 @@
 
 #include <Arduino.h>
 
+#include "../devices/Keyboard.h"
 #include "../drawing/DrawingContext.h"
-#include "../hmis/Keyboard.h"
 
 class View {
 public:
