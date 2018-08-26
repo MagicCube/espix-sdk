@@ -48,11 +48,11 @@ private:
   bool _otaUpdating = false;
   AnimationLoop _mainLoop;
   ViewContainer *_rootViewContainer;
-  ProgressView *_firmwareUpdatingView;
+  ProgressView *_progressView;
 
   KeyEventHandler _onKeyPress = NULL;
 
-  ProgressView *_getFirmwareUpdatingView();
+  ProgressView *_getProgressView();
   void _loop();
   void _handleKeyPress(KeyCode keyCode);
   void _fireKeyPressEvent(KeyCode keyCode);
