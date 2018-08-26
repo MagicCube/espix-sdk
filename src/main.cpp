@@ -16,11 +16,25 @@ TextView *textView = new TextView("Hello.", FONT_SIZE_H2);
 void onConnected() {
   app->enableOTA();
   app->setRootView(textView, TransitionOptions(TRANSITION_TO_LEFT));
-  textView->setText(app->getNetwork()->getLocalIP());
+  textView->setText(WiFiNetwork.getLocalIP());
+}
+
+void connect() {
+  WiFiConnectionSetting settings[] = {
+      WiFiConnectionSetting("Henry's iPhone 6", "13913954971"),
+      WiFiConnectionSetting("Henry's Living Room 2.4GHz", "13913954971")};
+  WiFiNetwork.connect(settings, 2, true, onConnected);
 }
 
 void setupDevices() {
   Keyboard.begin();
+}
+
+void setupApp() {
+  app->begin();
+  // Settings
+  app->getScreen()->setBrightness(100);
+  app->getScreen()->setOrientation(true);
 }
 
 void setup() {
@@ -28,15 +42,8 @@ void setup() {
   Serial.println();
 
   setupDevices();
-
-  app->begin();
-  // Settings
-  app->getScreen()->setBrightness(100);
-  app->getScreen()->setOrientation(true);
-  WiFiConnectionSetting settings[] = {
-      WiFiConnectionSetting("Henry's iPhone 6", "13913954971"),
-      WiFiConnectionSetting("Henry's Living Room 2.4GHz", "13913954971")};
-  app->getNetwork()->connect(settings, 2, true, onConnected);
+  setupApp();
+  connect();
 }
 
 void loop() {

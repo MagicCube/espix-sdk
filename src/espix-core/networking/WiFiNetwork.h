@@ -10,9 +10,9 @@
 
 typedef std::function<void()> NetworkConnectionCallback;
 
-class WiFiNetwork {
+class WiFiNetworkClass {
 public:
-  WiFiNetwork();
+  WiFiNetworkClass();
 
   bool isConnected();
   wl_status_t getStatus();
@@ -42,3 +42,5 @@ private:
   ProgressView *_getProgressView();
   ProgressView *_progressView;
 };
+
+extern WiFiNetworkClass WiFiNetwork;

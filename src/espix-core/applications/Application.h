@@ -21,15 +21,6 @@ public:
   // Get a Screen object represent the current screen.
   Screen *getScreen();
 
-  // Get WiFi network.
-  WiFiNetwork *getNetwork();
-
-  // Get local IP Address of WiFi if connected.
-  String getWiFiLocalIP();
-
-  // Returns whether WiFi is now connected.
-  bool isWiFiConnected();
-
   // Get root ViewContainer of application.
   ViewContainer *getRootViewContainer();
 
@@ -55,15 +46,11 @@ public:
   // Update application in the Arduino loop. Place this method in your loop().
   int update();
 
-  // Connect to WiFi using given setting include ssid and password.
-  void connectToWiFi(WiFiConnectionSetting setting);
-
 private:
   unsigned long _lastUpdate = 0;
   bool _otaEnabled = false;
   bool _otaUpdating = false;
   Screen *_screen = NULL;
-  WiFiNetwork *_network;
   AnimationLoop *_mainLoop;
   ViewContainer *_rootViewContainer;
   ProgressView *_firmwareUpdatingView;

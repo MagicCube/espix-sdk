@@ -5,23 +5,23 @@
 #include "../applications/Application.h"
 #include "../timing/TimeClient.h"
 
-WiFiNetwork::WiFiNetwork() {
+WiFiNetworkClass::WiFiNetworkClass() {
 }
 
-bool WiFiNetwork::isConnected() {
+bool WiFiNetworkClass::isConnected() {
   return WiFi.status() == WL_CONNECTED;
 }
 
-wl_status_t WiFiNetwork::getStatus() {
+wl_status_t WiFiNetworkClass::getStatus() {
   return WiFi.status();
 }
 
-String WiFiNetwork::getLocalIP() {
+String WiFiNetworkClass::getLocalIP() {
   return WiFi.localIP().toString();
 }
 
-void WiFiNetwork::connect(WiFiConnectionSetting settings[], int settingsCount, bool showProgress,
-                          NetworkConnectionCallback callback) {
+void WiFiNetworkClass::connect(WiFiConnectionSetting settings[], int settingsCount,
+                               bool showProgress, NetworkConnectionCallback callback) {
   if (showProgress) {
     _getProgressView()->setMode(PROGRESS_INFINITY);
     _getProgressView()->setText("Connecting to WiFi...");
@@ -52,11 +52,11 @@ void WiFiNetwork::connect(WiFiConnectionSetting settings[], int settingsCount, b
   _connecting = true;
 }
 
-void WiFiNetwork::disconnect(bool wifiOff) {
+void WiFiNetworkClass::disconnect(bool wifiOff) {
   WiFi.disconnect(wifiOff);
 }
 
-void WiFiNetwork::update() {
+void WiFiNetworkClass::update() {
   if (_connecting) {
     if (millis() - _lastUpdate > 200) {
       _lastUpdate = millis();
@@ -65,9 +65,11 @@ void WiFiNetwork::update() {
   }
 }
 
-ProgressView *WiFiNetwork::_getProgressView() {
+ProgressView *WiFiNetworkClass::_getProgressView() {
   if (_progressView == NULL) {
     _progressView = new ProgressView();
   }
   return _progressView;
 }
+
+WiFiNetworkClass WiFiNetwork;

@@ -3,6 +3,7 @@
 #include <ArduinoOTA.h>
 
 #include "../devices/Keyboard.h"
+#include "../networking/WiFiNetwork.h"
 #include "../timing/TimeClient.h"
 
 static Application *__instance = NULL;
@@ -10,7 +11,6 @@ static Application *__instance = NULL;
 Application::Application(OLEDDisplay *display) {
   _screen = new Screen(display);
   _mainLoop = new AnimationLoop();
-  _network = new WiFiNetwork();
   _rootViewContainer = new ViewContainer();
   __instance = this;
 }
@@ -21,10 +21,6 @@ Application *Application::getInstance() {
 
 Screen *Application::getScreen() {
   return _screen;
-}
-
-WiFiNetwork *Application::getNetwork() {
-  return _network;
 }
 
 ViewContainer *Application::getRootViewContainer() {
@@ -98,10 +94,10 @@ int Application::update() {
     ArduinoOTA.handle();
   }
   auto updateStart = millis();
-  _network->update();
+  WiFiNetwork.update();
   Keyboard.update();
   _mainLoop->update();
-  if (_network->isConnected()) {
+  if (WiFiNetwork.isConnected()) {
     // Update time only when network is available.
     TimeClient.update();
   }
