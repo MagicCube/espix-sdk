@@ -2,7 +2,6 @@
 
 AnimationLoop::AnimationLoop(AnimationOptions options) {
   _options = options;
-  begin();
 }
 
 void AnimationLoop::onTick(AnimationTickEventHandler handler) {
