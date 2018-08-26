@@ -21,21 +21,12 @@ String WiFiNetworkClass::getLocalIP() {
 }
 
 void WiFiNetworkClass::connect(WiFiConnectionSetting settings[], int settingsCount,
-                               bool showProgress, NetworkConnectionCallback callback) {
-  if (showProgress) {
-    _getProgressView()->setMode(PROGRESS_INFINITY);
-    _getProgressView()->setText("Connecting to WiFi...");
-    Application::getInstance()->setRootView(_getProgressView());
-  }
-
+                               NetworkConnectionCallback callback) {
   static WiFiEventHandler handler = WiFi.onStationModeGotIP([=](const WiFiEventStationModeGotIP e) {
     _connecting = false;
     handler = NULL;
     WiFi.onStationModeGotIP(NULL);
     schedule_function([=]() {
-      if (showProgress) {
-        _getProgressView()->setText("WiFi connected.");
-      }
       TimeClient.begin();
       if (callback) {
         callback();
@@ -63,13 +54,6 @@ void WiFiNetworkClass::update() {
       _wifiMulti.run();
     }
   }
-}
-
-ProgressView *WiFiNetworkClass::_getProgressView() {
-  if (_progressView == NULL) {
-    _progressView = new ProgressView();
-  }
-  return _progressView;
 }
 
 WiFiNetworkClass WiFiNetwork;

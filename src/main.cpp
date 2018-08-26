@@ -25,7 +25,7 @@ void connect() {
   WiFiConnectionSetting settings[] = {
       WiFiConnectionSetting("Henry's iPhone 6", "13913954971"),
       WiFiConnectionSetting("Henry's Living Room 2.4GHz", "13913954971")};
-  WiFiNetwork.connect(settings, 2, true, onConnected);
+  WiFiNetwork.connect(settings, 2, onConnected);
 }
 
 void setupDevices() {
