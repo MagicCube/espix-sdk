@@ -3,6 +3,7 @@
 #include <ArduinoOTA.h>
 
 #include "../devices/Keyboard.h"
+#include "../devices/Screen.h"
 #include "../networking/WiFiNetwork.h"
 #include "../timing/TimeClient.h"
 

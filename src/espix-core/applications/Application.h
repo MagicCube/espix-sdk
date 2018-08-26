@@ -6,8 +6,7 @@
 
 #include "../../espix-design/views/ProgressView.h"
 #include "../animations/AnimationLoop.h"
-#include "../drawing/Screen.h"
-#include "../networking/WiFiNetwork.h"
+#include "../devices/Screen.h"
 #include "../views/ViewContainer.h"
 
 // Represent the application of Expix.

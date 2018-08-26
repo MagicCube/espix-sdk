@@ -1,6 +1,6 @@
 #include "Screen.h"
 
-#include "DrawingContext.h"
+#include "../drawing/DrawingContext.h"
 
 static Screen *__instance = NULL;
 

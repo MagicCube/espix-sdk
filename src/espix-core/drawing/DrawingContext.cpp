@@ -1,7 +1,7 @@
 
 #include "DrawingContext.h"
 
-#include "Screen.h"
+#include "../devices/Screen.h"
 
 DrawingContext::DrawingContext(Screen *screen, int width, int height, int offsetX, int offsetY) {
   _screen = screen;

@@ -1,7 +1,5 @@
 #include "ViewContainer.h"
 
-#include "../drawing/Screen.h"
-
 ViewContainer::ViewContainer() {
 }
 
