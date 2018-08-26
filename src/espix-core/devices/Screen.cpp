@@ -1,7 +1,5 @@
 #include "Screen.h"
 
-#include "../drawing/DrawingContext.h"
-
 ScreenClass::ScreenClass() {
 }
 
