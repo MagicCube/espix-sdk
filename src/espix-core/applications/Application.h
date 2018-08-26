@@ -34,7 +34,10 @@ public:
   void enableOTA();
 
   // Fires when key pressed.
-  void onKeyPress(KeyEventHandler onKeyPress);
+  void onKeyPress(KeyEventHandler handler);
+
+  // Fires when key pressed.
+  void onScroll(ScrollEventHandler handler);
 
   // Initialize application. Place this method in your setup().
   void begin();
@@ -51,9 +54,12 @@ private:
   ProgressView *_progressView;
 
   KeyEventHandler _onKeyPress = NULL;
+  ScrollEventHandler _onScroll = NULL;
 
   ProgressView *_getProgressView();
   void _loop();
   void _handleKeyPress(KeyCode keyCode);
   void _fireKeyPressEvent(KeyCode keyCode);
+  void _handleScroll(int delta);
+  void _fireScrollEvent(int delta);
 };

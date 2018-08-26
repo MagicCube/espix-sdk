@@ -17,6 +17,7 @@ public:
   void update();
   void render(DrawingContext *context);
   void handleKeyPress(KeyCode keyCode);
+  void handleScroll(int delta);
 
 private:
   void _mountView(View *view, int offsetX = 0, int offsetY = 0);

@@ -67,12 +67,17 @@ void Application::enableOTA() {
   });
 }
 
-void Application::onKeyPress(KeyEventHandler onKeyPress) {
-  _onKeyPress = onKeyPress;
+void Application::onKeyPress(KeyEventHandler handler) {
+  _onKeyPress = handler;
+}
+
+void Application::onScroll(ScrollEventHandler handler) {
+  _onScroll = handler;
 }
 
 void Application::begin() {
   Keyboard.onKeyPress([=](KeyCode keyCode) { _handleKeyPress(keyCode); });
+  Keyboard.onScroll([=](int delta) { _handleScroll(delta); });
 
   _mainLoop.onTick([=](AnimationLoop *target) { _loop(); });
   _mainLoop.begin();
@@ -128,5 +133,18 @@ void Application::_handleKeyPress(KeyCode keyCode) {
 void Application::_fireKeyPressEvent(KeyCode keyCode) {
   if (_onKeyPress) {
     _onKeyPress(keyCode);
+  }
+}
+
+void Application::_handleScroll(int delta) {
+  _fireScrollEvent(delta);
+  if (_rootViewContainer) {
+    _rootViewContainer->handleScroll(delta);
+  }
+}
+
+void Application::_fireScrollEvent(int delta) {
+  if (_onScroll) {
+    _onScroll(delta);
   }
 }

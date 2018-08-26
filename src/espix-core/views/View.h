@@ -30,6 +30,7 @@ public:
 
   // Event Handlers
   virtual void handleKeyPress(KeyCode keyCode);
+  virtual void handleScroll(int delta);
 
 private:
   DrawingContext *_drawingContext;

@@ -11,14 +11,13 @@ void JogDial::begin() {
 }
 
 void JogDial::update() {
-  if (millis() - _lastUpdate > 200) {
+  if (millis() - _lastUpdate > 150) {
     int value = 0 - _encoder.read();
     if (value != 0) {
-      if (std::abs(value) == 1) {
-        value = value * 2;
+      if (std::abs(value) > 1) {
+        value = value / 2;
       }
-      int delta = (value / 2) * (360 / 30);
-      _fireScrollEvent(delta);
+      _fireScrollEvent(value);
       _encoder.write(0);
     }
     _lastUpdate = millis();

@@ -40,7 +40,7 @@ private:
   KeyEventHandler _keyPressHandler = NULL;
   KeyEventHandler _onKeyPress = NULL;
   ScrollEventHandler _jogDialScrollHandler = NULL;
-  KeyEventHandler _onScroll = NULL;
+  ScrollEventHandler _onScroll = NULL;
 };
 
 extern KeyboardClass Keyboard;

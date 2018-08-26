@@ -75,3 +75,6 @@ void View::willUnmount() {
 
 void View::handleKeyPress(KeyCode keyCode) {
 }
+
+void View::handleScroll(int delta) {
+}

@@ -7,6 +7,9 @@
 
 #define OLED_SDA D1
 #define OLED_CLK D2
+#define KY04_CLK D5
+#define KY04_DT D6
+#define KY04_SW D7
 
 unsigned long lastUpdate = 0;
 unsigned long lastViewChange = 0;
@@ -34,6 +37,8 @@ void setupDevices() {
   Screen.begin(&display);
   Screen.setBrightness(100);
   Screen.setOrientation(true);
+
+  Keyboard.registerJogDial(KY04_CLK, KY04_DT, KY04_SW);
   Keyboard.begin();
 }
 

@@ -102,6 +102,12 @@ void ViewContainer::handleKeyPress(KeyCode keyCode) {
   }
 }
 
+void ViewContainer::handleScroll(int delta) {
+  if (_currentView) {
+    _currentView->handleScroll(delta);
+  }
+}
+
 void ViewContainer::_mountView(View *view, int offsetX, int offsetY) {
   _currentView = view;
   _currentView->willMount();
