@@ -2,36 +2,36 @@
 
 #include "../drawing/DrawingContext.h"
 
-static ScreenClass *__instance = NULL;
+static Screen *__instance = NULL;
 
-ScreenClass::ScreenClass() {
+Screen::Screen() {
 }
 
-ScreenClass *ScreenClass::getInstance() {
+Screen *Screen::getInstance() {
   if (__instance == NULL) {
-    __instance = new ScreenClass();
+    __instance = new Screen();
   }
   return __instance;
 }
 
-OLEDDisplay *ScreenClass::getDisplay() {
+OLEDDisplay *Screen::getDisplay() {
   return _display;
 }
 
-uint8_t ScreenClass::getBrightness() {
+uint8_t Screen::getBrightness() {
   return _brightness;
 }
 
-void ScreenClass::setBrightness(uint8_t percentage) {
+void Screen::setBrightness(uint8_t percentage) {
   _brightness = percentage;
   _display->setContrast(percentage * 255 / 100);
 }
 
-bool ScreenClass::isFlipped() {
+bool Screen::isFlipped() {
   return _flipped;
 }
 
-void ScreenClass::setOrientation(bool flipped, bool mirrored) {
+void Screen::setOrientation(bool flipped, bool mirrored) {
   _flipped = flipped;
   _mirrored = mirrored;
   _display->resetOrientation();
@@ -43,23 +43,23 @@ void ScreenClass::setOrientation(bool flipped, bool mirrored) {
   }
 }
 
-bool ScreenClass::isMirrored() {
+bool Screen::isMirrored() {
   return _mirrored;
 }
 
-int ScreenClass::getWidth() {
+int Screen::getWidth() {
   return _display->getWidth();
 }
 
-int ScreenClass::getHeight() {
+int Screen::getHeight() {
   return _display->getHeight();
 }
 
-void ScreenClass::setDirty() {
+void Screen::setDirty() {
   _dirty = true;
 }
 
-void ScreenClass::begin(OLEDDisplay *display) {
+void Screen::begin(OLEDDisplay *display) {
   _display = display;
   _display->init();
   _display->resetDisplay();
@@ -69,25 +69,25 @@ void ScreenClass::begin(OLEDDisplay *display) {
   clear();
 }
 
-void ScreenClass::update() {
+void Screen::update() {
   if (_dirty) {
     _display->display();
     _dirty = false;
   }
 }
 
-void ScreenClass::clearBuffer() {
+void Screen::clearBuffer() {
   _display->clear();
   _dirty = true;
 }
 
-void ScreenClass::clear() {
+void Screen::clear() {
   clearBuffer();
   _display->display();
   _dirty = false;
 }
 
-DrawingContext *ScreenClass::createDrawingContext() {
+DrawingContext *Screen::createDrawingContext() {
   auto context = new DrawingContext();
   context->setSize(getWidth(), getHeight());
   return context;

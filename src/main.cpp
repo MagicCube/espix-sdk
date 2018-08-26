@@ -29,9 +29,9 @@ void connect() {
 }
 
 void setupDevices() {
-  ScreenClass::getInstance()->begin(&display);
-  ScreenClass::getInstance()->setBrightness(100);
-  ScreenClass::getInstance()->setOrientation(true);
+  Screen::getInstance()->begin(&display);
+  Screen::getInstance()->setBrightness(100);
+  Screen::getInstance()->setOrientation(true);
   Keyboard.begin();
 }
 

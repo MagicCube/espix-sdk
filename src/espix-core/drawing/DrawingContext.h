@@ -4,7 +4,7 @@
 
 #include <OLEDDisplay.h>
 
-class ScreenClass;
+class Screen;
 
 #define TEXT_ALIGN OLEDDISPLAY_TEXT_ALIGNMENT
 
@@ -97,7 +97,7 @@ public:
   void clear();
 
 private:
-  ScreenClass *_screen = NULL;
+  Screen *_screen = NULL;
 
   int _x(int value);
   int _y(int value);

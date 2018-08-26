@@ -113,7 +113,7 @@ void Application::_loop() {
   if (currentView) {
     if (currentView->tryUpdate()) {
       currentView->redraw(true);
-      ScreenClass::getInstance()->update();
+      Screen::getInstance()->update();
     }
   }
 }
