@@ -13,13 +13,12 @@ unsigned long lastViewChange = 0;
 
 SH1106Wire display(0x3c, OLED_SDA, OLED_CLK);
 Application application(&display);
-
-TextView *textView = new TextView("Hello.", FONT_SIZE_H2);
+TextView textView("Hello.", FONT_SIZE_H2);
 
 void onConnected() {
   application.enableOTA();
-  application.setRootView(textView, TransitionOptions(TRANSITION_TO_LEFT));
-  textView->setText(WiFiNetwork.getLocalIP());
+  application.setRootView(&textView, TransitionOptions(TRANSITION_TO_LEFT));
+  textView.setText(WiFiNetwork.getLocalIP());
 }
 
 void connect() {
