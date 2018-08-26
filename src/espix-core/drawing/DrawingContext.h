@@ -4,8 +4,6 @@
 
 #include <OLEDDisplay.h>
 
-class ScreenClass;
-
 #define TEXT_ALIGN OLEDDISPLAY_TEXT_ALIGNMENT
 
 enum FONT_SIZE { FONT_SIZE_H1 = 1, FONT_SIZE_H2 = 2, FONT_SIZE_NORMAL = 3 };
@@ -97,8 +95,6 @@ public:
   void clear();
 
 private:
-  ScreenClass *_screen = NULL;
-
   int _x(int value);
   int _y(int value);
 
