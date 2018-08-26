@@ -26,7 +26,7 @@ void setup() {
   app->begin();
   // Settings
   app->getScreen()->setBrightness(100);
-  app->getScreen()->setOrientation(false);
+  app->getScreen()->setOrientation(true);
   WiFiConnectionSetting settings[] = {
       WiFiConnectionSetting("Henry's iPhone 6", "13913954971"),
       WiFiConnectionSetting("Henry's Living Room 2.4GHz", "13913954971")};
