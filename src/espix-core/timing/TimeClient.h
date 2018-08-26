@@ -4,11 +4,9 @@
 
 #include "DateTime.h"
 
-class TimeClient {
+class TimeClientClass {
 public:
-  TimeClient(unsigned long timeOffset);
-
-  static TimeClient *getInstance();
+  TimeClientClass(unsigned long timeOffset);
 
   unsigned long now();
   bool isReady();
@@ -33,3 +31,5 @@ private:
   unsigned long _updateStart = 0;
   unsigned long _lastUpdate = 0;
 };
+
+extern TimeClientClass TimeClient;

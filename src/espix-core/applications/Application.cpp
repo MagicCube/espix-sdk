@@ -108,7 +108,7 @@ int Application::update() {
   _mainLoop->update();
   if (_network->isConnected()) {
     // Update time only when network is available.
-    TimeClient::getInstance()->update();
+    TimeClient.update();
   }
   auto elapsedSinceLastUpdate = millis() - _lastUpdate;
   int timeBudget = _mainLoop->getOptions().updateInterval - elapsedSinceLastUpdate;
