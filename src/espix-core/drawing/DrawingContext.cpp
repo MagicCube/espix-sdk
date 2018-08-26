@@ -5,7 +5,6 @@
 
 DrawingContext::DrawingContext(Screen *screen, int width, int height, int offsetX, int offsetY) {
   _screen = screen;
-  _canvas = screen->getDisplay();
   setSize(width, height);
   setOffset(offsetX, offsetY);
 }

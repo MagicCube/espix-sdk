@@ -96,7 +96,6 @@ public:
 
 private:
   Screen *_screen;
-  OLEDDisplay *_canvas;
 
   int _x(int value);
   int _y(int value);
