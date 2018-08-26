@@ -17,9 +17,6 @@ public:
 
   static Application *getInstance();
 
-  // Get a Screen object represent the current screen.
-  Screen *getScreen();
-
   // Get root ViewContainer of application.
   ViewContainer *getRootViewContainer();
 

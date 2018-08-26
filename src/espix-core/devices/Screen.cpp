@@ -4,12 +4,13 @@
 
 static Screen *__instance = NULL;
 
-Screen::Screen(OLEDDisplay *display) {
-  _display = display;
-  __instance = this;
+Screen::Screen() {
 }
 
 Screen *Screen::getInstance() {
+  if (__instance == NULL) {
+    __instance = new Screen();
+  }
   return __instance;
 }
 
@@ -58,7 +59,8 @@ void Screen::setDirty() {
   _dirty = true;
 }
 
-void Screen::begin() {
+void Screen::begin(OLEDDisplay *display) {
+  _display = display;
   _display->init();
   _display->resetDisplay();
   _display->resetOrientation();

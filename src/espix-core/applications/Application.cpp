@@ -10,17 +10,12 @@
 static Application *__instance = NULL;
 
 Application::Application(OLEDDisplay *display) {
-  _screen = new Screen(display);
   _rootViewContainer = new ViewContainer();
   __instance = this;
 }
 
 Application *Application::getInstance() {
   return __instance;
-}
-
-Screen *Application::getScreen() {
-  return _screen;
 }
 
 ViewContainer *Application::getRootViewContainer() {
@@ -77,8 +72,6 @@ void Application::onKeyPress(KeyEventHandler onKeyPress) {
 }
 
 void Application::begin() {
-  _screen->begin();
-
   Keyboard.onKeyPress([=](KeyCode keyCode) { _handleKeyPress(keyCode); });
 
   _mainLoop.onTick([=](AnimationLoop *target) { _loop(); });
@@ -120,7 +113,7 @@ void Application::_loop() {
   if (currentView) {
     if (currentView->tryUpdate()) {
       currentView->redraw(true);
-      _screen->update();
+      Screen::getInstance()->update();
     }
   }
 }

@@ -10,7 +10,7 @@ class DrawingContext;
 class Screen {
 public:
   // Construct a Screen object by passing an OLEDDisplay object.
-  Screen(OLEDDisplay *_display);
+  Screen();
 
   // Get singlton of Screen.
   static Screen *getInstance();
@@ -43,7 +43,7 @@ public:
   void setDirty();
 
   // Initialize screen.
-  void begin();
+  void begin(OLEDDisplay *display);
 
   // Update in loop().
   void update();

@@ -3,7 +3,6 @@
 #include "../devices/Screen.h"
 
 View::View() {
-  _drawingContext = Screen::getInstance()->createDrawingContext();
 }
 
 View::~View() {
@@ -11,6 +10,9 @@ View::~View() {
 }
 
 DrawingContext *View::getDrawingContext() {
+  if (_drawingContext == NULL) {
+    _drawingContext = Screen::getInstance()->createDrawingContext();
+  }
   return _drawingContext;
 }
 

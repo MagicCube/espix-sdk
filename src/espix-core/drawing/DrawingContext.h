@@ -16,6 +16,8 @@ public:
   // Use Screen.createDrawingContext() instead.
   DrawingContext(Screen *screen, int width = 0, int height = 0, int offsetX = 0, int offsetY = 0);
 
+  OLEDDisplay *getCanvas();
+
   void setColor(OLEDDISPLAY_COLOR color);
 
   // Get width of context
@@ -94,7 +96,7 @@ public:
 
 private:
   Screen *_screen;
-  OLEDDisplay *_display;
+  OLEDDisplay *_canvas;
 
   int _x(int value);
   int _y(int value);
