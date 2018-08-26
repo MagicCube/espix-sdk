@@ -5,17 +5,20 @@
 #include "espix-core.h"
 #include "espix-design.h"
 
+#define OLED_SDA D1
+#define OLED_CLK D2
+
 unsigned long lastUpdate = 0;
 unsigned long lastViewChange = 0;
 
-SH1106Wire *display = new SH1106Wire(0x3c, D1, D2);
-Application *app = new Application(display);
+SH1106Wire display(0x3c, OLED_SDA, OLED_CLK);
+Application application(&display);
 
 TextView *textView = new TextView("Hello.", FONT_SIZE_H2);
 
 void onConnected() {
-  app->enableOTA();
-  app->setRootView(textView, TransitionOptions(TRANSITION_TO_LEFT));
+  application.enableOTA();
+  application.setRootView(textView, TransitionOptions(TRANSITION_TO_LEFT));
   textView->setText(WiFiNetwork.getLocalIP());
 }
 
@@ -27,14 +30,13 @@ void connect() {
 }
 
 void setupDevices() {
+  application.getScreen()->setBrightness(100);
+  application.getScreen()->setOrientation(true);
   Keyboard.begin();
 }
 
 void setupApp() {
-  app->begin();
-  // Settings
-  app->getScreen()->setBrightness(100);
-  app->getScreen()->setOrientation(true);
+  application.begin();
 }
 
 void setup() {
@@ -47,7 +49,7 @@ void setup() {
 }
 
 void loop() {
-  int timeBudget = app->update();
+  int timeBudget = application.update();
   if (timeBudget > 0) {
     delay(timeBudget);
   }
