@@ -7,13 +7,13 @@
 class DrawingContext;
 
 // Represent an OLED screen, you use this class to get screen resolution or set brightness.
-class Screen {
+class ScreenClass {
 public:
   // Construct a Screen object by passing an OLEDDisplay object.
-  Screen();
+  ScreenClass();
 
   // Get singlton of Screen.
-  static Screen *getInstance();
+  static ScreenClass *getInstance();
 
   // Get internal OLEDDisplay object.
   OLEDDisplay *getDisplay();
