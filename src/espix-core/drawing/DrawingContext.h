@@ -18,6 +18,8 @@ public:
 
   OLEDDisplay *getCanvas();
 
+  void setDirty();
+
   void setColor(OLEDDISPLAY_COLOR color);
 
   // Get width of context

@@ -13,6 +13,10 @@ OLEDDisplay *DrawingContext::getCanvas() {
   return _screen->getDisplay();
 }
 
+void DrawingContext::setDirty() {
+  _screen->setDirty();
+}
+
 void DrawingContext::setColor(OLEDDISPLAY_COLOR color) {
   getCanvas()->setColor(color);
 }
@@ -64,37 +68,37 @@ void DrawingContext::setFontSize(FONT_SIZE size) {
 
 void DrawingContext::drawPixel(int x, int y) {
   getCanvas()->setPixel(_x(x), _y(y));
-  _screen->setDirty();
+  setDirty();
 }
 
 void DrawingContext::drawLine(int x0, int y0, int x1, int y1) {
   getCanvas()->drawLine(_x(x0), _y(y0), _x(x1), _y(y1));
-  _screen->setDirty();
+  setDirty();
 }
 
 void DrawingContext::drawRect(int x, int y, int width, int height) {
   getCanvas()->drawRect(_x(x), _y(y), width, height);
-  _screen->setDirty();
+  setDirty();
 }
 
 void DrawingContext::fillRect(int x, int y, int width, int height) {
   getCanvas()->fillRect(_x(x), _y(y), width, height);
-  _screen->setDirty();
+  setDirty();
 }
 
 void DrawingContext::drawCircle(int x, int y, int radius) {
   getCanvas()->drawCircle(_x(x), _y(y), radius);
-  _screen->setDirty();
+  setDirty();
 }
 
 void DrawingContext::drawCircleQuads(int x, int y, int radius, int quads) {
   getCanvas()->drawCircleQuads(_x(x), _y(y), radius, quads);
-  _screen->setDirty();
+  setDirty();
 }
 
 void DrawingContext::fillCircle(int x, int y, int radius) {
   getCanvas()->fillCircle(_x(x), _y(y), radius);
-  _screen->setDirty();
+  setDirty();
 }
 
 void DrawingContext::drawHorizontalLine(int x, int y, int length) {
@@ -102,7 +106,7 @@ void DrawingContext::drawHorizontalLine(int x, int y, int length) {
     length = getWidth();
   }
   getCanvas()->drawHorizontalLine(_x(x), _y(y), length);
-  _screen->setDirty();
+  setDirty();
 }
 
 void DrawingContext::drawVerticalLine(int x, int y, int length) {
@@ -110,12 +114,12 @@ void DrawingContext::drawVerticalLine(int x, int y, int length) {
     length = getHeight();
   }
   getCanvas()->drawVerticalLine(_x(x), _y(y), length);
-  _screen->setDirty();
+  setDirty();
 }
 
 void DrawingContext::drawXBM(const uint8_t *xbm, int width, int height, int x, int y) {
   getCanvas()->drawXbm(_x(x), _y(y), width, height, xbm);
-  _screen->setDirty();
+  setDirty();
 }
 
 void DrawingContext::drawString(String text, int x, int y) {
@@ -137,7 +141,7 @@ void DrawingContext::drawString(String text, int x, int y) {
     }
   }
   getCanvas()->drawString(_x(x), _y(y), text);
-  _screen->setDirty();
+  setDirty();
 }
 
 void DrawingContext::drawMultilineString(String text, int x, int y, int maxLineWidth) {
@@ -162,7 +166,7 @@ void DrawingContext::drawMultilineString(String text, int x, int y, int maxLineW
     maxLineWidth = getWidth();
   }
   getCanvas()->drawStringMaxWidth(_x(x), _y(y), maxLineWidth, text);
-  _screen->setDirty();
+  setDirty();
 }
 
 int DrawingContext::getStringWidth(String text) {
