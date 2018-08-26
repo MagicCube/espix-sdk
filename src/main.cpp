@@ -19,9 +19,15 @@ void onConnected() {
   textView->setText(app->getNetwork()->getLocalIP());
 }
 
+void setupDevices() {
+  Keyboard.begin();
+}
+
 void setup() {
   Serial.begin(115200);
   Serial.println();
+
+  setupDevices();
 
   app->begin();
   // Settings

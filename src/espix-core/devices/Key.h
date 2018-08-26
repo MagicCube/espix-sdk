@@ -24,11 +24,12 @@ public:
 
   uint8_t getPin();
   KeyState getState();
+  void disableRepeat();
+  void enableRepeat();
 
   void onKeyPress(KeyEventHandler handler);
 
-  void disableRepeat();
-  void enableRepeat();
+  void begin();
   void update();
 
 private:

@@ -4,10 +4,10 @@
 #include "Key.h"
 
 // Represent a keyboard.
-class Keyboard {
+class KeyboardClass {
 public:
   // Construct a new Keyboard.
-  Keyboard();
+  KeyboardClass();
 
   // Fires when key pressed.
   void onKeyPress(KeyEventHandler handler);
@@ -30,3 +30,5 @@ private:
   KeyEventHandler _keyPressHandler = NULL;
   KeyEventHandler _onKeyPress = NULL;
 };
+
+extern KeyboardClass Keyboard;

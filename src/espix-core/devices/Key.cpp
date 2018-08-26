@@ -3,7 +3,6 @@
 Key::Key(KeyCode keyCode, uint8_t pin) {
   _keyCode = keyCode;
   _pin = pin;
-  pinMode(_pin, INPUT_PULLUP);
   if (_keyCode == KEY_ESC || _keyCode == KEY_ENTER) {
     disableRepeat();
   }
@@ -27,6 +26,10 @@ void Key::disableRepeat() {
 
 void Key::onKeyPress(KeyEventHandler handler) {
   _onKeyPress = handler;
+}
+
+void Key::begin() {
+  pinMode(_pin, INPUT_PULLUP);
 }
 
 void Key::update() {

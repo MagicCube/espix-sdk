@@ -1,14 +1,14 @@
 #include "Keyboard.h"
 
-Keyboard::Keyboard() {
+KeyboardClass::KeyboardClass() {
   _keyPressHandler = [=](uint8_t keyCode) { this->_handleKeyPress(keyCode); };
 }
 
-void Keyboard::onKeyPress(KeyEventHandler handler) {
+void KeyboardClass::onKeyPress(KeyEventHandler handler) {
   _onKeyPress = handler;
 }
 
-void Keyboard::registerKey(KeyCode keyCode, uint8_t pin) {
+void KeyboardClass::registerKey(KeyCode keyCode, uint8_t pin) {
   auto key = new Key(keyCode, pin);
   key->onKeyPress(_keyPressHandler);
   _keys[_keyCount] = key;
@@ -19,21 +19,26 @@ void Keyboard::registerKey(KeyCode keyCode, uint8_t pin) {
   }
 }
 
-void Keyboard::begin() {
+void KeyboardClass::begin() {
+  for (int i = 0; i < _keyCount; i++) {
+    _keys[i]->begin();
+  }
 }
 
-void Keyboard::update() {
+void KeyboardClass::update() {
   for (int i = 0; i < _keyCount; i++) {
     _keys[i]->update();
   }
 }
 
-void Keyboard::_handleKeyPress(uint8_t keyCode) {
+void KeyboardClass::_handleKeyPress(uint8_t keyCode) {
   _fireKeyPressEvent(keyCode);
 }
 
-void Keyboard::_fireKeyPressEvent(KeyCode keyCode) {
+void KeyboardClass::_fireKeyPressEvent(KeyCode keyCode) {
   if (_onKeyPress) {
     _onKeyPress(keyCode);
   }
 }
+
+KeyboardClass Keyboard;

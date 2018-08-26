@@ -6,7 +6,6 @@
 
 #include "../../espix-design/views/ProgressView.h"
 #include "../animations/AnimationLoop.h"
-#include "../devices/Keyboard.h"
 #include "../drawing/Screen.h"
 #include "../networking/WiFiNetwork.h"
 #include "../views/ViewContainer.h"
@@ -21,9 +20,6 @@ public:
 
   // Get a Screen object represent the current screen.
   Screen *getScreen();
-
-  // Get a Keyboard object represent the current keyboard.
-  Keyboard *getKeyboard();
 
   // Get WiFi network.
   WiFiNetwork *getNetwork();
@@ -67,7 +63,6 @@ private:
   bool _otaEnabled = false;
   bool _otaUpdating = false;
   Screen *_screen = NULL;
-  Keyboard *_keyboard;
   WiFiNetwork *_network;
   AnimationLoop *_mainLoop;
   ViewContainer *_rootViewContainer;

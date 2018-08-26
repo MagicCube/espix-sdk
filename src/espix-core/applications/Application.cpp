@@ -2,13 +2,13 @@
 
 #include <ArduinoOTA.h>
 
+#include "../devices/Keyboard.h"
 #include "../timing/TimeClient.h"
 
 static Application *__instance = NULL;
 
 Application::Application(OLEDDisplay *display) {
   _screen = new Screen(display);
-  _keyboard = new Keyboard();
   _mainLoop = new AnimationLoop();
   _network = new WiFiNetwork();
   _rootViewContainer = new ViewContainer();
@@ -21,10 +21,6 @@ Application *Application::getInstance() {
 
 Screen *Application::getScreen() {
   return _screen;
-}
-
-Keyboard *Application::getKeyboard() {
-  return _keyboard;
 }
 
 WiFiNetwork *Application::getNetwork() {
@@ -87,8 +83,7 @@ void Application::onKeyPress(KeyEventHandler onKeyPress) {
 void Application::begin() {
   _screen->begin();
 
-  _keyboard->onKeyPress([=](KeyCode keyCode) { _handleKeyPress(keyCode); });
-  _keyboard->begin();
+  Keyboard.onKeyPress([=](KeyCode keyCode) { _handleKeyPress(keyCode); });
 
   _mainLoop->onTick([=](AnimationLoop *target) { _loop(); });
   _mainLoop->begin();
@@ -104,7 +99,7 @@ int Application::update() {
   }
   auto updateStart = millis();
   _network->update();
-  _keyboard->update();
+  Keyboard.update();
   _mainLoop->update();
   if (_network->isConnected()) {
     // Update time only when network is available.
