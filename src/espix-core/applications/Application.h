@@ -46,7 +46,6 @@ private:
   unsigned long _lastUpdate = 0;
   bool _otaEnabled = false;
   bool _otaUpdating = false;
-  Screen *_screen = NULL;
   AnimationLoop _mainLoop;
   ViewContainer *_rootViewContainer;
   ProgressView *_firmwareUpdatingView;
