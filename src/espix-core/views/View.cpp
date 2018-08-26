@@ -11,7 +11,7 @@ View::~View() {
 
 DrawingContext *View::getDrawingContext() {
   if (_drawingContext == NULL) {
-    _drawingContext = Screen::getInstance()->createDrawingContext();
+    _drawingContext = Screen.createDrawingContext();
   }
   return _drawingContext;
 }

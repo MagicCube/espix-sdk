@@ -2,36 +2,27 @@
 
 #include "../drawing/DrawingContext.h"
 
-static Screen *__instance = NULL;
-
-Screen::Screen() {
+ScreenClass::ScreenClass() {
 }
 
-Screen *Screen::getInstance() {
-  if (__instance == NULL) {
-    __instance = new Screen();
-  }
-  return __instance;
-}
-
-OLEDDisplay *Screen::getDisplay() {
+OLEDDisplay *ScreenClass::getDisplay() {
   return _display;
 }
 
-uint8_t Screen::getBrightness() {
+uint8_t ScreenClass::getBrightness() {
   return _brightness;
 }
 
-void Screen::setBrightness(uint8_t percentage) {
+void ScreenClass::setBrightness(uint8_t percentage) {
   _brightness = percentage;
   _display->setContrast(percentage * 255 / 100);
 }
 
-bool Screen::isFlipped() {
+bool ScreenClass::isFlipped() {
   return _flipped;
 }
 
-void Screen::setOrientation(bool flipped, bool mirrored) {
+void ScreenClass::setOrientation(bool flipped, bool mirrored) {
   _flipped = flipped;
   _mirrored = mirrored;
   _display->resetOrientation();
@@ -43,23 +34,23 @@ void Screen::setOrientation(bool flipped, bool mirrored) {
   }
 }
 
-bool Screen::isMirrored() {
+bool ScreenClass::isMirrored() {
   return _mirrored;
 }
 
-int Screen::getWidth() {
+int ScreenClass::getWidth() {
   return _display->getWidth();
 }
 
-int Screen::getHeight() {
+int ScreenClass::getHeight() {
   return _display->getHeight();
 }
 
-void Screen::setDirty() {
+void ScreenClass::setDirty() {
   _dirty = true;
 }
 
-void Screen::begin(OLEDDisplay *display) {
+void ScreenClass::begin(OLEDDisplay *display) {
   _display = display;
   _display->init();
   _display->resetDisplay();
@@ -69,26 +60,28 @@ void Screen::begin(OLEDDisplay *display) {
   clear();
 }
 
-void Screen::update() {
+void ScreenClass::update() {
   if (_dirty) {
     _display->display();
     _dirty = false;
   }
 }
 
-void Screen::clearBuffer() {
+void ScreenClass::clearBuffer() {
   _display->clear();
   _dirty = true;
 }
 
-void Screen::clear() {
+void ScreenClass::clear() {
   clearBuffer();
   _display->display();
   _dirty = false;
 }
 
-DrawingContext *Screen::createDrawingContext() {
+DrawingContext *ScreenClass::createDrawingContext() {
   auto context = new DrawingContext();
   context->setSize(getWidth(), getHeight());
   return context;
 }
+
+ScreenClass Screen;
