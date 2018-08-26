@@ -13,6 +13,7 @@ unsigned long lastViewChange = 0;
 
 SH1106Wire display(0x3c, OLED_SDA, OLED_CLK);
 Application application;
+ProgressView connectionView("Connecting to WiFi...", PROGRESS_INFINITY);
 TextView textView("Hello.", FONT_SIZE_H2);
 
 void onConnected() {
@@ -22,6 +23,7 @@ void onConnected() {
 }
 
 void connect() {
+  application.setRootView(&connectionView);
   WiFiConnectionSetting settings[] = {
       WiFiConnectionSetting("Henry's iPhone 6", "13913954971"),
       WiFiConnectionSetting("Henry's Living Room 2.4GHz", "13913954971")};
@@ -48,6 +50,7 @@ void setup() {
   connect();
 }
 
+bool firstTime = true;
 void loop() {
   int timeBudget = application.update();
   if (timeBudget > 0) {
