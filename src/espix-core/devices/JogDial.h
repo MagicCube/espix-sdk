@@ -2,18 +2,23 @@
 
 #include <Arduino.h>
 
+#include <Encoder.h>
+
+typedef std::function<void(int)> ScrollEventHandler;
+
 class JogDial {
 public:
   JogDial(uint8_t clkPin, uint8_t dtPin);
+
+  void onScroll(ScrollEventHandler handler);
 
   void begin();
   void update();
 
 private:
-  uint8_t _clkPin;
-  uint8_t _dtPin;
-  int _clkValue = HIGH;
-  int _lastClkValue = HIGH;
-  int _value = 0;
+  void _fireScrollEvent(int delta);
+
+  Encoder _encoder;
+  ScrollEventHandler _onScroll = NULL;
   unsigned long _lastUpdate = 0;
 };
