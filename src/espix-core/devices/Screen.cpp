@@ -7,6 +7,10 @@ OLEDDisplay *ScreenClass::getDisplay() {
   return _display;
 }
 
+Canvas *ScreenClass::getCanvas() {
+  return _canvas;
+}
+
 uint8_t ScreenClass::getBrightness() {
   return _brightness;
 }
@@ -44,42 +48,31 @@ int ScreenClass::getHeight() {
   return _display->getHeight();
 }
 
-void ScreenClass::setDirty() {
-  _dirty = true;
-}
-
 void ScreenClass::begin(OLEDDisplay *display) {
   _display = display;
   _display->init();
   _display->resetDisplay();
   _display->resetOrientation();
   _display->normalDisplay();
-  setBrightness(100);
+
+  _canvas = new Canvas(display);
+
   clear();
 }
 
 void ScreenClass::update() {
-  if (_dirty) {
-    _display->display();
-    _dirty = false;
+  if (_canvas) {
+    _canvas->update();
   }
 }
 
 void ScreenClass::clearBuffer() {
-  _display->clear();
-  _dirty = true;
+  _canvas->clear();
 }
 
 void ScreenClass::clear() {
   clearBuffer();
   _display->display();
-  _dirty = false;
-}
-
-DrawingContext *ScreenClass::createDrawingContext() {
-  auto context = new DrawingContext();
-  context->setSize(getWidth(), getHeight());
-  return context;
 }
 
 ScreenClass Screen;

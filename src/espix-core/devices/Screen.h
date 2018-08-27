@@ -4,6 +4,7 @@
 
 #include <OLEDDisplay.h>
 
+#include "../drawing/Canvas.h"
 #include "../drawing/DrawingContext.h"
 
 // Represent an OLED screen, you use this class to get screen resolution or set brightness.
@@ -14,6 +15,9 @@ public:
 
   // Get internal OLEDDisplay object.
   OLEDDisplay *getDisplay();
+
+  // Get canvas of screen.
+  Canvas *getCanvas();
 
   // Get brightness percentage of the screen. The range of percentage is 0-100.
   uint8_t getBrightness();
@@ -36,9 +40,6 @@ public:
   // Get height of the screen.
   int getHeight();
 
-  // Marks screen as dirty.
-  void setDirty();
-
   // Initialize screen.
   void begin(OLEDDisplay *display);
 
@@ -56,10 +57,10 @@ public:
 
 private:
   OLEDDisplay *_display;
+  Canvas *_canvas;
   int _brightness;
   bool _flipped = false;
   bool _mirrored = false;
-  bool _dirty = false;
 };
 
 extern ScreenClass Screen;

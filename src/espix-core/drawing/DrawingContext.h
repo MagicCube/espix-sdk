@@ -2,17 +2,16 @@
 
 #include <Arduino.h>
 
-#include <OLEDDisplay.h>
-
 #include "enums.h"
+
+class Canvas;
 
 class DrawingContext {
 public:
   // Do NOT use this constructor directly.
-  // Use Screen.createDrawingContext() instead.
-  DrawingContext(int width = 0, int height = 0, int offsetX = 0, int offsetY = 0);
+  DrawingContext(Canvas *canvas, int width, int height, int offsetX, int offsetY);
 
-  OLEDDisplay *getCanvas();
+  Canvas *getCanvas();
 
   void setDirty();
 
@@ -47,7 +46,7 @@ public:
   void setFontSize(FontSize size);
 
   // Draw a pixel at given position
-  void drawPixel(int x, int y);
+  void setPixel(int x, int y);
 
   // Draw a line from position 0 to position 1
   void drawLine(int x0, int y0, int x1, int y1);
@@ -99,4 +98,6 @@ private:
   int _offsetX;
   int _offsetY;
   TextAlign _textAlign = TextAlign::LEFT;
+
+  Canvas *_canvas = NULL;
 };
