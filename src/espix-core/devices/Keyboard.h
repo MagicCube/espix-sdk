@@ -4,10 +4,12 @@
 #include "JogDial.h"
 #include "Key.h"
 
-// Represent a keyboard.
+// Represents a keyboard.
+// The only instance of KeyboardClass is a global variable `Keyboard`.
 class KeyboardClass {
 public:
-  // Construct a new Keyboard.
+  // Initializes a new instance of the keyboard class.
+  // Do not call this constructor directly. Always use the global variable `Keyboard`.
   KeyboardClass();
 
   // Occurs when key pressed.
@@ -16,16 +18,16 @@ public:
   // Occurs when Jog Dial scrolled.
   void onScroll(ScrollEventHandler handler);
 
-  // Initialize keyboard.
+  // Initializes the keyboard.
   void begin();
 
-  // Update in loop().
+  // Updates in loop().
   void update();
 
-  // Register keyCode and its mapping pin.
+  // Registers keyCode and its mapping pin.
   void registerKey(KeyCode keyCode, uint8_t pin);
 
-  // Register KY04 encoder.
+  // Registers KY04 encoder as Jog Dial.
   void registerJogDial(int clkPin, int dtPin, int swPin = -1);
 
 private:
