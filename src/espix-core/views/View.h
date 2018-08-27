@@ -3,14 +3,14 @@
 #include <Arduino.h>
 
 #include "../devices/Keyboard.h"
-#include "../drawing/DrawingContext.h"
+#include "../drawing/CanvasContext.h"
 
 class View {
 public:
   View();
   ~View();
 
-  DrawingContext *getDrawingContext();
+  CanvasContext *getCanvasContext();
   int getWidth();
   int getHeight();
   bool isDirty();
@@ -22,7 +22,7 @@ public:
 
   // Lifecycle
   virtual void willMount();
-  virtual void render(DrawingContext *context);
+  virtual void render(CanvasContext *context);
   virtual void didMount();
   virtual bool shouldUpdate();
   virtual void update();
@@ -33,7 +33,7 @@ public:
   virtual void handleScroll(int delta);
 
 private:
-  DrawingContext *_drawingContext;
+  CanvasContext *_CanvasContext;
   bool _dirty = false;
   unsigned long _lastUpdate = 0;
 };

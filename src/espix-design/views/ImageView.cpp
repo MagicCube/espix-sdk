@@ -6,6 +6,6 @@ ImageView::ImageView(const uint8_t *xbm, int width, int height) {
   _height = height;
 }
 
-void ImageView::render(DrawingContext *context) {
+void ImageView::render(CanvasContext *context) {
   context->drawXBM(_xbm, _width, _height, (getWidth() - _width) / 2, (getHeight() - _height) / 2);
 }

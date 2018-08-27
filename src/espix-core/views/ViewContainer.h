@@ -15,7 +15,7 @@ public:
 
   bool shouldUpdate();
   void update();
-  void render(DrawingContext *context);
+  void render(CanvasContext *context);
   void handleKeyPress(KeyCode keyCode);
   void handleScroll(int delta);
 

@@ -58,14 +58,14 @@ void Canvas::update() {
   }
 }
 
-DrawingContext *Canvas::createContext(int width, int height, int offsetX, int offsetY) {
+CanvasContext *Canvas::createContext(int width, int height, int offsetX, int offsetY) {
   if (width == 0) {
     width = getWidth();
   }
   if (height == 0) {
     height = getHeight();
   }
-  return new DrawingContext(this, width, height, offsetX, offsetY);
+  return new CanvasContext(this, width, height, offsetX, offsetY);
 }
 
 void Canvas::setPixel(int x, int y) {

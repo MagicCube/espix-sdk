@@ -4,7 +4,7 @@
 
 #include <OLEDDisplay.h>
 
-#include "DrawingContext.h"
+#include "CanvasContext.h"
 #include "enums.h"
 
 class Canvas {
@@ -29,7 +29,7 @@ public:
 
   void update();
 
-  DrawingContext *createContext(int width = 0, int height = 0, int offsetX = 0, int offsetY = 0);
+  CanvasContext *createContext(int width = 0, int height = 0, int offsetX = 0, int offsetY = 0);
 
   void setPixel(int x, int y);
 

@@ -6,22 +6,22 @@ View::View() {
 }
 
 View::~View() {
-  delete _drawingContext;
+  delete _CanvasContext;
 }
 
-DrawingContext *View::getDrawingContext() {
-  if (_drawingContext == NULL) {
-    _drawingContext = Screen.getCanvas()->createContext();
+CanvasContext *View::getCanvasContext() {
+  if (_CanvasContext == NULL) {
+    _CanvasContext = Screen.getCanvas()->createContext();
   }
-  return _drawingContext;
+  return _CanvasContext;
 }
 
 int View::getWidth() {
-  return _drawingContext->getWidth();
+  return _CanvasContext->getWidth();
 }
 
 int View::getHeight() {
-  return _drawingContext->getHeight();
+  return _CanvasContext->getHeight();
 }
 
 bool View::isDirty() {
@@ -47,7 +47,7 @@ bool View::tryUpdate() {
 }
 
 void View::redraw(bool clearBeforeRendering) {
-  auto context = getDrawingContext();
+  auto context = getCanvasContext();
   if (clearBeforeRendering) {
     context->clear();
   }
@@ -57,7 +57,7 @@ void View::redraw(bool clearBeforeRendering) {
 void View::willMount() {
 }
 
-void View::render(DrawingContext *context) {
+void View::render(CanvasContext *context) {
 }
 
 void View::didMount() {

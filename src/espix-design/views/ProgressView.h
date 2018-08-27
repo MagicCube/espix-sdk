@@ -17,10 +17,10 @@ public:
 
   bool shouldUpdate();
   void update();
-  void render(DrawingContext *context);
+  void render(CanvasContext *context);
 
 private:
-  void _renderText(DrawingContext *context);
+  void _renderText(CanvasContext *context);
 
   ProgressMode _mode;
   String _text;

@@ -5,7 +5,7 @@
 #include <OLEDDisplay.h>
 
 #include "../drawing/Canvas.h"
-#include "../drawing/DrawingContext.h"
+#include "../drawing/CanvasContext.h"
 
 // Represent an OLED screen, you use this class to get screen resolution or set brightness.
 class ScreenClass {
@@ -52,8 +52,8 @@ public:
   // Clear screen immediately.
   void clear();
 
-  // Create a new DrawingContext object.
-  DrawingContext *createDrawingContext();
+  // Create a new CanvasContext object.
+  CanvasContext *createCanvasContext();
 
 private:
   OLEDDisplay *_display;

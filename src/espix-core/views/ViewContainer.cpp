@@ -75,22 +75,22 @@ void ViewContainer::update() {
   }
 }
 
-void ViewContainer::render(DrawingContext *context) {
+void ViewContainer::render(CanvasContext *context) {
   if (_unmountingView) {
     auto direction = _viewTransition.getDirection();
     if (direction == TransitionDirection::LEFT || direction == TransitionDirection::RIGHT) {
-      _unmountingView->getDrawingContext()->setOffset(_unmountingViewOffset);
+      _unmountingView->getCanvasContext()->setOffset(_unmountingViewOffset);
     } else if (direction == TransitionDirection::UP || direction == TransitionDirection::DOWN) {
-      _unmountingView->getDrawingContext()->setOffset(0, _unmountingViewOffset);
+      _unmountingView->getCanvasContext()->setOffset(0, _unmountingViewOffset);
     }
     _unmountingView->redraw();
   }
   if (_currentView) {
     auto direction = _viewTransition.getDirection();
     if (direction == TransitionDirection::LEFT || direction == TransitionDirection::RIGHT) {
-      _currentView->getDrawingContext()->setOffset(_viewOffset);
+      _currentView->getCanvasContext()->setOffset(_viewOffset);
     } else if (direction == TransitionDirection::UP || direction == TransitionDirection::DOWN) {
-      _currentView->getDrawingContext()->setOffset(0, _viewOffset);
+      _currentView->getCanvasContext()->setOffset(0, _viewOffset);
     }
     _currentView->redraw();
   }
@@ -111,8 +111,8 @@ void ViewContainer::handleScroll(int delta) {
 void ViewContainer::_mountView(View *view, int offsetX, int offsetY) {
   _currentView = view;
   _currentView->willMount();
-  auto viewContainerContext = getDrawingContext();
-  auto viewContext = _currentView->getDrawingContext();
+  auto viewContainerContext = getCanvasContext();
+  auto viewContext = _currentView->getCanvasContext();
   viewContext->setSize(viewContainerContext->getWidth(), viewContainerContext->getHeight());
   viewContext->setOffset(offsetX, offsetY);
   _currentView->redraw(true);

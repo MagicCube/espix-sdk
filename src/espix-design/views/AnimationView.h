@@ -11,7 +11,7 @@ public:
   void willMount();
   bool shouldUpdate();
   void update();
-  void render(DrawingContext *context);
+  void render(CanvasContext *context);
 
 private:
   const uint8_t **_xbmFrames = NULL;

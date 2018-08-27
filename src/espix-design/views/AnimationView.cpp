@@ -27,7 +27,7 @@ void AnimationView::update() {
   }
 }
 
-void AnimationView::render(DrawingContext *context) {
+void AnimationView::render(CanvasContext *context) {
   context->drawXBM(_xbmFrames[_frameIndex], _width, _height, (getWidth() - _width) / 2,
                    (getHeight() - _height) / 2);
 }

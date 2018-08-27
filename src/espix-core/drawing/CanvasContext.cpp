@@ -1,62 +1,62 @@
 
-#include "DrawingContext.h"
+#include "CanvasContext.h"
 
 #include "Canvas.h"
 
-DrawingContext::DrawingContext(Canvas *canvas, int width, int height, int offsetX, int offsetY) {
+CanvasContext::CanvasContext(Canvas *canvas, int width, int height, int offsetX, int offsetY) {
   _canvas = canvas;
   setSize(width, height);
   setOffset(offsetX, offsetY);
 }
 
-Canvas *DrawingContext::getCanvas() {
+Canvas *CanvasContext::getCanvas() {
   return _canvas;
 }
 
-int DrawingContext::getWidth() {
+int CanvasContext::getWidth() {
   return _width;
 }
 
-int DrawingContext::getHeight() {
+int CanvasContext::getHeight() {
   return _height;
 }
 
-void DrawingContext::setDirty() {
+void CanvasContext::setDirty() {
   getCanvas()->setDirty();
 }
 
-void DrawingContext::setColor(Color color) {
+void CanvasContext::setColor(Color color) {
   getCanvas()->setColor(color);
 }
 
-void DrawingContext::setSize(int width, int height) {
+void CanvasContext::setSize(int width, int height) {
   _width = width;
   _height = height;
 }
 
-int DrawingContext::getOffsetX() {
+int CanvasContext::getOffsetX() {
   return _offsetX;
 }
 
-int DrawingContext::getOffsetY() {
+int CanvasContext::getOffsetY() {
   return _offsetY;
 }
 
-void DrawingContext::setOffset(int x, int y) {
+void CanvasContext::setOffset(int x, int y) {
   _offsetX = x;
   _offsetY = y;
 }
 
-void DrawingContext::setTextAlign(TextAlign align) {
+void CanvasContext::setTextAlign(TextAlign align) {
   _textAlign = align;
   getCanvas()->setTextAlign(_textAlign);
 }
 
-void DrawingContext::setFont(const uint8_t *fontData) {
+void CanvasContext::setFont(const uint8_t *fontData) {
   getCanvas()->setFont(fontData);
 }
 
-void DrawingContext::setFontSize(FontSize size) {
+void CanvasContext::setFontSize(FontSize size) {
   if (size == FontSize::H1) {
     getCanvas()->setFont(ArialMT_Plain_24);
   } else if (size == FontSize::H2) {
@@ -66,53 +66,53 @@ void DrawingContext::setFontSize(FontSize size) {
   }
 }
 
-void DrawingContext::setPixel(int x, int y) {
+void CanvasContext::setPixel(int x, int y) {
   getCanvas()->setPixel(_x(x), _y(y));
 }
 
-void DrawingContext::drawLine(int x0, int y0, int x1, int y1) {
+void CanvasContext::drawLine(int x0, int y0, int x1, int y1) {
   getCanvas()->drawLine(_x(x0), _y(y0), _x(x1), _y(y1));
 }
 
-void DrawingContext::drawRect(int x, int y, int width, int height) {
+void CanvasContext::drawRect(int x, int y, int width, int height) {
   getCanvas()->drawRect(_x(x), _y(y), width, height);
 }
 
-void DrawingContext::fillRect(int x, int y, int width, int height) {
+void CanvasContext::fillRect(int x, int y, int width, int height) {
   getCanvas()->fillRect(_x(x), _y(y), width, height);
 }
 
-void DrawingContext::drawCircle(int x, int y, int radius) {
+void CanvasContext::drawCircle(int x, int y, int radius) {
   getCanvas()->drawCircle(_x(x), _y(y), radius);
 }
 
-void DrawingContext::drawCircleQuads(int x, int y, int radius, int quads) {
+void CanvasContext::drawCircleQuads(int x, int y, int radius, int quads) {
   getCanvas()->drawCircleQuads(_x(x), _y(y), radius, quads);
 }
 
-void DrawingContext::fillCircle(int x, int y, int radius) {
+void CanvasContext::fillCircle(int x, int y, int radius) {
   getCanvas()->fillCircle(_x(x), _y(y), radius);
 }
 
-void DrawingContext::drawHorizontalLine(int x, int y, int length) {
+void CanvasContext::drawHorizontalLine(int x, int y, int length) {
   if (length == -1) {
     length = getWidth();
   }
   getCanvas()->drawHorizontalLine(_x(x), _y(y), length);
 }
 
-void DrawingContext::drawVerticalLine(int x, int y, int length) {
+void CanvasContext::drawVerticalLine(int x, int y, int length) {
   if (length == -1) {
     length = getHeight();
   }
   getCanvas()->drawVerticalLine(_x(x), _y(y), length);
 }
 
-void DrawingContext::drawXBM(const uint8_t *xbm, int width, int height, int x, int y) {
+void CanvasContext::drawXBM(const uint8_t *xbm, int width, int height, int x, int y) {
   getCanvas()->drawXBM(xbm, width, height, _x(x), _y(y));
 }
 
-void DrawingContext::drawString(String text, int x, int y) {
+void CanvasContext::drawString(String text, int x, int y) {
   if (x == -1) {
     if (_textAlign == TextAlign::LEFT) {
       x = 0;
@@ -133,7 +133,7 @@ void DrawingContext::drawString(String text, int x, int y) {
   getCanvas()->drawString(text, _x(x), _y(y));
 }
 
-void DrawingContext::drawMultilineString(String text, int x, int y, int maxLineWidth) {
+void CanvasContext::drawMultilineString(String text, int x, int y, int maxLineWidth) {
   if (x == -1) {
     if (_textAlign == TextAlign::LEFT) {
       x = 0;
@@ -157,18 +157,18 @@ void DrawingContext::drawMultilineString(String text, int x, int y, int maxLineW
   getCanvas()->drawMultilineString(text, _x(x), _y(y), maxLineWidth);
 }
 
-int DrawingContext::getStringWidth(String text) {
+int CanvasContext::getStringWidth(String text) {
   return getCanvas()->getStringWidth(text);
 }
 
-void DrawingContext::clear() {
+void CanvasContext::clear() {
   return getCanvas()->clear();
 }
 
-int DrawingContext::_x(int value) {
+int CanvasContext::_x(int value) {
   return _offsetX + value;
 }
 
-int DrawingContext::_y(int value) {
+int CanvasContext::_y(int value) {
   return _offsetY + value;
 }

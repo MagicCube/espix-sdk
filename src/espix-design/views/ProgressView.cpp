@@ -51,7 +51,7 @@ void ProgressView::update() {
   }
 }
 
-void ProgressView::render(DrawingContext *context) {
+void ProgressView::render(CanvasContext *context) {
   _renderText(context);
 
   int width = getWidth() / 10 * 9;
@@ -83,7 +83,7 @@ void ProgressView::render(DrawingContext *context) {
   }
 }
 
-void ProgressView::_renderText(DrawingContext *context) {
+void ProgressView::_renderText(CanvasContext *context) {
   context->setFontSize(_fontSize);
   context->setTextAlign(TextAlign::CENTER);
   context->drawString(_text != "" ? _text : (String(_progress) + " %"), getWidth() / 2, 12);

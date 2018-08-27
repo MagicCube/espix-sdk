@@ -29,7 +29,7 @@ void TextView::setText(String text) {
   }
 }
 
-void TextView::render(DrawingContext *context) {
+void TextView::render(CanvasContext *context) {
   context->setFontSize(_fontSize);
   context->setTextAlign(_textAlign);
   context->drawString(_text);

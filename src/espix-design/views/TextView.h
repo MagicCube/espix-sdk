@@ -13,7 +13,7 @@ public:
   String getText();
   void setText(String text);
 
-  void render(DrawingContext *context);
+  void render(CanvasContext *context);
 
 private:
   String _text;
