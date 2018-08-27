@@ -33,10 +33,10 @@ public:
   // Enables OTA.
   void enableOTA();
 
-  // Fires when key pressed.
+  // Occurs when key pressed.
   void onKeyPress(KeyEventHandler handler);
 
-  // Fires when key pressed.
+  // Occurs when key pressed.
   void onScroll(ScrollEventHandler handler);
 
   // Initializes application. Place this method in Arduino's setup().

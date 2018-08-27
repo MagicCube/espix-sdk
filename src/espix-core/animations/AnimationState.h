@@ -2,6 +2,7 @@
 
 #include <Arduino.h>
 
+// Represents a state of animation
 struct AnimationState {
   unsigned long lastUpdate = 0;
   unsigned long updateStart = 0;

@@ -10,10 +10,10 @@ public:
   // Construct a new Keyboard.
   KeyboardClass();
 
-  // Fires when key pressed.
+  // Occurs when key pressed.
   void onKeyPress(KeyEventHandler handler);
 
-  // Fires when Jog Dial scrolled.
+  // Occurs when Jog Dial scrolled.
   void onScroll(ScrollEventHandler handler);
 
   // Initialize keyboard.

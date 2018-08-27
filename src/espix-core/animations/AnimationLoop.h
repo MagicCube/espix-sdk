@@ -9,6 +9,7 @@ class AnimationLoop;
 
 typedef std::function<void(AnimationLoop *target)> AnimationTickEventHandler;
 
+// Represents an animation loop.
 class AnimationLoop {
 public:
   AnimationLoop(AnimationOptions options = AnimationOptions());
@@ -16,6 +17,7 @@ public:
   AnimationOptions getOptions();
   AnimationState getState();
 
+  // Occurs when the timer has elapsed and the animation loop has begun.
   void onTick(AnimationTickEventHandler handler);
 
   void begin();
