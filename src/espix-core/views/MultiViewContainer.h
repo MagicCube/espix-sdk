@@ -2,7 +2,7 @@
 
 #include <Arduino.h>
 
-#include "../collections/Set.h"
+#include "../collections/List.h"
 
 #include "ViewContainer.h"
 
@@ -19,5 +19,5 @@ public:
   void removeSubview(View *subview);
 
 protected:
-  Set<View *> _subviews;
+  List<View *> _subviews;
 };
