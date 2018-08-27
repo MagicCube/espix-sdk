@@ -13,8 +13,6 @@ public:
   View *getParentView();
   void setParentView(View *parentView);
 
-  CanvasContext *getCanvasContext();
-
   int getWidth();
   void setWidth(int width);
   int getHeight();

@@ -16,10 +16,6 @@ void View::setParentView(View *parentView) {
   _parentView = parentView;
 }
 
-CanvasContext *View::getCanvasContext() {
-  return NULL;
-}
-
 int View::getWidth() {
   return _bounds.width;
 }
