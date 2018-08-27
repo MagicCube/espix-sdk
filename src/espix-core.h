@@ -3,6 +3,8 @@
 #include <Arduino.h>
 
 #include "espix-core/applications/Application.h"
+#include "espix-core/collections/List.h"
+#include "espix-core/collections/Set.h"
 #include "espix-core/devices/Keyboard.h"
 #include "espix-core/devices/Screen.h"
 #include "espix-core/networking/WiFiNetwork.h"
