@@ -16,10 +16,17 @@ void View::setParentView(ViewContainer *parentView) {
 }
 
 Canvas *View::getCanvas() {
+  if (_canvas) {
+    return _canvas;
+  }
   if (getParentView()) {
     return getParentView()->getCanvas();
   }
   return NULL;
+}
+
+void View::setCanvas(Canvas *canvas) {
+  _canvas = canvas;
 }
 
 int View::getWidth() {

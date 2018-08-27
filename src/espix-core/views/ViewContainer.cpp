@@ -3,14 +3,6 @@
 ViewContainer::ViewContainer() {
 }
 
-Canvas *ViewContainer::getCanvas() {
-  return _canvas;
-}
-
-void ViewContainer::setCanvas(Canvas *canvas) {
-  _canvas = canvas;
-}
-
 View *ViewContainer::getCurrentView() {
   return _currentView;
 }

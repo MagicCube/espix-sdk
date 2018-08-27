@@ -19,7 +19,8 @@ public:
 
   // Gets the canvas of the view.
   // Can be derived from its parent or ancestor.
-  virtual Canvas *getCanvas();
+  Canvas *getCanvas();
+  void setCanvas(Canvas *canvas);
 
   // Gets or sets the width of the view.
   int getWidth();
@@ -106,6 +107,7 @@ public:
   virtual void handleScroll(int delta);
 
 private:
+  Canvas *_canvas;
   ViewContainer *_parentView = NULL;
 
   Rectangle _bounds;

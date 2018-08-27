@@ -12,10 +12,6 @@ public:
   // Initializes a new instance of the ViewContainer class.
   ViewContainer();
 
-  // Gets or sets the canvas of the container.
-  Canvas *getCanvas();
-  void setCanvas(Canvas *canvas);
-
   // Gets or sets the current active view of the container.
   // There's only one active view at one time.
   View *getCurrentView();
@@ -36,7 +32,6 @@ private:
   void _mountView(View *view, int offsetX = 0, int offsetY = 0);
   void _unmountView();
 
-  Canvas *_canvas;
   int _viewOffset = 0;
   int _unmountingViewOffset = 0;
   View *_currentView;
