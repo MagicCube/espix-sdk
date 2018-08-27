@@ -19,8 +19,6 @@ void KeyboardClass::registerKey(KeyCode keyCode, uint8_t pin) {
   _keys[_keyCount] = key;
   if (_keyCount < 10) {
     _keyCount++;
-  } else {
-    Serial.println("Error: Keyboard can only have 10 keys.");
   }
 }
 
