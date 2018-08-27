@@ -4,14 +4,14 @@
 
 #include "../../espix-core/views/View.h"
 
-enum PROGRESS_MODE { PROGRESS_NORMAL, PROGRESS_INFINITY };
+enum class ProgressMode { DETERMINATE = 0, INDETERMINATE = 1 };
 
 class ProgressView : public View {
 public:
-  ProgressView(String text = "", PROGRESS_MODE mode = PROGRESS_NORMAL);
-  ProgressView(PROGRESS_MODE mode);
+  ProgressView(String text = "", ProgressMode mode = ProgressMode::DETERMINATE);
+  ProgressView(ProgressMode mode);
 
-  void setMode(PROGRESS_MODE mode);
+  void setMode(ProgressMode mode);
   void setText(String text);
   void setProgress(int progress);
 
@@ -22,7 +22,7 @@ public:
 private:
   void _renderText(DrawingContext *context);
 
-  PROGRESS_MODE _mode;
+  ProgressMode _mode;
   String _text;
   FontSize _fontSize = FontSize::NORMAL;
   int _progress = 0;

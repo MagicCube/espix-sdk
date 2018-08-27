@@ -1,16 +1,16 @@
 #include "ProgressView.h"
 
-ProgressView::ProgressView(String text, PROGRESS_MODE mode) {
+ProgressView::ProgressView(String text, ProgressMode mode) {
   _text = text;
   _mode = mode;
 }
 
-ProgressView::ProgressView(PROGRESS_MODE mode) {
+ProgressView::ProgressView(ProgressMode mode) {
   _text = "";
   _mode = mode;
 }
 
-void ProgressView::setMode(PROGRESS_MODE mode) {
+void ProgressView::setMode(ProgressMode mode) {
   if (mode != _mode) {
     _mode = mode;
     _progress = 0;
@@ -36,14 +36,14 @@ bool ProgressView::shouldUpdate() {
   if (isDirty()) {
     return true;
   }
-  if (_mode == PROGRESS_INFINITY) {
+  if (_mode == ProgressMode::INDETERMINATE) {
     return millis() - getLastUpdate() > 16;
   }
   return false;
 }
 
 void ProgressView::update() {
-  if (_mode == PROGRESS_INFINITY) {
+  if (_mode == ProgressMode::INDETERMINATE) {
     _progress += _progressOffset;
     if ((_progress >= 100 && _progressOffset > 0) || (_progress <= 0 && _progressOffset < 0)) {
       _progressOffset = -_progressOffset;
@@ -69,12 +69,12 @@ void ProgressView::render(DrawingContext *context) {
   context->drawHorizontalLine(xRadius, y + height, width - doubleRadius + 1);
   context->drawCircleQuads(x + width - radius, yRadius, radius, 0b00001001);
 
-  if (_mode == PROGRESS_NORMAL) {
+  if (_mode == ProgressMode::DETERMINATE) {
     uint16_t maxProgressWidth = (width - doubleRadius + 1) * _progress / 100;
     context->fillCircle(xRadius, yRadius, innerRadius);
     context->fillRect(xRadius + 1, y + 2, maxProgressWidth, height - 3);
     context->fillCircle(xRadius + maxProgressWidth, yRadius, innerRadius);
-  } else if (_mode == PROGRESS_INFINITY) {
+  } else if (_mode == ProgressMode::INDETERMINATE) {
     uint16_t length = width / 10;
     uint16_t offset = (width - length - doubleRadius + 1) * _progress / 100;
     context->fillCircle(xRadius + offset, yRadius, innerRadius);
