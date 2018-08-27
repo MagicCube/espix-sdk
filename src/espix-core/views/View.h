@@ -13,6 +13,7 @@ public:
   View *getParentView();
   void setParentView(View *parentView);
 
+
   int getWidth();
   void setWidth(int width);
   int getHeight();
@@ -47,7 +48,7 @@ public:
   virtual void handleScroll(int delta);
 
 private:
-  View *_parentView;
+  View *_parentView = NULL;
 
   Rectangle _bounds;
 
