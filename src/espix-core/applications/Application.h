@@ -10,9 +10,11 @@
 #include "../views/ViewContainer.h"
 
 // Represent the application of Expix.
+// The only instance of ApplicationClass is a global variable `Application`.
 class ApplicationClass {
 public:
   // Construct a new Espix application.
+  // Do not call this constructor directly. Always use the global variable `Application`.
   ApplicationClass();
 
   // Get root ViewContainer of application.
