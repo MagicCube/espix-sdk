@@ -103,7 +103,7 @@ void Canvas::drawVerticalLine(int x, int y, int length) {
   setDirty();
 }
 
-void Canvas::drawXBM(const uint8_t *xbm, int width, int height, int x, int y) {
+void Canvas::drawXBM(const uint8_t *xbm, int x, int y, int width, int height) {
   _display->drawXbm(x, y, width, height, xbm);
   setDirty();
 }

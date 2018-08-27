@@ -125,8 +125,8 @@ void CanvasContext::drawVerticalLine(int x, int y, int length) {
   getCanvas()->drawVerticalLine(_x(x), _y(y), length);
 }
 
-void CanvasContext::drawXBM(const uint8_t *xbm, int width, int height, int x, int y) {
-  getCanvas()->drawXBM(xbm, width, height, _x(x), _y(y));
+void CanvasContext::drawXBM(const uint8_t *xbm, int x, int y, int width, int height) {
+  getCanvas()->drawXBM(xbm, _x(x), _y(y), width, height);
 }
 
 void CanvasContext::drawString(String text, int x, int y) {

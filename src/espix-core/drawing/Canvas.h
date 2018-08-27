@@ -47,7 +47,7 @@ public:
 
   void drawVerticalLine(int x, int y, int length);
 
-  void drawXBM(const uint8_t *xbm, int width, int height, int x, int y);
+  void drawXBM(const uint8_t *xbm, int x, int y, int width, int height);
 
   void drawString(String text, int x, int y);
 

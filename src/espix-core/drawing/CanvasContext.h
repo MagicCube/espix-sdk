@@ -58,8 +58,18 @@ public:
   // Draw the border of a rectangle at the given location
   void drawRect(int x, int y, int width, int height);
 
+  // Draw the border of a rectangle at the given Rectangle object
+  void drawRect(Rectangle rect) {
+    drawRect(rect.left, rect.top, rect.width, rect.height);
+  }
+
   // Fill the rectangle
   void fillRect(int x, int y, int width, int height);
+
+  // Fill the rectangle
+  void fillRect(Rectangle rect) {
+    fillRect(rect.left, rect.top, rect.width, rect.height);
+  }
 
   // Draw the border of a circle
   void drawCircle(int x, int y, int radius);
@@ -77,7 +87,7 @@ public:
   void drawVerticalLine(int x, int y, int length = -1);
 
   // Draw a XBM picture
-  void drawXBM(const uint8_t *xbm, int width, int height, int x = 0, int y = 0);
+  void drawXBM(const uint8_t *xbm, int x, int y, int width, int height);
 
   // Draws a string at the given position
   void drawString(String text, int x = -1, int y = -1);
