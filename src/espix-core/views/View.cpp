@@ -21,31 +21,35 @@ CanvasContext *View::getCanvasContext() {
 }
 
 int View::getWidth() {
-  return _canvasContext->getWidth();
+  return _width;
 }
 void View::setWidth(int width) {
-  _canvasContext->setWidth(width);
+  _width = width;
+  _canvasContext->setWidth(_width);
 }
 
 int View::getHeight() {
-  return _canvasContext->getHeight();
+  return _height;
 }
 void View::setHeight(int height) {
-  _canvasContext->setHeight(height);
+  _height = height;
+  _canvasContext->setHeight(_height);
 }
 
 int View::getLeft() {
-  return _canvasContext->getOffsetX();
+  return _left;
 }
 void View::setLeft(int left) {
-  _canvasContext->setOffsetX(left);
+  _left = left;
+  _canvasContext->setOffsetX(_left);
 }
 
 int View::getTop() {
-  return _canvasContext->getOffsetY();
+  return _top;
 }
 void View::setTop(int top) {
-  _canvasContext->setOffsetY(top);
+  _top = top;
+  _canvasContext->setOffsetY(_top);
 }
 
 void View::resizeTo(int width, int height) {

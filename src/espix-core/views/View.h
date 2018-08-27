@@ -53,6 +53,12 @@ public:
 private:
   View *_parentView;
   CanvasContext *_canvasContext;
+
+  int _left = 0;
+  int _top = 0;
+  int _width = 0;
+  int _height = 0;
+
   bool _dirty = false;
   unsigned long _lastUpdate = 0;
 };
