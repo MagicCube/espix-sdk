@@ -1,7 +1,8 @@
 #pragma once
 
-#include "TransitionOptions.h"
 #include <Arduino.h>
+
+#include "TransitionOptions.h"
 
 class Transition {
 public:
@@ -9,7 +10,7 @@ public:
   int getStartTime();
   int getStartValue();
   int getEndValue();
-  TRANSITION_DIRECTION getDirection();
+  TransitionDirection getDirection();
   int getDuration();
   TransitionOptions getOptions();
   bool isRunning();

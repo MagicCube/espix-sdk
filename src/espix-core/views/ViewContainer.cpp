@@ -16,17 +16,17 @@ void ViewContainer::setView(View *view, TransitionOptions transitionOptions) {
     _unmountingView = _currentView;
     _currentView->willUnmount();
   }
-  if (transitionOptions.direction != TRANSITION_DIRECTION_NONE) {
+  if (transitionOptions.direction != TransitionDirection::NONE) {
     int startValue = 0;
     switch (transitionOptions.direction) {
-    case TRANSITION_TO_LEFT:
-    case TRANSITION_TO_RIGHT:
-      startValue = transitionOptions.direction * getWidth();
+    case TransitionDirection::LEFT:
+    case TransitionDirection::RIGHT:
+      startValue = (int)transitionOptions.direction * getWidth();
       _mountView(view, startValue, 0);
       break;
-    case TRANSITION_TO_TOP:
-    case TRANSITION_TO_BOTTOM:
-      startValue = transitionOptions.direction / 2 * getHeight();
+    case TransitionDirection::UP:
+    case TransitionDirection::DOWN:
+      startValue = (int)transitionOptions.direction / 2 * getHeight();
       _mountView(view, 0, startValue);
       break;
     default:
@@ -55,13 +55,13 @@ void ViewContainer::update() {
       _viewOffset = _viewTransition.getValue();
       auto direction = _viewTransition.getOptions().direction;
       switch (direction) {
-      case TRANSITION_TO_LEFT:
-      case TRANSITION_TO_RIGHT:
-        _unmountingViewOffset = _viewOffset - direction * getWidth();
+      case TransitionDirection::LEFT:
+      case TransitionDirection::RIGHT:
+        _unmountingViewOffset = _viewOffset - (int)direction * getWidth();
         break;
-      case TRANSITION_TO_TOP:
-      case TRANSITION_TO_BOTTOM:
-        _unmountingViewOffset = _viewOffset - direction / 2 * getHeight();
+      case TransitionDirection::UP:
+      case TransitionDirection::DOWN:
+        _unmountingViewOffset = _viewOffset - (int)direction / 2 * getHeight();
         break;
       default:
         break;
@@ -78,18 +78,18 @@ void ViewContainer::update() {
 void ViewContainer::render(DrawingContext *context) {
   if (_unmountingView) {
     auto direction = _viewTransition.getDirection();
-    if (direction == TRANSITION_TO_LEFT || direction == TRANSITION_TO_RIGHT) {
+    if (direction == TransitionDirection::LEFT || direction == TransitionDirection::RIGHT) {
       _unmountingView->getDrawingContext()->setOffset(_unmountingViewOffset);
-    } else if (direction == TRANSITION_TO_TOP || direction == TRANSITION_TO_BOTTOM) {
+    } else if (direction == TransitionDirection::UP || direction == TransitionDirection::DOWN) {
       _unmountingView->getDrawingContext()->setOffset(0, _unmountingViewOffset);
     }
     _unmountingView->redraw();
   }
   if (_currentView) {
     auto direction = _viewTransition.getDirection();
-    if (direction == TRANSITION_TO_LEFT || direction == TRANSITION_TO_RIGHT) {
+    if (direction == TransitionDirection::LEFT || direction == TransitionDirection::RIGHT) {
       _currentView->getDrawingContext()->setOffset(_viewOffset);
-    } else if (direction == TRANSITION_TO_TOP || direction == TRANSITION_TO_BOTTOM) {
+    } else if (direction == TransitionDirection::UP || direction == TransitionDirection::DOWN) {
       _currentView->getDrawingContext()->setOffset(0, _viewOffset);
     }
     _currentView->redraw();

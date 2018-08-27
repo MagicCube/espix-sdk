@@ -33,7 +33,7 @@ int Transition::getEndValue() {
   return _endValue;
 }
 
-TRANSITION_DIRECTION Transition::getDirection() {
+TransitionDirection Transition::getDirection() {
   return _options.direction;
 }
 

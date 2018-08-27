@@ -2,36 +2,30 @@
 
 #include <Arduino.h>
 
-enum TRANSITION_DIRECTION {
-  TRANSITION_TO_LEFT = 1,
-  TRANSITION_DIRECTION_NONE = 0,
-  TRANSITION_TO_RIGHT = -1,
-  TRANSITION_TO_TOP = 2,
-  TRANSITION_TO_BOTTOM = -2
-};
+enum class TransitionDirection { LEFT = 1, NONE = 0, RIGHT = -1, UP = 2, DOWN = -2 };
 
 struct TransitionOptions {
   TransitionOptions() {
-    direction = TRANSITION_DIRECTION_NONE;
+    direction = TransitionDirection::NONE;
     duration = 200;
   }
 
   TransitionOptions(int duration) {
-    direction = TRANSITION_DIRECTION_NONE;
+    direction = TransitionDirection::NONE;
     duration = duration;
   }
 
-  TransitionOptions(TRANSITION_DIRECTION p_direction) {
+  TransitionOptions(TransitionDirection p_direction) {
     direction = p_direction;
     duration = 200;
   }
 
-  TransitionOptions(TRANSITION_DIRECTION p_direction, int p_duration) {
+  TransitionOptions(TransitionDirection p_direction, int p_duration) {
     direction = p_direction;
     duration = p_duration;
   }
 
-  TRANSITION_DIRECTION direction = TRANSITION_DIRECTION_NONE;
+  TransitionDirection direction = TransitionDirection::NONE;
   int duration = 0;
 };
 
