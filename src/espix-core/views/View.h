@@ -37,7 +37,7 @@ public:
   void setTop(int top);
 
 
-  // Gets a bool value indicates whether the view is dirty.
+  // Gets a boolean value indicates whether the view is dirty.
   // Sets it true by invoking `setDirty()`.
   bool isDirty();
 

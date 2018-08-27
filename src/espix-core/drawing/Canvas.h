@@ -19,7 +19,7 @@ public:
   // Gets the height of the canvas.
   int getHeight();
 
-  // Gets a bool value indicates whether the canvas is dirty.
+  // Gets a boolean value indicates whether the canvas is dirty.
   // Sets it true by invoking `setDirty()`.
   bool isDirty();
 
