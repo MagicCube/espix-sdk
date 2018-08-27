@@ -9,28 +9,28 @@
 #include "../devices/Screen.h"
 #include "../views/ViewContainer.h"
 
-// Represent the application of Expix.
+// Represents the application of Expix.
 // The only instance of ApplicationClass is a global variable `Application`.
 class ApplicationClass {
 public:
-  // Construct a new Espix application.
+  // Initializes a new instance of Espix application.
   // Do not call this constructor directly. Always use the global variable `Application`.
   ApplicationClass();
 
-  // Get root ViewContainer of application.
+  // Gets the root ViewContainer of application.
   ViewContainer *getRootViewContainer();
 
-  // Get root view of application.
-  View *getRootView();
-
-  // Set root view of application.
+  // Sets root view of application.
   // It is the shortcut for getRootViewContainer()->setView().
   void setRootView(View *view, TransitionOptions transitionOptions = TRANSITION_OPTIONS_NONE);
 
-  // Get current active view.
+  // Gets root view of application.
+  View *getRootView();
+
+  // Gets current active view.
   View *getCurrentView();
 
-  // Enable OTA.
+  // Enables OTA.
   void enableOTA();
 
   // Fires when key pressed.
@@ -39,10 +39,10 @@ public:
   // Fires when key pressed.
   void onScroll(ScrollEventHandler handler);
 
-  // Initialize application. Place this method in your setup().
+  // Initializes application. Place this method in Arduino's setup().
   void begin();
 
-  // Update application in the Arduino loop. Place this method in your loop().
+  // Updates application in the Arduino loop. Place this method in Arduino's loop().sd
   int update();
 
 private:
