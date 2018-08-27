@@ -53,7 +53,7 @@ public:
   // Moves the view to the specific location.
   void moveTo(int left, int top);
 
-  // Gets or sets a `Rectangle` object which represent the bounds of the view.
+  // Gets or sets a `Rectangle` object which represents the bounds of the view.
   Rectangle getBounds();
   void setBounds(Rectangle bounds);
 

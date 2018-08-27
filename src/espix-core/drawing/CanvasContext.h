@@ -33,7 +33,7 @@ public:
   int getHeight();
   void setHeight(int height);
 
-  // Gets or sets a `Rectangle` object which represent the bounds of the context.
+  // Gets or sets a `Rectangle` object which represents the bounds of the context.
   Rectangle getBounds();
   void setBounds(Rectangle bounds);
 
