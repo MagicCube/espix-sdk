@@ -20,7 +20,7 @@ String WiFiNetworkClass::getLocalIP() {
   return WiFi.localIP().toString();
 }
 
-void WiFiNetworkClass::connect(WiFiConnectionSetting settings[], int settingsCount,
+void WiFiNetworkClass::connect(List<WiFiConnectionSetting> settings,
                                NetworkConnectionCallback callback) {
   static WiFiEventHandler handler = WiFi.onStationModeGotIP([=](const WiFiEventStationModeGotIP e) {
     _connecting = false;
@@ -35,8 +35,7 @@ void WiFiNetworkClass::connect(WiFiConnectionSetting settings[], int settingsCou
   });
 
   WiFi.mode(WIFI_STA);
-  for (int i = 0; i < settingsCount; i++) {
-    auto setting = settings[i];
+  for (auto setting : settings) {
     _wifiMulti.addAP(setting.ssid.c_str(), setting.password.c_str());
   }
   _wifiMulti.run();

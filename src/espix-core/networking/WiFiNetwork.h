@@ -5,6 +5,8 @@
 #include <ESP8266WiFi.h>
 #include <ESP8266WiFiMulti.h>
 
+#include "../collections/List.h"
+
 #include "WiFiConnectionSetting.h"
 
 typedef std::function<void()> NetworkConnectionCallback;
@@ -18,11 +20,10 @@ public:
   String getLocalIP();
 
 
-  void connect(WiFiConnectionSetting settings[], int settingsCount,
-               NetworkConnectionCallback callback = NULL);
+  void connect(List<WiFiConnectionSetting> settings, NetworkConnectionCallback callback = NULL);
   void connect(WiFiConnectionSetting setting, NetworkConnectionCallback callback = NULL) {
-    WiFiConnectionSetting settings[] = {setting};
-    connect(settings, 1, callback);
+    List<WiFiConnectionSetting> settings;
+    connect(settings, callback);
   }
   void connect(String ssid, String password, NetworkConnectionCallback callback = NULL) {
     WiFiConnectionSetting setting(ssid, password);
