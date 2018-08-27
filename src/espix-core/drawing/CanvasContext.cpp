@@ -17,6 +17,20 @@ void CanvasContext::setCanvas(Canvas *canvas) {
   setTextAlign(_textAlign);
 }
 
+int CanvasContext::getOffsetX() {
+  return _offsetX;
+}
+void CanvasContext::setOffsetX(int offsetX) {
+  _offsetX = offsetX;
+}
+
+int CanvasContext::getOffsetY() {
+  return _offsetY;
+}
+void CanvasContext::setOffsetY(int offsetY) {
+  _offsetY = offsetY;
+}
+
 int CanvasContext::getWidth() {
   return _width;
 }
@@ -38,20 +52,6 @@ void CanvasContext::setDirty() {
 void CanvasContext::setColor(Color color) {
   _color = color;
   getCanvas()->setColor(color);
-}
-
-int CanvasContext::getOffsetX() {
-  return _offsetX;
-}
-void CanvasContext::setOffsetX(int offsetX) {
-  _offsetX = offsetX;
-}
-
-int CanvasContext::getOffsetY() {
-  return _offsetY;
-}
-void CanvasContext::setOffsetY(int offsetY) {
-  _offsetY = offsetY;
 }
 
 void CanvasContext::setTextAlign(TextAlign align) {

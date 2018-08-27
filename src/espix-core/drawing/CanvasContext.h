@@ -19,14 +19,6 @@ public:
 
   void setColor(Color color);
 
-  // Get or set width of context
-  int getWidth();
-  void setWidth(int width);
-
-  // Get or set height of context
-  int getHeight();
-  void setHeight(int height);
-
   // Get or set offsetX of context
   int getOffsetX();
   void setOffsetX(int offsetX);
@@ -34,6 +26,14 @@ public:
   // Get or set offsetY of context
   int getOffsetY();
   void setOffsetY(int offsetY);
+
+  // Get or set width of context
+  int getWidth();
+  void setWidth(int width);
+
+  // Get or set height of context
+  int getHeight();
+  void setHeight(int height);
 
   // Specifies relative to which anchor point
   // the text is rendered.
