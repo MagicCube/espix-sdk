@@ -35,6 +35,8 @@ public:
   int getHeight();
   void setHeight(int height);
 
+  void setBounds(int offsetX, int offsetY, int width, int height);
+
   // Specifies relative to which anchor point
   // the text is rendered.
   void setTextAlign(TextAlign textAlign);

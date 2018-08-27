@@ -45,6 +45,13 @@ void CanvasContext::setHeight(int height) {
   _height = height;
 }
 
+void CanvasContext::setBounds(int offsetX, int offsetY, int width, int height) {
+  setOffsetX(offsetX);
+  setOffsetY(offsetY);
+  setWidth(width);
+  setHeight(height);
+}
+
 void CanvasContext::setDirty() {
   getCanvas()->setDirty();
 }
