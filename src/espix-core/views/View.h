@@ -5,16 +5,17 @@
 #include "../devices/Keyboard.h"
 #include "../drawing/CanvasContext.h"
 
+class ViewContainer;
+
 // Represents a part or full of screen which makes up an application's user interface.
 class View {
 public:
   // Initailize a new instance of the View class.
   View();
 
-
   // Gets or sets the parent of the view.
-  View *getParentView();
-  void setParentView(View *parentView);
+  ViewContainer *getParentView();
+  void setParentView(ViewContainer *parentView);
 
   // Gets the canvas of the view.
   // Can be derived from its parent or ancestor.
@@ -105,7 +106,7 @@ public:
   virtual void handleScroll(int delta);
 
 private:
-  View *_parentView = NULL;
+  ViewContainer *_parentView = NULL;
 
   Rectangle _bounds;
 

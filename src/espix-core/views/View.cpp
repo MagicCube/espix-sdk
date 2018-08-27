@@ -2,14 +2,16 @@
 
 #include "../devices/Screen.h"
 
+#include "ViewContainer.h"
+
 View::View() {
 }
 
-View *View::getParentView() {
+ViewContainer *View::getParentView() {
   return _parentView;
 }
 
-void View::setParentView(View *parentView) {
+void View::setParentView(ViewContainer *parentView) {
   _parentView = parentView;
 }
 
