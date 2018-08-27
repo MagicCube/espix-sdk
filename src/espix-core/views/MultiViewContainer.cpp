@@ -11,5 +11,11 @@ int MultiViewContainer::indexOfSubview(View *subview) {
 }
 
 void MultiViewContainer::addSubview(View *subview) {
-  _subviews.push_back(subview);
+  subview->setParentView(this);
+  _subviews.add(subview);
+}
+
+void MultiViewContainer::removeSubview(View *subview) {
+  subview->setParentView(NULL);
+  _subviews.remove(subview);
 }

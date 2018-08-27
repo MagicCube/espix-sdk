@@ -2,16 +2,22 @@
 
 #include <Arduino.h>
 
+#include "../collections/Set.h"
+
 #include "ViewContainer.h"
 
+// Represents a container which can contains multiple views.
 class MultiViewContainer : public ViewContainer {
 public:
+  // Initializes a new instance of the MultiViewContainer class.
   MultiViewContainer();
 
-  int indexOfSubview(View *subview);
-
+  // Add the specific subview.
   void addSubview(View *subview);
 
+  // Remove the specific subview.
+  void removeSubview(View *subview);
+
 protected:
-  std::vector<View *> _subviews;
+  Set<View *> _subviews;
 };
