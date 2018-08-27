@@ -38,10 +38,10 @@ public:
 
 
   // Gets a bool value indicates whether the view is dirty.
-  // Set it true by invoking `setDirty()`.
+  // Sets it true by invoking `setDirty()`.
   bool isDirty();
 
-  // Sets the view as dirty. So it will be redrawed in the next update.
+  // Marks the view as dirty. So it will be redrawed in the next update.
   void setDirty();
 
   // Gets the time of last update.
@@ -69,21 +69,27 @@ public:
   /* Lifecyle of View                  */
   /*************************************/
   // Overrides if you want to do something before the view is mountied.
+  // Please avoid to call this method inside your program.
   virtual void willMount();
 
   // Overrides if you want to customize rendering.
+  // Please avoid to call this method inside your program.
   virtual void render(CanvasContext *context);
 
   // Overrides if you want to do something after the view has been mounted.
+  // Please avoid to call this method inside your program.
   virtual void didMount();
 
   // Overrides if you want to determine when to update.
+  // Please avoid to call this method inside your program.
   virtual bool shouldUpdate();
 
   // Overrides if you want to customize updating.
+  // Please avoid to call this method inside your program.
   virtual void update();
 
   // Overrides if you want to do something before the view is unmounted.
+  // Please avoid to call this method inside your program.
   virtual void willUnmount();
 
 
@@ -91,9 +97,11 @@ public:
   /* Event Handlers                    */
   /*************************************/
   // Overrides if you want to capture key press event.
+  // Please avoid to call this method inside your program.
   virtual void handleKeyPress(KeyCode keyCode);
 
   // Overrides if you want to capture scroll event.
+  // Please avoid to call this method inside your program.
   virtual void handleScroll(int delta);
 
 private:

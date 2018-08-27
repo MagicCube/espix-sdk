@@ -12,10 +12,6 @@ int Canvas::getHeight() {
   return _display->getHeight();
 }
 
-int Canvas::getStringWidth(String text) {
-  return _display->getStringWidth(text);
-}
-
 bool Canvas::isDirty() {
   return _dirty;
 }
@@ -68,6 +64,16 @@ void Canvas::drawLine(int x0, int y0, int x1, int y1) {
   setDirty();
 }
 
+void Canvas::drawHorizontalLine(int x, int y, int length) {
+  _display->drawHorizontalLine(x, y, length);
+  setDirty();
+}
+
+void Canvas::drawVerticalLine(int x, int y, int length) {
+  _display->drawVerticalLine(x, y, length);
+  setDirty();
+}
+
 void Canvas::drawRect(int x, int y, int width, int height) {
   _display->drawRect(x, y, width, height);
   setDirty();
@@ -93,19 +99,13 @@ void Canvas::fillCircle(int x, int y, int radius) {
   setDirty();
 }
 
-void Canvas::drawHorizontalLine(int x, int y, int length) {
-  _display->drawHorizontalLine(x, y, length);
-  setDirty();
-}
-
-void Canvas::drawVerticalLine(int x, int y, int length) {
-  _display->drawVerticalLine(x, y, length);
-  setDirty();
-}
-
 void Canvas::drawXBM(const uint8_t *xbm, int x, int y, int width, int height) {
   _display->drawXbm(x, y, width, height, xbm);
   setDirty();
+}
+
+int Canvas::getStringWidth(String text) {
+  return _display->getStringWidth(text);
 }
 
 void Canvas::drawString(String text, int x, int y) {

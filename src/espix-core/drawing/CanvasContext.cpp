@@ -47,10 +47,6 @@ void CanvasContext::setBounds(Rectangle bounds) {
   _bounds = bounds;
 }
 
-void CanvasContext::setDirty() {
-  getCanvas()->setDirty();
-}
-
 void CanvasContext::setColor(Color color) {
   _color = color;
   getCanvas()->setColor(color);
@@ -85,6 +81,20 @@ void CanvasContext::drawLine(int x0, int y0, int x1, int y1) {
   getCanvas()->drawLine(_x(x0), _y(y0), _x(x1), _y(y1));
 }
 
+void CanvasContext::drawHorizontalLine(int x, int y, int length) {
+  if (length == -1) {
+    length = getWidth();
+  }
+  getCanvas()->drawHorizontalLine(_x(x), _y(y), length);
+}
+
+void CanvasContext::drawVerticalLine(int x, int y, int length) {
+  if (length == -1) {
+    length = getHeight();
+  }
+  getCanvas()->drawVerticalLine(_x(x), _y(y), length);
+}
+
 void CanvasContext::drawRect(int x, int y, int width, int height) {
   getCanvas()->drawRect(_x(x), _y(y), width, height);
 }
@@ -105,22 +115,12 @@ void CanvasContext::fillCircle(int x, int y, int radius) {
   getCanvas()->fillCircle(_x(x), _y(y), radius);
 }
 
-void CanvasContext::drawHorizontalLine(int x, int y, int length) {
-  if (length == -1) {
-    length = getWidth();
-  }
-  getCanvas()->drawHorizontalLine(_x(x), _y(y), length);
-}
-
-void CanvasContext::drawVerticalLine(int x, int y, int length) {
-  if (length == -1) {
-    length = getHeight();
-  }
-  getCanvas()->drawVerticalLine(_x(x), _y(y), length);
-}
-
 void CanvasContext::drawXBM(const uint8_t *xbm, int x, int y, int width, int height) {
   getCanvas()->drawXBM(xbm, _x(x), _y(y), width, height);
+}
+
+int CanvasContext::getStringWidth(String text) {
+  return getCanvas()->getStringWidth(text);
 }
 
 void CanvasContext::drawString(String text, int x, int y) {
@@ -166,10 +166,6 @@ void CanvasContext::drawMultilineString(String text, int x, int y, int maxLineWi
     maxLineWidth = getWidth();
   }
   getCanvas()->drawMultilineString(text, _x(x), _y(y), maxLineWidth);
-}
-
-int CanvasContext::getStringWidth(String text) {
-  return getCanvas()->getStringWidth(text);
 }
 
 void CanvasContext::clear() {

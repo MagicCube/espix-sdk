@@ -1,5 +1,6 @@
 #pragma once
 
+// Stores a set of four integers that represent the location and size of a rectangle.
 struct Rectangle {
   Rectangle(int p_left = 0, int p_top = 0, int p_width = 0, int p_height = 0) {
     left = p_left;

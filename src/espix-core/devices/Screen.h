@@ -43,7 +43,7 @@ public:
   // Initializes screen.
   void begin(OLEDDisplay *display);
 
-  // Updates in loop().
+  // Updates in the loop.
   void update();
 
   // Clears buffer of screen.

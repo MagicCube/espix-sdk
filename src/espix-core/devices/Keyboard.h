@@ -21,7 +21,7 @@ public:
   // Initializes the keyboard.
   void begin();
 
-  // Updates in loop().
+  // Updates in loop.
   void update();
 
   // Registers keyCode and its mapping pin.

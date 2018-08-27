@@ -8,103 +8,102 @@
 
 class Canvas;
 
+// Represents the context of given canvas.
 class CanvasContext {
 public:
-  // Do NOT use this constructor directly.
+  // Initializes a new instance of the CanvasContext class.
   CanvasContext(Canvas *canvas, Rectangle bounds);
 
+  // Gets the corresponding canvas of the context.
   Canvas *getCanvas();
 
-  void setDirty();
-
-  void setColor(Color color);
-
-  // Get or set offsetX of context
+  // Gets or sets offsetX of the context.
   int getOffsetX();
   void setOffsetX(int offsetX);
 
-  // Get or set offsetY of context
+  // Gets or sets offsetY of the context.
   int getOffsetY();
   void setOffsetY(int offsetY);
 
-  // Get or set width of context
+  // Gets or sets width of the context.
   int getWidth();
   void setWidth(int width);
 
-  // Get or set height of context
+  // Gets or sets height of the context.
   int getHeight();
   void setHeight(int height);
 
+  // Gets or sets a `Rectangle` object which represent the bounds of the context.
   Rectangle getBounds();
   void setBounds(Rectangle bounds);
 
-  // Specifies relative to which anchor point
-  // the text is rendered.
+  // Sets the front color of the canvas.
+  void setColor(Color color);
+
+  // Sets the text alignment of the canvas.
   void setTextAlign(TextAlign textAlign);
 
-  // Change font
+  // Sets the font of the canvas.
   void setFont(const uint8_t *fontData);
 
   // Sets the current font size.
   void setFontSize(FontSize size);
 
-  // Draw a pixel at given position
+  // Draws a single pixel with the current color.
   void setPixel(int x, int y);
 
-  // Draw a line from position 0 to position 1
+  // Draws a line connecting two points.
   void drawLine(int x0, int y0, int x1, int y1);
 
-  // Draw the border of a rectangle at the given location
+  // Draws a horizontal line specified starting point and length.
+  void drawHorizontalLine(int x, int y, int length = -1);
+
+  // Draws a vertical line specified starting point and length.
+  void drawVerticalLine(int x, int y, int length = -1);
+
+  // Draws a rectangle specified by given top-left point and size.
   void drawRect(int x, int y, int width, int height);
 
-  // Draw the border of a rectangle at the given Rectangle object
+  // Draws a rectangle specified by given `Rectangle` object.
   void drawRect(Rectangle rect) {
     drawRect(rect.left, rect.top, rect.width, rect.height);
   }
 
-  // Fill the rectangle
+  // Fills the interior of a rectangle specified by given top-left point and size.
   void fillRect(int x, int y, int width, int height);
 
-  // Fill the rectangle
+  // Fills the interior of a rectangle specified by given `Rectangle` object.
   void fillRect(Rectangle rect) {
     fillRect(rect.left, rect.top, rect.width, rect.height);
   }
 
-  // Draw the border of a circle
+  // Draws a circle specified by given central point and radius.
   void drawCircle(int x, int y, int radius);
 
-  // Draw all Quadrants specified in the quads bit mask
+  // Draws circle quads specified by given central point, radius and quads.
   void drawCircleQuads(int x, int y, int radius, int quads);
 
-  // Fill circle
+  // Fills the interior of a circle specified by given central location and radius.
   void fillCircle(int x, int y, int radius);
 
-  // Draw a line horizontally
-  void drawHorizontalLine(int x, int y, int length = -1);
-
-  // Draw a line vertically
-  void drawVerticalLine(int x, int y, int length = -1);
-
-  // Draw a XBM picture
+  // Draws a XBM image at the specified location with specified size.
   void drawXBM(const uint8_t *xbm, int x, int y, int width, int height);
 
-  // Draw a XBM picture
+  // Draws a XBM image in the given `Rectangle` location.
   void drawXBM(const uint8_t *xbm, Rectangle rect) {
     drawXBM(xbm, rect.left, rect.top, rect.width, rect.height);
   }
 
-  // Draws a string at the given position
-  void drawString(String text, int x = -1, int y = -1);
-
-  // Get width of string
+  // Gets the width of the specific text using the current font.
   int getStringWidth(String text);
 
-  // Draws a String with a maximum width at the given location.
-  // If the given String is wider than the specified width
-  // The text will be wrapped to the next line at a space or dash
+  // Draws a text specified at specified location.
+  void drawString(String text, int x = -1, int y = -1);
+
+  // Draws multi-line text at specified location with specified line width limitation.
   void drawMultilineString(String text, int x = -1, int y = -1, int maxLineWidth = -1);
 
-  // Clear buffer
+  // Clears the buffer of the canvas.
   void clear();
 
 private:
