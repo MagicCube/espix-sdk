@@ -89,6 +89,11 @@ public:
   // Draw a XBM picture
   void drawXBM(const uint8_t *xbm, int x, int y, int width, int height);
 
+  // Draw a XBM picture
+  void drawXBM(const uint8_t *xbm, Rectangle rect) {
+    drawXBM(xbm, rect.left, rect.top, rect.width, rect.height);
+  }
+
   // Draws a string at the given position
   void drawString(String text, int x = -1, int y = -1);
 
