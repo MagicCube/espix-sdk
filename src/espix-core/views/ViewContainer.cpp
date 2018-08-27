@@ -3,6 +3,14 @@
 ViewContainer::ViewContainer() {
 }
 
+Canvas *ViewContainer::getCanvas() {
+  return _canvas;
+}
+
+void ViewContainer::setCanvas(Canvas *canvas) {
+  _canvas = canvas;
+}
+
 View *ViewContainer::getCurrentView() {
   return _currentView;
 }
@@ -15,7 +23,6 @@ void ViewContainer::setView(View *view, TransitionOptions transitionOptions) {
   if (_currentView) {
     _unmountingView = _currentView;
     _currentView->willUnmount();
-    _currentView->setParentView(NULL);
   }
   if (transitionOptions.direction != TransitionDirection::NONE) {
     int startValue = 0;
@@ -35,7 +42,7 @@ void ViewContainer::setView(View *view, TransitionOptions transitionOptions) {
     }
     _viewTransition.start(startValue, 0, transitionOptions);
   } else {
-    _unmountingView = NULL;
+    _unmountView();
     _mountView(view);
   }
 }
@@ -68,7 +75,7 @@ void ViewContainer::update() {
         break;
       }
       if (_viewTransition.isTimeout()) {
-        _unmountingView = NULL;
+        _unmountView();
         _viewTransition.stop();
       }
     }
@@ -116,4 +123,11 @@ void ViewContainer::_mountView(View *view, int offsetX, int offsetY) {
   _currentView->setBounds(getBounds());
   _currentView->redraw(true);
   _currentView->didMount();
+}
+
+void ViewContainer::_unmountView() {
+  if (_unmountingView) {
+    _unmountingView->setParentView(NULL);
+    _unmountingView = NULL;
+  }
 }

@@ -9,8 +9,13 @@
 class ViewContainer : public View {
 public:
   ViewContainer();
+
+  Canvas *getCanvas();
+  void setCanvas(Canvas *canvas);
+
   View *getCurrentView();
   void setView(View *view, TransitionOptions transitionOptions = TRANSITION_OPTIONS_NONE);
+
   bool isTransitioning();
 
   bool shouldUpdate();
@@ -21,7 +26,9 @@ public:
 
 private:
   void _mountView(View *view, int offsetX = 0, int offsetY = 0);
+  void _unmountView();
 
+  Canvas *_canvas;
   int _viewOffset = 0;
   int _unmountingViewOffset = 0;
   View *_currentView;

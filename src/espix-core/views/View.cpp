@@ -16,6 +16,13 @@ void View::setParentView(View *parentView) {
   _parentView = parentView;
 }
 
+Canvas *View::getCanvas() {
+  if (getParentView()) {
+    return getParentView()->getCanvas();
+  }
+  return NULL;
+}
+
 int View::getWidth() {
   return _bounds.width;
 }
@@ -86,7 +93,7 @@ bool View::tryUpdate() {
 }
 
 void View::redraw(bool clearBeforeRendering) {
-  auto context = new CanvasContext(Screen.getCanvas(), getBounds());
+  auto context = new CanvasContext(getCanvas(), getBounds());
 
   if (clearBeforeRendering) {
     context->clear();

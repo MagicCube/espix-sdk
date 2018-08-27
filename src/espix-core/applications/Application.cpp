@@ -105,6 +105,7 @@ int Application::update() {
 
 void Application::_setRootViewContainer(ViewContainer *container) {
   _rootViewContainer = container;
+  _rootViewContainer->setCanvas(Screen.getCanvas());
   _rootViewContainer->resizeTo(Screen.getWidth(), Screen.getHeight());
   _rootViewContainer->willMount();
   _rootViewContainer->redraw(true);
