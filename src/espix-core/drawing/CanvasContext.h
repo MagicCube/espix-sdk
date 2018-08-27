@@ -3,6 +3,7 @@
 #include <Arduino.h>
 #include <OLEDDisplay.h>
 
+#include "Rectangle.h"
 #include "enums.h"
 
 class Canvas;
@@ -35,7 +36,8 @@ public:
   int getHeight();
   void setHeight(int height);
 
-  void setBounds(int offsetX, int offsetY, int width, int height);
+  Rectangle getBounds();
+  void setBounds(Rectangle bounds);
 
   // Specifies relative to which anchor point
   // the text is rendered.
@@ -95,10 +97,7 @@ private:
   int _x(int value);
   int _y(int value);
 
-  int _width;
-  int _height;
-  int _offsetX;
-  int _offsetY;
+  Rectangle _bounds;
 
   Color _color = Color::WHITE;
   const uint8_t *_font = ArialMT_Plain_10;

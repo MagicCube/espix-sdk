@@ -18,38 +18,39 @@ void CanvasContext::setCanvas(Canvas *canvas) {
 }
 
 int CanvasContext::getOffsetX() {
-  return _offsetX;
+  return _bounds.left;
 }
 void CanvasContext::setOffsetX(int offsetX) {
-  _offsetX = offsetX;
+  _bounds.left = offsetX;
 }
 
 int CanvasContext::getOffsetY() {
-  return _offsetY;
+  return _bounds.top;
 }
 void CanvasContext::setOffsetY(int offsetY) {
-  _offsetY = offsetY;
+  _bounds.top = offsetY;
 }
 
 int CanvasContext::getWidth() {
-  return _width;
+  return _bounds.width;
 }
 void CanvasContext::setWidth(int width) {
-  _width = width;
+  _bounds.width = width;
 }
 
 int CanvasContext::getHeight() {
-  return _height;
+  return _bounds.height;
 }
 void CanvasContext::setHeight(int height) {
-  _height = height;
+  _bounds.height = height;
 }
 
-void CanvasContext::setBounds(int offsetX, int offsetY, int width, int height) {
-  setOffsetX(offsetX);
-  setOffsetY(offsetY);
-  setWidth(width);
-  setHeight(height);
+Rectangle CanvasContext::getBounds() {
+  return _bounds;
+}
+
+void CanvasContext::setBounds(Rectangle bounds) {
+  _bounds = bounds;
 }
 
 void CanvasContext::setDirty() {
@@ -182,9 +183,9 @@ void CanvasContext::clear() {
 }
 
 int CanvasContext::_x(int value) {
-  return _offsetX + value;
+  return _bounds.left + value;
 }
 
 int CanvasContext::_y(int value) {
-  return _offsetY + value;
+  return _bounds.top + value;
 }

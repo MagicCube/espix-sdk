@@ -21,35 +21,35 @@ CanvasContext *View::getCanvasContext() {
 }
 
 int View::getWidth() {
-  return _width;
+  return _bounds.width;
 }
 void View::setWidth(int width) {
-  _width = width;
-  _canvasContext->setWidth(_width);
+  _bounds.width = width;
+  _canvasContext->setWidth(width);
 }
 
 int View::getHeight() {
-  return _height;
+  return _bounds.height;
 }
 void View::setHeight(int height) {
-  _height = height;
-  _canvasContext->setHeight(_height);
+  _bounds.height = height;
+  _canvasContext->setHeight(height);
 }
 
 int View::getLeft() {
-  return _left;
+  return _bounds.left;
 }
 void View::setLeft(int left) {
-  _left = left;
-  _canvasContext->setOffsetX(_left);
+  _bounds.left = left;
+  _canvasContext->setOffsetX(left);
 }
 
 int View::getTop() {
-  return _top;
+  return _bounds.top;
 }
 void View::setTop(int top) {
-  _top = top;
-  _canvasContext->setOffsetY(_top);
+  _bounds.top = top;
+  _canvasContext->setOffsetY(top);
 }
 
 void View::resizeTo(int width, int height) {
@@ -62,9 +62,13 @@ void View::moveTo(int left, int top) {
   setTop(top);
 }
 
-void View::setBounds(int left, int top, int width, int height) {
-  moveTo(left, top);
-  resizeTo(width, height);
+Rectangle View::getBounds() {
+  return _bounds;
+}
+
+void View::setBounds(Rectangle bounds) {
+  moveTo(bounds.left, bounds.top);
+  resizeTo(bounds.width, bounds.height);
 }
 
 bool View::isDirty() {

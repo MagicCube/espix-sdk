@@ -113,7 +113,7 @@ void ViewContainer::_mountView(View *view, int offsetX, int offsetY) {
   _currentView = view;
   _currentView->setParentView(this);
   _currentView->willMount();
-  _currentView->setBounds(offsetX, offsetY, getWidth(), getHeight());
+  _currentView->setBounds(getBounds());
   _currentView->redraw(getCanvasContext(), true);
   _currentView->didMount();
 }
