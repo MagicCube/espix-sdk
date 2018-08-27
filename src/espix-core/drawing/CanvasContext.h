@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Arduino.h>
+#include <OLEDDisplay.h>
 
 #include "enums.h"
 
@@ -12,6 +13,7 @@ public:
   CanvasContext(Canvas *canvas, int width, int height, int offsetX, int offsetY);
 
   Canvas *getCanvas();
+  void setCanvas(Canvas *canvas);
 
   void setDirty();
 
@@ -97,6 +99,9 @@ private:
   int _height;
   int _offsetX;
   int _offsetY;
+
+  Color _color = Color::WHITE;
+  const uint8_t *_font = ArialMT_Plain_10;
   TextAlign _textAlign = TextAlign::LEFT;
 
   Canvas *_canvas = NULL;

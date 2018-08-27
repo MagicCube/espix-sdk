@@ -13,6 +13,13 @@ Canvas *CanvasContext::getCanvas() {
   return _canvas;
 }
 
+void CanvasContext::setCanvas(Canvas *canvas) {
+  _canvas = canvas;
+  setColor(_color);
+  setFont(_font);
+  setTextAlign(_textAlign);
+}
+
 int CanvasContext::getWidth() {
   return _width;
 }
@@ -26,6 +33,7 @@ void CanvasContext::setDirty() {
 }
 
 void CanvasContext::setColor(Color color) {
+  _color = color;
   getCanvas()->setColor(color);
 }
 
@@ -53,17 +61,19 @@ void CanvasContext::setTextAlign(TextAlign align) {
 }
 
 void CanvasContext::setFont(const uint8_t *fontData) {
+  _font = fontData;
   getCanvas()->setFont(fontData);
 }
 
 void CanvasContext::setFontSize(FontSize size) {
   if (size == FontSize::H1) {
-    getCanvas()->setFont(ArialMT_Plain_24);
+    _font = ArialMT_Plain_24;
   } else if (size == FontSize::H2) {
-    getCanvas()->setFont(ArialMT_Plain_16);
+    _font = ArialMT_Plain_16;
   } else {
-    getCanvas()->setFont(ArialMT_Plain_10);
+    _font = ArialMT_Plain_10;
   }
+  getCanvas()->setFont(_font);
 }
 
 void CanvasContext::setPixel(int x, int y) {
