@@ -11,8 +11,7 @@ class MultiViewContainer : public ViewContainer {
 public:
   // Initializes a new instance of the MultiViewContainer class.
   MultiViewContainer();
-  MultiViewContainer(initializer_list<View *> l) : _subviews(l) {
-  }
+  MultiViewContainer(initializer_list<View *> l);
 
   // Add the specific subview.
   void addSubview(View *subview);
