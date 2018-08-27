@@ -15,6 +15,7 @@ void ViewContainer::setView(View *view, TransitionOptions transitionOptions) {
   if (_currentView) {
     _unmountingView = _currentView;
     _currentView->willUnmount();
+    _currentView->setParentView(NULL);
   }
   if (transitionOptions.direction != TransitionDirection::NONE) {
     int startValue = 0;
@@ -110,6 +111,7 @@ void ViewContainer::handleScroll(int delta) {
 
 void ViewContainer::_mountView(View *view, int offsetX, int offsetY) {
   _currentView = view;
+  _currentView->setParentView(this);
   _currentView->willMount();
   _currentView->setBounds(offsetX, offsetY, getWidth(), getHeight());
   _currentView->redraw(getCanvasContext(), true);

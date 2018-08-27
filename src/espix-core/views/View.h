@@ -10,7 +10,11 @@ public:
   View();
   ~View();
 
+  View *getParentView();
+  void setParentView(View *parentView);
+
   CanvasContext *getCanvasContext();
+
   int getWidth();
   void setWidth(int width);
   int getHeight();
@@ -19,6 +23,7 @@ public:
   void setLeft(int left);
   int getTop();
   void setTop(int top);
+
   bool isDirty();
   void setDirty();
   unsigned long getLastUpdate();
@@ -46,6 +51,7 @@ public:
   virtual void handleScroll(int delta);
 
 private:
+  View *_parentView;
   CanvasContext *_canvasContext;
   bool _dirty = false;
   unsigned long _lastUpdate = 0;

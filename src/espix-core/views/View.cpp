@@ -8,6 +8,14 @@ View::~View() {
   delete _canvasContext;
 }
 
+View *View::getParentView() {
+  return _parentView;
+}
+
+void View::setParentView(View *parentView) {
+  _parentView = parentView;
+}
+
 CanvasContext *View::getCanvasContext() {
   return _canvasContext;
 }
