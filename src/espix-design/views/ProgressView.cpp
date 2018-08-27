@@ -11,11 +11,9 @@ ProgressView::ProgressView(ProgressMode mode) {
 }
 
 void ProgressView::setMode(ProgressMode mode) {
-  if (mode != _mode) {
-    _mode = mode;
-    _progress = 0;
-    setDirty();
-  }
+  _mode = mode;
+  _progress = 0;
+  setDirty();
 }
 
 void ProgressView::setText(String text) {
