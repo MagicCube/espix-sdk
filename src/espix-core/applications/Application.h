@@ -10,12 +10,10 @@
 #include "../views/ViewContainer.h"
 
 // Represent the application of Expix.
-class Application {
+class ApplicationClass {
 public:
-  // Construct an Espix application.
-  Application();
-
-  static Application *getInstance();
+  // Construct a new Espix application.
+  ApplicationClass();
 
   // Get root ViewContainer of application.
   ViewContainer *getRootViewContainer();
@@ -64,3 +62,5 @@ private:
   void _handleScroll(int delta);
   void _fireScrollEvent(int delta);
 };
+
+extern ApplicationClass Application;

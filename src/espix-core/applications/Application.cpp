@@ -7,35 +7,28 @@
 #include "../networking/WiFiNetwork.h"
 #include "../timing/TimeClient.h"
 
-static Application *__instance = NULL;
-
-Application::Application() {
+ApplicationClass::ApplicationClass() {
   _rootViewContainer = new ViewContainer();
-  __instance = this;
 }
 
-Application *Application::getInstance() {
-  return __instance;
-}
-
-ViewContainer *Application::getRootViewContainer() {
+ViewContainer *ApplicationClass::getRootViewContainer() {
   return _rootViewContainer;
 }
 
-View *Application::getRootView() {
+View *ApplicationClass::getRootView() {
   if (_rootViewContainer) {
     return _rootViewContainer->getCurrentView();
   }
   return NULL;
 }
 
-void Application::setRootView(View *view, TransitionOptions transitionOptions) {
+void ApplicationClass::setRootView(View *view, TransitionOptions transitionOptions) {
   if (_rootViewContainer) {
     _rootViewContainer->setView(view, transitionOptions);
   }
 }
 
-View *Application::getCurrentView() {
+View *ApplicationClass::getCurrentView() {
   View *activeView = NULL;
   if (_otaUpdating) {
     activeView = _getProgressView();
@@ -45,7 +38,7 @@ View *Application::getCurrentView() {
   return activeView;
 }
 
-void Application::enableOTA() {
+void ApplicationClass::enableOTA() {
   if (_otaEnabled) {
     return;
   }
@@ -67,15 +60,15 @@ void Application::enableOTA() {
   });
 }
 
-void Application::onKeyPress(KeyEventHandler handler) {
+void ApplicationClass::onKeyPress(KeyEventHandler handler) {
   _onKeyPress = handler;
 }
 
-void Application::onScroll(ScrollEventHandler handler) {
+void ApplicationClass::onScroll(ScrollEventHandler handler) {
   _onScroll = handler;
 }
 
-void Application::begin() {
+void ApplicationClass::begin() {
   Keyboard.onKeyPress([=](KeyCode keyCode) { _handleKeyPress(keyCode); });
   Keyboard.onScroll([=](int delta) { _handleScroll(delta); });
 
@@ -85,7 +78,7 @@ void Application::begin() {
   _setRootViewContainer(_rootViewContainer);
 }
 
-int Application::update() {
+int ApplicationClass::update() {
   if (_otaEnabled) {
     ArduinoOTA.handle();
   }
@@ -103,7 +96,7 @@ int Application::update() {
   return timeBudget;
 }
 
-void Application::_setRootViewContainer(ViewContainer *container) {
+void ApplicationClass::_setRootViewContainer(ViewContainer *container) {
   _rootViewContainer = container;
   _rootViewContainer->setCanvas(Screen.getCanvas());
   _rootViewContainer->resizeTo(Screen.getWidth(), Screen.getHeight());
@@ -112,7 +105,7 @@ void Application::_setRootViewContainer(ViewContainer *container) {
   _rootViewContainer->didMount();
 }
 
-ProgressView *Application::_getProgressView() {
+ProgressView *ApplicationClass::_getProgressView() {
   if (_progressView == NULL) {
     _progressView = new ProgressView("Updating firmware...");
     _progressView->resizeTo(Screen.getWidth(), Screen.getHeight());
@@ -120,7 +113,7 @@ ProgressView *Application::_getProgressView() {
   return _progressView;
 }
 
-void Application::_loop() {
+void ApplicationClass::_loop() {
   auto currentView = getCurrentView();
 
   if (currentView) {
@@ -131,28 +124,30 @@ void Application::_loop() {
   }
 }
 
-void Application::_handleKeyPress(KeyCode keyCode) {
+void ApplicationClass::_handleKeyPress(KeyCode keyCode) {
   _fireKeyPressEvent(keyCode);
   if (_rootViewContainer) {
     _rootViewContainer->handleKeyPress(keyCode);
   }
 }
 
-void Application::_fireKeyPressEvent(KeyCode keyCode) {
+void ApplicationClass::_fireKeyPressEvent(KeyCode keyCode) {
   if (_onKeyPress) {
     _onKeyPress(keyCode);
   }
 }
 
-void Application::_handleScroll(int delta) {
+void ApplicationClass::_handleScroll(int delta) {
   _fireScrollEvent(delta);
   if (_rootViewContainer) {
     _rootViewContainer->handleScroll(delta);
   }
 }
 
-void Application::_fireScrollEvent(int delta) {
+void ApplicationClass::_fireScrollEvent(int delta) {
   if (_onScroll) {
     _onScroll(delta);
   }
 }
+
+ApplicationClass Application;

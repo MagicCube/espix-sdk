@@ -15,18 +15,17 @@ unsigned long lastUpdate = 0;
 unsigned long lastViewChange = 0;
 
 SH1106Wire display(0x3c, OLED_SDA, OLED_CLK);
-Application application;
 ProgressView connectionView("Connecting to WiFi...", ProgressMode::INDETERMINATE);
 TextView textView("Hello.", FontSize::H2);
 
 void onConnected() {
-  application.enableOTA();
-  application.setRootView(&textView, TransitionOptions(TransitionDirection::LEFT));
+  Application.enableOTA();
+  Application.setRootView(&textView, TransitionOptions(TransitionDirection::LEFT));
   textView.setText(WiFiNetwork.getLocalIP());
 }
 
 void connect() {
-  application.setRootView(&connectionView);
+  Application.setRootView(&connectionView);
   WiFiConnectionSetting settings[] = {
       WiFiConnectionSetting("Henry's iPhone 6", "13913954971"),
       WiFiConnectionSetting("Henry's Living Room 2.4GHz", "13913954971")};
@@ -43,7 +42,7 @@ void setupDevices() {
 }
 
 void setupApp() {
-  application.begin();
+  Application.begin();
 }
 
 void setup() {
@@ -57,7 +56,7 @@ void setup() {
 
 bool firstTime = true;
 void loop() {
-  int timeBudget = application.update();
+  int timeBudget = Application.update();
   if (timeBudget > 0) {
     delay(timeBudget);
   }
