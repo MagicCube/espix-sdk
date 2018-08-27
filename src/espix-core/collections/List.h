@@ -11,6 +11,9 @@ public:
   List() {
   }
 
+  List(initializer_list<T> l) : _vector(l) {
+  }
+
   // Iterator for begin.
   typename vector<T>::iterator begin() {
     return _vector.begin();
