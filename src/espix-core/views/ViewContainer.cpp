@@ -1,7 +1,5 @@
 #include "ViewContainer.h"
 
-#include "../devices/Screen.h"
-
 ViewContainer::ViewContainer() {
 }
 
@@ -85,7 +83,7 @@ void ViewContainer::render(CanvasContext *context) {
     } else if (direction == TransitionDirection::UP || direction == TransitionDirection::DOWN) {
       _unmountingView->moveTo(0, _unmountingViewOffset);
     }
-    _unmountingView->redraw(Screen.getCanvas());
+    _unmountingView->redraw(getCanvasContext());
   }
   if (_currentView) {
     auto direction = _viewTransition.getDirection();
@@ -94,7 +92,7 @@ void ViewContainer::render(CanvasContext *context) {
     } else if (direction == TransitionDirection::UP || direction == TransitionDirection::DOWN) {
       _currentView->moveTo(0, _viewOffset);
     }
-    _currentView->redraw(Screen.getCanvas());
+    _currentView->redraw(getCanvasContext());
   }
 }
 
@@ -114,6 +112,6 @@ void ViewContainer::_mountView(View *view, int offsetX, int offsetY) {
   _currentView = view;
   _currentView->willMount();
   _currentView->setBounds(offsetX, offsetY, getWidth(), getHeight());
-  _currentView->redraw(Screen.getCanvas(), true);
+  _currentView->redraw(getCanvasContext(), true);
   _currentView->didMount();
 }

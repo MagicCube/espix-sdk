@@ -29,6 +29,9 @@ public:
 
   bool tryUpdate();
   void redraw(Canvas *canvas, bool clearBeforeRendering = false);
+  void redraw(CanvasContext *canvasContext, bool clearBeforeRendering = false) {
+    redraw(canvasContext->getCanvas(), clearBeforeRendering);
+  }
 
   // Lifecycle
   virtual void willMount();
