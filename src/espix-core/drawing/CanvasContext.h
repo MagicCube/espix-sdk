@@ -14,7 +14,6 @@ public:
   CanvasContext(Canvas *canvas, Rectangle bounds);
 
   Canvas *getCanvas();
-  void setCanvas(Canvas *canvas);
 
   void setDirty();
 

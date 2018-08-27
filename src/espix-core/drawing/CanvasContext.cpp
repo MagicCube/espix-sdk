@@ -4,18 +4,11 @@
 #include "Canvas.h"
 
 CanvasContext::CanvasContext(Canvas *canvas, Rectangle bounds) : _bounds(bounds) {
-  setCanvas(canvas);
+  _canvas = canvas;
 }
 
 Canvas *CanvasContext::getCanvas() {
   return _canvas;
-}
-
-void CanvasContext::setCanvas(Canvas *canvas) {
-  _canvas = canvas;
-  setColor(_color);
-  setFont(_font);
-  setTextAlign(_textAlign);
 }
 
 int CanvasContext::getOffsetX() {
