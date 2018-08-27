@@ -5,9 +5,6 @@
 View::View() {
 }
 
-View::~View() {
-}
-
 View *View::getParentView() {
   return _parentView;
 }
