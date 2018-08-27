@@ -33,11 +33,11 @@ void Key::begin() {
 }
 
 void Key::update() {
-  int value = digitalRead(_pin);
-  if (value == KEY_DOWN) {
-    if (_state == KEY_UP) {
-      _setState(KEY_DOWN);
-    } else if (_state == KEY_DOWN) {
+  KeyState value = (KeyState)digitalRead(_pin);
+  if (value == KeyState::KEY_DOWN) {
+    if (_state == KeyState::KEY_UP) {
+      _setState(KeyState::KEY_DOWN);
+    } else if (_state == KeyState::KEY_DOWN) {
       if (!_keyPressed || (_allowRepeat && millis() - _lastKeyPressing > 500)) {
         if (!_keyPressed) {
           _keyPressed = true;
@@ -46,10 +46,10 @@ void Key::update() {
         _fireKeyPressEvent();
       }
     }
-  } else if (value == KEY_UP) {
-    if (_state == KEY_DOWN) {
+  } else if (value == KeyState::KEY_UP) {
+    if (_state == KeyState::KEY_DOWN) {
       _keyPressed = false;
-      _setState(KEY_UP);
+      _setState(KeyState::KEY_UP);
     }
   }
 }
