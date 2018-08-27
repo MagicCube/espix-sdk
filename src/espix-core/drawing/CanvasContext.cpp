@@ -3,7 +3,8 @@
 
 #include "Canvas.h"
 
-CanvasContext::CanvasContext() {
+CanvasContext::CanvasContext(Canvas *canvas, Rectangle bounds) : _bounds(bounds) {
+  setCanvas(canvas);
 }
 
 Canvas *CanvasContext::getCanvas() {

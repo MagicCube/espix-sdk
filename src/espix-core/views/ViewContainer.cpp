@@ -84,7 +84,7 @@ void ViewContainer::render(CanvasContext *context) {
     } else if (direction == TransitionDirection::UP || direction == TransitionDirection::DOWN) {
       _unmountingView->moveTo(0, _unmountingViewOffset);
     }
-    _unmountingView->redraw(getCanvasContext());
+    _unmountingView->redraw();
   }
   if (_currentView) {
     auto direction = _viewTransition.getDirection();
@@ -93,7 +93,7 @@ void ViewContainer::render(CanvasContext *context) {
     } else if (direction == TransitionDirection::UP || direction == TransitionDirection::DOWN) {
       _currentView->moveTo(0, _viewOffset);
     }
-    _currentView->redraw(getCanvasContext());
+    _currentView->redraw();
   }
 }
 
@@ -114,6 +114,6 @@ void ViewContainer::_mountView(View *view, int offsetX, int offsetY) {
   _currentView->setParentView(this);
   _currentView->willMount();
   _currentView->setBounds(getBounds());
-  _currentView->redraw(getCanvasContext(), true);
+  _currentView->redraw(true);
   _currentView->didMount();
 }

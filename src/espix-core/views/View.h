@@ -34,10 +34,7 @@ public:
   void setBounds(Rectangle bounds);
 
   bool tryUpdate();
-  void redraw(Canvas *canvas, bool clearBeforeRendering = false);
-  void redraw(CanvasContext *canvasContext, bool clearBeforeRendering = false) {
-    redraw(canvasContext->getCanvas(), clearBeforeRendering);
-  }
+  void redraw(bool clearBeforeRendering = false);
 
   // Lifecycle
   virtual void willMount();
@@ -53,7 +50,6 @@ public:
 
 private:
   View *_parentView;
-  CanvasContext *_canvasContext;
 
   Rectangle _bounds;
 

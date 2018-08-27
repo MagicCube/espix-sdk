@@ -11,7 +11,7 @@ class Canvas;
 class CanvasContext {
 public:
   // Do NOT use this constructor directly.
-  CanvasContext();
+  CanvasContext(Canvas *canvas, Rectangle bounds);
 
   Canvas *getCanvas();
   void setCanvas(Canvas *canvas);

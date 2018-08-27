@@ -107,7 +107,7 @@ void Application::_setRootViewContainer(ViewContainer *container) {
   _rootViewContainer = container;
   _rootViewContainer->resizeTo(Screen.getWidth(), Screen.getHeight());
   _rootViewContainer->willMount();
-  _rootViewContainer->redraw(Screen.getCanvas(), true);
+  _rootViewContainer->redraw(true);
   _rootViewContainer->didMount();
 }
 
@@ -124,7 +124,7 @@ void Application::_loop() {
 
   if (currentView) {
     if (currentView->tryUpdate()) {
-      currentView->redraw(Screen.getCanvas(), true);
+      currentView->redraw(true);
       Screen.update();
     }
   }

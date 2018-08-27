@@ -1,11 +1,11 @@
 #include "View.h"
 
+#include "../devices/Screen.h"
+
 View::View() {
-  _canvasContext = new CanvasContext();
 }
 
 View::~View() {
-  delete _canvasContext;
 }
 
 View *View::getParentView() {
@@ -17,7 +17,7 @@ void View::setParentView(View *parentView) {
 }
 
 CanvasContext *View::getCanvasContext() {
-  return _canvasContext;
+  return NULL;
 }
 
 int View::getWidth() {
@@ -25,7 +25,6 @@ int View::getWidth() {
 }
 void View::setWidth(int width) {
   _bounds.width = width;
-  _canvasContext->setWidth(width);
 }
 
 int View::getHeight() {
@@ -33,7 +32,6 @@ int View::getHeight() {
 }
 void View::setHeight(int height) {
   _bounds.height = height;
-  _canvasContext->setHeight(height);
 }
 
 int View::getLeft() {
@@ -41,7 +39,6 @@ int View::getLeft() {
 }
 void View::setLeft(int left) {
   _bounds.left = left;
-  _canvasContext->setOffsetX(left);
 }
 
 int View::getTop() {
@@ -49,7 +46,6 @@ int View::getTop() {
 }
 void View::setTop(int top) {
   _bounds.top = top;
-  _canvasContext->setOffsetY(top);
 }
 
 void View::resizeTo(int width, int height) {
@@ -93,13 +89,15 @@ bool View::tryUpdate() {
   return false;
 }
 
-void View::redraw(Canvas *canvas, bool clearBeforeRendering) {
-  auto context = getCanvasContext();
-  context->setCanvas(canvas);
+void View::redraw(bool clearBeforeRendering) {
+  auto context = new CanvasContext(Screen.getCanvas(), getBounds());
+
   if (clearBeforeRendering) {
     context->clear();
   }
   render(context);
+
+  delete context;
 }
 
 void View::willMount() {
