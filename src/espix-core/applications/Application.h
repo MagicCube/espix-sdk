@@ -21,7 +21,7 @@ public:
   ViewContainer *getRootViewContainer();
 
   // Sets root view of application.
-  // It is the shortcut for getRootViewContainer()->setView().
+  // It is the shortcut for getRootViewContainer()->setCurrentView().
   void setRootView(View *view, TransitionOptions transitionOptions = TRANSITION_OPTIONS_NONE);
 
   // Gets root view of application.

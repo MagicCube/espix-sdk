@@ -6,18 +6,26 @@
 
 #include "View.h"
 
+// Represents a container of single view.
 class ViewContainer : public View {
 public:
+  // Initializes a new instance of the ViewContainer class.
   ViewContainer();
 
+  // Gets or sets the canvas of the container.
   Canvas *getCanvas();
   void setCanvas(Canvas *canvas);
 
+  // Gets or sets the current active view of the container.
+  // There's only one active view at one time.
   View *getCurrentView();
-  void setView(View *view, TransitionOptions transitionOptions = TRANSITION_OPTIONS_NONE);
+  void setCurrentView(View *view, TransitionOptions transitionOptions = TRANSITION_OPTIONS_NONE);
 
+  // Gets a bool indicates whether the container is transitioning by using `setCurrentView()`.
   bool isTransitioning();
 
+
+  // Overrides
   bool shouldUpdate();
   void update();
   void render(CanvasContext *context);

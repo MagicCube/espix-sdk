@@ -24,7 +24,7 @@ View *ApplicationClass::getRootView() {
 
 void ApplicationClass::setRootView(View *view, TransitionOptions transitionOptions) {
   if (_rootViewContainer) {
-    _rootViewContainer->setView(view, transitionOptions);
+    _rootViewContainer->setCurrentView(view, transitionOptions);
   }
 }
 

@@ -12,10 +12,6 @@ public:
   View();
 
 
-  /*************************************/
-  /* Properties                        */
-  /*************************************/
-
   // Gets or sets the parent of the view.
   View *getParentView();
   void setParentView(View *parentView);
@@ -40,10 +36,6 @@ public:
   int getTop();
   void setTop(int top);
 
-
-  /*************************************/
-  /* Methods                           */
-  /*************************************/
 
   // Gets a bool value indicates whether the view is dirty.
   // Set it true by invoking `setDirty()`.
@@ -94,10 +86,10 @@ public:
   // Overrides if you want to do something before the view is unmounted.
   virtual void willUnmount();
 
+
   /*************************************/
   /* Event Handlers                    */
   /*************************************/
-
   // Overrides if you want to capture key press event.
   virtual void handleKeyPress(KeyCode keyCode);
 
