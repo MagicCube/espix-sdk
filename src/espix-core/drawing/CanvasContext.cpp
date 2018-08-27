@@ -3,10 +3,8 @@
 
 #include "Canvas.h"
 
-CanvasContext::CanvasContext(Canvas *canvas, int width, int height, int offsetX, int offsetY) {
-  _canvas = canvas;
-  setSize(width, height);
-  setOffset(offsetX, offsetY);
+CanvasContext::CanvasContext() {
+  setSize(128, 64);
 }
 
 Canvas *CanvasContext::getCanvas() {

@@ -10,7 +10,7 @@ class Canvas;
 class CanvasContext {
 public:
   // Do NOT use this constructor directly.
-  CanvasContext(Canvas *canvas, int width, int height, int offsetX, int offsetY);
+  CanvasContext();
 
   Canvas *getCanvas();
   void setCanvas(Canvas *canvas);

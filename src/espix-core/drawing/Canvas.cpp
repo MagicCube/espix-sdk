@@ -58,16 +58,6 @@ void Canvas::update() {
   }
 }
 
-CanvasContext *Canvas::createContext(int width, int height, int offsetX, int offsetY) {
-  if (width == 0) {
-    width = getWidth();
-  }
-  if (height == 0) {
-    height = getHeight();
-  }
-  return new CanvasContext(this, width, height, offsetX, offsetY);
-}
-
 void Canvas::setPixel(int x, int y) {
   _display->setPixel(x, y);
   setDirty();

@@ -1,27 +1,23 @@
 #include "View.h"
 
-#include "../devices/Screen.h"
-
 View::View() {
+  _canvasContext = new CanvasContext();
 }
 
 View::~View() {
-  delete _CanvasContext;
+  delete _canvasContext;
 }
 
 CanvasContext *View::getCanvasContext() {
-  if (_CanvasContext == NULL) {
-    _CanvasContext = Screen.getCanvas()->createContext();
-  }
-  return _CanvasContext;
+  return _canvasContext;
 }
 
 int View::getWidth() {
-  return _CanvasContext->getWidth();
+  return _canvasContext->getWidth();
 }
 
 int View::getHeight() {
-  return _CanvasContext->getHeight();
+  return _canvasContext->getHeight();
 }
 
 bool View::isDirty() {
@@ -46,8 +42,9 @@ bool View::tryUpdate() {
   return false;
 }
 
-void View::redraw(bool clearBeforeRendering) {
+void View::redraw(Canvas *canvas, bool clearBeforeRendering) {
   auto context = getCanvasContext();
+  context->setCanvas(canvas);
   if (clearBeforeRendering) {
     context->clear();
   }

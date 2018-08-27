@@ -18,7 +18,7 @@ public:
   unsigned long getLastUpdate();
 
   bool tryUpdate();
-  void redraw(bool clearBeforeRendering = false);
+  void redraw(Canvas *canvas, bool clearBeforeRendering = false);
 
   // Lifecycle
   virtual void willMount();
@@ -33,7 +33,7 @@ public:
   virtual void handleScroll(int delta);
 
 private:
-  CanvasContext *_CanvasContext;
+  CanvasContext *_canvasContext;
   bool _dirty = false;
   unsigned long _lastUpdate = 0;
 };

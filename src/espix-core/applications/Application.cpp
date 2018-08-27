@@ -83,7 +83,7 @@ void Application::begin() {
   _mainLoop.begin();
 
   _rootViewContainer->willMount();
-  _rootViewContainer->redraw(true);
+  _rootViewContainer->redraw(Screen.getCanvas(), true);
   _rootViewContainer->didMount();
 }
 
@@ -117,7 +117,7 @@ void Application::_loop() {
 
   if (currentView) {
     if (currentView->tryUpdate()) {
-      currentView->redraw(true);
+      currentView->redraw(Screen.getCanvas(), true);
       Screen.update();
     }
   }

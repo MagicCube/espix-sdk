@@ -29,8 +29,6 @@ public:
 
   void update();
 
-  CanvasContext *createContext(int width = 0, int height = 0, int offsetX = 0, int offsetY = 0);
-
   void setPixel(int x, int y);
 
   void drawLine(int x0, int y0, int x1, int y1);
