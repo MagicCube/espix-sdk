@@ -1,22 +1,11 @@
 #include <Arduino.h>
 
-#define KEY_ENTER 13
-#define KEY_ESC 27
-#define KEY_LEFT_ARROW 37
-#define KEY_UP_ARROW 38
-#define KEY_RIGHT_ARROW 39
-#define KEY_DOWN_ARROW 40
-#define KEY_A 65
-#define KEY_B 66
-#define KEY_C 67
-#define KEY_D 68
+#include "KeyCode.h"
+#include "events.h"
 
 class Keyboard;
 
 enum class KeyState { UP = HIGH, DOWN = LOW };
-
-typedef uint8_t KeyCode;
-typedef std::function<void(KeyCode)> KeyEventHandler;
 
 class Key {
 public:

@@ -4,7 +4,7 @@
 
 #include <Encoder.h>
 
-typedef std::function<void(int)> ScrollEventHandler;
+#include "events.h"
 
 class JogDial {
 public:
