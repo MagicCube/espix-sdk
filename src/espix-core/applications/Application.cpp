@@ -46,7 +46,11 @@ void ApplicationClass::enableOTA() {
   _otaEnabled = true;
   ArduinoOTA.onStart([=]() {
     _otaUpdating = true;
+    _getProgressView()->setCanvas(Screen.getCanvas());
+    _getProgressView()->resizeTo(Screen.getWidth(), Screen.getHeight());
+    _getProgressView()->setMode(ProgressMode::DETERMINATE);
     _getProgressView()->setProgress(0);
+    _getProgressView()->setText("Updating firmware...");
     _loop();
   });
   ArduinoOTA.onProgress([=](unsigned int progress, unsigned int total) {
@@ -107,8 +111,7 @@ void ApplicationClass::_setRootViewContainer(ViewContainer *container) {
 
 ProgressView *ApplicationClass::_getProgressView() {
   if (_progressView == NULL) {
-    _progressView = new ProgressView("Updating firmware...");
-    _progressView->resizeTo(Screen.getWidth(), Screen.getHeight());
+    _progressView = new ProgressView();
   }
   return _progressView;
 }
