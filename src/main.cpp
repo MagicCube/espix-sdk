@@ -35,7 +35,7 @@ void connect() {
 
 void setupDevices() {
   Screen.begin(&display);
-  Screen.setBrightness(100);
+  // Screen.setBrightness(100);
   Screen.setOrientation(true);
 
   Keyboard.registerJogDial(KY04_CLK, KY04_DT, KY04_SW);

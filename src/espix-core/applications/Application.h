@@ -56,6 +56,7 @@ private:
   KeyEventHandler _onKeyPress = NULL;
   ScrollEventHandler _onScroll = NULL;
 
+  void _setRootViewContainer(ViewContainer *container);
   ProgressView *_getProgressView();
   void _loop();
   void _handleKeyPress(KeyCode keyCode);

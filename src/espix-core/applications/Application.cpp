@@ -82,10 +82,7 @@ void Application::begin() {
   _mainLoop.onTick([=](AnimationLoop *target) { _loop(); });
   _mainLoop.begin();
 
-  _rootViewContainer->resizeTo(Screen.getWidth(), Screen.getHeight());
-  _rootViewContainer->willMount();
-  _rootViewContainer->redraw(Screen.getCanvas(), true);
-  _rootViewContainer->didMount();
+  _setRootViewContainer(_rootViewContainer);
 }
 
 int Application::update() {
@@ -104,6 +101,14 @@ int Application::update() {
   int timeBudget = _mainLoop.getOptions().updateInterval - elapsedSinceLastUpdate;
   _lastUpdate = updateStart;
   return timeBudget;
+}
+
+void Application::_setRootViewContainer(ViewContainer *container) {
+  _rootViewContainer = container;
+  _rootViewContainer->resizeTo(Screen.getWidth(), Screen.getHeight());
+  _rootViewContainer->willMount();
+  _rootViewContainer->redraw(Screen.getCanvas(), true);
+  _rootViewContainer->didMount();
 }
 
 ProgressView *Application::_getProgressView() {
