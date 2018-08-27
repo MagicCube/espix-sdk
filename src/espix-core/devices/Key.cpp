@@ -34,10 +34,10 @@ void Key::begin() {
 
 void Key::update() {
   KeyState value = (KeyState)digitalRead(_pin);
-  if (value == KeyState::KEY_DOWN) {
-    if (_state == KeyState::KEY_UP) {
-      _setState(KeyState::KEY_DOWN);
-    } else if (_state == KeyState::KEY_DOWN) {
+  if (value == KeyState::DOWN) {
+    if (_state == KeyState::UP) {
+      _setState(KeyState::DOWN);
+    } else if (_state == KeyState::DOWN) {
       if (!_keyPressed || (_allowRepeat && millis() - _lastKeyPressing > 500)) {
         if (!_keyPressed) {
           _keyPressed = true;
@@ -46,10 +46,10 @@ void Key::update() {
         _fireKeyPressEvent();
       }
     }
-  } else if (value == KeyState::KEY_UP) {
-    if (_state == KeyState::KEY_DOWN) {
+  } else if (value == KeyState::UP) {
+    if (_state == KeyState::DOWN) {
       _keyPressed = false;
-      _setState(KeyState::KEY_UP);
+      _setState(KeyState::UP);
     }
   }
 }

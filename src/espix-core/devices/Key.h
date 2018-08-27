@@ -13,7 +13,7 @@
 
 class Keyboard;
 
-enum class KeyState { KEY_UP = HIGH, KEY_DOWN = LOW };
+enum class KeyState { UP = HIGH, DOWN = LOW };
 
 typedef uint8_t KeyCode;
 typedef std::function<void(KeyCode)> KeyEventHandler;
@@ -43,7 +43,7 @@ private:
   KeyCode _keyCode;
   bool _keyPressed = false;
   uint8_t _pin = 0;
-  KeyState _state = KeyState::KEY_UP;
+  KeyState _state = KeyState::UP;
 
   KeyEventHandler _onKeyPress = NULL;
 };
