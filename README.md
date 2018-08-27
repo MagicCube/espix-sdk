@@ -30,6 +30,10 @@ Inspired by iOS and React.js, `espix-core` is a simple but powerful SDK for the 
 
 The `espix-design` library includes many [useful UI elements](./src/espix-design/views).
 
+### Demos
+
+Please visit [the demo project](https://github.com/espix/espix-examples).
+
 ## How to install
 
 In `platform.ini` add `espix-core` into your `lib-deps`.
