@@ -81,18 +81,18 @@ void ViewContainer::render(CanvasContext *context) {
   if (_unmountingView) {
     auto direction = _viewTransition.getDirection();
     if (direction == TransitionDirection::LEFT || direction == TransitionDirection::RIGHT) {
-      _unmountingView->getCanvasContext()->setOffset(_unmountingViewOffset);
+      _unmountingView->moveTo(_unmountingViewOffset, 0);
     } else if (direction == TransitionDirection::UP || direction == TransitionDirection::DOWN) {
-      _unmountingView->getCanvasContext()->setOffset(0, _unmountingViewOffset);
+      _unmountingView->moveTo(0, _unmountingViewOffset);
     }
     _unmountingView->redraw(Screen.getCanvas());
   }
   if (_currentView) {
     auto direction = _viewTransition.getDirection();
     if (direction == TransitionDirection::LEFT || direction == TransitionDirection::RIGHT) {
-      _currentView->getCanvasContext()->setOffset(_viewOffset);
+      _currentView->moveTo(_viewOffset, 0);
     } else if (direction == TransitionDirection::UP || direction == TransitionDirection::DOWN) {
-      _currentView->getCanvasContext()->setOffset(0, _viewOffset);
+      _currentView->moveTo(0, _viewOffset);
     }
     _currentView->redraw(Screen.getCanvas());
   }
@@ -113,10 +113,7 @@ void ViewContainer::handleScroll(int delta) {
 void ViewContainer::_mountView(View *view, int offsetX, int offsetY) {
   _currentView = view;
   _currentView->willMount();
-  auto viewContainerContext = getCanvasContext();
-  auto viewContext = _currentView->getCanvasContext();
-  viewContext->setSize(viewContainerContext->getWidth(), viewContainerContext->getHeight());
-  viewContext->setOffset(offsetX, offsetY);
+  _currentView->setBounds(offsetX, offsetY, getWidth(), getHeight());
   _currentView->redraw(Screen.getCanvas(), true);
   _currentView->didMount();
 }

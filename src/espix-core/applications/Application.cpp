@@ -82,6 +82,7 @@ void Application::begin() {
   _mainLoop.onTick([=](AnimationLoop *target) { _loop(); });
   _mainLoop.begin();
 
+  _rootViewContainer->resizeTo(Screen.getWidth(), Screen.getHeight());
   _rootViewContainer->willMount();
   _rootViewContainer->redraw(Screen.getCanvas(), true);
   _rootViewContainer->didMount();
@@ -108,6 +109,7 @@ int Application::update() {
 ProgressView *Application::_getProgressView() {
   if (_progressView == NULL) {
     _progressView = new ProgressView("Updating firmware...");
+    _progressView->resizeTo(Screen.getWidth(), Screen.getHeight());
   }
   return _progressView;
 }

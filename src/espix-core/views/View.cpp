@@ -15,9 +15,44 @@ CanvasContext *View::getCanvasContext() {
 int View::getWidth() {
   return _canvasContext->getWidth();
 }
+void View::setWidth(int width) {
+  _canvasContext->setWidth(width);
+}
 
 int View::getHeight() {
   return _canvasContext->getHeight();
+}
+void View::setHeight(int height) {
+  _canvasContext->setHeight(height);
+}
+
+int View::getLeft() {
+  return _canvasContext->getOffsetX();
+}
+void View::setLeft(int left) {
+  _canvasContext->setOffsetX(left);
+}
+
+int View::getTop() {
+  return _canvasContext->getOffsetY();
+}
+void View::setTop(int top) {
+  _canvasContext->setOffsetY(top);
+}
+
+void View::resizeTo(int width, int height) {
+  setWidth(width);
+  setHeight(height);
+}
+
+void View::moveTo(int left, int top) {
+  setLeft(left);
+  setTop(top);
+}
+
+void View::setBounds(int left, int top, int width, int height) {
+  moveTo(left, top);
+  resizeTo(width, height);
 }
 
 bool View::isDirty() {

@@ -4,7 +4,6 @@
 #include "Canvas.h"
 
 CanvasContext::CanvasContext() {
-  setSize(128, 64);
 }
 
 Canvas *CanvasContext::getCanvas() {
@@ -21,9 +20,15 @@ void CanvasContext::setCanvas(Canvas *canvas) {
 int CanvasContext::getWidth() {
   return _width;
 }
+void CanvasContext::setWidth(int width) {
+  _width = width;
+}
 
 int CanvasContext::getHeight() {
   return _height;
+}
+void CanvasContext::setHeight(int height) {
+  _height = height;
 }
 
 void CanvasContext::setDirty() {
@@ -35,22 +40,18 @@ void CanvasContext::setColor(Color color) {
   getCanvas()->setColor(color);
 }
 
-void CanvasContext::setSize(int width, int height) {
-  _width = width;
-  _height = height;
-}
-
 int CanvasContext::getOffsetX() {
   return _offsetX;
+}
+void CanvasContext::setOffsetX(int offsetX) {
+  _offsetX = offsetX;
 }
 
 int CanvasContext::getOffsetY() {
   return _offsetY;
 }
-
-void CanvasContext::setOffset(int x, int y) {
-  _offsetX = x;
-  _offsetY = y;
+void CanvasContext::setOffsetY(int offsetY) {
+  _offsetY = offsetY;
 }
 
 void CanvasContext::setTextAlign(TextAlign align) {
