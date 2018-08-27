@@ -17,7 +17,7 @@ unsigned long lastViewChange = 0;
 SH1106Wire display(0x3c, OLED_SDA, OLED_CLK);
 Application application;
 ProgressView connectionView("Connecting to WiFi...", PROGRESS_INFINITY);
-TextView textView("Hello.", FONT_SIZE_H2);
+TextView textView("Hello.", FontSize::H2);
 
 void onConnected() {
   application.enableOTA();

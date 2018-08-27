@@ -4,9 +4,7 @@
 
 #include <OLEDDisplay.h>
 
-#define TEXT_ALIGN OLEDDISPLAY_TEXT_ALIGNMENT
-
-enum FONT_SIZE { FONT_SIZE_H1 = 1, FONT_SIZE_H2 = 2, FONT_SIZE_NORMAL = 3 };
+#include "enums.h"
 
 class DrawingContext {
 public:
@@ -18,7 +16,7 @@ public:
 
   void setDirty();
 
-  void setColor(OLEDDISPLAY_COLOR color);
+  void setColor(Color color);
 
   // Get width of context
   int getWidth();
@@ -39,16 +37,14 @@ public:
   void setOffset(int x = 0, int y = 0);
 
   // Specifies relative to which anchor point
-  // the text is rendered. Available constants:
-  // TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER_BOTH
-  void setTextAlign(TEXT_ALIGN textAlign);
+  // the text is rendered.
+  void setTextAlign(TextAlign textAlign);
 
   // Change font
   void setFont(const uint8_t *fontData);
 
-  // Sets the current font. Available default fonts
-  // ArialMT_Plain_10, ArialMT_Plain_16, ArialMT_Plain_24
-  void setFontSize(FONT_SIZE size);
+  // Sets the current font size.
+  void setFontSize(FontSize size);
 
   // Draw a pixel at given position
   void drawPixel(int x, int y);
@@ -102,5 +98,5 @@ private:
   int _height;
   int _offsetX;
   int _offsetY;
-  TEXT_ALIGN _textAlign = TEXT_ALIGN_LEFT;
+  TextAlign _textAlign = TextAlign::LEFT;
 };

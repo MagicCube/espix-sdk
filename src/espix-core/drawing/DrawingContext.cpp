@@ -12,20 +12,35 @@ OLEDDisplay *DrawingContext::getCanvas() {
   return Screen.getDisplay();
 }
 
-void DrawingContext::setDirty() {
-  Screen.setDirty();
-}
-
-void DrawingContext::setColor(OLEDDISPLAY_COLOR color) {
-  getCanvas()->setColor(color);
-}
-
 int DrawingContext::getWidth() {
   return _width;
 }
 
 int DrawingContext::getHeight() {
   return _height;
+}
+
+void DrawingContext::setDirty() {
+  Screen.setDirty();
+}
+
+void DrawingContext::setColor(Color color) {
+  OLEDDISPLAY_COLOR oColor;
+  switch (color) {
+  case Color::BLACK:
+    oColor = BLACK;
+    break;
+  case Color::WHITE:
+    oColor = WHITE;
+    break;
+  case Color::INVERSE:
+    oColor = WHITE;
+    break;
+  default:
+    oColor = WHITE;
+    break;
+  }
+  getCanvas()->setColor(oColor);
 }
 
 void DrawingContext::setSize(int width, int height) {
@@ -46,19 +61,19 @@ void DrawingContext::setOffset(int x, int y) {
   _offsetY = y;
 }
 
-void DrawingContext::setTextAlign(TEXT_ALIGN align) {
+void DrawingContext::setTextAlign(TextAlign align) {
   _textAlign = align;
-  getCanvas()->setTextAlignment(align);
+  getCanvas()->setTextAlignment((OLEDDISPLAY_TEXT_ALIGNMENT)_textAlign);
 }
 
 void DrawingContext::setFont(const uint8_t *fontData) {
   getCanvas()->setFont(fontData);
 }
 
-void DrawingContext::setFontSize(FONT_SIZE size) {
-  if (size == FONT_SIZE_H1) {
+void DrawingContext::setFontSize(FontSize size) {
+  if (size == FontSize::H1) {
     getCanvas()->setFont(ArialMT_Plain_24);
-  } else if (size == FONT_SIZE_H2) {
+  } else if (size == FontSize::H2) {
     getCanvas()->setFont(ArialMT_Plain_16);
   } else {
     getCanvas()->setFont(ArialMT_Plain_10);
@@ -123,17 +138,17 @@ void DrawingContext::drawXBM(const uint8_t *xbm, int width, int height, int x, i
 
 void DrawingContext::drawString(String text, int x, int y) {
   if (x == -1) {
-    if (_textAlign == TEXT_ALIGN_LEFT) {
+    if (_textAlign == TextAlign::LEFT) {
       x = 0;
-    } else if (_textAlign == TEXT_ALIGN_RIGHT) {
+    } else if (_textAlign == TextAlign::RIGHT) {
       x = getWidth();
       y = 0;
-    } else if (_textAlign == TEXT_ALIGN_CENTER || _textAlign == TEXT_ALIGN_CENTER_BOTH) {
+    } else if (_textAlign == TextAlign::CENTER || _textAlign == TextAlign::CENTER_BOTH) {
       x = getWidth() / 2;
     }
   }
   if (y == -1) {
-    if (_textAlign == TEXT_ALIGN_CENTER_BOTH) {
+    if (_textAlign == TextAlign::CENTER_BOTH) {
       y = getHeight() / 2;
     } else {
       y = 0;
@@ -145,17 +160,17 @@ void DrawingContext::drawString(String text, int x, int y) {
 
 void DrawingContext::drawMultilineString(String text, int x, int y, int maxLineWidth) {
   if (x == -1) {
-    if (_textAlign == TEXT_ALIGN_LEFT) {
+    if (_textAlign == TextAlign::LEFT) {
       x = 0;
-    } else if (_textAlign == TEXT_ALIGN_RIGHT) {
+    } else if (_textAlign == TextAlign::RIGHT) {
       x = getWidth();
       y = 0;
-    } else if (_textAlign == TEXT_ALIGN_CENTER || _textAlign == TEXT_ALIGN_CENTER_BOTH) {
+    } else if (_textAlign == TextAlign::CENTER || _textAlign == TextAlign::CENTER_BOTH) {
       x = getWidth() / 2;
     }
   }
   if (y == -1) {
-    if (_textAlign == TEXT_ALIGN_CENTER_BOTH) {
+    if (_textAlign == TextAlign::CENTER_BOTH) {
       y = getHeight() / 2;
     } else {
       y = 0;

@@ -24,7 +24,7 @@ private:
 
   PROGRESS_MODE _mode;
   String _text;
-  FONT_SIZE _fontSize = FONT_SIZE_NORMAL;
+  FontSize _fontSize = FontSize::NORMAL;
   int _progress = 0;
   int _progressOffset = 1;
 };

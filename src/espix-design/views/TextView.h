@@ -6,9 +6,9 @@
 
 class TextView : public View {
 public:
-  TextView(String text, FONT_SIZE fontSize = FONT_SIZE_H1,
-           TEXT_ALIGN textAlign = TEXT_ALIGN_CENTER_BOTH);
-  TextView(FONT_SIZE fontSize = FONT_SIZE_H1, TEXT_ALIGN textAlign = TEXT_ALIGN_CENTER_BOTH);
+  TextView(String text, FontSize fontSize = FontSize::H1,
+           TextAlign textAlign = TextAlign::CENTER_BOTH);
+  TextView(FontSize fontSize = FontSize::H1, TextAlign textAlign = TextAlign::CENTER_BOTH);
 
   String getText();
   void setText(String text);
@@ -17,6 +17,6 @@ public:
 
 private:
   String _text;
-  TEXT_ALIGN _textAlign;
-  FONT_SIZE _fontSize;
+  TextAlign _textAlign;
+  FontSize _fontSize;
 };
