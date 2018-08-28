@@ -35,6 +35,6 @@ public:
 
   // Removes all elements from the list.
   void clear() {
-    _vector.clear();
+    this->_vector.clear();
   }
 };
