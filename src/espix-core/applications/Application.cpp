@@ -87,7 +87,6 @@ int ApplicationClass::update() {
     ArduinoOTA.handle();
   }
   auto updateStart = millis();
-  WiFiNetwork.update();
   Keyboard.update();
   _mainLoop.update();
   if (WiFiNetwork.isConnected()) {

@@ -38,6 +38,15 @@ void WiFiNetworkClass::connect(NetworkConnectionCallback callback) {
   });
 
   WiFi.mode(WIFI_STA);
+  _scan();
+}
+
+void WiFiNetworkClass::disconnect(bool wifiOff) {
+  WiFi.disconnect(wifiOff);
+  _connectionState = WiFiConnectionState::DISCONNECTED;
+}
+
+void WiFiNetworkClass::_scan() {
   _connectionState = WiFiConnectionState::SCANNING;
   WiFi.scanNetworksAsync([=](int networksFounds) {
     if (_connectionState != WiFiConnectionState::SCANNING) {
@@ -48,19 +57,11 @@ void WiFiNetworkClass::connect(NetworkConnectionCallback callback) {
         if (setting.ssid.equals(WiFi.SSID(i))) {
           _connectionState = WiFiConnectionState::CONNECTING;
           WiFi.begin(setting.ssid.c_str(), setting.password.c_str());
-          break;
+          return;
         }
       }
     }
   });
-}
-
-void WiFiNetworkClass::disconnect(bool wifiOff) {
-  WiFi.disconnect(wifiOff);
-  _connectionState = WiFiConnectionState::DISCONNECTED;
-}
-
-void WiFiNetworkClass::update() {
 }
 
 WiFiNetworkClass WiFiNetwork;

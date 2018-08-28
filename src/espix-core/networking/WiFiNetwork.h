@@ -32,9 +32,10 @@ public:
   }
 
   void disconnect(bool wifiOff = false);
-  void update();
 
 private:
+  void _scan();
+
   WiFiConnectionState _connectionState = WiFiConnectionState::DISCONNECTED;
   List<WiFiConnectionSetting> _preferredList;
 };
