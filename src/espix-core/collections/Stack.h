@@ -33,6 +33,11 @@ public:
     return _vector.size();
   }
 
+  // Returns whether the list is empty.
+  bool isEmpty() {
+    return _vector.empty();
+  }
+
   // Pushes the specific item to the stack.
   void push(T item) {
     return _vector.push_back(item);
@@ -41,10 +46,12 @@ public:
   // Pops the top item and return it.
   // Returns `NULL` if the stack is empty.
   T pop() {
-    if (_vector.empty()) {
+    if (isEmpty()) {
       return NULL;
     }
-    return _vector.pop_back();
+    auto t = top();
+    _vector.pop_back();
+    return t;
   }
 
 protected:

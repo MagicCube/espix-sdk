@@ -28,6 +28,11 @@ public:
     return _vector.size();
   }
 
+  // Returns whether the list is empty.
+  bool isEmpty() {
+    return _vector.empty();
+  }
+
   // Searches for the specified item and returns the zero-based index of the first occurrence within
   // the list. Returns -1 if not found.
   int indexOf(T item) {
