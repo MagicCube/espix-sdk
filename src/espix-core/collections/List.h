@@ -22,7 +22,7 @@ public:
 
   // Remove the specific item from the list.
   void remove(T item) {
-    int index = indexOf(item);
+    int index = this->indexOf(item);
     if (index != -1) {
       removeAt(index);
     }
