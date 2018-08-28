@@ -22,11 +22,11 @@ View *ApplicationClass::getCurrentView() {
 }
 
 View *ApplicationClass::getRootView() {
-  return _rootViewContainer->getCurrentView();
+  return _rootViewContainer->getRootView();
 }
 
 void ApplicationClass::setRootView(View *view, TransitionOptions transitionOptions) {
-  _rootViewContainer->setCurrentView(view, transitionOptions);
+  _rootViewContainer->setRootView(view, transitionOptions);
 }
 
 void ApplicationClass::enableOTA() {

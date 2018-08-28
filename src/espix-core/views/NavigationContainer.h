@@ -12,6 +12,15 @@ public:
   // Creates an instance of the NavigationContainer class.
   NavigationContainer();
 
+  // Gets the root view of the navagation container.
+  View *getRootView();
+
+  // Pops all the views in the navigation stack, and sets the root view of the navagation container.
+  void setRootView(View *view, TransitionOptions options = TRANSITION_OPTIONS_NONE);
+
+  // Returns whether the navigation stack can be popped.
+  bool canPop();
+
   // Pushes a specific view to the navigation stack and display it.
   void pushView(View *view, TransitionOptions options = TRANSITION_OPTIONS_RIGHT);
 
@@ -20,5 +29,6 @@ public:
   View *popView(TransitionOptions options = TRANSITION_OPTIONS_LEFT);
 
 private:
+  View *_rootView = NULL;
   Stack<View *> _navigationStack;
 };
