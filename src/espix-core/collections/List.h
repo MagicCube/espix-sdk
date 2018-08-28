@@ -10,7 +10,7 @@ using namespace std;
 template <typename T> class List : public ReadonlyList<T> {
 public:
   // Creates a new instance of the List class.
-  List() : List<T>() {
+  List() : ReadonlyList<T>() {
   }
   List(initializer_list<T> l) : ReadonlyList<T>(l) {
   }
