@@ -23,7 +23,7 @@ String WiFiNetworkClass::getLocalIP() {
 void WiFiNetworkClass::connect(List<WiFiConnectionSetting> settings,
                                NetworkConnectionCallback callback) {
   static WiFiEventHandler handler = WiFi.onStationModeGotIP([=](const WiFiEventStationModeGotIP e) {
-    _connecting = false;
+    _connectionState = WiFiConnectionState::CONNECTED;
     handler = NULL;
     WiFi.onStationModeGotIP(NULL);
     schedule_function([=]() {
@@ -35,24 +35,30 @@ void WiFiNetworkClass::connect(List<WiFiConnectionSetting> settings,
   });
 
   WiFi.mode(WIFI_STA);
-  for (auto setting : settings) {
-    _wifiMulti.addAP(setting.ssid.c_str(), setting.password.c_str());
-  }
-  _wifiMulti.run();
-  _connecting = true;
+  _connectionState = WiFiConnectionState::SCANNING;
+  static List<WiFiConnectionSetting> static_settings = settings;
+  WiFi.scanNetworksAsync([=](int networksFounds) {
+    if (_connectionState != WiFiConnectionState::SCANNING) {
+      return;
+    }
+    for (int i = 0; i < networksFounds; i++) {
+      for (auto setting : static_settings) {
+        if (setting.ssid.equals(WiFi.SSID(i))) {
+          _connectionState = WiFiConnectionState::CONNECTING;
+          WiFi.begin(setting.ssid.c_str(), setting.password.c_str());
+          break;
+        }
+      }
+    }
+  });
 }
 
 void WiFiNetworkClass::disconnect(bool wifiOff) {
   WiFi.disconnect(wifiOff);
+  _connectionState = WiFiConnectionState::DISCONNECTED;
 }
 
 void WiFiNetworkClass::update() {
-  if (_connecting) {
-    if (millis() - _lastUpdate > 200) {
-      _lastUpdate = millis();
-      _wifiMulti.run();
-    }
-  }
 }
 
 WiFiNetworkClass WiFiNetwork;

@@ -3,11 +3,11 @@
 #include <Arduino.h>
 
 #include <ESP8266WiFi.h>
-#include <ESP8266WiFiMulti.h>
 
 #include "../collections/List.h"
 
 #include "WiFiConnectionSetting.h"
+#include "WiFiConnectionState.h"
 
 typedef std::function<void()> NetworkConnectionCallback;
 
@@ -34,9 +34,7 @@ public:
   void update();
 
 private:
-  bool _connecting = false;
-  unsigned long _lastUpdate = 0;
-  ESP8266WiFiMulti _wifiMulti;
+  WiFiConnectionState _connectionState = WiFiConnectionState::DISCONNECTED;
 };
 
 extern WiFiNetworkClass WiFiNetwork;
