@@ -4,7 +4,7 @@
 
 #include <ESP8266WiFi.h>
 
-#include "../collections/List.h"
+#include "../collections/MutableList.h"
 
 #include "WiFiConnectionSetting.h"
 #include "WiFiConnectionState.h"
@@ -37,7 +37,7 @@ private:
   void _scan();
 
   WiFiConnectionState _connectionState = WiFiConnectionState::DISCONNECTED;
-  List<WiFiConnectionSetting> _preferredList;
+  MutableList<WiFiConnectionSetting> _preferredList;
 };
 
 extern WiFiNetworkClass WiFiNetwork;
