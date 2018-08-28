@@ -1,7 +1,7 @@
 #include "AnimationView.h"
 
 AnimationView::AnimationView(const uint8_t **xbmFrames, int width, int height, int frameCount,
-                             uint8_t fps) {
+                             uint8_t fps) : View() {
   _xbmFrames = xbmFrames;
   _width = width;
   _height = height;

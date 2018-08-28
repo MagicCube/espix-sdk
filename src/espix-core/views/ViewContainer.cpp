@@ -1,6 +1,6 @@
 #include "ViewContainer.h"
 
-ViewContainer::ViewContainer() {
+ViewContainer::ViewContainer() : View() {
 }
 
 View *ViewContainer::getCurrentView() {

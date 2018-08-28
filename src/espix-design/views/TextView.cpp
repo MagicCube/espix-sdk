@@ -1,6 +1,6 @@
 #include "TextView.h"
 
-TextView::TextView(String text, FontSize fontSize, TextAlign textAlign) {
+TextView::TextView(String text, FontSize fontSize, TextAlign textAlign) : View() {
   if (text == NULL) {
     text = "";
   }
@@ -9,7 +9,7 @@ TextView::TextView(String text, FontSize fontSize, TextAlign textAlign) {
   _textAlign = textAlign;
 }
 
-TextView::TextView(FontSize fontSize, TextAlign textAlign) {
+TextView::TextView(FontSize fontSize, TextAlign textAlign) : View() {
   _text = "";
   _fontSize = fontSize;
   _textAlign = textAlign;

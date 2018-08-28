@@ -1,6 +1,6 @@
 #include "ImageView.h"
 
-ImageView::ImageView(const uint8_t *xbm, int width, int height) {
+ImageView::ImageView(const uint8_t *xbm, int width, int height) : View() {
   _xbm = xbm;
   _width = width;
   _height = height;

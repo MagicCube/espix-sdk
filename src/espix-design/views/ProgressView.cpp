@@ -1,11 +1,11 @@
 #include "ProgressView.h"
 
-ProgressView::ProgressView(String text, ProgressMode mode) {
+ProgressView::ProgressView(String text, ProgressMode mode) : View() {
   _text = text;
   _mode = mode;
 }
 
-ProgressView::ProgressView(ProgressMode mode) {
+ProgressView::ProgressView(ProgressMode mode) : View() {
   _text = "";
   _mode = mode;
 }
