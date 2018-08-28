@@ -54,6 +54,11 @@ public:
     return t;
   }
 
+  // Removes all elements from the list.
+  void clear() {
+    this->_vector.clear();
+  }
+
 protected:
   vector<T> _vector;
 };
