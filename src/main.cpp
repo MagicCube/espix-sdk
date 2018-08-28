@@ -20,7 +20,7 @@ TextView textView("Hello.", FontSize::H2);
 
 void onConnected() {
   Application.enableOTA();
-  Application.setRootView(&textView, TransitionOptions(TransitionDirection::LEFT));
+  Application.setRootView(&textView, TRANSITION_OPTIONS_LEFT);
   textView.setText(WiFiNetwork.getLocalIP());
 }
 
