@@ -12,10 +12,9 @@ public:
   // Creates a new instance of the ViewContainer class.
   ViewContainer();
 
-  // Gets or sets the current active view of the container.
+  // Gets the current active view of the container.
   // There's only one active view at one time.
   View *getCurrentView();
-  void setCurrentView(View *view, TransitionOptions transitionOptions = TRANSITION_OPTIONS_NONE);
 
   // Gets a bool indicates whether the container is transitioning by using `setCurrentView()`.
   bool isTransitioning();
@@ -27,6 +26,9 @@ public:
   void render(CanvasContext *context);
   void handleKeyPress(KeyEventArgs e);
   void handleScroll(ScrollEventArgs e);
+
+protected:
+  void setCurrentView(View *view, TransitionOptions transitionOptions = TRANSITION_OPTIONS_NONE);
 
 private:
   void _mountView(View *view, int offsetX = 0, int offsetY = 0);
