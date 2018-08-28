@@ -32,4 +32,9 @@ public:
   void removeAt(int index) {
     this->_vector.erase(this->_vector.begin() + index);
   }
+
+  // Removes all elements from the list.
+  void clear() {
+    _vector.clear();
+  }
 };

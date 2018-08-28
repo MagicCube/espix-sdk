@@ -4,10 +4,10 @@
 
 using namespace std;
 
-// Represents a list of items.
+// Represents a list with basic functions.
 template <typename T> class BaseList {
 public:
-  // Creates a new instance of the List class.
+  // Creates a new instance of the BaseList class.
   BaseList() {
   }
   BaseList(initializer_list<T> l) : _vector(l) {
@@ -42,11 +42,6 @@ public:
   // Returns true if the given item is in the list.
   bool includes(T item) {
     return indexOf(item) != -1;
-  }
-
-  // Removes all elements from the list.
-  void clear() {
-    _vector.clear();
   }
 
 protected:
