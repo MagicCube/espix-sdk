@@ -15,5 +15,6 @@
 
 #include "espix-core/timing/TimeClient.h"
 
+#include "espix-core/views/MultiViewContainer.h"
 #include "espix-core/views/NavigationContainer.h"
 #include "espix-core/views/View.h"
