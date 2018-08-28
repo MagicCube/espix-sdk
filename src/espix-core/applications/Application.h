@@ -7,7 +7,7 @@
 #include "../../espix-design/views/ProgressView.h"
 #include "../animations/AnimationLoop.h"
 #include "../devices/Screen.h"
-#include "../views/ViewContainer.h"
+#include "../views/NavigationContainer.h"
 
 // Represents the application of Expix.
 // The only instance of ApplicationClass is a global variable `Application`.
@@ -17,8 +17,8 @@ public:
   // Do not call this constructor directly. Always use the global variable `Application`.
   ApplicationClass();
 
-  // Gets the root ViewContainer of application.
-  ViewContainer *getRootViewContainer();
+  // Gets the root view container of application.
+  NavigationContainer *getRootViewContainer();
 
   // Sets root view of application.
   // It is the shortcut for getRootViewContainer()->setCurrentView().
@@ -46,23 +46,22 @@ public:
   int update();
 
 private:
-  unsigned long _lastUpdate = 0;
-  bool _otaEnabled = false;
-  bool _otaUpdating = false;
-  AnimationLoop _mainLoop;
-  ViewContainer *_rootViewContainer;
-  ProgressView *_progressView;
-
-  KeyEventHandler _onKeyPress = NULL;
-  ScrollEventHandler _onScroll = NULL;
-
-  void _setRootViewContainer(ViewContainer *container);
   ProgressView *_getProgressView();
   void _loop();
   void _handleKeyPress(KeyEventArgs e);
   void _fireKeyPressEvent(KeyEventArgs e);
   void _handleScroll(ScrollEventArgs e);
   void _fireScrollEvent(ScrollEventArgs e);
+
+  unsigned long _lastUpdate = 0;
+  bool _otaEnabled = false;
+  bool _otaUpdating = false;
+  AnimationLoop _mainLoop;
+  NavigationContainer *_rootViewContainer;
+  ProgressView *_progressView;
+
+  KeyEventHandler _onKeyPress = NULL;
+  ScrollEventHandler _onScroll = NULL;
 };
 
 extern ApplicationClass Application;

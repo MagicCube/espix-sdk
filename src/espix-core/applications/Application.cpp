@@ -8,10 +8,10 @@
 #include "../timing/TimeClient.h"
 
 ApplicationClass::ApplicationClass() {
-  _rootViewContainer = new ViewContainer();
+  _rootViewContainer = new NavigationContainer();
 }
 
-ViewContainer *ApplicationClass::getRootViewContainer() {
+NavigationContainer *ApplicationClass::getRootViewContainer() {
   return _rootViewContainer;
 }
 
@@ -79,7 +79,11 @@ void ApplicationClass::begin() {
   _mainLoop.onTick([=]() { _loop(); });
   _mainLoop.begin();
 
-  _setRootViewContainer(_rootViewContainer);
+  _rootViewContainer->setCanvas(Screen.getCanvas());
+  _rootViewContainer->resizeTo(Screen.getWidth(), Screen.getHeight());
+  _rootViewContainer->willMount();
+  _rootViewContainer->redraw(true);
+  _rootViewContainer->didMount();
 }
 
 int ApplicationClass::update() {
@@ -97,15 +101,6 @@ int ApplicationClass::update() {
   int timeBudget = _mainLoop.getOptions().updateInterval - elapsedSinceLastUpdate;
   _lastUpdate = updateStart;
   return timeBudget;
-}
-
-void ApplicationClass::_setRootViewContainer(ViewContainer *container) {
-  _rootViewContainer = container;
-  _rootViewContainer->setCanvas(Screen.getCanvas());
-  _rootViewContainer->resizeTo(Screen.getWidth(), Screen.getHeight());
-  _rootViewContainer->willMount();
-  _rootViewContainer->redraw(true);
-  _rootViewContainer->didMount();
 }
 
 ProgressView *ApplicationClass::_getProgressView() {
