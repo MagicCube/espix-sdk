@@ -11,7 +11,7 @@
 // The only instance of ScreenClass is a global variable `Screen`.
 class ScreenClass {
 public:
-  // Initializes a new instance of the Screen class.
+  // Creates a new instance of the Screen class.
   // Do not call this constructor directly. Always use the global variable `Screen`.
   ScreenClass();
 

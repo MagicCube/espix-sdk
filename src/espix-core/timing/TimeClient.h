@@ -8,7 +8,7 @@
 // The only instance of TimeClientClass is a global variable `TimeClient`.
 class TimeClientClass {
 public:
-  // Initializes a new instance of the TimeClientClass class.
+  // Creates a new instance of the TimeClientClass class.
   // Do not call this constructor directly. Always use the global variable `TimeClient`.
   TimeClientClass(unsigned long timeOffset);
 

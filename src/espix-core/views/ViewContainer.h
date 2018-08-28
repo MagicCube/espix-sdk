@@ -9,7 +9,7 @@
 // Represents a container of single view.
 class ViewContainer : public View {
 public:
-  // Initializes a new instance of the ViewContainer class.
+  // Creates a new instance of the ViewContainer class.
   ViewContainer();
 
   // Gets or sets the current active view of the container.

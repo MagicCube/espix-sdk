@@ -8,7 +8,7 @@
 // The only instance of KeyboardClass is a global variable `Keyboard`.
 class KeyboardClass {
 public:
-  // Initializes a new instance of the keyboard class.
+  // Creates a new instance of the keyboard class.
   // Do not call this constructor directly. Always use the global variable `Keyboard`.
   KeyboardClass();
 

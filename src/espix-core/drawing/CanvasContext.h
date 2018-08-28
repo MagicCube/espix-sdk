@@ -11,7 +11,7 @@ class Canvas;
 // Represents the context of given canvas.
 class CanvasContext {
 public:
-  // Initializes a new instance of the CanvasContext class.
+  // Creates a new instance of the CanvasContext class.
   CanvasContext(Canvas *canvas, Rectangle bounds);
 
   // Gets the corresponding canvas of the context.

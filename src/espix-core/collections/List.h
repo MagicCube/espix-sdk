@@ -7,7 +7,7 @@ using namespace std;
 // Represents a list of items.
 template <typename T> class List {
 public:
-  // Initializes a new instance of the List class.
+  // Creates a new instance of the List class.
   List() {
   }
   List(initializer_list<T> l) : _vector(l) {

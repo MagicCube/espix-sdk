@@ -10,7 +10,7 @@
 // Represents a canvas of OLED display.
 class Canvas {
 public:
-  // Initializes a new instance of the Canvas class.
+  // Creates a new instance of the Canvas class.
   Canvas(OLEDDisplay *display);
 
   // Gets the width of the canvas.

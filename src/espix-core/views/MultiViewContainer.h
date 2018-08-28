@@ -9,7 +9,7 @@
 // Represents a container which can contains multiple views.
 class MultiViewContainer : public ViewContainer {
 public:
-  // Initializes a new instance of the MultiViewContainer class.
+  // Creates a new instance of the MultiViewContainer class.
   MultiViewContainer();
   MultiViewContainer(initializer_list<View *> l);
 
