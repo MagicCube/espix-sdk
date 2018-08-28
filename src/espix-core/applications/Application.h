@@ -17,8 +17,8 @@ public:
   // Do not call this constructor directly. Always use the global variable `Application`.
   ApplicationClass();
 
-  // Gets the root view container of application.
-  NavigationContainer *getRootViewContainer();
+  // Get current active view.
+  View *getCurrentView();
 
   // Sets root view of application.
   // It is the shortcut for getRootViewContainer()->setCurrentView().
@@ -26,9 +26,6 @@ public:
 
   // Gets root view of application.
   View *getRootView();
-
-  // Gets current active view.
-  View *getCurrentView();
 
   // Enables OTA.
   void enableOTA();

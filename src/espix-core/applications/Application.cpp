@@ -11,31 +11,22 @@ ApplicationClass::ApplicationClass() {
   _rootViewContainer = new NavigationContainer();
 }
 
-NavigationContainer *ApplicationClass::getRootViewContainer() {
-  return _rootViewContainer;
-}
-
-View *ApplicationClass::getRootView() {
-  if (_rootViewContainer) {
-    return _rootViewContainer->getCurrentView();
-  }
-  return NULL;
-}
-
-void ApplicationClass::setRootView(View *view, TransitionOptions transitionOptions) {
-  if (_rootViewContainer) {
-    _rootViewContainer->setCurrentView(view, transitionOptions);
-  }
-}
-
 View *ApplicationClass::getCurrentView() {
   View *activeView = NULL;
   if (_otaUpdating) {
     activeView = _getProgressView();
-  } else if (_rootViewContainer) {
+  } else {
     activeView = _rootViewContainer;
   }
   return activeView;
+}
+
+View *ApplicationClass::getRootView() {
+  return _rootViewContainer->getCurrentView();
+}
+
+void ApplicationClass::setRootView(View *view, TransitionOptions transitionOptions) {
+  _rootViewContainer->setCurrentView(view, transitionOptions);
 }
 
 void ApplicationClass::enableOTA() {
@@ -113,19 +104,15 @@ ProgressView *ApplicationClass::_getProgressView() {
 void ApplicationClass::_loop() {
   auto currentView = getCurrentView();
 
-  if (currentView) {
-    if (currentView->tryUpdate()) {
-      currentView->redraw(true);
-      Screen.update();
-    }
+  if (currentView->tryUpdate()) {
+    currentView->redraw(true);
+    Screen.update();
   }
 }
 
 void ApplicationClass::_handleKeyPress(KeyEventArgs e) {
   _fireKeyPressEvent(e);
-  if (_rootViewContainer) {
-    _rootViewContainer->handleKeyPress(e);
-  }
+  _rootViewContainer->handleKeyPress(e);
 }
 
 void ApplicationClass::_fireKeyPressEvent(KeyEventArgs e) {
@@ -136,9 +123,7 @@ void ApplicationClass::_fireKeyPressEvent(KeyEventArgs e) {
 
 void ApplicationClass::_handleScroll(ScrollEventArgs e) {
   _fireScrollEvent(e);
-  if (_rootViewContainer) {
-    _rootViewContainer->handleScroll(e);
-  }
+  _rootViewContainer->handleScroll(e);
 }
 
 void ApplicationClass::_fireScrollEvent(ScrollEventArgs e) {
