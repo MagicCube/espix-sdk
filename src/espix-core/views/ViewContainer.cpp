@@ -88,7 +88,6 @@ void ViewContainer::_mountView(View *view, int offsetX, int offsetY) {
 
 void ViewContainer::_unmountView() {
   if (_unmountingView) {
-    _unmountingView->setParentView(NULL);
     _unmountingView = NULL;
   }
 }
