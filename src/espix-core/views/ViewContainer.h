@@ -31,6 +31,7 @@ public:
 private:
   void _mountView(View *view, int offsetX = 0, int offsetY = 0);
   void _unmountView();
+  void _updateTransition();
 
   int _viewOffset = 0;
   int _unmountingViewOffset = 0;
