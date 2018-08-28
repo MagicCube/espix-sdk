@@ -76,7 +76,7 @@ void ApplicationClass::begin() {
   Keyboard.onKeyPress([=](KeyCode keyCode) { _handleKeyPress(keyCode); });
   Keyboard.onScroll([=](int delta) { _handleScroll(delta); });
 
-  _mainLoop.onTick([=](AnimationLoop *target) { _loop(); });
+  _mainLoop.onTick([=]() { _loop(); });
   _mainLoop.begin();
 
   _setRootViewContainer(_rootViewContainer);

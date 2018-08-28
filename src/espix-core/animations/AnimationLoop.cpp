@@ -42,6 +42,6 @@ void AnimationLoop::update() {
 
 void AnimationLoop::_fireTickEvent() {
   if (_onTick) {
-    _onTick(this);
+    _onTick();
   }
 }
