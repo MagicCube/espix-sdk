@@ -23,6 +23,7 @@ public:
     return _vector.end();
   }
 
+  // Returns the item on the top of the stack.
   T top() {
     return _vector.back();
   }
@@ -32,12 +33,13 @@ public:
     return _vector.size();
   }
 
-  // Push the specific item to the stack.
+  // Pushes the specific item to the stack.
   void push(T item) {
     return _vector.push_back(item);
   }
 
-  // Pop the top item and return it.
+  // Pops the top item and return it.
+  // Returns `NULL` if the stack is empty.
   T pop() {
     if (_vector.empty()) {
       return NULL;
