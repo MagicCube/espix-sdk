@@ -4,7 +4,7 @@
 
 #include "ViewContainer.h"
 
-View::View() {
+View::View() : _paddings(0, 10, 30, 0) {
 }
 
 ViewContainer *View::getParentView() {
@@ -57,6 +57,49 @@ void View::setTop(int top) {
   _bounds.top = top;
 }
 
+Rectangle View::getBounds() {
+  return _bounds;
+}
+void View::setBounds(Rectangle bounds) {
+  moveTo(bounds.left, bounds.top);
+  resizeTo(bounds.width, bounds.height);
+}
+
+int View::getClientLeft() {
+  int result = getLeft() + getPaddings().left;
+  if (getParentView()) {
+    result += getParentView()->getClientLeft();
+  }
+  return result;
+}
+
+int View::getClientTop() {
+  int result = getTop() + getPaddings().top;
+  if (getParentView()) {
+    result += getParentView()->getClientTop();
+  }
+  return result;
+}
+
+int View::getClientWidth() {
+  int result = getWidth() - getPaddings().left - getPaddings().right;
+  return result;
+}
+
+int View::getClientHeight() {
+  int result = getHeight() - getPaddings().top - getPaddings().bottom;
+  return result;
+}
+
+Rectangle View::getClientBounds() {
+  return Rectangle(getClientLeft(), getClientTop(), getClientWidth(), getClientHeight());
+}
+
+Thickness View::getPaddings() {
+  return _paddings;
+}
+
+
 void View::resizeTo(int width, int height) {
   setWidth(width);
   setHeight(height);
@@ -65,15 +108,6 @@ void View::resizeTo(int width, int height) {
 void View::moveTo(int left, int top) {
   setLeft(left);
   setTop(top);
-}
-
-Rectangle View::getBounds() {
-  return _bounds;
-}
-
-void View::setBounds(Rectangle bounds) {
-  moveTo(bounds.left, bounds.top);
-  resizeTo(bounds.width, bounds.height);
 }
 
 bool View::isDirty() {
@@ -99,7 +133,8 @@ bool View::tryUpdate() {
 }
 
 void View::redraw(bool clearBeforeRendering) {
-  auto context = new CanvasContext(getCanvas(), getBounds());
+  // Only the client area can be drawn, so we use client bounds here.
+  auto context = new CanvasContext(getCanvas(), getClientBounds());
 
   if (clearBeforeRendering) {
     context->clear();

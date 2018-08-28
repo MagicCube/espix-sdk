@@ -52,9 +52,9 @@ void ProgressView::update() {
 void ProgressView::render(CanvasContext *context) {
   _renderText(context);
 
-  int width = getWidth() / 10 * 9;
+  int width = getClientWidth() / 10 * 9;
   int height = 8;
-  int x = (getWidth() - width) / 2;
+  int x = (getClientWidth() - width) / 2;
   int y = 32;
   uint16_t radius = height / 2;
   uint16_t xRadius = x + radius;
@@ -84,5 +84,5 @@ void ProgressView::render(CanvasContext *context) {
 void ProgressView::_renderText(CanvasContext *context) {
   context->setFontSize(_fontSize);
   context->setTextAlign(TextAlign::CENTER);
-  context->drawString(_text != "" ? _text : (String(_progress) + " %"), getWidth() / 2, 12);
+  context->drawString(_text != "" ? _text : (String(_progress) + " %"), getClientWidth() / 2, 12);
 }

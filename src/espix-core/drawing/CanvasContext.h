@@ -3,8 +3,8 @@
 #include <Arduino.h>
 #include <OLEDDisplay.h>
 
-#include "Rectangle.h"
 #include "enums.h"
+#include "structs.h"
 
 class Canvas;
 

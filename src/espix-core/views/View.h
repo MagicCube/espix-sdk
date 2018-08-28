@@ -4,6 +4,7 @@
 
 #include "../devices/Keyboard.h"
 #include "../drawing/CanvasContext.h"
+#include "../drawing/Thickness.h"
 
 class ViewContainer;
 
@@ -38,6 +39,27 @@ public:
   int getTop();
   void setTop(int top);
 
+  // Gets or sets a `Rectangle` object which represents the bounds of the view.
+  Rectangle getBounds();
+  void setBounds(Rectangle bounds);
+
+  // Gets the left of the client area of the view.
+  int getClientLeft();
+
+  // Gets the top of the client area of the view.
+  int getClientTop();
+
+  // Gets the width of the client area of the view.
+  int getClientWidth();
+
+  // Gets the height of the client area of the view.
+  int getClientHeight();
+
+  // Gets a `Rectangle` object which represents the bounds of the view's client area.
+  Rectangle getClientBounds();
+
+  // Gets a `Thickness` object which represents the paddings of the view.
+  Thickness getPaddings();
 
   // Gets a boolean value indicates whether the view is dirty.
   // Sets it true by invoking `setDirty()`.
@@ -55,17 +77,12 @@ public:
   // Moves the view to the specific location.
   void moveTo(int left, int top);
 
-  // Gets or sets a `Rectangle` object which represents the bounds of the view.
-  Rectangle getBounds();
-  void setBounds(Rectangle bounds);
-
   // Updates the view if it is dirty or `shouldUpdate()` is true.
   // It also change the value of `lastUpdate` which you can retain from `getLastUpdate()`.
   bool tryUpdate();
 
   // Redraws the view.
   void redraw(bool clearBeforeRendering = false);
-
 
   /*************************************/
   /* Lifecyle of View                  */
@@ -111,6 +128,7 @@ private:
   ViewContainer *_parentView = NULL;
 
   Rectangle _bounds;
+  Thickness _paddings;
 
   bool _dirty = false;
   unsigned long _lastUpdate = 0;
