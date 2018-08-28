@@ -4,7 +4,7 @@
 
 #include "ViewContainer.h"
 
-View::View() : _paddings(0, 10, 30, 0) {
+View::View() {
 }
 
 ViewContainer *View::getParentView() {
