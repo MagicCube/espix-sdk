@@ -25,8 +25,8 @@ public:
   bool shouldUpdate();
   void update();
   void render(CanvasContext *context);
-  void handleKeyPress(KeyCode keyCode);
-  void handleScroll(int delta);
+  void handleKeyPress(KeyEventArgs e);
+  void handleScroll(ScrollEventArgs e);
 
 private:
   void _mountView(View *view, int offsetX = 0, int offsetY = 0);

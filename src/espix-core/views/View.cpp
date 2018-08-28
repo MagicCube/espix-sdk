@@ -128,8 +128,8 @@ void View::update() {
 void View::willUnmount() {
 }
 
-void View::handleKeyPress(KeyCode keyCode) {
+void View::handleKeyPress(KeyEventArgs e) {
 }
 
-void View::handleScroll(int delta) {
+void View::handleScroll(ScrollEventArgs e) {
 }

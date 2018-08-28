@@ -73,8 +73,8 @@ void ApplicationClass::onScroll(ScrollEventHandler handler) {
 }
 
 void ApplicationClass::begin() {
-  Keyboard.onKeyPress([=](KeyCode keyCode) { _handleKeyPress(keyCode); });
-  Keyboard.onScroll([=](int delta) { _handleScroll(delta); });
+  Keyboard.onKeyPress([=](KeyEventArgs e) { _handleKeyPress(e); });
+  Keyboard.onScroll([=](ScrollEventArgs e) { _handleScroll(e); });
 
   _mainLoop.onTick([=]() { _loop(); });
   _mainLoop.begin();
@@ -127,29 +127,29 @@ void ApplicationClass::_loop() {
   }
 }
 
-void ApplicationClass::_handleKeyPress(KeyCode keyCode) {
-  _fireKeyPressEvent(keyCode);
+void ApplicationClass::_handleKeyPress(KeyEventArgs e) {
+  _fireKeyPressEvent(e);
   if (_rootViewContainer) {
-    _rootViewContainer->handleKeyPress(keyCode);
+    _rootViewContainer->handleKeyPress(e);
   }
 }
 
-void ApplicationClass::_fireKeyPressEvent(KeyCode keyCode) {
+void ApplicationClass::_fireKeyPressEvent(KeyEventArgs e) {
   if (_onKeyPress) {
-    _onKeyPress(keyCode);
+    _onKeyPress(e);
   }
 }
 
-void ApplicationClass::_handleScroll(int delta) {
-  _fireScrollEvent(delta);
+void ApplicationClass::_handleScroll(ScrollEventArgs e) {
+  _fireScrollEvent(e);
   if (_rootViewContainer) {
-    _rootViewContainer->handleScroll(delta);
+    _rootViewContainer->handleScroll(e);
   }
 }
 
-void ApplicationClass::_fireScrollEvent(int delta) {
+void ApplicationClass::_fireScrollEvent(ScrollEventArgs e) {
   if (_onScroll) {
-    _onScroll(delta);
+    _onScroll(e);
   }
 }
 

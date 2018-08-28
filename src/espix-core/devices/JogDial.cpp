@@ -17,15 +17,15 @@ void JogDial::update() {
       if (std::abs(value) > 1) {
         value = value / 2;
       }
-      _fireScrollEvent(value);
+      _fireScrollEvent(ScrollEventArgs(value));
       _encoder.write(0);
     }
     _lastUpdate = millis();
   }
 }
 
-void JogDial::_fireScrollEvent(int delta) {
+void JogDial::_fireScrollEvent(ScrollEventArgs e) {
   if (_onScroll) {
-    _onScroll(delta);
+    _onScroll(e);
   }
 }

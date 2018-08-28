@@ -59,10 +59,10 @@ private:
   void _setRootViewContainer(ViewContainer *container);
   ProgressView *_getProgressView();
   void _loop();
-  void _handleKeyPress(KeyCode keyCode);
-  void _fireKeyPressEvent(KeyCode keyCode);
-  void _handleScroll(int delta);
-  void _fireScrollEvent(int delta);
+  void _handleKeyPress(KeyEventArgs e);
+  void _fireKeyPressEvent(KeyEventArgs e);
+  void _handleScroll(ScrollEventArgs e);
+  void _fireScrollEvent(ScrollEventArgs e);
 };
 
 extern ApplicationClass Application;

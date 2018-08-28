@@ -65,15 +65,15 @@ void ViewContainer::render(CanvasContext *context) {
   }
 }
 
-void ViewContainer::handleKeyPress(KeyCode keyCode) {
+void ViewContainer::handleKeyPress(KeyEventArgs e) {
   if (_currentView) {
-    _currentView->handleKeyPress(keyCode);
+    _currentView->handleKeyPress(e);
   }
 }
 
-void ViewContainer::handleScroll(int delta) {
+void ViewContainer::handleScroll(ScrollEventArgs e) {
   if (_currentView) {
-    _currentView->handleScroll(delta);
+    _currentView->handleScroll(e);
   }
 }
 

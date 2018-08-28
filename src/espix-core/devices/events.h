@@ -2,9 +2,27 @@
 
 #include <Arduino.h>
 
+#include "../events/EventArgs.h"
+
 #include "KeyCode.h"
 
 using namespace std;
 
-typedef function<void(int)> ScrollEventHandler;
-typedef function<void(KeyCode)> KeyEventHandler;
+struct ScrollEventArgs : EventArgs {
+  ScrollEventArgs(int p_delta) {
+    delta = p_delta;
+  }
+
+  int delta;
+};
+
+struct KeyEventArgs : EventArgs {
+  KeyEventArgs(KeyCode p_keyCode) {
+    keyCode = p_keyCode;
+  }
+
+  KeyCode keyCode;
+};
+
+typedef function<void(ScrollEventArgs)> ScrollEventHandler;
+typedef function<void(KeyEventArgs)> KeyEventHandler;
