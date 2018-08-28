@@ -26,9 +26,9 @@ void onConnected() {
 
 void connect() {
   Application.setRootView(&connectionView);
-  WiFiNetwork.connect({WiFiConnectionSetting("Henry's iPhone 6", "13913954971"),
-                       WiFiConnectionSetting("Henry's Living Room 2.4GHz", "13913954971")},
-                      onConnected);
+  WiFiNetwork.addToPreferredList("Henry's iPhone 6", "13913954971");
+  WiFiNetwork.addToPreferredList("Henry's Living Room 2.4GHz", "13913954971");
+  WiFiNetwork.connect(onConnected);
 }
 
 void setupDevices() {

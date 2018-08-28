@@ -19,15 +19,16 @@ public:
   wl_status_t getStatus();
   String getLocalIP();
 
-
-  void connect(List<WiFiConnectionSetting> settings, NetworkConnectionCallback callback = NULL);
-  void connect(WiFiConnectionSetting setting, NetworkConnectionCallback callback = NULL) {
-    List<WiFiConnectionSetting> settings;
-    connect(settings, callback);
-  }
-  void connect(String ssid, String password, NetworkConnectionCallback callback = NULL) {
+  void addToPreferredList(WiFiConnectionSetting setting);
+  void addToPreferredList(String ssid, String password) {
     WiFiConnectionSetting setting(ssid, password);
-    connect(setting, callback);
+    addToPreferredList(setting);
+  }
+
+  void connect(NetworkConnectionCallback callback = NULL);
+  void connect(String ssid, String password, NetworkConnectionCallback callback = NULL) {
+    addToPreferredList(ssid, password);
+    connect(callback);
   }
 
   void disconnect(bool wifiOff = false);
@@ -35,6 +36,7 @@ public:
 
 private:
   WiFiConnectionState _connectionState = WiFiConnectionState::DISCONNECTED;
+  List<WiFiConnectionSetting> _preferredList;
 };
 
 extern WiFiNetworkClass WiFiNetwork;

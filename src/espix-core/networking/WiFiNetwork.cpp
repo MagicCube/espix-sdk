@@ -20,8 +20,11 @@ String WiFiNetworkClass::getLocalIP() {
   return WiFi.localIP().toString();
 }
 
-void WiFiNetworkClass::connect(List<WiFiConnectionSetting> settings,
-                               NetworkConnectionCallback callback) {
+void WiFiNetworkClass::addToPreferredList(WiFiConnectionSetting setting) {
+  _preferredList.add(setting);
+}
+
+void WiFiNetworkClass::connect(NetworkConnectionCallback callback) {
   static WiFiEventHandler handler = WiFi.onStationModeGotIP([=](const WiFiEventStationModeGotIP e) {
     _connectionState = WiFiConnectionState::CONNECTED;
     handler = NULL;
@@ -36,13 +39,12 @@ void WiFiNetworkClass::connect(List<WiFiConnectionSetting> settings,
 
   WiFi.mode(WIFI_STA);
   _connectionState = WiFiConnectionState::SCANNING;
-  static List<WiFiConnectionSetting> static_settings = settings;
   WiFi.scanNetworksAsync([=](int networksFounds) {
     if (_connectionState != WiFiConnectionState::SCANNING) {
       return;
     }
     for (int i = 0; i < networksFounds; i++) {
-      for (auto setting : static_settings) {
+      for (auto setting : _preferredList) {
         if (setting.ssid.equals(WiFi.SSID(i))) {
           _connectionState = WiFiConnectionState::CONNECTING;
           WiFi.begin(setting.ssid.c_str(), setting.password.c_str());
