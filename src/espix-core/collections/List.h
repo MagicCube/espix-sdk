@@ -2,48 +2,39 @@
 
 #include <Arduino.h>
 
+#include "ReadonlyList.h"
+
 using namespace std;
 
-// Represents a readonly list.
-template <typename T> class List {
+// Represents a mutable list of items.
+template <typename T> class List : public ReadonlyList<T> {
 public:
   // Creates a new instance of the List class.
-  List() {
+  List() : List<T>() {
   }
-  List(initializer_list<T> l) : _vector(l) {
-  }
-
-  // Iterator for begin.
-  typename vector<T>::iterator begin() {
-    return _vector.begin();
+  List(initializer_list<T> l) : ReadonlyList<T>(l) {
   }
 
-  // Iterator for end.
-  typename vector<T>::iterator end() {
-    return _vector.end();
+  // Add the specific item to the list.
+  void add(T item) {
+    this->_vector.push_back(item);
   }
 
-  // Gets the number of items in the list.
-  int size() {
-    return _vector.size();
-  }
-
-  // Searches for the specified item and returns the zero-based index of the first occurrence within
-  // the list. Returns -1 if not found.
-  int indexOf(T item) {
-    auto lower = lower_bound(_vector.begin(), _vector.end(), item);
-    if (lower != _vector.end()) {
-      auto index = lower - _vector.begin();
-      return index;
+  // Remove the specific item from the list.
+  void remove(T item) {
+    int index = indexOf(item);
+    if (index != -1) {
+      removeAt(index);
     }
-    return -1;
   }
 
-  // Returns true if the given item is in the list.
-  bool includes(T item) {
-    return indexOf(item) != -1;
+  // Remove the item with specific index from the list.
+  void removeAt(int index) {
+    this->_vector.erase(this->_vector.begin() + index);
   }
 
-protected:
-  vector<T> _vector;
+  // Removes all elements from the list.
+  void clear() {
+    this->_vector.clear();
+  }
 };
