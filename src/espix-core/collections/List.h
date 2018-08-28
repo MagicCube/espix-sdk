@@ -2,39 +2,48 @@
 
 #include <Arduino.h>
 
-#include "BaseList.h"
-
 using namespace std;
 
-// Represents a list of items.
-template <typename T> class List : public BaseList<T> {
+// Represents a readonly list.
+template <typename T> class List {
 public:
   // Creates a new instance of the List class.
-  List() : BaseList<T>() {
+  List() {
   }
-  List(initializer_list<T> l) : BaseList<T>(l) {
-  }
-
-  // Add the specific item to the list.
-  void add(T item) {
-    this->_vector.push_back(item);
+  List(initializer_list<T> l) : _vector(l) {
   }
 
-  // Remove the specific item from the list.
-  void remove(T item) {
-    int index = indexOf(item);
-    if (index != -1) {
-      removeAt(index);
+  // Iterator for begin.
+  typename vector<T>::iterator begin() {
+    return _vector.begin();
+  }
+
+  // Iterator for end.
+  typename vector<T>::iterator end() {
+    return _vector.end();
+  }
+
+  // Gets the number of items in the list.
+  int size() {
+    return _vector.size();
+  }
+
+  // Searches for the specified item and returns the zero-based index of the first occurrence within
+  // the list. Returns -1 if not found.
+  int indexOf(T item) {
+    auto lower = lower_bound(_vector.begin(), _vector.end(), item);
+    if (lower != _vector.end()) {
+      auto index = lower - _vector.begin();
+      return index;
     }
+    return -1;
   }
 
-  // Remove the item with specific index from the list.
-  void removeAt(int index) {
-    this->_vector.erase(this->_vector.begin() + index);
+  // Returns true if the given item is in the list.
+  bool includes(T item) {
+    return indexOf(item) != -1;
   }
 
-  // Removes all elements from the list.
-  void clear() {
-    this->_vector.clear();
-  }
+protected:
+  vector<T> _vector;
 };
