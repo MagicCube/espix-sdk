@@ -2,7 +2,8 @@
 
 #include <Arduino.h>
 
-#include "enums.h"
+#include "TransitionDirection.h"
+#include "TransitionOrientation.h"
 
 struct TransitionOptions {
   TransitionOptions() {
