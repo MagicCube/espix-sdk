@@ -8,7 +8,7 @@ int CarouselContainer::getCurrentSubviewIndex() {
 }
 
 void CarouselContainer::setCurrentSubviewIndex(int index, TransitionOptions options) {
-  slideToSubview(index, options);
+  showSubview(index, options);
 }
 
 TransitionOrientation CarouselContainer::getTransitionOrientation() {
@@ -19,7 +19,7 @@ void CarouselContainer::setTransitionOrientation(TransitionOrientation orientati
   _transitionOrientation = orientation;
 }
 
-void CarouselContainer::slideToSubview(View *view, TransitionOptions options) {
+void CarouselContainer::showSubview(View *view, TransitionOptions options) {
   if (_subviews.size() == 0) {
     return;
   }
@@ -46,7 +46,7 @@ void CarouselContainer::slideToSubview(View *view, TransitionOptions options) {
   }
 }
 
-void CarouselContainer::slideToSubview(int index, TransitionOptions options) {
+void CarouselContainer::showSubview(int index, TransitionOptions options) {
   if (_subviews.size() == 0) {
     return;
   }
@@ -56,47 +56,55 @@ void CarouselContainer::slideToSubview(int index, TransitionOptions options) {
     index = 0;
   }
   auto view = _subviews[index];
-  slideToSubview(view, options);
+  showSubview(view, options);
 }
 
-void CarouselContainer::slideToFirstSubview() {
-  slideToSubview(0);
+void CarouselContainer::showFirstSubview() {
+  showSubview(0);
 }
 
-void CarouselContainer::slideToLastSubview() {
-  slideToSubview(_subviews.size() - 1);
+void CarouselContainer::showLastSubview() {
+  showSubview(_subviews.size() - 1);
 }
 
-void CarouselContainer::slideToNextSubview() {
-  slideToSubview(_currentSubviewIndex + 1, _computeTransitionDirection(1));
+void CarouselContainer::showNextSubview() {
+  showSubview(_currentSubviewIndex + 1, _computeTransitionDirection(1));
 }
 
-void CarouselContainer::slideToPrevSubview() {
-  slideToSubview(_currentSubviewIndex - 1, _computeTransitionDirection(-1));
+void CarouselContainer::showPrevSubview() {
+  showSubview(_currentSubviewIndex - 1, _computeTransitionDirection(-1));
 }
 
 void CarouselContainer::handleKeyPress(KeyEventArgs e) {
   auto orientation = getTransitionOrientation();
   if (orientation == TransitionOrientation::HORIZONTAL) {
     if (e.keyCode == KEY_LEFT_ARROW) {
-      slideToPrevSubview();
+      showPrevSubview();
+      return;
     } else if (e.keyCode == KEY_RIGHT_ARROW) {
-      slideToNextSubview();
+      showNextSubview();
+      return;
     }
   } else {
     if (e.keyCode == KEY_UP_ARROW) {
-      slideToPrevSubview();
+      showPrevSubview();
+      return;
     } else if (e.keyCode == KEY_DOWN_ARROW) {
-      slideToNextSubview();
+      showNextSubview();
+      return;
     }
+  }
+
+  if (getCurrentView()) {
+    getCurrentView()->handleKeyPress(e);
   }
 }
 
 void CarouselContainer::handleScroll(ScrollEventArgs e) {
   if (e.delta < 0) {
-    slideToPrevSubview();
+    showPrevSubview();
   } else {
-    slideToNextSubview();
+    showNextSubview();
   }
 }
 

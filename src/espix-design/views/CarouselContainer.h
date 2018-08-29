@@ -16,12 +16,12 @@ public:
   TransitionOrientation getTransitionOrientation();
   void setTransitionOrientation(TransitionOrientation orientation);
 
-  void slideToSubview(View *view, TransitionOptions options = TRANSITION_OPTIONS_AUTO);
-  void slideToSubview(int index, TransitionOptions options = TRANSITION_OPTIONS_AUTO);
-  void slideToFirstSubview();
-  void slideToLastSubview();
-  void slideToNextSubview();
-  void slideToPrevSubview();
+  void showSubview(View *view, TransitionOptions options = TRANSITION_OPTIONS_AUTO);
+  void showSubview(int index, TransitionOptions options = TRANSITION_OPTIONS_AUTO);
+  void showFirstSubview();
+  void showLastSubview();
+  void showNextSubview();
+  void showPrevSubview();
 
   void handleKeyPress(KeyEventArgs e);
   void handleScroll(ScrollEventArgs e);
