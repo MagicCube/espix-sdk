@@ -88,7 +88,7 @@ void ViewContainer::_mountView(View *view, int offsetX, int offsetY) {
   _currentView->willMount();
   _currentView->moveTo(offsetX, offsetY);
   _currentView->resizeTo(getClientWidth(), getClientHeight());
-  _currentView->redraw(true);
+  _currentView->redraw();
   _currentView->didMount();
 }
 
