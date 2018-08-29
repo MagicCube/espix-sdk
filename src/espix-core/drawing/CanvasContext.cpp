@@ -5,6 +5,9 @@
 
 CanvasContext::CanvasContext(Canvas *canvas, Rectangle bounds) : _bounds(bounds) {
   _canvas = canvas;
+  setColor(_color);
+  setFont(_font);
+  setTextAlign(_textAlign);
 }
 
 Canvas *CanvasContext::getCanvas() {
@@ -169,9 +172,10 @@ void CanvasContext::drawMultilineString(String text, int x, int y, int maxLineWi
 }
 
 void CanvasContext::clear() {
+  Color oColor = _color;
   setColor(Color::BLACK);
   fillRect(_bounds);
-  setColor(Color::WHITE);
+  setColor(oColor);
 }
 
 int CanvasContext::_x(int value) {
