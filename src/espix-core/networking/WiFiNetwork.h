@@ -6,8 +6,9 @@
 
 #include "../collections/List.h"
 
+#include "enums/WiFiConnectionState.h"
+
 #include "WiFiConnectionSetting.h"
-#include "WiFiConnectionState.h"
 
 typedef std::function<void()> NetworkConnectionCallback;
 

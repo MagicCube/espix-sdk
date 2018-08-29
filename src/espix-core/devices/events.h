@@ -2,9 +2,9 @@
 
 #include <Arduino.h>
 
-#include "../events/EventArgs.h"
-
 #include "enums/KeyCode.h"
+
+#include "../events/EventArgs.h"
 
 using namespace std;
 

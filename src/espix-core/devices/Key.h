@@ -2,6 +2,7 @@
 
 #include "enums/KeyCode.h"
 #include "enums/KeyState.h"
+
 #include "events.h"
 
 class Keyboard;
