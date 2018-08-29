@@ -27,6 +27,10 @@ void StatusBar::update() {
 }
 
 void StatusBar::render(CanvasContext *context) {
+  context->setColor(Color::BLACK);
+  context->fillRect(0, 0, 128, 10);
+  context->setColor(Color::WHITE);
+  context->setColor(Color::WHITE);
   context->setFont(Dialog_plain_8);
   context->setTextAlign(TextAlign::CENTER);
   context->drawString(_text);
