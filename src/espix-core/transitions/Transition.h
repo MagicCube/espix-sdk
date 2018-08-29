@@ -2,8 +2,8 @@
 
 #include <Arduino.h>
 
-#include "TransitionOptions.h"
 #include "enums.h"
+#include "structs.h"
 
 class Transition {
 public:
