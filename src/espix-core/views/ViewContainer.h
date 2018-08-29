@@ -24,6 +24,7 @@ public:
   bool shouldUpdate();
   void update();
   void render(CanvasContext *context);
+  void didSelect();
   void handleKeyPress(KeyEventArgs e);
   void handleScroll(ScrollEventArgs e);
 

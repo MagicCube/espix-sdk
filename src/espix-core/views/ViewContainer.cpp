@@ -66,6 +66,12 @@ void ViewContainer::render(CanvasContext *context) {
   }
 }
 
+void ViewContainer::didSelect() {
+  if (_currentView) {
+    _currentView->select();
+  }
+}
+
 void ViewContainer::handleKeyPress(KeyEventArgs e) {
   if (_currentView) {
     _currentView->handleKeyPress(e);
