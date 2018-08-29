@@ -44,6 +44,7 @@ struct TransitionOptions {
 };
 
 const TransitionOptions TRANSITION_OPTIONS_NONE;
+const TransitionOptions TRANSITION_OPTIONS_AUTO(TransitionDirection::AUTO);
 const TransitionOptions TRANSITION_OPTIONS_LEFT(TransitionDirection::LEFT);
 const TransitionOptions TRANSITION_OPTIONS_RIGHT(TransitionDirection::RIGHT);
 const TransitionOptions TRANSITION_OPTIONS_UP(TransitionDirection::UP);
