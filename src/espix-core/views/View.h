@@ -61,6 +61,18 @@ public:
   // Gets a `Thickness` object which represents the paddings of the view.
   Thickness getPaddings();
 
+  // Gets left side of paddings of the view.
+  int getPaddingLeft();
+
+  // Gets right side of paddings of the view.
+  int getPaddingRight();
+
+  // Gets top side of paddings of the view.
+  int getPaddingTop();
+
+  // Gets bottom side of paddings of the view.
+  int getPaddingBottom();
+
   // Gets a boolean value indicates whether the view is dirty.
   // Sets it true by invoking `setDirty()`.
   bool isDirty();

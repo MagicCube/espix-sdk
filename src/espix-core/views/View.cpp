@@ -99,6 +99,21 @@ Thickness View::getPaddings() {
   return _paddings;
 }
 
+int View::getPaddingLeft() {
+  return _paddings.left;
+}
+
+int View::getPaddingRight() {
+  return _paddings.right;
+}
+
+int View::getPaddingTop() {
+  return _paddings.top;
+}
+
+int View::getPaddingBottom() {
+  return _paddings.bottom;
+}
 
 void View::resizeTo(int width, int height) {
   setWidth(width);
@@ -133,6 +148,11 @@ bool View::tryUpdate() {
 }
 
 void View::redraw(bool clearBeforeRendering) {
+  Canvas *canvas = getCanvas();
+  if (canvas == NULL) {
+    // Not ready to redraw.
+    return;
+  }
   // Only the client area can be drawn, so we use client bounds here.
   auto context = new CanvasContext(getCanvas(), getClientBounds());
 
