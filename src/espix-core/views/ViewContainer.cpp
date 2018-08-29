@@ -18,14 +18,12 @@ void ViewContainer::setCurrentView(View *view, TransitionOptions transitionOptio
   }
   if (transitionOptions.direction != TransitionDirection::NONE) {
     int startValue = 0;
-    switch (transitionOptions.direction) {
-    case TransitionDirection::LEFT:
-    case TransitionDirection::RIGHT:
+    switch (transitionOptions.getOrientation()) {
+    case TransitionOrientation::HORIZONTAL:
       startValue = (int)transitionOptions.direction * getWidth();
       _mountView(view, startValue, 0);
       break;
-    case TransitionDirection::UP:
-    case TransitionDirection::DOWN:
+    case TransitionOrientation::VERTICAL:
       startValue = (int)transitionOptions.direction / 2 * getHeight();
       _mountView(view, 0, startValue);
       break;
@@ -94,18 +92,17 @@ void ViewContainer::_unmountView() {
 
 void ViewContainer::_updateTransition() {
   if (_viewTransition.isRunning()) {
-    auto direction = _viewTransition.getOptions().direction;
+    auto direction = _viewTransition.getDirection();
+    auto orientation = _viewTransition.getOrientation();
     _viewOffset = _viewTransition.getValue();
 
-    switch (direction) {
-    case TransitionDirection::LEFT:
-    case TransitionDirection::RIGHT:
+    switch (orientation) {
+    case TransitionOrientation::HORIZONTAL:
       _unmountingViewOffset = _viewOffset - (int)direction * getWidth();
       _unmountingView->moveTo(_unmountingViewOffset, 0);
       _currentView->moveTo(_viewOffset, 0);
       break;
-    case TransitionDirection::UP:
-    case TransitionDirection::DOWN:
+    case TransitionOrientation::VERTICAL:
       _unmountingViewOffset = _viewOffset - (int)direction / 2 * getHeight();
       _unmountingView->moveTo(0, _unmountingViewOffset);
       _currentView->moveTo(0, _viewOffset);

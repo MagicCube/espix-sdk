@@ -2,7 +2,7 @@
 
 #include <Arduino.h>
 
-enum class TransitionDirection { LEFT = 1, NONE = 0, RIGHT = -1, UP = 2, DOWN = -2 };
+#include "enums.h"
 
 struct TransitionOptions {
   TransitionOptions() {
@@ -23,6 +23,19 @@ struct TransitionOptions {
   TransitionOptions(TransitionDirection p_direction, int p_duration) {
     direction = p_direction;
     duration = p_duration;
+  }
+
+  TransitionOrientation getOrientation() {
+    switch (direction) {
+    case TransitionDirection::LEFT:
+    case TransitionDirection::RIGHT:
+      return TransitionOrientation::HORIZONTAL;
+    case TransitionDirection::UP:
+    case TransitionDirection::DOWN:
+      return TransitionOrientation::VERTICAL;
+    default:
+      return TransitionOrientation::NONE;
+    }
   }
 
   TransitionDirection direction = TransitionDirection::NONE;

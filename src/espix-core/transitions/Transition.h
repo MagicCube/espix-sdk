@@ -3,6 +3,7 @@
 #include <Arduino.h>
 
 #include "TransitionOptions.h"
+#include "enums.h"
 
 class Transition {
 public:
@@ -11,6 +12,7 @@ public:
   int getStartValue();
   int getEndValue();
   TransitionDirection getDirection();
+  TransitionOrientation getOrientation();
   int getDuration();
   TransitionOptions getOptions();
   bool isRunning();

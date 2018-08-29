@@ -37,6 +37,10 @@ TransitionDirection Transition::getDirection() {
   return _options.direction;
 }
 
+TransitionOrientation Transition::getOrientation() {
+  return _options.getOrientation();
+}
+
 int Transition::getDuration() {
   return _options.duration;
 }
