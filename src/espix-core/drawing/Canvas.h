@@ -23,11 +23,6 @@ public:
   // Sets it true by invoking `setDirty()`.
   bool isDirty();
 
-  // Marks the canvas as dirty.
-  // By default, all the drawing operation will automatically mark the canvas as dirty,
-  // while `update()` will mark it as clean.
-  void setDirty();
-
   // Sets the front color of the canvas.
   void setColor(Color color);
 
@@ -86,5 +81,4 @@ public:
 
 private:
   OLEDDisplay *_display;
-  bool _dirty;
 };
