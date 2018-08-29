@@ -7,6 +7,8 @@
 #include "enums.h"
 #include "structs.h"
 
+#define AUTO_POS INT16_MIN
+
 class Canvas;
 
 // Represents the context of given canvas.
@@ -57,10 +59,10 @@ public:
   void drawLine(int x0, int y0, int x1, int y1);
 
   // Draws a horizontal line specified starting point and length.
-  void drawHorizontalLine(int x, int y, int length = INT16_MIN);
+  void drawHorizontalLine(int x, int y, int length = AUTO_POS);
 
   // Draws a vertical line specified starting point and length.
-  void drawVerticalLine(int x, int y, int length = INT16_MIN);
+  void drawVerticalLine(int x, int y, int length = AUTO_POS);
 
   // Draws a rectangle specified by given top-left point and size.
   void drawRect(int x, int y, int width, int height);
@@ -99,11 +101,11 @@ public:
   int getStringWidth(String text);
 
   // Draws a text specified at specified location.
-  void drawString(String text, int x = INT16_MIN, int y = INT16_MIN);
+  void drawString(String text, int x = AUTO_POS, int y = AUTO_POS);
 
   // Draws multi-line text at specified location with specified line width limitation.
-  void drawMultilineString(String text, int x = INT16_MIN, int y = INT16_MIN,
-                           int maxLineWidth = INT16_MIN);
+  void drawMultilineString(String text, int x = AUTO_POS, int y = AUTO_POS,
+                           int maxLineWidth = AUTO_POS);
 
   // Clears the buffer of the canvas context.
   // It will only affect the client area of context.
