@@ -2,10 +2,8 @@
 
 #include "../../espix-core/timing/TimeClient.h"
 
-#include "../assets/dialog-font.h"
-
 StatusBar::StatusBar() : View() {
-  setHeight(10);
+  setHeight(12);
 }
 
 bool StatusBar::shouldUpdate() {
@@ -28,7 +26,7 @@ void StatusBar::update() {
 
 void StatusBar::render(CanvasContext *context) {
   context->clear();
-  context->setFont(Dialog_plain_8);
+  context->setFontSize(FontSize::NORMAL);
   context->setTextAlign(TextAlign::CENTER);
   context->drawString(_text);
 }

@@ -80,7 +80,7 @@ void NavigationContainer::render(CanvasContext *context) {
   ViewContainer::render(context);
   if (_statusView && _statusViewVisible) {
     _statusView->redraw();
-    context->drawHorizontalLine(0, -1);
+    context->drawHorizontalLine(0, -2);
   }
 }
 
