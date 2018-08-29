@@ -2,6 +2,9 @@
 
 Canvas::Canvas(OLEDDisplay *display) {
   _display = display;
+  setColor(Color::WHITE);
+  setFont(ArialMT_Plain_10);
+  setTextAlign(TextAlign::LEFT);
 }
 
 int Canvas::getWidth() {
