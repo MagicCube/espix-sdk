@@ -10,6 +10,9 @@
 class MultiViewContainer : public ViewContainer {
 public:
   MultiViewContainer();
+  MultiViewContainer(initializer_list<View *> l) {
+    addSubviews(l);
+  }
 
   // Returns a readonly list of subviews of the container.
   ReadonlyList<View *> getSubviews();
@@ -17,9 +20,12 @@ public:
   // Add the specific subview to the container.
   void addSubview(View *subview);
 
+  // Add the multiple subviews to the container.
+  void addSubviews(List<View *> subviews);
+
   // Remove the specific subview from the container.
   void removeSubview(View *subview);
 
-private:
+protected:
   List<View *> _subviews;
 };
