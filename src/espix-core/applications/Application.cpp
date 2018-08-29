@@ -30,6 +30,19 @@ void ApplicationClass::setRootView(View *view, TransitionOptions transitionOptio
   Screen.update();
 }
 
+void ApplicationClass::pushView(View *view, TransitionOptions transitionOptions) {
+  _rootViewContainer->pushView(view, transitionOptions);
+  Screen.update();
+}
+
+View *ApplicationClass::popView(TransitionOptions transitionOptions) {
+  auto view = _rootViewContainer->popView(transitionOptions);
+  if (view) {
+    Screen.update();
+  }
+  return view;
+}
+
 void ApplicationClass::enableOTA() {
   if (_otaEnabled) {
     return;
