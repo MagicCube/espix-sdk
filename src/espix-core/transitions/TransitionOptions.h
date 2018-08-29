@@ -5,10 +5,12 @@
 #include "enums/TransitionDirection.h"
 #include "enums/TransitionOrientation.h"
 
+#define DEFAULT_TRANSITION_DURATION 225
+
 struct TransitionOptions {
   TransitionOptions() {
     direction = TransitionDirection::NONE;
-    duration = 250;
+    duration = DEFAULT_TRANSITION_DURATION;
   }
 
   TransitionOptions(int duration) {
@@ -18,7 +20,7 @@ struct TransitionOptions {
 
   TransitionOptions(TransitionDirection p_direction) {
     direction = p_direction;
-    duration = 250;
+    duration = DEFAULT_TRANSITION_DURATION;
   }
 
   TransitionOptions(TransitionDirection p_direction, int p_duration) {
