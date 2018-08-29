@@ -30,6 +30,14 @@ void ApplicationClass::setRootView(View *view, TransitionOptions transitionOptio
   Screen.update();
 }
 
+View *ApplicationClass::getStatusView() {
+  return _rootViewContainer->getStatusView();
+}
+
+void ApplicationClass::setStatusView(View *view) {
+  _rootViewContainer->setStatusView(view);
+}
+
 void ApplicationClass::pushView(View *view, TransitionOptions transitionOptions) {
   _rootViewContainer->pushView(view, transitionOptions);
   Screen.update();

@@ -27,6 +27,12 @@ public:
   // Gets root view of application.
   View *getRootView();
 
+  // Gets or sets the status bar view of navigation container.
+  // Set to NULL if you don't want to use status bar.
+  // Try StatusBar in espix-design if you don't want to implement one by yourself.
+  View *getStatusView();
+  void setStatusView(View *view);
+
   // Pushes a specific view to the application navigation stack and display it.
   void pushView(View *view, TransitionOptions transitionOptions = TRANSITION_OPTIONS_LEFT);
 

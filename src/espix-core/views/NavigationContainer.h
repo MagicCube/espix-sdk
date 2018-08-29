@@ -18,6 +18,12 @@ public:
   // Pops all the views in the navigation stack, and sets the root view of the navagation container.
   void setRootView(View *view, TransitionOptions options = TRANSITION_OPTIONS_NONE);
 
+  // Gets or sets the status bar view of navigation container.
+  // Set to NULL if you don't want to use status bar.
+  // Try StatusBar in espix-design if you don't want to implement one by yourself.
+  View *getStatusView();
+  void setStatusView(View *view);
+
   // Returns whether the navigation stack can be popped.
   bool canPop();
 
@@ -28,9 +34,13 @@ public:
   // Returns `NULL` if the navigation stack is empty.
   View *popView(TransitionOptions options = TRANSITION_OPTIONS_RIGHT);
 
+  bool shouldUpdate();
+  void update();
+  void render(CanvasContext *context);
   void handleKeyPress(KeyEventArgs e);
 
 private:
   View *_rootView = NULL;
+  View *_statusView = NULL;
   Stack<View *> _navigationStack;
 };
