@@ -33,28 +33,40 @@ int View::getWidth() {
   return _bounds.width;
 }
 void View::setWidth(int width) {
-  _bounds.width = width;
+  if (_bounds.width != width) {
+    _bounds.width = width;
+    setDirty();
+  }
 }
 
 int View::getHeight() {
   return _bounds.height;
 }
 void View::setHeight(int height) {
-  _bounds.height = height;
+  if (_bounds.height != height) {
+    _bounds.height = height;
+    setDirty();
+  }
 }
 
 int View::getLeft() {
   return _bounds.left;
 }
 void View::setLeft(int left) {
-  _bounds.left = left;
+  if (_bounds.left != left) {
+    _bounds.left = left;
+    setDirty();
+  }
 }
 
 int View::getTop() {
   return _bounds.top;
 }
 void View::setTop(int top) {
-  _bounds.top = top;
+  if (_bounds.top != top) {
+    _bounds.top = top;
+    setDirty();
+  }
 }
 
 Rectangle View::getBounds() {
@@ -104,6 +116,7 @@ void View::setPaddings(Thickness paddings) {
   _paddings.top = paddings.top;
   _paddings.right = paddings.right;
   _paddings.bottom = paddings.bottom;
+  setDirty();
 }
 
 void View::setPaddings(int all) {
@@ -111,6 +124,7 @@ void View::setPaddings(int all) {
   _paddings.top = all;
   _paddings.right = all;
   _paddings.bottom = all;
+  setDirty();
 }
 
 void View::setPaddings(int horizontal, int vertical) {
@@ -118,6 +132,7 @@ void View::setPaddings(int horizontal, int vertical) {
   _paddings.right = horizontal;
   _paddings.top = vertical;
   _paddings.bottom = vertical;
+  setDirty();
 }
 
 void View::setPaddings(int left, int top, int right, int bottom) {
@@ -125,6 +140,7 @@ void View::setPaddings(int left, int top, int right, int bottom) {
   _paddings.top = top;
   _paddings.right = right;
   _paddings.bottom = bottom;
+  setDirty();
 }
 
 int View::getPaddingLeft() {
