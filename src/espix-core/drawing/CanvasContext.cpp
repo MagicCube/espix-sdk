@@ -60,9 +60,9 @@ void CanvasContext::setTextAlign(TextAlign align) {
   getCanvas()->setTextAlign(_textAlign);
 }
 
-void CanvasContext::setFont(const uint8_t *fontData) {
-  _font = fontData;
-  getCanvas()->setFont(fontData);
+void CanvasContext::setFont(Font font) {
+  _font = font;
+  getCanvas()->setFont(font);
 }
 
 void CanvasContext::setFontSize(FontSize size) {

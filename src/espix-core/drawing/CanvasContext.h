@@ -3,6 +3,7 @@
 #include <Arduino.h>
 #include <OLEDDisplay.h>
 
+#include "Font.h"
 #include "enums.h"
 #include "structs.h"
 
@@ -44,7 +45,7 @@ public:
   void setTextAlign(TextAlign textAlign);
 
   // Sets the font of the canvas.
-  void setFont(const uint8_t *fontData);
+  void setFont(Font font);
 
   // Sets the current font size.
   void setFontSize(FontSize size);
@@ -115,7 +116,7 @@ private:
   Rectangle _bounds;
 
   Color _color = Color::WHITE;
-  const uint8_t *_font = ArialMT_Plain_10;
+  Font _font = ArialMT_Plain_10;
   TextAlign _textAlign = TextAlign::LEFT;
 
   Canvas *_canvas = NULL;

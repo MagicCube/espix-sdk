@@ -38,8 +38,8 @@ void Canvas::setTextAlign(TextAlign textAlign) {
   _display->setTextAlignment((OLEDDISPLAY_TEXT_ALIGNMENT)textAlign);
 }
 
-void Canvas::setFont(const uint8_t *fontData) {
-  _display->setFont(fontData);
+void Canvas::setFont(Font font) {
+  _display->setFont(font);
 }
 
 void Canvas::update() {

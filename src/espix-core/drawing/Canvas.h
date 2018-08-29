@@ -5,6 +5,7 @@
 #include <OLEDDisplay.h>
 
 #include "CanvasContext.h"
+#include "Font.h"
 #include "enums.h"
 
 // Represents a canvas of OLED display.
@@ -30,7 +31,7 @@ public:
   void setTextAlign(TextAlign textAlign);
 
   // Sets the font of the canvas.
-  void setFont(const uint8_t *fontData);
+  void setFont(Font font);
 
   // Updates in the loop.
   // It will draw the buffer image if the canvas is marked as dirty, then mark it as clean after
