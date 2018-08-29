@@ -4,7 +4,7 @@
 
 #include "../events/EventArgs.h"
 
-#include "KeyCode.h"
+#include "enums/KeyCode.h"
 
 using namespace std;
 

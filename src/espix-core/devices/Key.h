@@ -1,11 +1,10 @@
 #include <Arduino.h>
 
-#include "KeyCode.h"
+#include "enums/KeyCode.h"
+#include "enums/KeyState.h"
 #include "events.h"
 
 class Keyboard;
-
-enum class KeyState { UP = HIGH, DOWN = LOW };
 
 class Key {
 public:
