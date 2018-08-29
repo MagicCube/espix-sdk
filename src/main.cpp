@@ -15,11 +15,13 @@ unsigned long lastUpdate = 0;
 unsigned long lastViewChange = 0;
 
 SH1106Wire display(0x3c, OLED_SDA, OLED_CLK);
+StatusBar statusBar;
 ProgressView connectionView("Connecting to WiFi...", ProgressMode::INDETERMINATE);
 TextView textView("Hello.", FontSize::H2);
 
 void onConnected() {
   Application.enableOTA();
+  Application.setStatusView(&statusBar);
   Application.setRootView(&textView, TRANSITION_OPTIONS_LEFT);
   textView.setText(WiFiNetwork.getLocalIP());
 }
