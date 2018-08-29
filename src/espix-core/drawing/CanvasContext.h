@@ -56,10 +56,10 @@ public:
   void drawLine(int x0, int y0, int x1, int y1);
 
   // Draws a horizontal line specified starting point and length.
-  void drawHorizontalLine(int x, int y, int length = -1);
+  void drawHorizontalLine(int x, int y, int length = INT16_MIN);
 
   // Draws a vertical line specified starting point and length.
-  void drawVerticalLine(int x, int y, int length = -1);
+  void drawVerticalLine(int x, int y, int length = INT16_MIN);
 
   // Draws a rectangle specified by given top-left point and size.
   void drawRect(int x, int y, int width, int height);
@@ -98,10 +98,11 @@ public:
   int getStringWidth(String text);
 
   // Draws a text specified at specified location.
-  void drawString(String text, int x = -1, int y = -1);
+  void drawString(String text, int x = INT16_MIN, int y = INT16_MIN);
 
   // Draws multi-line text at specified location with specified line width limitation.
-  void drawMultilineString(String text, int x = -1, int y = -1, int maxLineWidth = -1);
+  void drawMultilineString(String text, int x = INT16_MIN, int y = INT16_MIN,
+                           int maxLineWidth = INT16_MIN);
 
   // Clears the buffer of the canvas.
   void clear();

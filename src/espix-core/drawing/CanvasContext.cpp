@@ -82,14 +82,14 @@ void CanvasContext::drawLine(int x0, int y0, int x1, int y1) {
 }
 
 void CanvasContext::drawHorizontalLine(int x, int y, int length) {
-  if (length == -1) {
+  if (length == INT16_MIN) {
     length = getWidth();
   }
   getCanvas()->drawHorizontalLine(_x(x), _y(y), length);
 }
 
 void CanvasContext::drawVerticalLine(int x, int y, int length) {
-  if (length == -1) {
+  if (length == INT16_MIN) {
     length = getHeight();
   }
   getCanvas()->drawVerticalLine(_x(x), _y(y), length);
@@ -124,7 +124,7 @@ int CanvasContext::getStringWidth(String text) {
 }
 
 void CanvasContext::drawString(String text, int x, int y) {
-  if (x == -1) {
+  if (x == INT16_MIN) {
     if (_textAlign == TextAlign::LEFT) {
       x = 0;
     } else if (_textAlign == TextAlign::RIGHT) {
@@ -134,7 +134,7 @@ void CanvasContext::drawString(String text, int x, int y) {
       x = getWidth() / 2;
     }
   }
-  if (y == -1) {
+  if (y == INT16_MIN) {
     if (_textAlign == TextAlign::CENTER_BOTH) {
       y = getHeight() / 2;
     } else {
@@ -145,7 +145,7 @@ void CanvasContext::drawString(String text, int x, int y) {
 }
 
 void CanvasContext::drawMultilineString(String text, int x, int y, int maxLineWidth) {
-  if (x == -1) {
+  if (x == INT16_MIN) {
     if (_textAlign == TextAlign::LEFT) {
       x = 0;
     } else if (_textAlign == TextAlign::RIGHT) {
@@ -155,14 +155,14 @@ void CanvasContext::drawMultilineString(String text, int x, int y, int maxLineWi
       x = getWidth() / 2;
     }
   }
-  if (y == -1) {
+  if (y == INT16_MIN) {
     if (_textAlign == TextAlign::CENTER_BOTH) {
       y = getHeight() / 2;
     } else {
       y = 0;
     }
   }
-  if (maxLineWidth == -1) {
+  if (maxLineWidth == INT16_MIN) {
     maxLineWidth = getWidth();
   }
   getCanvas()->drawMultilineString(text, _x(x), _y(y), maxLineWidth);
