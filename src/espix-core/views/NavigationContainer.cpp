@@ -22,7 +22,7 @@ void NavigationContainer::setStatusView(View *view) {
   if (_statusView) {
     _statusView->setParentView(this);
     _statusView->setWidth(getWidth());
-    _statusView->setTop(-_statusView->getHeight());
+    _statusView->setTop(-_statusView->getHeight() - 1);
     setPaddings(0, _statusView->getHeight() + 1, 0, 0);
   } else {
     setPaddings(0);
