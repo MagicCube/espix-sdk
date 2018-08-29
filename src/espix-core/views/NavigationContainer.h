@@ -24,6 +24,10 @@ public:
   View *getStatusView();
   void setStatusView(View *view);
 
+  // Show or hide status view.
+  void showStatusView();
+  void hideStatusView();
+
   // Returns whether the navigation stack can be popped.
   bool canPop();
 
@@ -40,7 +44,8 @@ public:
   void handleKeyPress(KeyEventArgs e);
 
 private:
-  View *_rootView = NULL;
+  bool _statusViewVisible = true;
   View *_statusView = NULL;
+  View *_rootView = NULL;
   Stack<View *> _navigationStack;
 };

@@ -38,6 +38,14 @@ void ApplicationClass::setStatusView(View *view) {
   _rootViewContainer->setStatusView(view);
 }
 
+void ApplicationClass::showStatusView() {
+  _rootViewContainer->showStatusView();
+}
+
+void ApplicationClass::hideStatusView() {
+  _rootViewContainer->hideStatusView();
+}
+
 void ApplicationClass::pushView(View *view, TransitionOptions transitionOptions) {
   _rootViewContainer->pushView(view, transitionOptions);
   Screen.update();

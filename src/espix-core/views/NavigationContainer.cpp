@@ -29,6 +29,12 @@ void NavigationContainer::setStatusView(View *view) {
   }
 }
 
+void NavigationContainer::showStatusView() {
+}
+
+void NavigationContainer::hideStatusView() {
+}
+
 bool NavigationContainer::canPop() {
   return !_navigationStack.isEmpty();
 }
@@ -56,7 +62,7 @@ bool NavigationContainer::shouldUpdate() {
   if (result) {
     return result;
   }
-  if (_statusView) {
+  if (_statusView && _statusViewVisible) {
     return _statusView->shouldUpdate();
   } else {
     return false;
@@ -65,15 +71,16 @@ bool NavigationContainer::shouldUpdate() {
 
 void NavigationContainer::update() {
   ViewContainer::update();
-  if (_statusView) {
+  if (_statusView && _statusViewVisible) {
     _statusView->tryUpdate();
   }
 }
 
 void NavigationContainer::render(CanvasContext *context) {
   ViewContainer::render(context);
-  if (_statusView) {
+  if (_statusView && _statusViewVisible) {
     _statusView->redraw();
+    context->drawHorizontalLine(0, _statusView->getHeight() - 1);
   }
 }
 

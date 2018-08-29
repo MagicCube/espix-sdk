@@ -33,6 +33,10 @@ public:
   View *getStatusView();
   void setStatusView(View *view);
 
+  // Show or hide status view.
+  void showStatusView();
+  void hideStatusView();
+
   // Pushes a specific view to the application navigation stack and display it.
   void pushView(View *view, TransitionOptions transitionOptions = TRANSITION_OPTIONS_LEFT);
 
