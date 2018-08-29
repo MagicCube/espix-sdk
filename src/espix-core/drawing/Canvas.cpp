@@ -120,5 +120,5 @@ void Canvas::drawMultilineString(String text, int x, int y, int maxLineWidth) {
 
 void Canvas::clear() {
   _display->clear();
-  _dirty = false;
+  setDirty();
 }

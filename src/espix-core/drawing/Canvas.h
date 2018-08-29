@@ -25,7 +25,7 @@ public:
 
   // Marks the canvas as dirty.
   // By default, all the drawing operation will automatically mark the canvas as dirty,
-  // while `update()` and `clear()` will mark it as clean.
+  // while `update()` will mark it as clean.
   void setDirty();
 
   // Sets the front color of the canvas.
@@ -82,7 +82,6 @@ public:
   void drawMultilineString(String text, int x, int y, int maxLineWidth);
 
   // Clears the buffer of the canvas.
-  // It will also mark the canvas as clean.
   void clear();
 
 private:
