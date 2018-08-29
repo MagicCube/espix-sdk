@@ -98,7 +98,7 @@ public:
   bool tryUpdate();
 
   // Redraws the view.
-  void redraw(bool clearBeforeRendering = false);
+  void redraw();
 
   // Trigger didSelect();
   // Please avoid to call this method directly from your program.

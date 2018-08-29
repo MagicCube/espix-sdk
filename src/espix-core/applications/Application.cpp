@@ -95,7 +95,7 @@ void ApplicationClass::begin() {
   _rootViewContainer->setCanvas(Screen.getCanvas());
   _rootViewContainer->resizeTo(Screen.getWidth(), Screen.getHeight());
   _rootViewContainer->willMount();
-  _rootViewContainer->redraw(true);
+  _rootViewContainer->redraw();
   _rootViewContainer->didMount();
 }
 
@@ -127,7 +127,8 @@ void ApplicationClass::_loop() {
   auto currentView = getCurrentView();
 
   if (currentView->tryUpdate()) {
-    currentView->redraw(true);
+    Screen.clearBuffer();
+    currentView->redraw();
     Screen.update();
   }
 }

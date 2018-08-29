@@ -169,7 +169,9 @@ void CanvasContext::drawMultilineString(String text, int x, int y, int maxLineWi
 }
 
 void CanvasContext::clear() {
-  return getCanvas()->clear();
+  setColor(Color::BLACK);
+  fillRect(_bounds);
+  setColor(Color::WHITE);
 }
 
 int CanvasContext::_x(int value) {

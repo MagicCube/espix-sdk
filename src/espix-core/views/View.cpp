@@ -175,7 +175,7 @@ bool View::tryUpdate() {
   return false;
 }
 
-void View::redraw(bool clearBeforeRendering) {
+void View::redraw() {
   Canvas *canvas = getCanvas();
   if (canvas == NULL) {
     // Not ready to redraw.
@@ -183,12 +183,7 @@ void View::redraw(bool clearBeforeRendering) {
   }
   // Only the client area can be drawn, so we use client bounds here.
   auto context = new CanvasContext(getCanvas(), getClientBounds());
-
-  if (clearBeforeRendering) {
-    context->clear();
-  }
   render(context);
-
   delete context;
 }
 

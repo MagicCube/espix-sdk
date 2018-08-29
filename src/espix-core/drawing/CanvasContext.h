@@ -104,7 +104,8 @@ public:
   void drawMultilineString(String text, int x = INT16_MIN, int y = INT16_MIN,
                            int maxLineWidth = INT16_MIN);
 
-  // Clears the buffer of the canvas.
+  // Clears the buffer of the canvas context.
+  // It will only affect the client area of context.
   void clear();
 
 private:
