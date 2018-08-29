@@ -58,8 +58,12 @@ public:
   // Gets a `Rectangle` object which represents the bounds of the view's client area.
   Rectangle getClientBounds();
 
-  // Gets a `Thickness` object which represents the paddings of the view.
+  // Gets or sets a `Thickness` object which represents the paddings of the view.
   Thickness getPaddings();
+  void setPaddings(Thickness paddings);
+  void setPaddings(int all);
+  void setPaddings(int horizontal, int vertical);
+  void setPaddings(int left, int top, int right, int bottom);
 
   // Gets left side of paddings of the view.
   int getPaddingLeft();

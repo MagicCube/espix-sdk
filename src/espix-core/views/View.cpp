@@ -99,6 +99,34 @@ Thickness View::getPaddings() {
   return _paddings;
 }
 
+void View::setPaddings(Thickness paddings) {
+  _paddings.left = paddings.left;
+  _paddings.top = paddings.top;
+  _paddings.right = paddings.right;
+  _paddings.bottom = paddings.bottom;
+}
+
+void View::setPaddings(int all) {
+  _paddings.left = all;
+  _paddings.top = all;
+  _paddings.right = all;
+  _paddings.bottom = all;
+}
+
+void View::setPaddings(int horizontal, int vertical) {
+  _paddings.left = horizontal;
+  _paddings.right = horizontal;
+  _paddings.top = vertical;
+  _paddings.bottom = vertical;
+}
+
+void View::setPaddings(int left, int top, int right, int bottom) {
+  _paddings.left = left;
+  _paddings.top = top;
+  _paddings.right = right;
+  _paddings.bottom = bottom;
+}
+
 int View::getPaddingLeft() {
   return _paddings.left;
 }
