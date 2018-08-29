@@ -23,11 +23,15 @@ void NavigationContainer::pushView(View *view, TransitionOptions options) {
 }
 
 View *NavigationContainer::popView(TransitionOptions options) {
-  if (canPop()) {
+  if (!canPop()) {
     return NULL;
   }
   View *view = _navigationStack.pop();
-  setCurrentView(view, options);
+  if (!_navigationStack.isEmpty()) {
+    setCurrentView(_navigationStack.top(), options);
+  } else {
+    setCurrentView(getRootView(), options);
+  }
   return view;
 }
 

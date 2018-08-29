@@ -22,11 +22,11 @@ public:
   bool canPop();
 
   // Pushes a specific view to the navigation stack and display it.
-  void pushView(View *view, TransitionOptions options = TRANSITION_OPTIONS_RIGHT);
+  void pushView(View *view, TransitionOptions options = TRANSITION_OPTIONS_LEFT);
 
   // Pops the view on the top of the navigation stack and return it back.
   // Returns `NULL` if the navigation stack is empty.
-  View *popView(TransitionOptions options = TRANSITION_OPTIONS_LEFT);
+  View *popView(TransitionOptions options = TRANSITION_OPTIONS_RIGHT);
 
   void handleKeyPress(KeyEventArgs e);
 
