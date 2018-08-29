@@ -27,6 +27,7 @@ View *ApplicationClass::getRootView() {
 
 void ApplicationClass::setRootView(View *view, TransitionOptions transitionOptions) {
   _rootViewContainer->setRootView(view, transitionOptions);
+  Screen.update();
 }
 
 void ApplicationClass::enableOTA() {
