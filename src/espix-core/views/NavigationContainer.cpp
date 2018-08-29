@@ -30,3 +30,21 @@ View *NavigationContainer::popView(TransitionOptions options) {
   setCurrentView(view, options);
   return view;
 }
+
+void NavigationContainer::handleKeyPress(KeyEventArgs e) {
+  switch (e.keyCode) {
+  case KEY_ENTER:
+    if (getCurrentView()) {
+      getCurrentView()->select();
+    }
+    break;
+  case KEY_ESC:
+    popView();
+    break;
+  default:
+    if (getCurrentView()) {
+      getCurrentView()->handleKeyPress(e);
+    }
+    break;
+  }
+}

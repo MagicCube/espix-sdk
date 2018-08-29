@@ -28,6 +28,8 @@ public:
   // Returns `NULL` if the navigation stack is empty.
   View *popView(TransitionOptions options = TRANSITION_OPTIONS_LEFT);
 
+  void handleKeyPress(KeyEventArgs e);
+
 private:
   View *_rootView = NULL;
   Stack<View *> _navigationStack;
