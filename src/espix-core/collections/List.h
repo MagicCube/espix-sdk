@@ -15,6 +15,11 @@ public:
   List(initializer_list<T> l) : ReadonlyList<T>(l) {
   }
 
+  // Overloading [] operator to access elements in array style
+  T &operator[](int index) {
+    return this->_vector[index];
+  }
+
   // Add the specific item to the list.
   void add(T item) {
     this->_vector.push_back(item);
