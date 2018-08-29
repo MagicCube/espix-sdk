@@ -22,12 +22,10 @@ void ViewContainer::setCurrentView(View *view, TransitionOptions transitionOptio
     switch (transitionOptions.getOrientation()) {
     case TransitionOrientation::HORIZONTAL:
       startValue = (int)transitionOptions.direction * getWidth();
-      endValue = this->getPaddingLeft();
       _mountView(view, startValue, 0);
       break;
     case TransitionOrientation::VERTICAL:
       startValue = (int)transitionOptions.direction / 2 * getHeight();
-      endValue = this->getPaddingTop();
       _mountView(view, 0, startValue);
       break;
     default:
@@ -36,7 +34,7 @@ void ViewContainer::setCurrentView(View *view, TransitionOptions transitionOptio
     _viewTransition.start(startValue, endValue, transitionOptions);
   } else {
     _unmountView();
-    _mountView(view, this->getPaddingLeft(), this->getPaddingTop());
+    _mountView(view);
   }
 }
 
