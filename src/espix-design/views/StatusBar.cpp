@@ -31,5 +31,4 @@ void StatusBar::render(CanvasContext *context) {
   context->setFont(Dialog_plain_8);
   context->setTextAlign(TextAlign::CENTER);
   context->drawString(_text);
-  context->drawHorizontalLine(0, context->getHeight() - 1);
 }
