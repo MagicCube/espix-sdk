@@ -164,6 +164,10 @@ void View::redraw(bool clearBeforeRendering) {
   delete context;
 }
 
+void View::select() {
+  didSelect();
+}
+
 void View::willMount() {
 }
 
@@ -178,6 +182,9 @@ bool View::shouldUpdate() {
 }
 
 void View::update() {
+}
+
+void View::didSelect() {
 }
 
 void View::willUnmount() {

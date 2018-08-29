@@ -96,31 +96,40 @@ public:
   // Redraws the view.
   void redraw(bool clearBeforeRendering = false);
 
+  // Trigger didSelect();
+  // Please avoid to call this method directly from your program.
+  void select();
+
   /*************************************/
   /* Lifecyle of View                  */
   /*************************************/
   // Overrides if you want to do something before the view is mountied.
-  // Please avoid to call this method inside your program.
+  // Please avoid to call this method directly from your program.
   virtual void willMount();
 
   // Overrides if you want to customize rendering.
-  // Please avoid to call this method inside your program.
+  // Please avoid to call this method directly from your program.
   virtual void render(CanvasContext *context);
 
   // Overrides if you want to do something after the view has been mounted.
-  // Please avoid to call this method inside your program.
+  // Please avoid to call this method directly from your program.
   virtual void didMount();
 
   // Overrides if you want to determine when to update.
-  // Please avoid to call this method inside your program.
+  // Please avoid to call this method directly from your program.
   virtual bool shouldUpdate();
 
   // Overrides if you want to customize updating.
-  // Please avoid to call this method inside your program.
+  // Please avoid to call this method directly from your program.
   virtual void update();
 
+  // Overrides if you want to do something after the view is selected.
+  // Occurs after the user press Enter key.
+  // Please avoid to call this method directly from your program.
+  virtual void didSelect();
+
   // Overrides if you want to do something before the view is unmounted.
-  // Please avoid to call this method inside your program.
+  // Please avoid to call this method directly from your program.
   virtual void willUnmount();
 
 
@@ -128,11 +137,11 @@ public:
   /* Event Handlers                    */
   /*************************************/
   // Overrides if you want to capture key press event.
-  // Please avoid to call this method inside your program.
+  // Please avoid to call this method directly from your program.
   virtual void handleKeyPress(KeyEventArgs e);
 
   // Overrides if you want to capture scroll event.
-  // Please avoid to call this method inside your program.
+  // Please avoid to call this method directly from your program.
   virtual void handleScroll(ScrollEventArgs e);
 
 private:
