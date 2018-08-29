@@ -18,22 +18,25 @@ void ViewContainer::setCurrentView(View *view, TransitionOptions transitionOptio
   }
   if (transitionOptions.direction != TransitionDirection::NONE) {
     int startValue = 0;
+    int endValue = 0;
     switch (transitionOptions.getOrientation()) {
     case TransitionOrientation::HORIZONTAL:
       startValue = (int)transitionOptions.direction * getWidth();
+      endValue = this->getPaddingLeft();
       _mountView(view, startValue, 0);
       break;
     case TransitionOrientation::VERTICAL:
       startValue = (int)transitionOptions.direction / 2 * getHeight();
+      endValue = this->getPaddingTop();
       _mountView(view, 0, startValue);
       break;
     default:
       break;
     }
-    _viewTransition.start(startValue, 0, transitionOptions);
+    _viewTransition.start(startValue, endValue, transitionOptions);
   } else {
     _unmountView();
-    _mountView(view);
+    _mountView(view, this->getPaddingLeft(), this->getPaddingTop());
   }
 }
 
@@ -79,7 +82,8 @@ void ViewContainer::_mountView(View *view, int offsetX, int offsetY) {
   _currentView = view;
   _currentView->setParentView(this);
   _currentView->willMount();
-  _currentView->setBounds(getBounds());
+  _currentView->moveTo(offsetX, offsetY);
+  _currentView->resizeTo(getClientWidth(), getClientHeight());
   _currentView->redraw(true);
   _currentView->didMount();
 }
