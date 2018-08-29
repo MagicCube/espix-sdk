@@ -8,7 +8,7 @@
 struct TransitionOptions {
   TransitionOptions() {
     direction = TransitionDirection::NONE;
-    duration = 200;
+    duration = 250;
   }
 
   TransitionOptions(int duration) {
@@ -18,7 +18,7 @@ struct TransitionOptions {
 
   TransitionOptions(TransitionDirection p_direction) {
     direction = p_direction;
-    duration = 200;
+    duration = 250;
   }
 
   TransitionOptions(TransitionDirection p_direction, int p_duration) {
