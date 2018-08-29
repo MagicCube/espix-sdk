@@ -55,7 +55,7 @@ void ProgressView::render(CanvasContext *context) {
   int width = getClientWidth() / 10 * 9;
   int height = 8;
   int x = (getClientWidth() - width) / 2;
-  int y = 32;
+  int y = 28;
   uint16_t radius = height / 2;
   uint16_t xRadius = x + radius;
   uint16_t yRadius = y + radius;
