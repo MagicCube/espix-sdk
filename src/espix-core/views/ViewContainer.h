@@ -21,6 +21,7 @@ public:
 
 
   // Overrides
+  void setBounds(Rectangle bounds);
   void setPaddings(Thickness paddings);
   bool shouldUpdate();
   void update();
