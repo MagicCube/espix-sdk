@@ -15,6 +15,13 @@ public:
   MenuListView();
   MenuListView(initializer_list<MenuItem> l);
 
+  ReadonlyList<MenuItem> getItems();
+  MenuItem getItem(int index);
+  void addItem(MenuItem item);
+  // void removeItem(MenuItem item);
+  // void removeItemAt(int index);
+  void clearItems();
+
   void selectItem(int index);
   void selectItem(String key);
   void selectNextItem();

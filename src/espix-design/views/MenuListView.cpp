@@ -5,6 +5,25 @@ MenuListView::MenuListView() : View() {
 
 MenuListView::MenuListView(initializer_list<MenuItem> l) : _items(l) {
   MenuListView();
+  setDirty();
+}
+
+ReadonlyList<MenuItem> MenuListView::getItems() {
+  return _items;
+}
+
+MenuItem MenuListView::getItem(int index) {
+  return _items[index];
+}
+
+void MenuListView::addItem(MenuItem item) {
+  _items.add(item);
+  setDirty();
+}
+
+void MenuListView::clearItems() {
+  _items.clear();
+  setDirty();
 }
 
 void MenuListView::selectItem(int index) {
