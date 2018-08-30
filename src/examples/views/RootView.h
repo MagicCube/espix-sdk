@@ -8,7 +8,7 @@
 class RootView : public CarouselContainer {
 public:
   RootView() : CarouselContainer() {
-    addSubviews({new TimeIndexView(), new WeatherIndexView()});
+    addSubviews({new ClockView(), new WeatherTodayView()});
   }
 
   void willMount() {
