@@ -44,6 +44,8 @@ public:
   void handleKeyPress(KeyEventArgs e);
 
 private:
+  void _renderIndicators(CanvasContext *context);
+
   bool _statusViewVisible = false;
   View *_statusView = NULL;
   View *_rootView = NULL;

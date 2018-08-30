@@ -28,6 +28,9 @@ void NavigationContainer::setStatusView(View *view) {
 }
 
 void NavigationContainer::showStatusView() {
+  if (_statusView == NULL) {
+    return;
+  }
   _statusViewVisible = true;
   _statusView->setWidth(getWidth());
   _statusView->setTop(-_statusView->getHeight() - 1);
@@ -86,6 +89,7 @@ void NavigationContainer::render(CanvasContext *context) {
     _statusView->redraw();
     context->drawHorizontalLine(0, -2);
   }
+  _renderIndicators(context);
 }
 
 void NavigationContainer::handleKeyPress(KeyEventArgs e) {
@@ -103,5 +107,13 @@ void NavigationContainer::handleKeyPress(KeyEventArgs e) {
       getCurrentView()->handleKeyPress(e);
     }
     break;
+  }
+}
+
+
+void NavigationContainer::_renderIndicators(CanvasContext *context) {
+  if (canPop()) {
+    context->drawLine(0, context->getHeight() / 2, 2, context->getHeight() / 2 - 2);
+    context->drawLine(0, context->getHeight() / 2, 2, context->getHeight() / 2 + 2);
   }
 }
