@@ -49,6 +49,11 @@ void View::setHeight(int height) {
   }
 }
 
+void View::resizeTo(int width, int height) {
+  setWidth(width);
+  setHeight(height);
+}
+
 int View::getLeft() {
   return _bounds.left;
 }
@@ -67,6 +72,11 @@ void View::setTop(int top) {
     _bounds.top = top;
     setDirty();
   }
+}
+
+void View::moveTo(int left, int top) {
+  setLeft(left);
+  setTop(top);
 }
 
 Rectangle View::getBounds() {
@@ -110,7 +120,6 @@ Rectangle View::getClientBounds() {
 Thickness View::getPaddings() {
   return _paddings;
 }
-
 void View::setPaddings(Thickness paddings) {
   _paddings.left = paddings.left;
   _paddings.top = paddings.top;
@@ -157,16 +166,6 @@ int View::getPaddingTop() {
 
 int View::getPaddingBottom() {
   return _paddings.bottom;
-}
-
-void View::resizeTo(int width, int height) {
-  setWidth(width);
-  setHeight(height);
-}
-
-void View::moveTo(int left, int top) {
-  setLeft(left);
-  setTop(top);
 }
 
 bool View::isDirty() {

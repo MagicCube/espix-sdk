@@ -39,9 +39,8 @@ public:
   int getTop();
   void setTop(int top);
 
-  // Gets or sets a `Rectangle` object which represents the bounds of the view.
-  Rectangle getBounds();
-  void setBounds(Rectangle bounds);
+  // Moves the view to the specific location.
+  void moveTo(int left, int top);
 
   // Gets the left of the client area of the view.
   int getClientLeft();
@@ -55,15 +54,22 @@ public:
   // Gets the height of the client area of the view.
   int getClientHeight();
 
+  // Resizes the view to the specific size.
+  void resizeTo(int width, int height);
+
+  // Gets or sets a `Rectangle` object which represents the bounds of the view.
+  Rectangle getBounds();
+  void setBounds(Rectangle bounds);
+
   // Gets a `Rectangle` object which represents the bounds of the view's client area.
   Rectangle getClientBounds();
 
   // Gets or sets a `Thickness` object which represents the paddings of the view.
   Thickness getPaddings();
+  void setPaddings(int left, int top, int right, int bottom);
   void setPaddings(Thickness paddings);
   void setPaddings(int all);
   void setPaddings(int horizontal, int vertical);
-  void setPaddings(int left, int top, int right, int bottom);
 
   // Gets left side of paddings of the view.
   int getPaddingLeft();
@@ -86,12 +92,6 @@ public:
 
   // Gets the time of last update.
   unsigned long getLastUpdate();
-
-  // Resizes the view to the specific size.
-  void resizeTo(int width, int height);
-
-  // Moves the view to the specific location.
-  void moveTo(int left, int top);
 
   // Updates the view if it is dirty or `shouldUpdate()` is true.
   // It also change the value of `lastUpdate` which you can retain from `getLastUpdate()`.
