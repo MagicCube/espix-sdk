@@ -11,14 +11,9 @@ public:
     addSubviews({new ClockView(), new WeatherTodayView()});
   }
 
-  void willMount() {
-    Application.hideStatusView();
+  void didMount() {
     if (getCurrentView() == NULL) {
       showFirstSubview();
     }
-  }
-
-  void willUnmount() {
-    Application.showStatusView();
   }
 };
