@@ -86,16 +86,6 @@ void NavigationContainer::render(CanvasContext *context) {
     _statusView->redraw();
     context->drawHorizontalLine(0, -2);
   }
-  Serial.print("NavigationContainer");
-  Serial.print(getClientLeft());
-  Serial.print(", ");
-  Serial.print(getClientTop());
-  Serial.print(", ");
-  Serial.print(getClientWidth());
-  Serial.print(", ");
-  Serial.print(getClientHeight());
-  Serial.print(", ");
-  Serial.println(getPaddingTop());
 }
 
 void NavigationContainer::handleKeyPress(KeyEventArgs e) {
