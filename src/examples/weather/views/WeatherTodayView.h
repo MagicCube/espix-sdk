@@ -16,7 +16,7 @@ public:
   }
 
   void render(CanvasContext *context) {
-    _drawContent(context);
+    _drawContent(context, (getClientWidth() - 72) / 2, (getClientHeight() - 40) / 2);
   }
 
   void didSelect() {
@@ -31,19 +31,19 @@ private:
     return _forecastView;
   }
 
-  void _drawContent(CanvasContext *context) {
+  void _drawContent(CanvasContext *context, int x, int y) {
     context->setFontSize(FontSize::NORMAL);
     context->setTextAlign(TextAlign::LEFT);
-    context->drawString("Mostly Cloudy", 56, 12);
+    context->drawString("Mostly Cloudy", x + 28, y + 5);
 
     String temp = "32°C";
     context->setFontSize(FontSize::H1);
-    context->drawString(temp, 56, 22);
+    context->drawString(temp, x + 28, y + 15);
 
     context->setFont(Meteocons_Plain_42);
     String weatherIcon = "Q";
     int weatherIconWidth = context->getStringWidth(weatherIcon);
-    context->drawString(weatherIcon, 28 - weatherIconWidth / 2, 7);
+    context->drawString(weatherIcon, x - weatherIconWidth / 2, y);
   }
 
   WeatherForecastView *_forecastView = NULL;

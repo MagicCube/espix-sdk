@@ -18,21 +18,21 @@ public:
 
 private:
   void _drawContent(CanvasContext *context) {
-    _drawForecastDetails(context, 0, 0);
-    _drawForecastDetails(context, 44, 1);
-    _drawForecastDetails(context, 88, 2);
+    for (int i = 0; i < 3; i++) {
+      _drawForecastDetails(context, (getClientWidth() / 3) * i, i);
+    }
   }
 
   void _drawForecastDetails(CanvasContext *context, int x, int dayIndex) {
     context->setTextAlign(TextAlign::CENTER);
     context->setFontSize(FontSize::NORMAL);
     String day = DAYS[dayIndex];
-    context->drawString(day, 20 + x, 2);
+    context->drawString(day, 22 + x, 2);
 
     context->setFont(Meteocons_Plain_21);
-    context->drawString(WEATHERS[dayIndex], x + 20, 14);
+    context->drawString(WEATHERS[dayIndex], x + 22, 14);
 
     context->setFontSize(FontSize::NORMAL);
-    context->drawString(TEMPERATURES[dayIndex], x + 20, 38);
+    context->drawString(TEMPERATURES[dayIndex], x + 22, 38);
   }
 };
