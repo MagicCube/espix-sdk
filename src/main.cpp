@@ -56,7 +56,9 @@ void setup() {
   Serial.println();
   setupDevices();
   setupApp();
-  connect();
+  // connect();
+  // Application.setStatusView(&statusBar);
+  Application.setRootView(&rootView);
 }
 
 void loop() {

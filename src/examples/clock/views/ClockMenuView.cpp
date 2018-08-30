@@ -1,7 +1,8 @@
 #include "ClockMenuView.h"
 
-ClockMenuView::ClockMenuView() : MenuListView() {
-  Serial.println("ClockMenuView");
+ClockMenuView::ClockMenuView()
+    : MenuListView({MenuItem("Alarm"), MenuItem("Calendar"), MenuItem("Stop Watch"),
+                    MenuItem("Timer"), MenuItem("World Clock"), MenuItem("Resync Time")}) {
 }
 
 ClockMenuView *ClockMenuView::getInstance() {
