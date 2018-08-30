@@ -44,7 +44,7 @@ public:
   void handleKeyPress(KeyEventArgs e);
 
 private:
-  bool _statusViewVisible = true;
+  bool _statusViewVisible = false;
   View *_statusView = NULL;
   View *_rootView = NULL;
   Stack<View *> _navigationStack;
