@@ -33,8 +33,8 @@ void NavigationContainer::showStatusView() {
   }
   _statusViewVisible = true;
   _statusView->setWidth(getWidth());
-  _statusView->setTop(-_statusView->getHeight());
-  setPaddings(Thickness(0, _statusView->getHeight(), 0, 0));
+  _statusView->setTop(-_statusView->getHeight() - 1);
+  setPaddings(Thickness(0, _statusView->getHeight() + 1, 0, 0));
 }
 
 void NavigationContainer::hideStatusView() {
