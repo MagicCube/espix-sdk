@@ -9,4 +9,8 @@ public:
   ClockMenuView();
 
   static ClockMenuView *getInstance();
+
+  void didSelect() {
+    Application.popView();
+  }
 };
