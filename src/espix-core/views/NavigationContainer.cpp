@@ -48,6 +48,8 @@ bool NavigationContainer::canPop() {
 
 void NavigationContainer::pushView(View *view, TransitionOptions options) {
   _navigationStack.push(view);
+  _indicatorShown = true;
+  _lastIndicatorShown = millis();
   setCurrentView(view, options);
 }
 
@@ -56,6 +58,8 @@ View *NavigationContainer::popView(TransitionOptions options) {
     return NULL;
   }
   View *view = _navigationStack.pop();
+  _indicatorShown = true;
+  _lastIndicatorShown = millis();
   if (!_navigationStack.isEmpty()) {
     setCurrentView(_navigationStack.top(), options);
   } else {
@@ -68,18 +72,21 @@ bool NavigationContainer::shouldUpdate() {
   bool result = ViewContainer::shouldUpdate();
   if (result) {
     return result;
-  }
-  if (_statusView && _statusViewVisible) {
+  } else if (_statusView && _statusViewVisible) {
     return _statusView->shouldUpdate();
-  } else {
-    return false;
+  } else if (_indicatorShown && (millis() - _lastIndicatorShown > 1200)) {
+    return true;
   }
+  return false;
 }
 
 void NavigationContainer::update() {
   ViewContainer::update();
   if (_statusView && _statusViewVisible) {
     _statusView->tryUpdate();
+  }
+  if (_indicatorShown && (millis() - _lastIndicatorShown > 800)) {
+    _indicatorShown = false;
   }
 }
 
@@ -112,7 +119,7 @@ void NavigationContainer::handleKeyPress(KeyEventArgs e) {
 
 
 void NavigationContainer::_renderIndicators(CanvasContext *context) {
-  if (canPop()) {
+  if (canPop() && _indicatorShown) {
     context->drawLine(0, context->getHeight() / 2, 2, context->getHeight() / 2 - 2);
     context->drawLine(0, context->getHeight() / 2, 2, context->getHeight() / 2 + 2);
   }
