@@ -6,33 +6,15 @@
 
 class ClockView : public View {
 public:
-  ClockView() {
-  }
+  ClockView();
 
-  bool shouldUpdate() {
-    if (isDirty()) {
-      return true;
-    }
-    if (millis() - getLastUpdate() > 1000) {
-      return true;
-    }
-    return false;
-  }
+  static ClockView *getInstance();
 
-  void update() {
-    if (TimeClient.isReady()) {
-      _text = TimeClient.getLocalTimeStrig();
-    } else {
-      _text = "-- : -- : --";
-    }
-  }
-
-  void render(CanvasContext *context) {
-    context->setFontSize(FontSize::H1);
-    context->setTextAlign(TextAlign::CENTER_BOTH);
-    context->drawString(_text);
-  }
+  bool shouldUpdate();
+  void update();
+  void didSelect();
+  void render(CanvasContext *context);
 
 private:
-  String _text;
+  String _timeString = "-- : -- : --";
 };

@@ -1,19 +1,8 @@
 #include <Arduino.h>
 
-#include "../../espix-core.h"
-
-#include "../clock/views/ClockView.h"
-#include "../weather/views/WeatherTodayView.h"
+#include "../../espix-design.h"
 
 class RootView : public CarouselContainer {
 public:
-  RootView() : CarouselContainer() {
-    addSubviews({new ClockView(), new WeatherTodayView()});
-  }
-
-  void didMount() {
-    if (getCurrentView() == NULL) {
-      showFirstSubview();
-    }
-  }
+  RootView();
 };
