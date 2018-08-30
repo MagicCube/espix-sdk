@@ -13,14 +13,24 @@
 class MenuListView : public View {
 public:
   MenuListView();
+  MenuListView(initializer_list<MenuItem> l);
+
+  void selectItem(int index);
+  void selectItem(String key);
+  void selectNextItem();
+  void selectPrevItem();
 
   void render(CanvasContext *context);
 
+  void handleKeyPress(KeyEventArgs e);
+  void handleScroll(ScrollEventArgs e);
+
 private:
   int _getFullyVisibleItemCount();
+  void _renderItem(CanvasContext *context, int index);
 
   List<MenuItem> _items;
 
-  int _selectedIndex = -1;
+  int _selectedIndex = 0;
   int _scrollIndex = 0;
 };
