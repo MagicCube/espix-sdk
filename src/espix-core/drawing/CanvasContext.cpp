@@ -47,7 +47,7 @@ Rectangle CanvasContext::getBounds() {
 }
 
 void CanvasContext::setBounds(Rectangle bounds) {
-  _bounds = bounds;
+  _bounds.copyFrom(bounds);
 }
 
 void CanvasContext::setColor(Color color) {
