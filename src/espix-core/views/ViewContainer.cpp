@@ -38,6 +38,14 @@ void ViewContainer::setCurrentView(View *view, TransitionOptions transitionOptio
   }
 }
 
+void ViewContainer::setPaddings(Thickness paddings) {
+  View::setPaddings(paddings);
+  if (_currentView) {
+    _currentView->moveTo(getClientLeft(), getClientTop());
+    _currentView->resizeTo(getClientWidth(), getClientHeight());
+  }
+}
+
 bool ViewContainer::shouldUpdate() {
   if (isDirty()) {
     return true;
