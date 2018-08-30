@@ -31,12 +31,12 @@ void NavigationContainer::showStatusView() {
   _statusViewVisible = true;
   _statusView->setWidth(getWidth());
   _statusView->setTop(-_statusView->getHeight() - 1);
-  setPaddings(0, _statusView->getHeight() + 1, 0, 0);
+  setPaddings(Thickness(0, _statusView->getHeight() + 1, 0, 0));
 }
 
 void NavigationContainer::hideStatusView() {
   _statusViewVisible = false;
-  setPaddings(0);
+  setPaddings(Thickness(0));
 }
 
 bool NavigationContainer::canPop() {
@@ -86,6 +86,16 @@ void NavigationContainer::render(CanvasContext *context) {
     _statusView->redraw();
     context->drawHorizontalLine(0, -2);
   }
+  Serial.print("NavigationContainer");
+  Serial.print(getClientLeft());
+  Serial.print(", ");
+  Serial.print(getClientTop());
+  Serial.print(", ");
+  Serial.print(getClientWidth());
+  Serial.print(", ");
+  Serial.print(getClientHeight());
+  Serial.print(", ");
+  Serial.println(getPaddingTop());
 }
 
 void NavigationContainer::handleKeyPress(KeyEventArgs e) {
