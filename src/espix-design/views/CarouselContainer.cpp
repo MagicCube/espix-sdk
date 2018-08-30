@@ -75,6 +75,12 @@ void CarouselContainer::showPrevSubview() {
   showSubview(_currentSubviewIndex - 1, _computeTransitionDirection(-1));
 }
 
+void CarouselContainer::didMount() {
+  if (getCurrentView() == NULL) {
+    showFirstSubview();
+  }
+}
+
 void CarouselContainer::handleKeyPress(KeyEventArgs e) {
   auto orientation = getTransitionOrientation();
   if (orientation == TransitionOrientation::HORIZONTAL) {

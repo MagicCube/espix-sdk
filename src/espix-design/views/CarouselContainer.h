@@ -23,6 +23,7 @@ public:
   void showNextSubview();
   void showPrevSubview();
 
+  void didMount();
   void handleKeyPress(KeyEventArgs e);
   void handleScroll(ScrollEventArgs e);
 
