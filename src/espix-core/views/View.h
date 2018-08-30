@@ -90,6 +90,11 @@ public:
   // Gets the time of last update.
   unsigned long getLastUpdate();
 
+  // Get a boolean value indicates wether the view can be selected.
+  // By default, it is always `false`.
+  bool isSelectable();
+  void setSelectable(bool selectable);
+
   // Updates the view if it is dirty or `shouldUpdate()` is true.
   // It also change the value of `lastUpdate` which you can retain from `getLastUpdate()`.
   bool tryUpdate();
@@ -99,7 +104,7 @@ public:
 
   // Trigger didSelect();
   // Please avoid to call this method directly from your program.
-  void select();
+  virtual void select();
 
   /*************************************/
   /* Lifecyle of View                  */
@@ -154,4 +159,5 @@ private:
 
   bool _dirty = false;
   unsigned long _lastUpdate = 0;
+  bool _selectable = false;
 };

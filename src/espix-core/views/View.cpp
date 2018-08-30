@@ -139,6 +139,13 @@ unsigned long View::getLastUpdate() {
   return _lastUpdate;
 }
 
+bool View::isSelectable() {
+  return _selectable;
+}
+void View::setSelectable(bool selectable) {
+  _selectable = selectable;
+}
+
 bool View::tryUpdate() {
   if (isDirty() || shouldUpdate()) {
     update();
@@ -162,7 +169,9 @@ void View::redraw() {
 }
 
 void View::select() {
-  didSelect();
+  if (isSelectable()) {
+    didSelect();
+  }
 }
 
 void View::willMount() {
