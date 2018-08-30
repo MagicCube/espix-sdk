@@ -3,9 +3,13 @@
 #include <Arduino.h>
 #include <OLEDDisplay.h>
 
+#include "enums/Color.h"
+#include "enums/FontSize.h"
+#include "enums/TextAlign.h"
+
 #include "Font.h"
-#include "enums.h"
-#include "structs.h"
+#include "Rectangle.h"
+#include "Thickness.h"
 
 #define AUTO_POS INT16_MIN
 

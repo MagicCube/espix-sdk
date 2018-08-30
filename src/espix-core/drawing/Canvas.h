@@ -4,9 +4,12 @@
 
 #include <OLEDDisplay.h>
 
+#include "enums/Color.h"
+#include "enums/FontSize.h"
+#include "enums/TextAlign.h"
+
 #include "CanvasContext.h"
 #include "Font.h"
-#include "enums.h"
 
 // Represents a canvas of OLED display.
 class Canvas {
