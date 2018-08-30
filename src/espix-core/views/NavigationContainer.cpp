@@ -21,18 +21,22 @@ void NavigationContainer::setStatusView(View *view) {
   _statusView = view;
   if (_statusView) {
     _statusView->setParentView(this);
-    _statusView->setWidth(getWidth());
-    _statusView->setTop(-_statusView->getHeight() - 1);
-    setPaddings(0, _statusView->getHeight() + 1, 0, 0);
+    showStatusView();
   } else {
-    setPaddings(0);
+    hideStatusView();
   }
 }
 
 void NavigationContainer::showStatusView() {
+  _statusViewVisible = true;
+  _statusView->setWidth(getWidth());
+  _statusView->setTop(-_statusView->getHeight() - 1);
+  setPaddings(0, _statusView->getHeight() + 1, 0, 0);
 }
 
 void NavigationContainer::hideStatusView() {
+  _statusViewVisible = false;
+  setPaddings(0);
 }
 
 bool NavigationContainer::canPop() {
