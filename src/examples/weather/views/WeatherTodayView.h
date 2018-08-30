@@ -8,8 +8,13 @@
 
 #include "../assets/meteocons-font.h"
 
+
 class WeatherTodayView : public View {
 public:
+  WeatherTodayView() : View() {
+    setSelectable(true);
+  }
+
   void render(CanvasContext *context) {
     _drawContent(context);
   }
