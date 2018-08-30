@@ -78,9 +78,13 @@ void ViewContainer::render(CanvasContext *context) {
   }
 }
 
-void ViewContainer::didSelect() {
-  if (_currentView) {
-    _currentView->select();
+void ViewContainer::select() {
+  if (isSelectable()) {
+    didSelect();
+  } else {
+    if (_currentView) {
+      _currentView->select();
+    }
   }
 }
 
