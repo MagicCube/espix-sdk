@@ -21,6 +21,7 @@ public:
 
 
   // Overrides
+  void setPaddings(Thickness paddings);
   bool shouldUpdate();
   void update();
   void render(CanvasContext *context);
