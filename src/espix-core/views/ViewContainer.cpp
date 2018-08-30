@@ -38,6 +38,20 @@ void ViewContainer::setCurrentView(View *view, TransitionOptions transitionOptio
   }
 }
 
+void ViewContainer::setPaddings(Thickness paddings) {
+  View::setPaddings(paddings);
+  if (_currentView) {
+    _currentView->setBounds(getClientBounds());
+  }
+}
+
+void ViewContainer::setBounds(Rectangle bounds) {
+  View::setBounds(bounds);
+  if (_currentView) {
+    _currentView->setBounds(getClientBounds());
+  }
+}
+
 bool ViewContainer::shouldUpdate() {
   if (isDirty()) {
     return true;
@@ -64,9 +78,13 @@ void ViewContainer::render(CanvasContext *context) {
   }
 }
 
-void ViewContainer::didSelect() {
-  if (_currentView) {
-    _currentView->select();
+void ViewContainer::select() {
+  if (isSelectable()) {
+    didSelect();
+  } else {
+    if (_currentView) {
+      _currentView->select();
+    }
   }
 }
 
@@ -86,8 +104,7 @@ void ViewContainer::_mountView(View *view, int offsetX, int offsetY) {
   _currentView = view;
   _currentView->setParentView(this);
   _currentView->willMount();
-  _currentView->moveTo(offsetX, offsetY);
-  _currentView->resizeTo(getClientWidth(), getClientHeight());
+  _currentView->setBounds(Rectangle(offsetX, offsetY, getClientWidth(), getClientHeight()));
   _currentView->redraw();
   _currentView->didMount();
 }

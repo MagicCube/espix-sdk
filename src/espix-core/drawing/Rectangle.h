@@ -9,6 +9,13 @@ struct Rectangle {
     height = p_height;
   }
 
+  void copyFrom(Rectangle rectangle) {
+    left = rectangle.left;
+    top = rectangle.top;
+    width = rectangle.width;
+    height = rectangle.height;
+  }
+
   int left = 0;
   int top = 0;
   int width = 0;

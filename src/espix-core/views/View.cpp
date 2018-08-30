@@ -33,48 +33,44 @@ int View::getWidth() {
   return _bounds.width;
 }
 void View::setWidth(int width) {
-  if (_bounds.width != width) {
-    _bounds.width = width;
-    setDirty();
-  }
+  resizeTo(width, getHeight());
 }
 
 int View::getHeight() {
   return _bounds.height;
 }
 void View::setHeight(int height) {
-  if (_bounds.height != height) {
-    _bounds.height = height;
-    setDirty();
-  }
+  resizeTo(getWidth(), height);
+}
+
+void View::resizeTo(int width, int height) {
+  setBounds(Rectangle(getLeft(), getTop(), width, height));
 }
 
 int View::getLeft() {
   return _bounds.left;
 }
 void View::setLeft(int left) {
-  if (_bounds.left != left) {
-    _bounds.left = left;
-    setDirty();
-  }
+  moveTo(left, getTop());
 }
 
 int View::getTop() {
   return _bounds.top;
 }
 void View::setTop(int top) {
-  if (_bounds.top != top) {
-    _bounds.top = top;
-    setDirty();
-  }
+  moveTo(getLeft(), top);
+}
+
+void View::moveTo(int left, int top) {
+  setBounds(Rectangle(left, top, getWidth(), getHeight()));
 }
 
 Rectangle View::getBounds() {
   return _bounds;
 }
 void View::setBounds(Rectangle bounds) {
-  moveTo(bounds.left, bounds.top);
-  resizeTo(bounds.width, bounds.height);
+  _bounds.copyFrom(bounds);
+  setDirty();
 }
 
 int View::getClientLeft() {
@@ -110,36 +106,8 @@ Rectangle View::getClientBounds() {
 Thickness View::getPaddings() {
   return _paddings;
 }
-
 void View::setPaddings(Thickness paddings) {
-  _paddings.left = paddings.left;
-  _paddings.top = paddings.top;
-  _paddings.right = paddings.right;
-  _paddings.bottom = paddings.bottom;
-  setDirty();
-}
-
-void View::setPaddings(int all) {
-  _paddings.left = all;
-  _paddings.top = all;
-  _paddings.right = all;
-  _paddings.bottom = all;
-  setDirty();
-}
-
-void View::setPaddings(int horizontal, int vertical) {
-  _paddings.left = horizontal;
-  _paddings.right = horizontal;
-  _paddings.top = vertical;
-  _paddings.bottom = vertical;
-  setDirty();
-}
-
-void View::setPaddings(int left, int top, int right, int bottom) {
-  _paddings.left = left;
-  _paddings.top = top;
-  _paddings.right = right;
-  _paddings.bottom = bottom;
+  _paddings.copyFrom(paddings);
   setDirty();
 }
 
@@ -159,16 +127,6 @@ int View::getPaddingBottom() {
   return _paddings.bottom;
 }
 
-void View::resizeTo(int width, int height) {
-  setWidth(width);
-  setHeight(height);
-}
-
-void View::moveTo(int left, int top) {
-  setLeft(left);
-  setTop(top);
-}
-
 bool View::isDirty() {
   return _dirty;
 }
@@ -179,6 +137,13 @@ void View::setDirty() {
 
 unsigned long View::getLastUpdate() {
   return _lastUpdate;
+}
+
+bool View::isSelectable() {
+  return _selectable;
+}
+void View::setSelectable(bool selectable) {
+  _selectable = selectable;
 }
 
 bool View::tryUpdate() {
@@ -204,7 +169,9 @@ void View::redraw() {
 }
 
 void View::select() {
-  didSelect();
+  if (isSelectable()) {
+    didSelect();
+  }
 }
 
 void View::willMount() {

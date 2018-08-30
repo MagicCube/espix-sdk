@@ -21,10 +21,12 @@ public:
 
 
   // Overrides
+  void setBounds(Rectangle bounds);
+  void setPaddings(Thickness paddings);
   bool shouldUpdate();
   void update();
   void render(CanvasContext *context);
-  void didSelect();
+  void select();
   void handleKeyPress(KeyEventArgs e);
   void handleScroll(ScrollEventArgs e);
 
