@@ -33,7 +33,7 @@ void NavigationContainer::showStatusView() {
   }
   _statusViewVisible = true;
   _statusView->setWidth(getWidth());
-  _statusView->setTop(-_statusView->getHeight() - 1);
+  _statusView->setTop(-_statusView->getHeight());
   setPaddings(Thickness(0, _statusView->getHeight(), 0, 0));
 }
 
@@ -94,7 +94,7 @@ void NavigationContainer::render(CanvasContext *context) {
   ViewContainer::render(context);
   if (_statusView && _statusViewVisible) {
     _statusView->redraw();
-    context->drawHorizontalLine(0, -2);
+    context->drawHorizontalLine(0, -1);
   }
   _renderIndicators(context);
 }
