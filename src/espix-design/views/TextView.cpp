@@ -1,6 +1,6 @@
 #include "TextView.h"
 
-TextView::TextView(String text, FontSize fontSize, TextAlign textAlign) : View() {
+TextView::TextView(String text, FontSize fontSize, TextAlign textAlign) : View(), _text(text) {
   if (text == NULL) {
     text = "";
   }
