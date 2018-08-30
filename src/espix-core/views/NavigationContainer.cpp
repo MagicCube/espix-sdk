@@ -48,8 +48,6 @@ bool NavigationContainer::canPop() {
 
 void NavigationContainer::pushView(View *view, TransitionOptions options) {
   _navigationStack.push(view);
-  _indicatorShown = true;
-  _lastIndicatorShown = millis();
   setCurrentView(view, options);
 }
 
@@ -58,8 +56,6 @@ View *NavigationContainer::popView(TransitionOptions options) {
     return NULL;
   }
   View *view = _navigationStack.pop();
-  _indicatorShown = true;
-  _lastIndicatorShown = millis();
   if (!_navigationStack.isEmpty()) {
     setCurrentView(_navigationStack.top(), options);
   } else {
@@ -74,8 +70,6 @@ bool NavigationContainer::shouldUpdate() {
     return result;
   } else if (_statusView && _statusViewVisible) {
     return _statusView->shouldUpdate();
-  } else if (_indicatorShown && (millis() - _lastIndicatorShown > 1200)) {
-    return true;
   }
   return false;
 }
@@ -85,9 +79,6 @@ void NavigationContainer::update() {
   if (_statusView && _statusViewVisible) {
     _statusView->tryUpdate();
   }
-  if (_indicatorShown && (millis() - _lastIndicatorShown > 800)) {
-    _indicatorShown = false;
-  }
 }
 
 void NavigationContainer::render(CanvasContext *context) {
@@ -96,7 +87,6 @@ void NavigationContainer::render(CanvasContext *context) {
     _statusView->redraw();
     context->drawHorizontalLine(0, -1);
   }
-  _renderIndicators(context);
 }
 
 void NavigationContainer::handleKeyPress(KeyEventArgs e) {
@@ -114,13 +104,5 @@ void NavigationContainer::handleKeyPress(KeyEventArgs e) {
       getCurrentView()->handleKeyPress(e);
     }
     break;
-  }
-}
-
-
-void NavigationContainer::_renderIndicators(CanvasContext *context) {
-  if (canPop() && _indicatorShown) {
-    context->drawLine(0, context->getHeight() / 2, 2, context->getHeight() / 2 - 2);
-    context->drawLine(0, context->getHeight() / 2, 2, context->getHeight() / 2 + 2);
   }
 }
