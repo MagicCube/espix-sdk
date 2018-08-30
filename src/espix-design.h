@@ -2,6 +2,8 @@
 
 #include <Arduino.h>
 
+#include "espix-core.h"
+
 #include "espix-design/views/AnimationView.h"
 #include "espix-design/views/CarouselContainer.h"
 #include "espix-design/views/ImageView.h"
