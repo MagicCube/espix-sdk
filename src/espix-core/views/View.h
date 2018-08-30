@@ -66,10 +66,7 @@ public:
 
   // Gets or sets a `Thickness` object which represents the paddings of the view.
   Thickness getPaddings();
-  void setPaddings(int left, int top, int right, int bottom);
   void setPaddings(Thickness paddings);
-  void setPaddings(int all);
-  void setPaddings(int horizontal, int vertical);
 
   // Gets left side of paddings of the view.
   int getPaddingLeft();

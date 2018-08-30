@@ -128,30 +128,6 @@ void View::setPaddings(Thickness paddings) {
   setDirty();
 }
 
-void View::setPaddings(int all) {
-  _paddings.left = all;
-  _paddings.top = all;
-  _paddings.right = all;
-  _paddings.bottom = all;
-  setDirty();
-}
-
-void View::setPaddings(int horizontal, int vertical) {
-  _paddings.left = horizontal;
-  _paddings.right = horizontal;
-  _paddings.top = vertical;
-  _paddings.bottom = vertical;
-  setDirty();
-}
-
-void View::setPaddings(int left, int top, int right, int bottom) {
-  _paddings.left = left;
-  _paddings.top = top;
-  _paddings.right = right;
-  _paddings.bottom = bottom;
-  setDirty();
-}
-
 int View::getPaddingLeft() {
   return _paddings.left;
 }
