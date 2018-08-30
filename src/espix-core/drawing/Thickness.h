@@ -31,6 +31,13 @@ struct Thickness {
     bottom = p_bottom;
   }
 
+  void copyFrom(Thickness thickness) {
+    left = thickness.left;
+    right = thickness.right;
+    top = thickness.top;
+    bottom = thickness.bottom;
+  }
+
   int left = 0;
   int right = 0;
   int top = 0;
