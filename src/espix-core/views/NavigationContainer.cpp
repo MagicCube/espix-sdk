@@ -101,7 +101,13 @@ void NavigationContainer::handleKeyPress(KeyEventArgs e) {
     }
     break;
   case KEY_ESC:
-    popView();
+    if (canPop()) {
+      popView();
+    } else {
+      if (getCurrentView()) {
+        getCurrentView()->handleKeyPress(e);
+      }
+    }
     break;
   default:
     if (getCurrentView()) {
