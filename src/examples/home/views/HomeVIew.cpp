@@ -47,7 +47,7 @@ void HomeView::render(CanvasContext *context) {
 }
 
 void HomeView::_drawDateTime(CanvasContext *context) {
-  const int PADDING_RIGHT = 4;
+  const int PADDING_RIGHT = 6;
 
   context->setTextAlign(TextAlign::RIGHT);
 
@@ -57,7 +57,7 @@ void HomeView::_drawDateTime(CanvasContext *context) {
 
   // Time
   context->setFontSize(FontSize::H1);
-  context->drawString(_timeString, getClientWidth() - PADDING_RIGHT, 16);
+  context->drawString(_timeString, getClientWidth() - PADDING_RIGHT, 14);
 }
 
 void HomeView::_drawWeather(CanvasContext *context) {
@@ -65,7 +65,7 @@ void HomeView::_drawWeather(CanvasContext *context) {
   context->setTextAlign(TextAlign::LEFT);
   context->setFont(Meteocons_Plain_42);
   String weatherIcon = "Q";
-  context->drawString(weatherIcon, PADDING_LEFT, 12);
+  context->drawString(weatherIcon, PADDING_LEFT, 10);
 
   context->setTextAlign(TextAlign::CENTER);
   context->setFontSize(FontSize::NORMAL);
