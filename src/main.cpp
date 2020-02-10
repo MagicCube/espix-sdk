@@ -1,10 +1,12 @@
 #include <Arduino.h>
 
+#include <ESP8266HTTPClient.h>
 #include <SH1106Wire.h>
 
 #include "espix-core.h"
 #include "espix-design.h"
 
+#include "examples/services/ServiceClient.h"
 #include "examples/root/views/RootView.h"
 
 #define OLED_SDA D1
@@ -27,6 +29,7 @@ void onConnected() {
   Application.enableOTA();
   Application.setStatusView(&statusBar);
   Application.setRootView(&rootView, TRANSITION_OPTIONS_DOWN);
+  ServiceClient.begin();
 }
 
 void connect() {

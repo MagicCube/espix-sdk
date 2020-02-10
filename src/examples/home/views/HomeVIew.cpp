@@ -2,6 +2,7 @@
 
 #include "HomeMenuView.h"
 
+#include "../../services/ServiceClient.h"
 #include "../../weather/assets/meteocons-font.h"
 
 HomeView::HomeView() : View() {
@@ -53,7 +54,7 @@ void HomeView::_drawDateTime(CanvasContext *context) {
 
   // Date
   context->setFontSize(FontSize::NORMAL);
-  context->drawString("SUN, 10", getClientWidth() - PADDING_RIGHT, 0);
+  context->drawString(TimeClient.getLocalDateShortString(), getClientWidth() - PADDING_RIGHT, 0);
 
   // Time
   context->setFontSize(FontSize::H1);
@@ -61,19 +62,30 @@ void HomeView::_drawDateTime(CanvasContext *context) {
 }
 
 void HomeView::_drawWeather(CanvasContext *context) {
-  const int PADDING_LEFT = 6;
-  context->setTextAlign(TextAlign::LEFT);
-  context->setFont(Meteocons_Plain_42);
-  String weatherIcon = "Q";
-  context->drawString(weatherIcon, PADDING_LEFT, 10);
 
-  context->setTextAlign(TextAlign::CENTER);
-  context->setFontSize(FontSize::NORMAL);
-  context->drawString("-1 / 8", PADDING_LEFT + 20, 0);
+  WeatherForecast forecast = ServiceClient.getWeatherForecast(0);
+
+  if (!forecast.day.equals("")) {
+    const int PADDING_LEFT = 6;
+    context->setTextAlign(TextAlign::LEFT);
+    context->setFont(Meteocons_Plain_42);
+    String weatherIcon = "Q";
+    context->drawString(weatherIcon, PADDING_LEFT, 10);
+
+    context->setTextAlign(TextAlign::CENTER);
+    context->setFontSize(FontSize::NORMAL);
+    String text = String(forecast.lowTemp) + " / " + forecast.highTemp;
+    context->drawString(text, PADDING_LEFT + 20, 0);
+  }
 }
 
 void HomeView::_drawStocks(CanvasContext *context) {
-  context->setTextAlign(TextAlign::CENTER);
-  context->setFontSize(FontSize::NORMAL);
-  context->drawString("BABA  216.53  -1.98%", getClientWidth() / 2, 54);
+  Stock stock = ServiceClient.getStock(0);
+  if (!stock.symbol.equals("")) {
+    context->setTextAlign(TextAlign::CENTER);
+    context->setFontSize(FontSize::NORMAL);
+    // context->drawString("BABA  216.53  -1.98%", getClientWidth() / 2, 54);
+    String text = stock.symbol + "  " + stock.price + "  " + stock.changePercent + "%";
+    context->drawString(text, getClientWidth() / 2, 54);
+  }
 }
