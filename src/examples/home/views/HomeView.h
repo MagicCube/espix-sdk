@@ -4,15 +4,17 @@
 
 #include "../../../espix-core.h"
 
-class ClockView : public View {
+class HomeView : public View {
 public:
-  ClockView();
+  HomeView();
 
-  static ClockView *getInstance();
+  static HomeView *getInstance();
 
   bool shouldUpdate();
   void update();
   void didSelect();
+  void willMount();
+  void willUnmount();
   void render(CanvasContext *context);
 
 private:

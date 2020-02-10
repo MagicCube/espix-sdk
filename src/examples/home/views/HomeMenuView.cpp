@@ -1,11 +1,11 @@
-#include "ClockMenuView.h"
+#include "HomeMenuView.h"
 
-ClockMenuView::ClockMenuView()
+HomeMenuView::HomeMenuView()
     : MenuListView({MenuItem("Alarm"), MenuItem("Calendar"), MenuItem("Stop Watch"),
                     MenuItem("Timer"), MenuItem("World Clock"), MenuItem("Resync Time")}) {
 }
 
-ClockMenuView *ClockMenuView::getInstance() {
-  static ClockMenuView instance;
+HomeMenuView *HomeMenuView::getInstance() {
+  static HomeMenuView instance;
   return &instance;
 }
