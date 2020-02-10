@@ -2,6 +2,8 @@
 
 #include "WeatherForecastView.h"
 
+#include "../assets/meteocons-font.h"
+
 WeatherTodayView::WeatherTodayView() : View() {
 }
 
