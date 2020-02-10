@@ -20,5 +20,7 @@ public:
 private:
   String _timeString = "-- : --";
 
-  void _drawClock(CanvasContext *context);
+  void _drawDateTime(CanvasContext *context);
+  void _drawWeather(CanvasContext *context);
+  void _drawStocks(CanvasContext *context);
 };
