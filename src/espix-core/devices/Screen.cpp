@@ -17,7 +17,11 @@ uint8_t ScreenClass::getBrightness() {
 
 void ScreenClass::setBrightness(uint8_t percentage) {
   _brightness = percentage;
-  _display->setContrast(percentage * 255 / 100);
+  if (percentage == 1) {
+    _display->setContrast(1);
+  } else {
+    _display->setContrast(percentage * 255 / 100);
+  }
 }
 
 bool ScreenClass::isFlipped() {
@@ -64,6 +68,11 @@ void ScreenClass::update() {
   if (_canvas) {
     _canvas->update();
   }
+  if (millis() - _lastActiveTime > 5 * 1000) {
+    if (_brightness != 1) {
+      setBrightness(1);
+    }
+  }
 }
 
 void ScreenClass::turnOn() {
@@ -81,6 +90,11 @@ void ScreenClass::clearBuffer() {
 void ScreenClass::clear() {
   clearBuffer();
   _display->display();
+}
+
+void ScreenClass::activate() {
+  setBrightness(100);
+  _lastActiveTime = millis();
 }
 
 ScreenClass Screen;

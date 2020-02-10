@@ -58,12 +58,16 @@ public:
   // Turns off.
   void turnOff();
 
+  // Reset auto dim timer.
+  void activate();
+
 private:
   OLEDDisplay *_display;
   Canvas *_canvas;
-  int _brightness;
+  int _brightness = 255;
   bool _flipped = false;
   bool _mirrored = false;
+  uint32_t _lastActiveTime = millis();
 };
 
 extern ScreenClass Screen;
