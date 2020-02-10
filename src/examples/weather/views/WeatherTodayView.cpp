@@ -15,20 +15,20 @@ void WeatherTodayView::didSelect() {
 }
 
 void WeatherTodayView::render(CanvasContext *context) {
-  _drawContent(context, (getClientWidth() - 72) / 2, (getClientHeight() - 40) / 2);
+  _drawContent(context, (getClientWidth() - 72) / 2, 0);
 }
 
 void WeatherTodayView::_drawContent(CanvasContext *context, int x, int y) {
   context->setFontSize(FontSize::NORMAL);
   context->setTextAlign(TextAlign::LEFT);
-  context->drawString("Mostly Cloudy", x + 28, y + 5);
+  context->drawString("Mostly Cloudy", x + 28, y - 2);
 
   String temp = "32°C";
   context->setFontSize(FontSize::H1);
-  context->drawString(temp, x + 28, y + 15);
+  context->drawString(temp, x + 28, y + 6);
 
   context->setFont(Meteocons_Plain_42);
   String weatherIcon = "Q";
   int weatherIconWidth = context->getStringWidth(weatherIcon);
-  context->drawString(weatherIcon, x - weatherIconWidth / 2, y);
+  context->drawString(weatherIcon, x - weatherIconWidth / 2, y - 8);
 }
