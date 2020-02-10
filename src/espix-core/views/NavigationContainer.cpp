@@ -31,15 +31,19 @@ void NavigationContainer::showStatusView() {
   if (_statusView == NULL) {
     return;
   }
-  _statusViewVisible = true;
-  _statusView->setWidth(getWidth());
-  _statusView->setTop(-_statusView->getHeight() - 1);
-  setPaddings(Thickness(0, _statusView->getHeight() + 1, 0, 0));
+  if (!_statusViewVisible) {
+    _statusViewVisible = true;
+    _statusView->setWidth(getWidth());
+    _statusView->setTop(-_statusView->getHeight() - 1);
+    setPaddings(Thickness(0, _statusView->getHeight() + 1, 0, 0));
+  }
 }
 
 void NavigationContainer::hideStatusView() {
-  _statusViewVisible = false;
-  setPaddings(Thickness(0));
+  if (_statusViewVisible) {
+    _statusViewVisible = false;
+    setPaddings(Thickness(0));
+  }
 }
 
 bool NavigationContainer::canPop() {
