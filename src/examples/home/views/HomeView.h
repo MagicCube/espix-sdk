@@ -18,5 +18,7 @@ public:
   void render(CanvasContext *context);
 
 private:
-  String _timeString = "-- : -- : --";
+  String _timeString = "-- : --";
+
+  void _drawClock(CanvasContext *context);
 };

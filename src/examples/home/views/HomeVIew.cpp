@@ -30,7 +30,7 @@ bool HomeView::shouldUpdate() {
 
 void HomeView::update() {
   if (TimeClient.isReady()) {
-    _timeString = TimeClient.getLocalTimeStrig();
+    _timeString = TimeClient.getLocalTimeShortStrig();
   }
 }
 
@@ -39,6 +39,10 @@ void HomeView::didSelect() {
 }
 
 void HomeView::render(CanvasContext *context) {
+  _drawClock(context);
+}
+
+void HomeView::_drawClock(CanvasContext *context) {
   context->setFontSize(FontSize::H1);
   context->setTextAlign(TextAlign::CENTER_BOTH);
   context->drawString(_timeString);
