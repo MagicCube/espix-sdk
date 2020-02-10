@@ -25,6 +25,8 @@ public:
   // http://www.cplusplus.com/reference/ctime/strftime/
   String getLocalTimeStrig();
 
+  String getLocalTimeShortStrig();
+
   // Initializes the time client.
   void begin();
 
