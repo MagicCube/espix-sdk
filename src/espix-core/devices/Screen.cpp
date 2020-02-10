@@ -66,6 +66,14 @@ void ScreenClass::update() {
   }
 }
 
+void ScreenClass::turnOn() {
+  _display->displayOn();
+}
+
+void ScreenClass::turnOff() {
+  _display->displayOff();
+}
+
 void ScreenClass::clearBuffer() {
   _canvas->clear();
 }

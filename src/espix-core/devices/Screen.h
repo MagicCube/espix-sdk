@@ -52,6 +52,12 @@ public:
   // Clears screen immediately.
   void clear();
 
+  // Turns on.
+  void turnOn();
+
+  // Turns off.
+  void turnOff();
+
 private:
   OLEDDisplay *_display;
   Canvas *_canvas;
