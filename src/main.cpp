@@ -5,7 +5,7 @@
 #include "espix-core.h"
 #include "espix-design.h"
 
-#include "examples/root/RootView.h"
+#include "examples/root/views/RootView.h"
 
 #define OLED_SDA D1
 #define OLED_CLK D2
