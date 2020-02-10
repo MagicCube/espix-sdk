@@ -18,6 +18,10 @@ void WeatherForecastView::render(CanvasContext *context) {
   }
 }
 
+void WeatherForecastView::didSelect() {
+  Application.popView();
+}
+
 void WeatherForecastView::_drawForecastDetails(CanvasContext *context, int x, int dayIndex) {
   context->setTextAlign(TextAlign::CENTER);
   context->setFontSize(FontSize::NORMAL);

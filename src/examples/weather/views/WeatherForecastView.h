@@ -14,6 +14,8 @@ public:
 
   void render(CanvasContext *context);
 
+  void didSelect();
+
 private:
   void _drawForecastDetails(CanvasContext *context, int x, int dayIndex);
 };
