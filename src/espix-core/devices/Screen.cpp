@@ -16,11 +16,13 @@ uint8_t ScreenClass::getBrightness() {
 }
 
 void ScreenClass::setBrightness(uint8_t percentage) {
-  _brightness = percentage;
-  if (percentage == 1) {
-    _display->setContrast(1);
-  } else {
-    _display->setContrast(percentage * 255 / 100);
+  if (_brightness != percentage) {
+    _brightness = percentage;
+    if (percentage == 1) {
+      _display->setContrast(1);
+    } else {
+      _display->setContrast(percentage * 255 / 100);
+    }
   }
 }
 
