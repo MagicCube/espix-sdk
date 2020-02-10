@@ -27,6 +27,8 @@ public:
 
   String getLocalTimeShortStrig();
 
+  String getLocalDateShortString();
+
   // Initializes the time client.
   void begin();
 

@@ -37,6 +37,16 @@ String TimeClientClass::getLocalTimeShortStrig() {
   return buffer;
 }
 
+String TimeClientClass::getLocalDateShortString() {
+  time_t rawTime = time(nullptr);
+  time_t localTime = rawTime + _timeOffset / 1000;
+  struct tm *timeInfo;
+  timeInfo = localtime(&localTime);
+  char buffer[6];
+  strftime(buffer, 9, "%a %d", timeInfo);
+  return buffer;
+}
+
 void TimeClientClass::begin() {
   _hasBegun = true;
   forceUpdate();
