@@ -1,7 +1,7 @@
 #include "WeatherForecastView.h"
 
 const String DAYS[3] = {"THU", "FRI", "SAT"};
-const String WEATHERS[3] = {"Q", "H", "B"};
+const String WEATHERS[3] = {"2", "3", "4"};
 const String TEMPERATURES[3] = {"26|33", "26|31", "26|32"};
 
 WeatherForecastView::WeatherForecastView() : View() {

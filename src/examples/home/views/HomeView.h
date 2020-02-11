@@ -19,6 +19,8 @@ public:
 
 private:
   String _timeString = "-- : --";
+  uint8_t _sideViewIndex = 0;
+  long _millisSinceLastSideViewIndexChanged = millis();
 
   void _drawDateTime(CanvasContext *context);
   void _drawWeather(CanvasContext *context);

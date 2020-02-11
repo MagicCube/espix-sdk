@@ -8,7 +8,7 @@ void ServiceClientClass::begin() {
 void ServiceClientClass::update() {
   long startTime = millis();
   Serial.println("Fetching...");
-  _httpClient.begin("http://fancy-scene-a1a2.you-fm.workers.dev/");
+  _httpClient.begin("http://my-cloudflare-services.you-fm.workers.dev/");
   int code = _httpClient.GET();
   if (code == 200) {
     Serial.print("Done in ");
@@ -33,7 +33,7 @@ WeatherForecast ServiceClientClass::getWeatherForecast(uint8_t day) {
 }
 
 void ServiceClientClass::_updateStocks(DynamicJsonDocument json) {
-  auto first = json["stocks"][0];
+  auto first = json["stock"];
   _stocks[0].symbol = first["symbol"].as<char *>();
   _stocks[0].price = first["price"];
   _stocks[0].change = first["change"];

@@ -28,6 +28,14 @@ bool HomeView::shouldUpdate() {
   if (millis() - getLastUpdate() > 1000) {
     return true;
   }
+  if (millis() - _millisSinceLastSideViewIndexChanged > 8 * 1000) {
+    _millisSinceLastSideViewIndexChanged = millis();
+    if (_sideViewIndex == 0) {
+      _sideViewIndex = 1;
+    } else {
+      _sideViewIndex = 0;
+    }
+  }
   return false;
 }
 
@@ -62,30 +70,58 @@ void HomeView::_drawDateTime(CanvasContext *context) {
 }
 
 void HomeView::_drawWeather(CanvasContext *context) {
-
   WeatherForecast forecast = ServiceClient.getWeatherForecast(0);
 
   if (!forecast.day.equals("")) {
-    const int PADDING_LEFT = 6;
-    context->setTextAlign(TextAlign::LEFT);
-    context->setFont(Meteocons_Plain_42);
-    String weatherIcon = "Q";
-    context->drawString(weatherIcon, PADDING_LEFT, 10);
+    if (_sideViewIndex == 0) {
+      const int PADDING_LEFT = 6;
 
-    context->setTextAlign(TextAlign::CENTER);
-    context->setFontSize(FontSize::NORMAL);
-    String text = String(forecast.lowTemp) + " / " + forecast.highTemp;
-    context->drawString(text, PADDING_LEFT + 20, 0);
+      context->setTextAlign(TextAlign::CENTER);
+      context->setFontSize(FontSize::NORMAL);
+      String text = String(forecast.lowTemp) + " / " + forecast.highTemp;
+      context->drawString(text, PADDING_LEFT + 20, 0);
+
+      context->setTextAlign(TextAlign::LEFT);
+      context->setFont(Meteocons_Plain_42);
+      String weatherIcon;
+      if (TimeClient.getLocalTime().getHours() >= 18) {
+        weatherIcon = forecast.nightCode;
+      } else {
+        weatherIcon = forecast.dayCode;
+      }
+      context->drawString(weatherIcon, PADDING_LEFT, 10);
+    } else {
+      context->setTextAlign(TextAlign::CENTER);
+      context->setFontSize(FontSize::NORMAL);
+      String text;
+      if (TimeClient.getLocalTime().getHours() >= 18) {
+        text = forecast.night;
+      } else {
+        text = forecast.day;
+      }
+      text += "  " + String(forecast.lowTemp) + " / " + String(forecast.highTemp);
+      context->drawString(text, getClientWidth() / 2, 52);
+    }
   }
 }
 
 void HomeView::_drawStocks(CanvasContext *context) {
   Stock stock = ServiceClient.getStock(0);
   if (!stock.symbol.equals("")) {
-    context->setTextAlign(TextAlign::CENTER);
-    context->setFontSize(FontSize::NORMAL);
-    // context->drawString("BABA  216.53  -1.98%", getClientWidth() / 2, 54);
-    String text = stock.symbol + "  " + stock.price + "  " + stock.changePercent + "%";
-    context->drawString(text, getClientWidth() / 2, 54);
+    if (_sideViewIndex == 1) {
+      const uint8_t PADDING_LEFT = 6;
+      context->setTextAlign(TextAlign::CENTER);
+      context->setFontSize(FontSize::NORMAL);
+      context->drawString((stock.changePercent > 0 ? "+" : "") + String(stock.changePercent) + "%",
+                          PADDING_LEFT + 20, 0);
+
+      context->setFontSize(FontSize::H2);
+      context->drawString("$" + String(stock.price), PADDING_LEFT + 20, 20);
+    } else {
+      context->setTextAlign(TextAlign::CENTER);
+      context->setFontSize(FontSize::NORMAL);
+      String text = stock.symbol + "  " + stock.price + "  " + stock.changePercent + "%";
+      context->drawString(text, getClientWidth() / 2, 52);
+    }
   }
 }
