@@ -3,7 +3,7 @@
 #include <Arduino.h>
 
 #include <ArduinoJson.h>
-#include <ESP8266HTTPClient.h>
+#include <asyncHTTPrequest.h>
 
 #include "./models/Stock.h"
 #include "./models/WeatherForecast.h"
@@ -16,14 +16,24 @@ public:
   WeatherForecast getWeatherForecast(uint8_t day);
   Stock getStock(uint8_t index);
 
+  void handleCallback(asyncHTTPrequest *request);
+
 private:
-  HTTPClient _httpClient;
+  unsigned long UPDATE_INTERVAL = 60 * 60 * 1000;
+  unsigned long UPDATE_TIMEOUT = 60 * 1000;
+
+  bool _initialized = false;
+  unsigned long _lastUpdateTime = 0;
+
+  asyncHTTPrequest _ajax;
+
   Stock _stocks[1] = { {
     .symbol = "",
     .price = 0,
     .change = 0,
     .changePercent = 0
   } };
+
   WeatherForecast _weatherForecast[3] = { {
     .day = "",
     .dayCode = "",
@@ -47,8 +57,8 @@ private:
     .lowTemp = 0
   } };
 
-  void _updateStocks(DynamicJsonDocument doc);
-  void _updateWeatherForecast(DynamicJsonDocument doc);
+  void _extractStock(DynamicJsonDocument doc);
+  void _extractForecast(DynamicJsonDocument doc);
 };
 
 extern ServiceClientClass ServiceClient;

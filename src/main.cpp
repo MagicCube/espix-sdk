@@ -6,8 +6,8 @@
 #include "espix-core.h"
 #include "espix-design.h"
 
-#include "examples/services/ServiceClient.h"
 #include "examples/root/views/RootView.h"
+#include "examples/services/ServiceClient.h"
 
 #define OLED_SDA D1
 #define OLED_CLK D2
@@ -63,6 +63,7 @@ void setup() {
 }
 
 void loop() {
+  ServiceClient.update();
   int timeBudget = Application.update();
   if (timeBudget > 0) {
     delay(timeBudget);

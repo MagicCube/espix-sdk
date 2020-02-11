@@ -41,7 +41,7 @@ public:
 private:
   void _internalUpdate();
   unsigned long UPDATE_TIMEOUT = 2000;
-  unsigned long UPDATE_INTERVAL = 60 * 60 * 1000;
+  unsigned long UPDATE_INTERVAL = 100 * 60 * 1000;
   bool _hasBegun = false;
   bool _isReady = false;
   bool _isUpdating = false;
