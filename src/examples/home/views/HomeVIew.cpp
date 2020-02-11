@@ -109,7 +109,7 @@ void HomeView::_drawStocks(CanvasContext *context) {
   Stock stock = ServiceClient.getStock(0);
   if (!stock.symbol.equals("")) {
     if (_sideViewIndex == 1) {
-      const uint8_t PADDING_LEFT = 6;
+      const uint8_t PADDING_LEFT = 8;
       context->setTextAlign(TextAlign::CENTER);
       context->setFontSize(FontSize::NORMAL);
       context->drawString((stock.changePercent > 0 ? "+" : "") + String(stock.changePercent) + "%",
