@@ -85,9 +85,9 @@ void HomeView::_drawWeather(CanvasContext *context) {
       context->setFont(Meteocons_Plain_42);
       String weatherIcon;
       if (TimeClient.getLocalTime().getHours() >= 18) {
-        weatherIcon = forecast.nightCode;
+        weatherIcon = forecast.nightCondCode;
       } else {
-        weatherIcon = forecast.dayCode;
+        weatherIcon = forecast.dayCondCode;
       }
       context->drawString(weatherIcon, PADDING_LEFT, 10);
     } else {
@@ -95,9 +95,9 @@ void HomeView::_drawWeather(CanvasContext *context) {
       context->setFontSize(FontSize::NORMAL);
       String text;
       if (TimeClient.getLocalTime().getHours() >= 18) {
-        text = forecast.night;
+        text = forecast.nightCond;
       } else {
-        text = forecast.day;
+        text = forecast.dayCond;
       }
       text += "  " + String(forecast.lowTemp) + " / " + String(forecast.highTemp);
       context->drawString(text, getClientWidth() / 2, 52);

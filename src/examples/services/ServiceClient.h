@@ -36,23 +36,26 @@ private:
 
   WeatherForecast _weatherForecast[3] = { {
     .day = "",
-    .dayCode = "",
-    .night = "",
-    .nightCode = "",
+    .dayCond = "",
+    .dayCondCode = "",
+    .nightCond = "",
+    .nightCondCode = "",
     .highTemp = 0,
     .lowTemp = 0
   }, {
     .day = "",
-    .dayCode = "",
-    .night = "",
-    .nightCode = "",
+    .dayCond = "",
+    .dayCondCode = "",
+    .nightCond = "",
+    .nightCondCode = "",
     .highTemp = 0,
     .lowTemp = 0
   }, {
     .day = "",
-    .dayCode = "",
-    .night = "",
-    .nightCode = "",
+    .dayCond = "",
+    .dayCondCode = "",
+    .nightCond = "",
+    .nightCondCode = "",
     .highTemp = 0,
     .lowTemp = 0
   } };

@@ -4,9 +4,10 @@
 
 struct WeatherForecast {
   String day;
-  String dayCode;
-  String night;
-  String nightCode;
+  String dayCond;
+  String dayCondCode;
+  String nightCond;
+  String nightCondCode;
   int highTemp;
   int lowTemp;
 };

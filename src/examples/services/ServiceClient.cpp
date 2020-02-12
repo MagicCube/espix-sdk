@@ -54,9 +54,10 @@ void ServiceClientClass::_extractForecast(DynamicJsonDocument json) {
   for (int i = 0; i < 3; i++) {
     auto forecast = json["weather"][0];
     _weatherForecast[i].day = forecast["day"].as<char *>();
-    _weatherForecast[i].dayCode = forecast["dayCode"].as<char *>();
-    _weatherForecast[i].night = forecast["night"].as<char *>();
-    _weatherForecast[i].nightCode = forecast["nightCode"].as<char *>();
+    _weatherForecast[i].dayCond = forecast["dayCond"].as<char *>();
+    _weatherForecast[i].dayCondCode = forecast["dayCondCode"].as<char *>();
+    _weatherForecast[i].nightCond = forecast["nightCond"].as<char *>();
+    _weatherForecast[i].nightCondCode = forecast["nightCondCode"].as<char *>();
     _weatherForecast[i].highTemp = forecast["highTemp"];
     _weatherForecast[i].lowTemp = forecast["lowTemp"];
   }
