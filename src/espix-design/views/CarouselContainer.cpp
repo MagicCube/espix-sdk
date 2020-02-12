@@ -123,9 +123,9 @@ TransitionDirection CarouselContainer::_computeTransitionDirection(int d) {
     return TransitionDirection::NONE;
   } else if (d > 0) {
     return _transitionOrientation == TransitionOrientation::HORIZONTAL ? TransitionDirection::LEFT
-                                                                       : TransitionDirection::UP;
+                                                                       : TransitionDirection::DOWN;
   } else {
     return _transitionOrientation == TransitionOrientation::HORIZONTAL ? TransitionDirection::RIGHT
-                                                                       : TransitionDirection::DOWN;
+                                                                       : TransitionDirection::UP;
   }
 }
