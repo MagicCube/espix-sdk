@@ -74,7 +74,7 @@ void View::setBounds(Rectangle bounds) {
 }
 
 int View::getClientLeft() {
-  int result = getLeft() + getPaddings().left;
+  int result = getLeft();
   if (getParentView()) {
     result += getParentView()->getClientLeft();
   }
@@ -82,9 +82,9 @@ int View::getClientLeft() {
 }
 
 int View::getClientTop() {
-  int result = getTop() + getPaddings().top;
+  int result = getTop();
   if (getParentView()) {
-    result += getParentView()->getClientTop();
+    result += getParentView()->getClientTop() + getParentView()->getPaddingTop();
   }
   return result;
 }

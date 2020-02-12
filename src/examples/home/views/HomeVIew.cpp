@@ -29,14 +29,14 @@ bool HomeView::shouldUpdate() {
   if (millis() - getLastUpdate() > 1000) {
     return true;
   }
-  // if (millis() - _millisSinceLastSideViewIndexChanged > 8 * 1000) {
-  //   _millisSinceLastSideViewIndexChanged = millis();
-  //   if (_sideViewIndex == 0) {
-  //     _sideViewIndex = 1;
-  //   } else {
-  //     _sideViewIndex = 0;
-  //   }
-  // }
+  if (millis() - _millisSinceLastSideViewIndexChanged > 8 * 1000) {
+    _millisSinceLastSideViewIndexChanged = millis();
+    if (_sideViewIndex == 0) {
+      _sideViewIndex = 1;
+    } else {
+      _sideViewIndex = 0;
+    }
+  }
   return false;
 }
 
@@ -112,13 +112,19 @@ void HomeView::_drawStocks(CanvasContext *context) {
       context->drawString(String(stock.price), PADDING_LEFT + 27, 20);
       // Draw Triangle
       if (stock.changePercent > 0) {
-        context->drawLine(3, 24, 0, 32);
-        context->drawLine(3, 24, 6, 32);
-        context->drawLine(0, 32, 6, 32);
+        context->drawLine(3, 25, 0, 33);
+        context->drawLine(3, 25, 6, 33);
+        context->drawLine(0, 33, 6, 33);
+        context->drawLine(3, 25, 3, 33);
+        context->drawLine(3, 25, 2, 33);
+        context->drawLine(3, 25, 4, 33);
       } else if (stock.changePercent < 0) {
-        context->drawLine(3, 32, 0, 24);
-        context->drawLine(3, 32, 6, 24);
-        context->drawLine(0, 24, 6, 24);
+        context->drawLine(3, 33, 2, 25);
+        context->drawLine(3, 33, 4, 25);
+        context->drawLine(3, 33, 3, 25);
+        context->drawLine(3, 33, 0, 25);
+        context->drawLine(3, 33, 6, 25);
+        context->drawLine(0, 25, 6, 25);
       }
     } else {
       context->setTextAlign(TextAlign::CENTER);

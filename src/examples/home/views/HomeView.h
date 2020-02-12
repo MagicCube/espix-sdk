@@ -19,7 +19,7 @@ public:
 
 private:
   String _timeString = "-- : --";
-  uint8_t _sideViewIndex = 1;
+  uint8_t _sideViewIndex = 0;
   long _millisSinceLastSideViewIndexChanged = millis();
 
   void _drawDateTime(CanvasContext *context);
