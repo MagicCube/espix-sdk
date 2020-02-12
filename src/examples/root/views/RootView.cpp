@@ -7,7 +7,7 @@
 RootView::RootView() : CarouselContainer() {
   addSubviews({
     HomeView::getInstance(),
-    WeatherForecastView::getInstance(),
     StockView::getInstance(),
+    WeatherForecastView::getInstance(),
   });
 }
