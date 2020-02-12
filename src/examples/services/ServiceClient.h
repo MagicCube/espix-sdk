@@ -61,7 +61,7 @@ private:
                                           .highTemp = 0,
                                           .lowTemp = 0}};
 #else
-  Stock _stocks[1] = {{.symbol = "BABA", .price = 320.34, .change = 5.42, .changePercent = 2.21}};
+  Stock _stocks[1] = {{.symbol = "BABA", .price = 320.34, .change = 5.42, .changePercent = 4.21}};
   WeatherForecast _weatherForecast[4] = {{.day = "MON",
                                           .dayCond = "Sunny",
                                           .dayCondCode = "S",
