@@ -20,6 +20,8 @@ void HomeView::willMount() {
 
 void HomeView::willUnmount() {
   Application.showStatusView();
+  _sideViewIndex = 0;
+  _millisSinceLastSideViewIndexChanged = millis();
 }
 
 bool HomeView::shouldUpdate() {
