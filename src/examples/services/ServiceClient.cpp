@@ -65,10 +65,6 @@ void ServiceClientClass::_extractForecast(DynamicJsonDocument json) {
     _weatherForecast[i].nightCondCode = forecast["nightCondCode"].as<char *>();
     _weatherForecast[i].highTemp = forecast["highTemp"];
     _weatherForecast[i].lowTemp = forecast["lowTemp"];
-    Serial.print("Extract ");
-    Serial.print(_weatherForecast[i].day);
-    Serial.print(" ");
-    Serial.println(_weatherForecast[i].dayCondCode);
   }
 }
 
