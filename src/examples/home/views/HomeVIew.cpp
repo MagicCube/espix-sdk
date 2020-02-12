@@ -3,6 +3,7 @@
 #include "HomeMenuView.h"
 
 #include "../../services/ServiceClient.h"
+
 #include "../../weather/assets/meteocons-font.h"
 
 HomeView::HomeView() : View() {
@@ -70,6 +71,7 @@ void HomeView::_drawDateTime(CanvasContext *context) {
 }
 
 void HomeView::_drawWeather(CanvasContext *context) {
+  WeatherForecast now = ServiceClient.getWeatherNow();
   WeatherForecast forecast = ServiceClient.getWeatherForecast(0);
 
   if (!forecast.day.equals("")) {
@@ -83,22 +85,11 @@ void HomeView::_drawWeather(CanvasContext *context) {
 
       context->setTextAlign(TextAlign::LEFT);
       context->setFont(Meteocons_Plain_42);
-      String weatherIcon;
-      if (TimeClient.getLocalTime().getHours() >= 18) {
-        weatherIcon = forecast.nightCondCode;
-      } else {
-        weatherIcon = forecast.dayCondCode;
-      }
-      context->drawString(weatherIcon, PADDING_LEFT, 10);
+      context->drawString(now.dayCondCode, PADDING_LEFT, 10);
     } else {
       context->setTextAlign(TextAlign::CENTER);
       context->setFontSize(FontSize::NORMAL);
-      String text;
-      if (TimeClient.getLocalTime().getHours() >= 18) {
-        text = forecast.nightCond;
-      } else {
-        text = forecast.dayCond;
-      }
+      String text = now.dayCond;
       text += "  " + String(forecast.lowTemp) + " / " + String(forecast.highTemp);
       context->drawString(text, getClientWidth() / 2, 52);
     }

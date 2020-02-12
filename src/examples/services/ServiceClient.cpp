@@ -9,7 +9,8 @@ void ServiceClientClass::begin() {
 }
 
 void ServiceClientClass::update() {
-  if (!_initialized) return;
+  if (!_initialized)
+    return;
 
   if (_lastUpdateTime == 0 || (millis() - _lastUpdateTime > UPDATE_INTERVAL)) {
     if (_ajax.readyState() == 0 || _ajax.readyState() == 4) {
@@ -25,8 +26,12 @@ Stock ServiceClientClass::getStock(uint8_t index) {
   return _stocks[0];
 }
 
+WeatherForecast ServiceClientClass::getWeatherNow() {
+  return _weatherForecast[0];
+}
+
 WeatherForecast ServiceClientClass::getWeatherForecast(uint8_t day) {
-  return _weatherForecast[day];
+  return _weatherForecast[day + 1];
 }
 
 void ServiceClientClass::handleCallback(asyncHTTPrequest *request) {
@@ -35,7 +40,7 @@ void ServiceClientClass::handleCallback(asyncHTTPrequest *request) {
   Serial.println();
 
   if (request->responseHTTPcode() == 200) {
-    DynamicJsonDocument json(1024);
+    DynamicJsonDocument json(2048);
     deserializeJson(json, request->responseText());
     ServiceClient._extractStock(json);
     ServiceClient._extractForecast(json);
@@ -51,8 +56,8 @@ void ServiceClientClass::_extractStock(DynamicJsonDocument json) {
 }
 
 void ServiceClientClass::_extractForecast(DynamicJsonDocument json) {
-  for (int i = 0; i < 3; i++) {
-    auto forecast = json["weather"][0];
+  for (int i = 0; i < 4; i++) {
+    auto forecast = json["weather"][i];
     _weatherForecast[i].day = forecast["day"].as<char *>();
     _weatherForecast[i].dayCond = forecast["dayCond"].as<char *>();
     _weatherForecast[i].dayCondCode = forecast["dayCondCode"].as<char *>();
@@ -60,6 +65,10 @@ void ServiceClientClass::_extractForecast(DynamicJsonDocument json) {
     _weatherForecast[i].nightCondCode = forecast["nightCondCode"].as<char *>();
     _weatherForecast[i].highTemp = forecast["highTemp"];
     _weatherForecast[i].lowTemp = forecast["lowTemp"];
+    Serial.print("Extract ");
+    Serial.print(_weatherForecast[i].day);
+    Serial.print(" ");
+    Serial.println(_weatherForecast[i].dayCondCode);
   }
 }
 

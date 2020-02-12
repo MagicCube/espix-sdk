@@ -13,6 +13,7 @@ public:
   void begin();
   void update();
 
+  WeatherForecast getWeatherNow();
   WeatherForecast getWeatherForecast(uint8_t day);
   Stock getStock(uint8_t index);
 
@@ -27,38 +28,36 @@ private:
 
   asyncHTTPrequest _ajax;
 
-  Stock _stocks[1] = { {
-    .symbol = "",
-    .price = 0,
-    .change = 0,
-    .changePercent = 0
-  } };
+  Stock _stocks[1] = {{.symbol = "", .price = 0, .change = 0, .changePercent = 0}};
 
-  WeatherForecast _weatherForecast[3] = { {
-    .day = "",
-    .dayCond = "",
-    .dayCondCode = "",
-    .nightCond = "",
-    .nightCondCode = "",
-    .highTemp = 0,
-    .lowTemp = 0
-  }, {
-    .day = "",
-    .dayCond = "",
-    .dayCondCode = "",
-    .nightCond = "",
-    .nightCondCode = "",
-    .highTemp = 0,
-    .lowTemp = 0
-  }, {
-    .day = "",
-    .dayCond = "",
-    .dayCondCode = "",
-    .nightCond = "",
-    .nightCondCode = "",
-    .highTemp = 0,
-    .lowTemp = 0
-  } };
+  WeatherForecast _weatherForecast[4] = {{.day = "",
+                                          .dayCond = "",
+                                          .dayCondCode = "",
+                                          .nightCond = "",
+                                          .nightCondCode = "",
+                                          .highTemp = 0,
+                                          .lowTemp = 0},
+                                         {.day = "",
+                                          .dayCond = "",
+                                          .dayCondCode = "",
+                                          .nightCond = "",
+                                          .nightCondCode = "",
+                                          .highTemp = 0,
+                                          .lowTemp = 0},
+                                         {.day = "",
+                                          .dayCond = "",
+                                          .dayCondCode = "",
+                                          .nightCond = "",
+                                          .nightCondCode = "",
+                                          .highTemp = 0,
+                                          .lowTemp = 0},
+                                         {.day = "",
+                                          .dayCond = "",
+                                          .dayCondCode = "",
+                                          .nightCond = "",
+                                          .nightCondCode = "",
+                                          .highTemp = 0,
+                                          .lowTemp = 0}};
 
   void _extractStock(DynamicJsonDocument doc);
   void _extractForecast(DynamicJsonDocument doc);

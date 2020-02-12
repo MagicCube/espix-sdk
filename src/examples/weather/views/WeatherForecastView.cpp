@@ -1,8 +1,6 @@
 #include "WeatherForecastView.h"
 
-const String DAYS[3] = {"THU", "FRI", "SAT"};
-const String WEATHERS[3] = {"2", "3", "4"};
-const String TEMPERATURES[3] = {"26|33", "26|31", "26|32"};
+#include "../../services/ServiceClient.h"
 
 WeatherForecastView::WeatherForecastView() : View() {
 }
@@ -23,14 +21,14 @@ void WeatherForecastView::didSelect() {
 }
 
 void WeatherForecastView::_drawForecastDetails(CanvasContext *context, int x, int dayIndex) {
+  auto forecast = ServiceClient.getWeatherForecast(dayIndex);
   context->setTextAlign(TextAlign::CENTER);
   context->setFontSize(FontSize::NORMAL);
-  String day = DAYS[dayIndex];
-  context->drawString(day, 22 + x, 2);
+  context->drawString(forecast.day, 22 + x, 2);
 
   context->setFont(Meteocons_Plain_21);
-  context->drawString(WEATHERS[dayIndex], x + 22, 14);
+  context->drawString(forecast.dayCondCode, x + 22, 14);
 
   context->setFontSize(FontSize::NORMAL);
-  context->drawString(TEMPERATURES[dayIndex], x + 22, 38);
+  context->drawString(String(forecast.lowTemp) + " / " + String(forecast.highTemp), x + 22, 38);
 }
