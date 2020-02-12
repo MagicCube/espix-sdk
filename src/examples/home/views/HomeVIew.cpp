@@ -69,7 +69,7 @@ void HomeView::_drawDateTime(CanvasContext *context) {
 
   // Time
   context->setFontSize(FontSize::H1);
-  context->drawString(_timeString, getClientWidth() - PADDING_RIGHT, 14);
+  context->drawString(_timeString, getClientWidth() - PADDING_RIGHT, 20);
 }
 
 void HomeView::_drawWeather(CanvasContext *context) {
@@ -87,7 +87,7 @@ void HomeView::_drawWeather(CanvasContext *context) {
 
       context->setTextAlign(TextAlign::LEFT);
       context->setFont(Meteocons_Plain_42);
-      context->drawString(now.dayCondCode, PADDING_LEFT, 10);
+      context->drawString(now.dayCondCode, PADDING_LEFT, 7);
     } else {
       context->setTextAlign(TextAlign::CENTER);
       context->setFontSize(FontSize::NORMAL);
@@ -110,26 +110,26 @@ void HomeView::_drawStocks(CanvasContext *context) {
 
       context->setFontSize(FontSize::H2);
       context->setTextAlign(TextAlign::RIGHT);
-      context->drawString(String((int)stock.price) + ".", PADDING_LEFT + 34, 20);
+      context->drawString(String((int)stock.price), PADDING_LEFT + 34, 27);
       context->setTextAlign(TextAlign::LEFT);
       context->setFontSize(FontSize::NORMAL);
-      context->drawString(String((int)(stock.price * 100 - ((int)stock.price * 100))), PADDING_LEFT + 35, 25);
+      context->drawString("." + String((int)(stock.price * 100 - ((int)stock.price * 100))), PADDING_LEFT + 34, 32);
 
       // Draw Triangle
       if (stock.changePercent > 0) {
-        context->drawLine(3, 25, 0, 33);
-        context->drawLine(3, 25, 6, 33);
-        context->drawLine(0, 33, 6, 33);
-        context->drawLine(3, 25, 3, 33);
-        context->drawLine(3, 25, 2, 33);
-        context->drawLine(3, 25, 4, 33);
+        context->drawLine(3, 34, 0, 41);
+        context->drawLine(3, 34, 6, 41);
+        context->drawLine(0, 41, 6, 41);
+        context->drawLine(3, 34, 3, 41);
+        context->drawLine(3, 34, 2, 41);
+        context->drawLine(3, 34, 4, 41);
       } else if (stock.changePercent < 0) {
-        context->drawLine(3, 33, 2, 25);
-        context->drawLine(3, 33, 4, 25);
-        context->drawLine(3, 33, 3, 25);
-        context->drawLine(3, 33, 0, 25);
-        context->drawLine(3, 33, 6, 25);
-        context->drawLine(0, 25, 6, 25);
+        context->drawLine(3, 41, 2, 34);
+        context->drawLine(3, 41, 3, 34);
+        context->drawLine(3, 41, 4, 34);
+        context->drawLine(3, 41, 0, 34);
+        context->drawLine(3, 41, 6, 34);
+        context->drawLine(0, 34, 6, 34);
       }
     } else {
       context->setTextAlign(TextAlign::CENTER);
