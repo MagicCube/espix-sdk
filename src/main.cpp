@@ -6,15 +6,10 @@
 #include "espix-core.h"
 #include "espix-design.h"
 
+#include "examples/config.h"
+
 #include "examples/root/views/RootView.h"
 #include "examples/services/ServiceClient.h"
-
-#define OLED_SDA D1
-#define OLED_CLK D2
-#define KY04_CLK D5
-#define KY04_DT D6
-#define KY04_SW D7
-#define ESC_BUTTON D3
 
 bool connecting = false;
 
@@ -34,8 +29,8 @@ void onConnected() {
 
 void connect() {
   Application.setRootView(&connectionView);
-  WiFiNetwork.addToPreferredList("Henry's iPhone 6", "13913954971");
-  WiFiNetwork.addToPreferredList("Henry's Living Room 2.4GHz", "13913954971");
+  WiFiNetwork.addToPreferredList(WIFI_DEFAULT_SSID, WIFI_DEFAULT_PWD);
+  WiFiNetwork.addToPreferredList(WIFI_2_SSID, WIFI_2_PWD);
   WiFiNetwork.connect(onConnected);
   connecting = true;
 }
@@ -59,7 +54,12 @@ void setup() {
   Serial.println();
   setupDevices();
   setupApp();
-  connect();
+  #ifndef DEBUG_LOCAL
+    connect();
+  #else
+    Application.setStatusView(&statusBar);
+    Application.setRootView(&rootView);
+  #endif
 }
 
 void loop() {
