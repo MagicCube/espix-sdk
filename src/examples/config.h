@@ -7,7 +7,7 @@
 #define KY04_SW D7
 #define ESC_BUTTON D3
 
-#define WIFI_DEFAULT_SSID "Henry's iPhone 6"
+#define WIFI_DEFAULT_SSID "Henry's iPhone Pro"
 #define WIFI_DEFAULT_PWD "13913954971"
 
 #define WIFI_2_SSID "Henry's Living Room 2.4GHz"
