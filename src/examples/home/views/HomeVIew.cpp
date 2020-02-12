@@ -63,7 +63,9 @@ void HomeView::_drawDateTime(CanvasContext *context) {
 
   // Date
   context->setFontSize(FontSize::NORMAL);
-  context->drawString(TimeClient.getLocalDateShortString(), getClientWidth() - PADDING_RIGHT, 0);
+  String date = TimeClient.getLocalDateShortString();
+  date.toUpperCase();
+  context->drawString(date, getClientWidth() - PADDING_RIGHT, 0);
 
   // Time
   context->setFontSize(FontSize::H1);
