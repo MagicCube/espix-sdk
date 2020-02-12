@@ -59,7 +59,7 @@ void HomeView::render(CanvasContext *context) {
 }
 
 void HomeView::_drawDateTime(CanvasContext *context) {
-  const int PADDING_RIGHT = 6;
+  const int PADDING_RIGHT = 2;
 
   context->setTextAlign(TextAlign::RIGHT);
 
