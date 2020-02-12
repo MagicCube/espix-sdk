@@ -4,5 +4,5 @@
 #include "../../weather/views/WeatherTodayView.h"
 
 RootView::RootView() : CarouselContainer() {
-  addSubviews({HomeView::getInstance()});
+  addSubviews({HomeView::getInstance(), WeatherTodayView::getInstance()});
 }
