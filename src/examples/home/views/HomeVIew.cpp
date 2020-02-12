@@ -29,7 +29,7 @@ bool HomeView::shouldUpdate() {
   if (millis() - getLastUpdate() > 1000) {
     return true;
   }
-  if (millis() - _millisSinceLastSideViewIndexChanged > 8 * 1000) {
+  if (_millisSinceLastSideViewIndexChanged == 0 || millis() - _millisSinceLastSideViewIndexChanged > 8 * 1000) {
     _millisSinceLastSideViewIndexChanged = millis();
     if (_sideViewIndex == 0) {
       _sideViewIndex = 1;
@@ -105,11 +105,16 @@ void HomeView::_drawStocks(CanvasContext *context) {
       const uint8_t PADDING_LEFT = 8;
       context->setTextAlign(TextAlign::CENTER);
       context->setFontSize(FontSize::NORMAL);
-      context->drawString((stock.changePercent > 0 ? "+" : "") + String(stock.changePercent) + "%",
+      context->drawString(String(abs(stock.changePercent)) + "%",
                           PADDING_LEFT + 22, 0);
 
       context->setFontSize(FontSize::H2);
-      context->drawString(String(stock.price), PADDING_LEFT + 27, 20);
+      context->setTextAlign(TextAlign::RIGHT);
+      context->drawString(String((int)stock.price) + ".", PADDING_LEFT + 34, 20);
+      context->setTextAlign(TextAlign::LEFT);
+      context->setFontSize(FontSize::NORMAL);
+      context->drawString(String((int)(stock.price * 100 - ((int)stock.price * 100))), PADDING_LEFT + 35, 25);
+
       // Draw Triangle
       if (stock.changePercent > 0) {
         context->drawLine(3, 25, 0, 33);
