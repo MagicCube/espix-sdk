@@ -1,7 +1,5 @@
 #include "WeatherTodayView.h"
 
-#include "WeatherForecastView.h"
-
 #include "../../services/ServiceClient.h"
 
 #include "../assets/meteocons-font.h"
@@ -15,7 +13,7 @@ WeatherTodayView *WeatherTodayView::getInstance() {
 }
 
 void WeatherTodayView::didSelect() {
-  Application.pushView(WeatherForecastView::getInstance());
+  Application.popView();
 }
 
 void WeatherTodayView::render(CanvasContext *context) {

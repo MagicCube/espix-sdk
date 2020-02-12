@@ -2,6 +2,8 @@
 
 #include "../../services/ServiceClient.h"
 
+#include "./WeatherTodayView.h"
+
 WeatherForecastView::WeatherForecastView() : View() {
 }
 
@@ -17,7 +19,7 @@ void WeatherForecastView::render(CanvasContext *context) {
 }
 
 void WeatherForecastView::didSelect() {
-  Application.popView();
+  Application.pushView(WeatherTodayView::getInstance());
 }
 
 void WeatherForecastView::_drawForecastDetails(CanvasContext *context, int x, int dayIndex) {
