@@ -18,11 +18,7 @@ uint8_t ScreenClass::getBrightness() {
 void ScreenClass::setBrightness(uint8_t percentage) {
   if (_brightness != percentage) {
     _brightness = percentage;
-    if (percentage == 1) {
-      _display->setContrast(1);
-    } else {
-      _display->setContrast(percentage * 255 / 100);
-    }
+    _display->setContrast(percentage * 255 / 100);
   }
 }
 
@@ -71,8 +67,8 @@ void ScreenClass::update() {
     _canvas->update();
   }
   if (millis() - _lastActiveTime > 5 * 1000) {
-    if (_brightness != 1) {
-      setBrightness(1);
+    if (_brightness != 0) {
+      setBrightness(0);
     }
   }
 }
