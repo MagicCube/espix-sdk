@@ -17,6 +17,10 @@ bool ScreenClass::isOn() {
   return _isOn;
 }
 
+bool ScreenClass::isActive() {
+  return _isActive;
+}
+
 uint8_t ScreenClass::getBrightness() {
   return _brightness;
 }
@@ -24,9 +28,7 @@ uint8_t ScreenClass::getBrightness() {
 void ScreenClass::setBrightness(uint8_t percentage) {
   if (_brightness != percentage) {
     _brightness = percentage;
-    if (isOn()) {
-      _display->setBrightness(percentage * 255 / 100);
-    }
+    _display->setBrightness(percentage * 255 / 100);
   }
 }
 
@@ -38,6 +40,7 @@ void ScreenClass::dim() {
     percentage = 0;
   }
   setBrightness(percentage);
+  _isActive = false;
 }
 
 bool ScreenClass::isFlipped() {
@@ -109,7 +112,11 @@ void ScreenClass::clear() {
 }
 
 void ScreenClass::activate() {
+  if (!isOn()) {
+    turnOn();
+  }
   setBrightness(100);
+  _isActive = true;
   _lastActiveTime = millis();
 }
 

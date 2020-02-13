@@ -132,6 +132,18 @@ ProgressView *ApplicationClass::_getProgressView() {
 }
 
 void ApplicationClass::_loop() {
+  auto hours = TimeClient.now().getHours();
+  if (hours <= 6) {
+    if (Screen.isOn() && !Screen.isActive()) {
+      Screen.turnOff();
+    }
+  } else {
+    if (!Screen.isOn()) {
+      Screen.turnOn();
+      Screen.dim();
+    }
+  }
+
   auto currentView = getCurrentView();
 
   if (currentView->tryUpdate()) {
@@ -142,9 +154,13 @@ void ApplicationClass::_loop() {
 }
 
 void ApplicationClass::_handleKeyPress(KeyEventArgs e) {
-  Screen.activate();
-  _fireKeyPressEvent(e);
-  _rootViewContainer->handleKeyPress(e);
+  if (!Screen.isOn()) {
+    Screen.activate();
+  } else {
+    Screen.activate();
+    _fireKeyPressEvent(e);
+    _rootViewContainer->handleKeyPress(e);
+  }
 }
 
 void ApplicationClass::_fireKeyPressEvent(KeyEventArgs e) {
@@ -154,9 +170,13 @@ void ApplicationClass::_fireKeyPressEvent(KeyEventArgs e) {
 }
 
 void ApplicationClass::_handleScroll(ScrollEventArgs e) {
-  Screen.activate();
-  _fireScrollEvent(e);
-  _rootViewContainer->handleScroll(e);
+  if (!Screen.isOn()) {
+    Screen.activate();
+  } else {
+    Screen.activate();
+    _fireScrollEvent(e);
+    _rootViewContainer->handleScroll(e);
+  }
 }
 
 void ApplicationClass::_fireScrollEvent(ScrollEventArgs e) {

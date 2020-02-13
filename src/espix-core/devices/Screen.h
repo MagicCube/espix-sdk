@@ -28,6 +28,8 @@ public:
   // Gets true if the screen is on.
   bool isOn();
 
+  bool isActive();
+
   // Gets true if the screen is flipped vertically.
   bool isFlipped();
 
@@ -72,6 +74,7 @@ private:
   OLEDDisplay *_display;
   Canvas *_canvas;
   bool _isOn = true;
+  bool _isActive = true;
   int _brightness = 255;
   bool _flipped = false;
   bool _mirrored = false;
