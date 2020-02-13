@@ -23,7 +23,7 @@ void ServiceClientClass::update() {
       auto now = TimeClient.now();
       if ((now.getHours() == 22 && now.getMinutes() >= 29) || now.getHours() > 22) {
         // During the night, when New York time is after 9:30am
-        if (millis() - _lastUpdateTime > 2 * 60 * 1000) {
+        if (millis() - _lastUpdateTime > 1.5 * 60 * 1000) {
           _lastUpdateTime = millis();
           Serial.println("Fetching from my-cloudflare-services.you-fm.workers.dev/stock...");
           _ajax.open("GET", "http://my-cloudflare-services.you-fm.workers.dev/stock");
