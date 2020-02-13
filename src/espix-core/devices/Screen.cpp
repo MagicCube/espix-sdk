@@ -13,6 +13,10 @@ Canvas *ScreenClass::getCanvas() {
   return _canvas;
 }
 
+bool ScreenClass::isOn() {
+  return _isOn;
+}
+
 uint8_t ScreenClass::getBrightness() {
   return _brightness;
 }
@@ -85,10 +89,12 @@ void ScreenClass::update() {
 
 void ScreenClass::turnOn() {
   _display->displayOn();
+  _isOn = true;
 }
 
 void ScreenClass::turnOff() {
   _display->displayOff();
+  _isOn = false;
 }
 
 void ScreenClass::clearBuffer() {

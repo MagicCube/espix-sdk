@@ -25,6 +25,9 @@ public:
   uint8_t getBrightness();
   void setBrightness(uint8_t percentage);
 
+  // Gets true if the screen is on.
+  bool isOn();
+
   // Gets true if the screen is flipped vertically.
   bool isFlipped();
 
@@ -68,6 +71,7 @@ public:
 private:
   OLEDDisplay *_display;
   Canvas *_canvas;
+  bool _isOn = true;
   int _brightness = 255;
   bool _flipped = false;
   bool _mirrored = false;
