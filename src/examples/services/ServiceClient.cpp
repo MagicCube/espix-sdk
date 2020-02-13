@@ -12,12 +12,24 @@ void ServiceClientClass::update() {
   if (!_initialized)
     return;
 
-  if (_lastUpdateTime == 0 || (millis() - _lastUpdateTime > UPDATE_INTERVAL)) {
-    if (_ajax.readyState() == 0 || _ajax.readyState() == 4) {
+  if (_ajax.readyState() == 0 || _ajax.readyState() == 4) {
+    if (_lastUpdateTime == 0 || (millis() - _lastUpdateTime > UPDATE_INTERVAL)) {
+      // Routine Update
       _lastUpdateTime = millis();
       Serial.println("Fetching from my-cloudflare-services.you-fm.workers.dev...");
       _ajax.open("GET", "http://my-cloudflare-services.you-fm.workers.dev/");
       _ajax.send();
+    } else {
+      auto now = TimeClient.now();
+      if ((now.getHours() == 22 && now.getMinutes() >= 29) || now.getHours() > 22) {
+        // During the night, when New York time is after 9:30am
+        if (millis() - _lastUpdateTime > 2 * 60 * 1000) {
+          _lastUpdateTime = millis();
+          Serial.println("Fetching from my-cloudflare-services.you-fm.workers.dev/stock...");
+          _ajax.open("GET", "http://my-cloudflare-services.you-fm.workers.dev/stock");
+          _ajax.send();
+        }
+      }
     }
   }
 }
@@ -42,8 +54,12 @@ void ServiceClientClass::handleCallback(asyncHTTPrequest *request) {
   if (request->responseHTTPcode() == 200) {
     DynamicJsonDocument json(2048);
     deserializeJson(json, request->responseText());
-    ServiceClient._extractStock(json);
-    ServiceClient._extractForecast(json);
+    if (json.containsKey("stock")) {
+      ServiceClient._extractStock(json);
+    }
+    if (json.containsKey("weather")) {
+      ServiceClient._extractWeather(json);
+    }
   }
 }
 
@@ -55,7 +71,7 @@ void ServiceClientClass::_extractStock(DynamicJsonDocument json) {
   _stocks[0].changePercent = first["changePercent"];
 }
 
-void ServiceClientClass::_extractForecast(DynamicJsonDocument json) {
+void ServiceClientClass::_extractWeather(DynamicJsonDocument json) {
   for (int i = 0; i < 4; i++) {
     auto forecast = json["weather"][i];
     _weatherForecast[i].day = forecast["day"].as<char *>();

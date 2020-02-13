@@ -132,18 +132,6 @@ ProgressView *ApplicationClass::_getProgressView() {
 }
 
 void ApplicationClass::_loop() {
-  auto hours = TimeClient.now().getHours();
-  if (hours <= 6) {
-    if (Screen.isOn() && !Screen.isActive()) {
-      Screen.turnOff();
-    }
-  } else {
-    if (!Screen.isOn()) {
-      Screen.turnOn();
-      Screen.dim();
-    }
-  }
-
   auto currentView = getCurrentView();
 
   if (currentView->tryUpdate()) {

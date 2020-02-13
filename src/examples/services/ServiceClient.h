@@ -5,6 +5,8 @@
 #include <ArduinoJson.h>
 #include <asyncHTTPrequest.h>
 
+#include "../../espix-core.h"
+
 #include "../config.h"
 
 #include "./models/Stock.h"
@@ -92,7 +94,7 @@ private:
                                           .lowTemp = 4}};
 #endif
   void _extractStock(DynamicJsonDocument doc);
-  void _extractForecast(DynamicJsonDocument doc);
+  void _extractWeather(DynamicJsonDocument doc);
 };
 
 extern ServiceClientClass ServiceClient;
