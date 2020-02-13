@@ -24,7 +24,9 @@ uint8_t ScreenClass::getBrightness() {
 void ScreenClass::setBrightness(uint8_t percentage) {
   if (_brightness != percentage) {
     _brightness = percentage;
-    _display->setBrightness(percentage * 255 / 100);
+    if (isOn()) {
+      _display->setBrightness(percentage * 255 / 100);
+    }
   }
 }
 
