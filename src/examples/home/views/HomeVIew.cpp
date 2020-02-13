@@ -44,7 +44,7 @@ bool HomeView::shouldUpdate() {
 
 void HomeView::update() {
   if (TimeClient.isReady()) {
-    _timeString = TimeClient.getLocalTimeShortStrig();
+    _timeString = TimeClient.now().toString("%H:%M");
   }
 }
 
@@ -65,7 +65,7 @@ void HomeView::_drawDateTime(CanvasContext *context) {
 
   // Date
   context->setFontSize(FontSize::NORMAL);
-  String date = TimeClient.getLocalDateShortString();
+  String date = TimeClient.now().toString("%a %d");
   date.toUpperCase();
   context->drawString(date, getClientWidth() - PADDING_RIGHT, 0);
 

@@ -58,8 +58,12 @@ public:
   // Turns off.
   void turnOff();
 
+  // Dim screen to minimum brightness.
+  void dim();
+
   // Reset auto dim timer.
   void activate();
+
 
 private:
   OLEDDisplay *_display;

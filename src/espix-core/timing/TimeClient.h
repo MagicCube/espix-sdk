@@ -13,21 +13,13 @@ public:
   TimeClientClass(unsigned long timeOffset);
 
   // Gets the Unix timestamp of now.
-  unsigned long now();
+  unsigned long ticks();
 
   // Gets a boolean value indicates whether the time client is synchronized.
   bool isReady();
 
   // Get a DateTime object in local time zone.
-  DateTime getLocalTime();
-
-  // Get formatted local time.
-  // http://www.cplusplus.com/reference/ctime/strftime/
-  String getLocalTimeStrig();
-
-  String getLocalTimeShortStrig();
-
-  String getLocalDateShortString();
+  DateTime now();
 
   // Initializes the time client.
   void begin();

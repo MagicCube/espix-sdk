@@ -4,7 +4,7 @@ TimeClientClass::TimeClientClass(unsigned long timeOffset) {
   _timeOffset = timeOffset;
 }
 
-unsigned long TimeClientClass::now() {
+unsigned long TimeClientClass::ticks() {
   return time(nullptr) * 1000;
 }
 
@@ -12,39 +12,8 @@ bool TimeClientClass::isReady() {
   return _isReady;
 }
 
-DateTime TimeClientClass::getLocalTime() {
-  long t = now();
-  return DateTime(t, _timeOffset);
-}
-
-String TimeClientClass::getLocalTimeStrig() {
-  time_t rawTime = time(nullptr);
-  time_t localTime = rawTime + _timeOffset / 1000;
-  struct tm *timeInfo;
-  timeInfo = localtime(&localTime);
-  char buffer[8];
-  strftime(buffer, 9, "%T", timeInfo);
-  return buffer;
-}
-
-String TimeClientClass::getLocalTimeShortStrig() {
-  time_t rawTime = time(nullptr);
-  time_t localTime = rawTime + _timeOffset / 1000;
-  struct tm *timeInfo;
-  timeInfo = localtime(&localTime);
-  char buffer[5];
-  strftime(buffer, 9, "%H:%M", timeInfo);
-  return buffer;
-}
-
-String TimeClientClass::getLocalDateShortString() {
-  time_t rawTime = time(nullptr);
-  time_t localTime = rawTime + _timeOffset / 1000;
-  struct tm *timeInfo;
-  timeInfo = localtime(&localTime);
-  char buffer[6];
-  strftime(buffer, 9, "%a %d", timeInfo);
-  return buffer;
+DateTime TimeClientClass::now() {
+  return DateTime(ticks(), _timeOffset);
 }
 
 void TimeClientClass::begin() {

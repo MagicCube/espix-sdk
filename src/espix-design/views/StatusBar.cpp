@@ -18,7 +18,7 @@ bool StatusBar::shouldUpdate() {
 
 void StatusBar::update() {
   if (TimeClient.isReady()) {
-    _text = TimeClient.getLocalTimeStrig().substring(0, 5);
+    _text = TimeClient.now().toString("%H:%M");
   } else {
     _text = "";
   }
