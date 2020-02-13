@@ -89,7 +89,7 @@ void HomeView::_drawWeather(CanvasContext *context) {
 
       context->setTextAlign(TextAlign::LEFT);
       context->setFont(Meteocons_Plain_42);
-      context->drawString(now.dayCondCode, PADDING_LEFT, 7);
+      context->drawString(now.dayCondCode, PADDING_LEFT, 12);
     } else {
       context->setTextAlign(TextAlign::CENTER);
       context->setFontSize(FontSize::NORMAL);
@@ -107,15 +107,15 @@ void HomeView::_drawStocks(CanvasContext *context) {
       const uint8_t PADDING_LEFT = 8;
       context->setTextAlign(TextAlign::CENTER);
       context->setFontSize(FontSize::NORMAL);
-      context->drawString(String(abs(stock.changePercent)) + "%",
-                          PADDING_LEFT + 22, 0);
+      context->drawString(String(abs(stock.changePercent)) + "%", PADDING_LEFT + 22, 0);
 
       context->setFontSize(FontSize::H2);
       context->setTextAlign(TextAlign::RIGHT);
       context->drawString(String((int)stock.price), PADDING_LEFT + 34, 27);
       context->setTextAlign(TextAlign::LEFT);
       context->setFontSize(FontSize::NORMAL);
-      context->drawString("." + String((int)(stock.price * 100 - ((int)stock.price * 100))), PADDING_LEFT + 34, 32);
+      context->drawString("." + String((int)(stock.price * 100 - ((int)stock.price * 100))),
+                          PADDING_LEFT + 34, 32);
 
       // Draw Triangle
       if (stock.changePercent > 0) {
