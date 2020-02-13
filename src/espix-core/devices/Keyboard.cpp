@@ -1,7 +1,5 @@
 #include "Keyboard.h"
 
-#include "Screen.h"
-
 KeyboardClass::KeyboardClass() {
   _keyPressHandler = [=](KeyEventArgs e) { this->_handleKeyPress(e); };
   _jogDialScrollHandler = [=](ScrollEventArgs e) { this->_handleScroll(e); };
@@ -51,12 +49,10 @@ void KeyboardClass::update() {
 }
 
 void KeyboardClass::_handleKeyPress(KeyEventArgs e) {
-  Screen.activate();
   _fireKeyPressEvent(e);
 }
 
 void KeyboardClass::_handleScroll(ScrollEventArgs e) {
-  Screen.activate();
   _fireScrollEvent(e);
 }
 

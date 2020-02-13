@@ -142,6 +142,7 @@ void ApplicationClass::_loop() {
 }
 
 void ApplicationClass::_handleKeyPress(KeyEventArgs e) {
+  Screen.activate();
   _fireKeyPressEvent(e);
   _rootViewContainer->handleKeyPress(e);
 }
@@ -153,6 +154,7 @@ void ApplicationClass::_fireKeyPressEvent(KeyEventArgs e) {
 }
 
 void ApplicationClass::_handleScroll(ScrollEventArgs e) {
+  Screen.activate();
   _fireScrollEvent(e);
   _rootViewContainer->handleScroll(e);
 }

@@ -1,5 +1,7 @@
 #include "Screen.h"
 
+#include "../timing/TimeClient.h"
+
 ScreenClass::ScreenClass() {
 }
 
@@ -18,8 +20,18 @@ uint8_t ScreenClass::getBrightness() {
 void ScreenClass::setBrightness(uint8_t percentage) {
   if (_brightness != percentage) {
     _brightness = percentage;
-    _display->setContrast(percentage * 255 / 100);
+    _display->setBrightness(percentage * 255 / 100);
   }
+}
+
+void ScreenClass::dim() {
+  uint8_t percentage = 40;
+  int hours = TimeClient.now().getHours();
+  if (hours > 20 || hours < 9) {
+    // Before 8pm
+    percentage = 0;
+  }
+  setBrightness(percentage);
 }
 
 bool ScreenClass::isFlipped() {
@@ -67,9 +79,7 @@ void ScreenClass::update() {
     _canvas->update();
   }
   if (millis() - _lastActiveTime > 5 * 1000) {
-    if (_brightness != 0) {
-      setBrightness(0);
-    }
+    dim();
   }
 }
 
