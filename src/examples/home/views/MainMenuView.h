@@ -4,11 +4,11 @@
 
 #include "../../../espix-design.h"
 
-class HomeMenuView : public MenuListView {
+class MainMenuView : public MenuListView {
 public:
-  HomeMenuView();
+  MainMenuView();
 
-  static HomeMenuView *getInstance();
+  static MainMenuView *getInstance();
 
   void didSelect() {
     Application.popView();

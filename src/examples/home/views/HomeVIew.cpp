@@ -1,6 +1,6 @@
 #include "HomeView.h"
 
-#include "HomeMenuView.h"
+#include "MainMenuView.h"
 
 #include "../../services/ServiceClient.h"
 
@@ -49,7 +49,7 @@ void HomeView::update() {
 }
 
 void HomeView::didSelect() {
-  // Application.pushView(HomeMenuView::getInstance());
+  Application.pushView(MainMenuView::getInstance());
 }
 
 void HomeView::render(CanvasContext *context) {
