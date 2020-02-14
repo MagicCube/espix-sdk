@@ -10,7 +10,7 @@ public:
 
   static MainMenuView *getInstance();
 
-  void didSelect() {
-    Application.popView();
-  }
+  void willMount();
+  void willUnmount();
+  void didSelect();
 };
