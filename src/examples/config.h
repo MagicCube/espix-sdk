@@ -1,13 +1,15 @@
 #pragma once
 
-#define OLED_SDA D1
-#define OLED_CLK D2
+#define OLED_SDA_PIN D1
+#define OLED_CLK_PIN D2
 
-#define KY04_CLK D5
-#define KY04_DT D6
-#define KY04_SW D7
+#define KY04_CLK_PIN D5
+#define KY04_DT_PIN D6
+#define KY04_SW_PIN D7
 
-#define ESC_BUTTON D3
+#define ESC_BUTTON_PIN D3
+
+#define BUZZER_PIN D8
 
 #define WIFI_DEFAULT_SSID "Henry's iPhone Pro"
 #define WIFI_DEFAULT_PWD "13913954971"

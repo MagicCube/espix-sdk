@@ -1,6 +1,7 @@
 #include <Arduino.h>
 
 #include <ESP8266HTTPClient.h>
+#include <EasyBuzzer.h>
 #include <SH1106Wire.h>
 
 #include "espix-core.h"
@@ -13,15 +14,20 @@
 
 bool connecting = false;
 
-SH1106Wire display(0x3c, OLED_SDA, OLED_CLK);
+SH1106Wire display(0x3c, OLED_SDA_PIN, OLED_CLK_PIN);
 
 StatusBar statusBar;
 RootView rootView;
 ProgressView connectionView("Connecting to WiFi...", ProgressMode::INDETERMINATE);
 
+void seoncdBeep() {
+  EasyBuzzer.singleBeep(2217, 20);
+}
+
 void onConnected() {
   connecting = false;
-  Application.enableOTA();
+  // Application.enableOTA();
+  EasyBuzzer.singleBeep(2637, 10, seoncdBeep);
   Application.setStatusView(&statusBar);
   Application.setRootView(&rootView, TRANSITION_OPTIONS_DOWN);
   ServiceClient.begin();
@@ -40,9 +46,11 @@ void setupDevices() {
   Screen.setOrientation(true);
   Screen.setBrightness(100);
 
-  Keyboard.registerJogDial(KY04_CLK, KY04_DT, KY04_SW);
-  Keyboard.registerKey(KEY_ESC, ESC_BUTTON);
+  Keyboard.registerJogDial(KY04_CLK_PIN, KY04_DT_PIN, KY04_SW_PIN);
+  Keyboard.registerKey(KEY_ESC, ESC_BUTTON_PIN);
   Keyboard.begin();
+
+  EasyBuzzer.setPin(BUZZER_PIN);
 }
 
 void setupApp() {
@@ -54,15 +62,25 @@ void setup() {
   Serial.println();
   setupDevices();
   setupApp();
-  #ifndef DEBUG_LOCAL
-    connect();
-  #else
-    Application.setStatusView(&statusBar);
-    Application.setRootView(&rootView);
-  #endif
+
+  // EasyBuzzer.beep(4000, // Frequency in hertz(HZ).
+  //                 40,   // On Duration in milliseconds(ms).
+  //                 80,   // Off Duration in milliseconds(ms).
+  //                 4,    // The number of beeps per cycle.
+  //                 500,  // Pause duration.
+  //                 20    // The number of cycle.
+  // );
+
+#ifndef DEBUG_LOCAL
+  connect();
+#else
+  Application.setStatusView(&statusBar);
+  Application.setRootView(&rootView);
+#endif
 }
 
 void loop() {
+  EasyBuzzer.update();
   ServiceClient.update();
   int timeBudget = Application.update();
   if (timeBudget > 0) {
