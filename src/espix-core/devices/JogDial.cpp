@@ -12,7 +12,7 @@ void JogDial::begin() {
 
 void JogDial::update() {
   if (millis() - _lastUpdate > 150) {
-    int value = 0 - _encoder.read();
+    int value = _encoder.read();
     if (value != 0) {
       if (std::abs(value) > 1) {
         value = value / 2;
