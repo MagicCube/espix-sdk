@@ -9,11 +9,11 @@ MainMenuView *MainMenuView::getInstance() {
 }
 
 void MainMenuView::willMount() {
-  Application.showStatusView();
+  Application.showStatusBar();
 }
 
 void MainMenuView::willUnmount() {
-  Application.hideStatusView();
+  Application.hideStatusBar();
 }
 
 void MainMenuView::didSelect() {

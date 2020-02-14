@@ -6,6 +6,17 @@ StatusBar::StatusBar() : View() {
   setHeight(12);
 }
 
+String StatusBar::getText() {
+  return _text;
+}
+
+void StatusBar::setText(String text) {
+  if (_text != text) {
+    _text = text;
+    setDirty();
+  }
+}
+
 bool StatusBar::shouldUpdate() {
   if (isDirty()) {
     return true;
@@ -16,17 +27,15 @@ bool StatusBar::shouldUpdate() {
   return false;
 }
 
-void StatusBar::update() {
-  if (TimeClient.isReady()) {
-    _text = TimeClient.now().toString("%H:%M");
-  } else {
-    _text = "";
-  }
-}
-
 void StatusBar::render(CanvasContext *context) {
   context->clear();
   context->setFontSize(FontSize::NORMAL);
   context->setTextAlign(TextAlign::CENTER);
-  context->drawString(_text);
+  if (!getText().equals("")) {
+    context->drawString(getText());
+  } else {
+    if (TimeClient.isReady()) {
+      context->drawString(TimeClient.now().toString("%H:%M"));
+    }
+  }
 }

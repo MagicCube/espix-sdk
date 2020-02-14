@@ -10,11 +10,11 @@ AlarmView *AlarmView::getInstance() {
 
 void AlarmView::willMount() {
   _step = AlarmSetupStep::SETTING_HOURS;
-  Application.showStatusView();
+  Application.showStatusBar();
 }
 
 void AlarmView::willUnmount() {
-  Application.hideStatusView();
+  Application.hideStatusBar();
 }
 
 void AlarmView::didSelect() {
@@ -103,7 +103,7 @@ void AlarmView::render(CanvasContext *context) {
   }
   context->setTextAlign(TextAlign::CENTER);
   context->setFontSize(FontSize::NORMAL);
-  context->drawString(ALARM_MODES[_mode], getClientWidth() / 2, 38);
+  context->drawString(ALARM_MODES[_mode], getClientWidth() / 2, 37);
 }
 
 void AlarmView::_nextStep() {

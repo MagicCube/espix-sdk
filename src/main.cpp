@@ -23,7 +23,7 @@ ProgressView connectionView("Connecting to WiFi...", ProgressMode::INDETERMINATE
 void onConnected() {
   connecting = false;
   // Application.enableOTA();
-  Application.setStatusView(&statusBar);
+  Application.setStatusBar(&statusBar);
   Application.setRootView(&rootView, TRANSITION_OPTIONS_DOWN);
   ServiceClient.begin();
 }
@@ -69,7 +69,7 @@ void setup() {
 #ifndef DEBUG_LOCAL
   connect();
 #else
-  Application.setStatusView(&statusBar);
+  Application.setStatusBar(&statusBar);
   Application.setRootView(&rootView);
 #endif
 }

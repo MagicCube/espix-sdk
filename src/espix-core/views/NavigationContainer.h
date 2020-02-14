@@ -3,6 +3,7 @@
 #include <Arduino.h>
 
 #include "ViewContainer.h"
+#include "../../espix-design/views/StatusBar.h"
 
 #include "../collections/Stack.h"
 
@@ -12,6 +13,8 @@ public:
   // Creates an instance of the NavigationContainer class.
   NavigationContainer();
 
+  void setCurrentView(View *view, TransitionOptions transitionOptions = TRANSITION_OPTIONS_NONE);
+
   // Gets the root view of the navagation container.
   View *getRootView();
 
@@ -19,14 +22,12 @@ public:
   void setRootView(View *view, TransitionOptions options = TRANSITION_OPTIONS_NONE);
 
   // Gets or sets the status bar view of navigation container.
-  // Set to NULL if you don't want to use status bar.
-  // Try StatusBar in espix-design if you don't want to implement one by yourself.
-  View *getStatusView();
-  void setStatusView(View *view);
+  StatusBar *getStatusBar();
+  void setStatusBar(StatusBar *view);
 
-  // Show or hide status view.
-  void showStatusView();
-  void hideStatusView();
+  // Show or hide status bar.
+  void showStatusBar();
+  void hideStatusBar();
 
   // Returns whether the navigation stack can be popped.
   bool canPop();
@@ -44,8 +45,8 @@ public:
   void handleKeyPress(KeyEventArgs e);
 
 private:
-  bool _statusViewVisible = false;
-  View *_statusView = NULL;
+  bool _statusBarVisible = false;
+  StatusBar *_statusBar = NULL;
   View *_rootView = NULL;
   Stack<View *> _navigationStack;
 };

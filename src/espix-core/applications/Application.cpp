@@ -30,20 +30,20 @@ void ApplicationClass::setRootView(View *view, TransitionOptions transitionOptio
   Screen.update();
 }
 
-View *ApplicationClass::getStatusView() {
-  return _rootViewContainer->getStatusView();
+View *ApplicationClass::getStatusBar() {
+  return _rootViewContainer->getStatusBar();
 }
 
-void ApplicationClass::setStatusView(View *view) {
-  _rootViewContainer->setStatusView(view);
+void ApplicationClass::setStatusBar(StatusBar *view) {
+  _rootViewContainer->setStatusBar(view);
 }
 
-void ApplicationClass::showStatusView() {
-  _rootViewContainer->showStatusView();
+void ApplicationClass::showStatusBar() {
+  _rootViewContainer->showStatusBar();
 }
 
-void ApplicationClass::hideStatusView() {
-  _rootViewContainer->hideStatusView();
+void ApplicationClass::hideStatusBar() {
+  _rootViewContainer->hideStatusBar();
 }
 
 void ApplicationClass::pushView(View *view, TransitionOptions transitionOptions) {

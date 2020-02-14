@@ -14,6 +14,11 @@ public:
   // Initailize a new instance of the View class.
   View();
 
+  // Gets the title of the view.
+  virtual String getTitle() {
+    return "";
+  }
+
   // Gets or sets the parent of the view.
   ViewContainer *getParentView();
   void setParentView(ViewContainer *parentView);

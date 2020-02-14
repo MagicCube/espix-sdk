@@ -16,6 +16,10 @@ public:
 
   static AlarmView *getInstance();
 
+  String getTitle() {
+    return "ALARM SETTINGS";
+  }
+
   void willMount();
   void willUnmount();
   void handleScroll(ScrollEventArgs e);
@@ -24,7 +28,7 @@ public:
   void render(CanvasContext *context);
 
 private:
-  const String ALARM_MODES[3] = { "EVERYDAY", "WEEKDAYS", "OFF" };
+  const String ALARM_MODES[3] = { "Everyday", "Weekdays", "Off" };
 
   uint8_t _hours = 0;
   uint8_t _minutes = 0;

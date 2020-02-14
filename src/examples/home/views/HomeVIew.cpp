@@ -15,11 +15,11 @@ HomeView *HomeView::getInstance() {
 }
 
 void HomeView::willMount() {
-  Application.hideStatusView();
+  Application.hideStatusBar();
 }
 
 void HomeView::willUnmount() {
-  Application.showStatusView();
+  Application.showStatusBar();
   _sideViewIndex = 0;
   _millisSinceLastSideViewIndexChanged = millis();
 }

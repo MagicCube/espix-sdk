@@ -8,10 +8,13 @@
 class StatusBar : public View {
 public:
   StatusBar();
+
+  String getText();
+  void setText(String text);
+
   bool shouldUpdate();
-  void update();
   void render(CanvasContext *context);
 
 private:
-  String _text;
+  String _text = "";
 };
