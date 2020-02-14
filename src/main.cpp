@@ -1,6 +1,8 @@
 #include <Arduino.h>
 
+#include <EEPROM.h>
 #include <ESP8266HTTPClient.h>
+
 #include <EasyBuzzer.h>
 #include <SH1106Wire.h>
 
@@ -9,6 +11,7 @@
 
 #include "examples/config.h"
 
+#include "examples/alarm/Alarm.h"
 #include "examples/root/views/RootView.h"
 #include "examples/services/ServiceClient.h"
 
@@ -49,6 +52,7 @@ void setupDevices() {
 }
 
 void setupApp() {
+  Alarm.begin();
   Application.begin();
 }
 

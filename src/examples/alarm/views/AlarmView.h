@@ -28,7 +28,7 @@ public:
   void render(CanvasContext *context);
 
 private:
-  const String ALARM_MODES[3] = { "Everyday", "Weekdays", "Off" };
+  const String ALARM_MODES[3] = { "Turned Off", "Everyday", "Weekdays" };
 
   uint8_t _hours = 0;
   uint8_t _minutes = 0;

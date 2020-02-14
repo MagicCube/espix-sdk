@@ -1,6 +1,6 @@
 #include "HomeView.h"
 
-#include "AlarmView.h"
+#include "../../alarm/views/AlarmView.h"
 
 #include "../../services/ServiceClient.h"
 
