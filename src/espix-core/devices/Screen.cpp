@@ -39,7 +39,7 @@ void ScreenClass::dim() {
     // After 8pm, and before 9
     percentage = 25;
   } else if (hours <= 6) {
-    percentage = 14;
+    percentage = 12;
     _isOn = false;
   }
   setBrightness(percentage);
