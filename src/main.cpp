@@ -20,14 +20,9 @@ StatusBar statusBar;
 RootView rootView;
 ProgressView connectionView("Connecting to WiFi...", ProgressMode::INDETERMINATE);
 
-void seoncdBeep() {
-  EasyBuzzer.singleBeep(2217, 20);
-}
-
 void onConnected() {
   connecting = false;
   // Application.enableOTA();
-  EasyBuzzer.singleBeep(2637, 10, seoncdBeep);
   Application.setStatusView(&statusBar);
   Application.setRootView(&rootView, TRANSITION_OPTIONS_DOWN);
   ServiceClient.begin();
