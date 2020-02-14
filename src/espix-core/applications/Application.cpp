@@ -147,7 +147,9 @@ void ApplicationClass::_handleKeyPress(KeyEventArgs e) {
   } else {
     Screen.activate();
     _fireKeyPressEvent(e);
-    _rootViewContainer->handleKeyPress(e);
+    if (!e.preventDefault) {
+      _rootViewContainer->handleKeyPress(e);
+    }
   }
 }
 

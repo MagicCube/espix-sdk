@@ -22,6 +22,7 @@ struct KeyEventArgs : EventArgs {
   }
 
   KeyCode keyCode;
+  bool preventDefault = false;
 };
 
 typedef function<void(ScrollEventArgs)> ScrollEventHandler;

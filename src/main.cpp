@@ -6,8 +6,8 @@
 #include <EasyBuzzer.h>
 #include <SH1106Wire.h>
 
-#include "espix-core.h"
-#include "espix-design.h"
+#include <espix-core.h>
+#include <espix-design.h>
 
 #include "examples/config.h"
 
@@ -51,9 +51,19 @@ void setupDevices() {
   EasyBuzzer.setPin(BUZZER_PIN);
 }
 
+void handleKeyPress(KeyEventArgs e) {
+  if (e.keyCode == KEY_ESC) {
+    if (Alarm.isBeeping()) {
+      e.preventDefault = true;
+      Alarm.stopBeep();
+    }
+  }
+}
+
 void setupApp() {
   Alarm.begin();
   Application.begin();
+  Application.onKeyPress(handleKeyPress);
 }
 
 void setup() {
@@ -61,15 +71,6 @@ void setup() {
   Serial.println();
   setupDevices();
   setupApp();
-
-  // EasyBuzzer.beep(4000, // Frequency in hertz(HZ).
-  //                 40,   // On Duration in milliseconds(ms).
-  //                 80,   // Off Duration in milliseconds(ms).
-  //                 4,    // The number of beeps per cycle.
-  //                 500,  // Pause duration.
-  //                 20    // The number of cycle.
-  // );
-
 #ifndef DEBUG_LOCAL
   connect();
 #else
@@ -79,6 +80,7 @@ void setup() {
 }
 
 void loop() {
+  Alarm.update();
   EasyBuzzer.update();
   ServiceClient.update();
   int timeBudget = Application.update();

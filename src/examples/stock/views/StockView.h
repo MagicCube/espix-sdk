@@ -2,7 +2,7 @@
 
 #include <Arduino.h>
 
-#include "../../../espix-core.h"
+#include <espix-core.h>
 
 class StockView : public View {
 public:
