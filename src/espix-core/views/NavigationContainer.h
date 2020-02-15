@@ -42,7 +42,7 @@ public:
   bool shouldUpdate();
   void update();
   void render(CanvasContext *context);
-  void handleKeyPress(KeyEventArgs e);
+  void handleKeyPress(KeyEventArgs *e);
 
 private:
   bool _statusBarVisible = false;

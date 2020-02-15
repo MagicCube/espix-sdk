@@ -144,11 +144,11 @@ public:
   /*************************************/
   // Overrides if you want to capture key press event.
   // Please avoid to call this method directly from your program.
-  virtual void handleKeyPress(KeyEventArgs e);
+  virtual void handleKeyPress(KeyEventArgs *e);
 
   // Overrides if you want to capture scroll event.
   // Please avoid to call this method directly from your program.
-  virtual void handleScroll(ScrollEventArgs e);
+  virtual void handleScroll(ScrollEventArgs *e);
 
 private:
   Canvas *_canvas;

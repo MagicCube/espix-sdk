@@ -24,8 +24,8 @@ public:
   void showPrevSubview();
 
   void didMount();
-  void handleKeyPress(KeyEventArgs e);
-  void handleScroll(ScrollEventArgs e);
+  void handleKeyPress(KeyEventArgs *e);
+  void handleScroll(ScrollEventArgs *e);
 
 private:
   TransitionDirection _computeTransitionDirection(int d);

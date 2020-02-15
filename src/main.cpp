@@ -53,10 +53,10 @@ void setupDevices() {
   EasyBuzzer.setPin(BUZZER_PIN);
 }
 
-void handleKeyPress(KeyEventArgs e) {
-  if (e.keyCode == KEY_ESC) {
+void handleKeyPress(KeyEventArgs *e) {
+  if (e->keyCode == KEY_ESC) {
     if (Alarm.isBeeping()) {
-      e.preventDefault = true;
+      e->preventDefault();
       Alarm.stopBeep();
     }
   }

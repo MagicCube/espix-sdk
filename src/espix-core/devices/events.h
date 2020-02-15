@@ -8,7 +8,8 @@
 
 using namespace std;
 
-struct ScrollEventArgs : EventArgs {
+class ScrollEventArgs : public EventArgs {
+public:
   ScrollEventArgs(int p_delta) {
     delta = p_delta;
   }
@@ -16,14 +17,14 @@ struct ScrollEventArgs : EventArgs {
   int delta;
 };
 
-struct KeyEventArgs : EventArgs {
+class KeyEventArgs : public EventArgs {
+public:
+  KeyCode keyCode;
+
   KeyEventArgs(KeyCode p_keyCode) {
     keyCode = p_keyCode;
   }
-
-  KeyCode keyCode;
-  bool preventDefault = false;
 };
 
-typedef function<void(ScrollEventArgs)> ScrollEventHandler;
-typedef function<void(KeyEventArgs)> KeyEventHandler;
+typedef function<void(ScrollEventArgs *)> ScrollEventHandler;
+typedef function<void(KeyEventArgs *)> KeyEventHandler;

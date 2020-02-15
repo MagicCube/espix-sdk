@@ -62,10 +62,10 @@ public:
 private:
   ProgressView *_getProgressView();
   void _loop();
-  void _handleKeyPress(KeyEventArgs e);
-  void _fireKeyPressEvent(KeyEventArgs e);
-  void _handleScroll(ScrollEventArgs e);
-  void _fireScrollEvent(ScrollEventArgs e);
+  void _handleKeyPress(KeyEventArgs *e);
+  void _fireKeyPressEvent(KeyEventArgs *e);
+  void _handleScroll(ScrollEventArgs *e);
+  void _fireScrollEvent(ScrollEventArgs *e);
 
   unsigned long _lastUpdate = 0;
   bool _otaEnabled = false;

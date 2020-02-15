@@ -84,13 +84,13 @@ void ViewContainer::select() {
   }
 }
 
-void ViewContainer::handleKeyPress(KeyEventArgs e) {
+void ViewContainer::handleKeyPress(KeyEventArgs *e) {
   if (_currentView) {
     _currentView->handleKeyPress(e);
   }
 }
 
-void ViewContainer::handleScroll(ScrollEventArgs e) {
+void ViewContainer::handleScroll(ScrollEventArgs *e) {
   if (_currentView) {
     _currentView->handleScroll(e);
   }

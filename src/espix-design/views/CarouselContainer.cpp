@@ -81,25 +81,25 @@ void CarouselContainer::didMount() {
   }
 }
 
-void CarouselContainer::handleKeyPress(KeyEventArgs e) {
+void CarouselContainer::handleKeyPress(KeyEventArgs *e) {
   auto orientation = getTransitionOrientation();
-  if (e.keyCode == KEY_ESC) {
+  if (e->keyCode == KEY_ESC) {
     showNextSubview();
     return;
   }
   if (orientation == TransitionOrientation::HORIZONTAL) {
-    if (e.keyCode == KEY_LEFT_ARROW) {
+    if (e->keyCode == KEY_LEFT_ARROW) {
       showPrevSubview();
       return;
-    } else if (e.keyCode == KEY_RIGHT_ARROW) {
+    } else if (e->keyCode == KEY_RIGHT_ARROW) {
       showNextSubview();
       return;
     }
   } else {
-    if (e.keyCode == KEY_UP_ARROW) {
+    if (e->keyCode == KEY_UP_ARROW) {
       showPrevSubview();
       return;
-    } else if (e.keyCode == KEY_DOWN_ARROW) {
+    } else if (e->keyCode == KEY_DOWN_ARROW) {
       showNextSubview();
       return;
     }
@@ -110,8 +110,8 @@ void CarouselContainer::handleKeyPress(KeyEventArgs e) {
   }
 }
 
-void CarouselContainer::handleScroll(ScrollEventArgs e) {
-  if (e.delta < 0) {
+void CarouselContainer::handleScroll(ScrollEventArgs *e) {
+  if (e->delta < 0) {
     showPrevSubview();
   } else {
     showNextSubview();

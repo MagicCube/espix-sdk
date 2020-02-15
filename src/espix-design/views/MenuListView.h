@@ -29,8 +29,8 @@ public:
 
   void render(CanvasContext *context);
 
-  void handleKeyPress(KeyEventArgs e);
-  void handleScroll(ScrollEventArgs e);
+  void handleKeyPress(KeyEventArgs *e);
+  void handleScroll(ScrollEventArgs *e);
 
 private:
   int _getFullyVisibleItemCount();

@@ -187,8 +187,8 @@ void View::didSelect() {
 void View::willUnmount() {
 }
 
-void View::handleKeyPress(KeyEventArgs e) {
+void View::handleKeyPress(KeyEventArgs *e) {
 }
 
-void View::handleScroll(ScrollEventArgs e) {
+void View::handleScroll(ScrollEventArgs *e) {
 }

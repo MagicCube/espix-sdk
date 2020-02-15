@@ -22,7 +22,7 @@ public:
 
   void willMount();
   void willUnmount();
-  void handleScroll(ScrollEventArgs e);
+  void handleScroll(ScrollEventArgs *e);
   void didSelect();
 
   void render(CanvasContext *context);

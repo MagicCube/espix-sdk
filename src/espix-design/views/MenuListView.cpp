@@ -88,8 +88,8 @@ void MenuListView::render(CanvasContext *context) {
   context->setColor(Color::WHITE);
 }
 
-void MenuListView::handleKeyPress(KeyEventArgs e) {
-  switch (e.keyCode) {
+void MenuListView::handleKeyPress(KeyEventArgs *e) {
+  switch (e->keyCode) {
   case KEY_ENTER:
     select();
     break;
@@ -104,8 +104,8 @@ void MenuListView::handleKeyPress(KeyEventArgs e) {
   }
 }
 
-void MenuListView::handleScroll(ScrollEventArgs e) {
-  if (e.delta > 0) {
+void MenuListView::handleScroll(ScrollEventArgs *e) {
+  if (e->delta > 0) {
     selectPrevItem();
   } else {
     selectNextItem();

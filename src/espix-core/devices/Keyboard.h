@@ -31,10 +31,10 @@ public:
   void registerJogDial(int clkPin, int dtPin, int swPin = -1);
 
 private:
-  void _handleKeyPress(KeyEventArgs e);
-  void _handleScroll(ScrollEventArgs e);
-  void _fireKeyPressEvent(KeyEventArgs e);
-  void _fireScrollEvent(ScrollEventArgs e);
+  void _handleKeyPress(KeyEventArgs *e);
+  void _handleScroll(ScrollEventArgs *e);
+  void _fireKeyPressEvent(KeyEventArgs *e);
+  void _fireScrollEvent(ScrollEventArgs *e);
 
   Key *_keys[10];
   JogDial *_jogDial;

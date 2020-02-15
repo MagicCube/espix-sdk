@@ -26,9 +26,9 @@ void AlarmView::didSelect() {
   _nextStep();
 }
 
-void AlarmView::handleScroll(ScrollEventArgs e) {
+void AlarmView::handleScroll(ScrollEventArgs *e) {
   if (_step == AlarmSetupStep::SETTING_HOURS) {
-    if (e.delta < 0) {
+    if (e->delta < 0) {
       if (_hours == 0) {
         _hours = 23;
       } else {
@@ -42,7 +42,7 @@ void AlarmView::handleScroll(ScrollEventArgs e) {
       }
     }
   } else if (_step == AlarmSetupStep::SETTING_MINUTES) {
-    if (e.delta < 0) {
+    if (e->delta < 0) {
       if (_minutes == 0) {
         _minutes = 55;
       } else {
@@ -56,7 +56,7 @@ void AlarmView::handleScroll(ScrollEventArgs e) {
       }
     }
   } else if (_step == AlarmSetupStep::SETTING_MODE) {
-    if (e.delta < 0) {
+    if (e->delta < 0) {
       if (_mode == 0) {
         _mode = 2;
       } else {

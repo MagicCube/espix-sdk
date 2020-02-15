@@ -27,8 +27,8 @@ public:
   void update();
   void render(CanvasContext *context);
   void select();
-  void handleKeyPress(KeyEventArgs e);
-  void handleScroll(ScrollEventArgs e);
+  void handleKeyPress(KeyEventArgs *e);
+  void handleScroll(ScrollEventArgs *e);
 
 protected:
   void setCurrentView(View *view, TransitionOptions transitionOptions = TRANSITION_OPTIONS_NONE);

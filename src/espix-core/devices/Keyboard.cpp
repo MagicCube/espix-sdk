@@ -1,8 +1,8 @@
 #include "Keyboard.h"
 
 KeyboardClass::KeyboardClass() {
-  _keyPressHandler = [=](KeyEventArgs e) { this->_handleKeyPress(e); };
-  _jogDialScrollHandler = [=](ScrollEventArgs e) { this->_handleScroll(e); };
+  _keyPressHandler = [=](KeyEventArgs *e) { this->_handleKeyPress(e); };
+  _jogDialScrollHandler = [=](ScrollEventArgs *e) { this->_handleScroll(e); };
 }
 
 void KeyboardClass::onKeyPress(KeyEventHandler handler) {
@@ -48,23 +48,23 @@ void KeyboardClass::update() {
   }
 }
 
-void KeyboardClass::_handleKeyPress(KeyEventArgs e) {
+void KeyboardClass::_handleKeyPress(KeyEventArgs *e) {
   _fireKeyPressEvent(e);
 }
 
-void KeyboardClass::_handleScroll(ScrollEventArgs e) {
+void KeyboardClass::_handleScroll(ScrollEventArgs *e) {
   _fireScrollEvent(e);
 }
 
-void KeyboardClass::_fireKeyPressEvent(KeyEventArgs e) {
+void KeyboardClass::_fireKeyPressEvent(KeyEventArgs *e) {
   if (_onKeyPress) {
     _onKeyPress(e);
   }
 }
 
-void KeyboardClass::_fireScrollEvent(ScrollEventArgs delta) {
+void KeyboardClass::_fireScrollEvent(ScrollEventArgs *e) {
   if (_onScroll) {
-    _onScroll(delta);
+    _onScroll(e);
   }
 }
 

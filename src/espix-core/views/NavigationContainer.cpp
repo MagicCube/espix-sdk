@@ -100,8 +100,8 @@ void NavigationContainer::render(CanvasContext *context) {
   }
 }
 
-void NavigationContainer::handleKeyPress(KeyEventArgs e) {
-  switch (e.keyCode) {
+void NavigationContainer::handleKeyPress(KeyEventArgs *e) {
+  switch (e->keyCode) {
   case KEY_ENTER:
     if (getCurrentView()) {
       getCurrentView()->select();

@@ -94,8 +94,8 @@ void ApplicationClass::onScroll(ScrollEventHandler handler) {
 }
 
 void ApplicationClass::begin() {
-  Keyboard.onKeyPress([=](KeyEventArgs e) { _handleKeyPress(e); });
-  Keyboard.onScroll([=](ScrollEventArgs e) { _handleScroll(e); });
+  Keyboard.onKeyPress([=](KeyEventArgs *e) { _handleKeyPress(e); });
+  Keyboard.onScroll([=](ScrollEventArgs *e) { _handleScroll(e); });
 
   _mainLoop.onTick([=]() { _loop(); });
   _mainLoop.begin();
@@ -141,25 +141,25 @@ void ApplicationClass::_loop() {
   }
 }
 
-void ApplicationClass::_handleKeyPress(KeyEventArgs e) {
+void ApplicationClass::_handleKeyPress(KeyEventArgs *e) {
   if (!Screen.isOn()) {
     Screen.activate();
   } else {
     Screen.activate();
     _fireKeyPressEvent(e);
-    if (!e.preventDefault) {
+    if (!e->isDefaultPrevented()) {
       _rootViewContainer->handleKeyPress(e);
     }
   }
 }
 
-void ApplicationClass::_fireKeyPressEvent(KeyEventArgs e) {
+void ApplicationClass::_fireKeyPressEvent(KeyEventArgs *e) {
   if (_onKeyPress) {
     _onKeyPress(e);
   }
 }
 
-void ApplicationClass::_handleScroll(ScrollEventArgs e) {
+void ApplicationClass::_handleScroll(ScrollEventArgs *e) {
   if (!Screen.isOn()) {
     Screen.activate();
   } else {
@@ -169,7 +169,7 @@ void ApplicationClass::_handleScroll(ScrollEventArgs e) {
   }
 }
 
-void ApplicationClass::_fireScrollEvent(ScrollEventArgs e) {
+void ApplicationClass::_fireScrollEvent(ScrollEventArgs *e) {
   if (_onScroll) {
     _onScroll(e);
   }

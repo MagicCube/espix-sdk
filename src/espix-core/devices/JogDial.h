@@ -16,7 +16,7 @@ public:
   void update();
 
 private:
-  void _fireScrollEvent(ScrollEventArgs e);
+  void _fireScrollEvent(ScrollEventArgs *e);
 
   Encoder _encoder;
   ScrollEventHandler _onScroll = NULL;
