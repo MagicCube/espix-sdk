@@ -35,7 +35,10 @@ void ScreenClass::setBrightness(uint8_t percentage) {
 void ScreenClass::dim() {
   uint8_t percentage = 40;
   int hours = TimeClient.now().getHours();
-  if (hours >= 20) {
+  if (hours >= 23) {
+    // After 11pm, and before 0am
+    percentage = 20;
+  } else if (hours >= 20) {
     // After 8pm, and before 9
     percentage = 25;
   } else if (hours <= 6) {
