@@ -62,7 +62,7 @@ void AlarmClass::startBeep() {
                   80,   // Off Duration in milliseconds(ms).
                   4,    // The number of beeps per cycle.
                   500,  // Pause duration.
-                  30    // The number of cycle.
+                  20    // The number of cycle.
   );
   if (!Screen.isOn()) {
     Screen.turnOn();
