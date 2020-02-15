@@ -25,7 +25,7 @@ ProgressView connectionView("Connecting to WiFi...", ProgressMode::INDETERMINATE
 
 void onConnected() {
   connecting = false;
-  // Application.enableOTA();
+  Application.enableOTA();
   Application.setStatusBar(&statusBar);
   Application.setRootView(&rootView, TRANSITION_OPTIONS_DOWN);
   ServiceClient.begin();
@@ -40,6 +40,8 @@ void connect() {
 }
 
 void setupDevices() {
+  pinMode(LED_PIN, OUTPUT);
+
   Screen.begin(&display);
   Screen.setOrientation(true);
   Screen.setBrightness(100);

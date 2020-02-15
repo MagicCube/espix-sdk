@@ -1,5 +1,7 @@
 #include "Alarm.h"
 
+#include "../config.h"
+
 #include <EEPROM.h>
 #include <EasyBuzzer.h>
 
@@ -66,7 +68,7 @@ void AlarmClass::startBeep() {
     Screen.turnOn();
   }
   Screen.activate();
-  digitalWrite(LED_BUILTIN, HIGH);
+  digitalWrite(LED_PIN, HIGH);
 }
 
 void AlarmClass::stopBeep() {
@@ -78,7 +80,7 @@ void AlarmClass::stopBeep() {
                   0, // Pause duration.
                   0  // The number of cycle.
   );
-  digitalWrite(LED_BUILTIN, LOW);
+  digitalWrite(LED_PIN, LOW);
   _isBeeping = false;
 }
 

@@ -10,6 +10,7 @@
 #define ESC_BUTTON_PIN D3
 
 #define BUZZER_PIN D8
+#define LED_PIN D0
 
 #define WIFI_DEFAULT_SSID "Henry's iPhone Pro"
 #define WIFI_DEFAULT_PWD "13913954971"
