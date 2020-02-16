@@ -18,7 +18,7 @@ public:
   int getSelectedIndex();
 
   ReadonlyList<MenuItem> getItems();
-  MenuItem getItem(int index);
+  MenuItem *getItem(int index);
   void addItem(MenuItem item);
   // void removeItem(MenuItem item);
   // void removeItemAt(int index);

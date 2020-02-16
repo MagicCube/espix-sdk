@@ -2,6 +2,9 @@
 
 #include "../timing/TimeClient.h"
 
+// TODO: DELETE
+#include "../../examples/settings/Settings.h"
+
 ScreenClass::ScreenClass() {
 }
 
@@ -35,15 +38,17 @@ void ScreenClass::setBrightness(uint8_t percentage) {
 void ScreenClass::dim() {
   uint8_t percentage = 40;
   int hours = TimeClient.now().getHours();
-  if (hours >= 23) {
-    // After 11pm, and before 0am
-    percentage = 20;
-  } else if (hours >= 20) {
-    // After 8pm, and before 9
-    percentage = 25;
-  } else if (hours <= 6) {
-    percentage = 16;
+  if (hours <= 6 || Settings.isNightMode()) {
+    percentage = 15;
     _isOn = false;
+  } else {
+    if (hours >= 23) {
+      // After 11pm, and before 0am
+      percentage = 20;
+    } else if (hours >= 20) {
+      // After 8pm, and before 9
+      percentage = 25;
+    }
   }
   setBrightness(percentage);
   _isActive = false;
@@ -93,6 +98,7 @@ void ScreenClass::update() {
   if (_canvas) {
     _canvas->update();
   }
+
   if (millis() - _lastActiveTime > 5 * 1000) {
     dim();
   }

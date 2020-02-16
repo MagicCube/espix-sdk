@@ -1,10 +1,9 @@
 #include "HomeView.h"
 
-#include "../../alarm/views/AlarmView.h"
-
 #include "../../services/ServiceClient.h"
-
 #include "../../weather/assets/meteocons-font.h"
+
+#include "MainMenuView.h"
 
 HomeView::HomeView() : View() {
 }
@@ -49,7 +48,7 @@ void HomeView::update() {
 }
 
 void HomeView::didSelect() {
-  Application.pushView(AlarmView::getInstance());
+  Application.pushView(MainMenuView::getInstance());
 }
 
 void HomeView::render(CanvasContext *context) {

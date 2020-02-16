@@ -16,8 +16,8 @@ ReadonlyList<MenuItem> MenuListView::getItems() {
   return _items;
 }
 
-MenuItem MenuListView::getItem(int index) {
-  return _items[index];
+MenuItem* MenuListView::getItem(int index) {
+  return &_items[index];
 }
 
 void MenuListView::addItem(MenuItem item) {

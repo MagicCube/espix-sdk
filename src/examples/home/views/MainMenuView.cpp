@@ -1,6 +1,12 @@
 #include "MainMenuView.h"
 
-MainMenuView::MainMenuView() : MenuListView({MenuItem("Alarm")}) {
+#include "../../alarm/views/AlarmView.h"
+#include "../../settings/Settings.h"
+
+MainMenuView::MainMenuView()
+    : MenuListView({MenuItem("NIGHT_MODE", "Enter Night Mode"), MenuItem("ALARM", "Alarm"),
+                    MenuItem("BRIGHTNESS", "Brightness"), MenuItem("NETWORK", "Network"),
+                    MenuItem("RESTART", "Restart")}) {
 }
 
 MainMenuView *MainMenuView::getInstance() {
@@ -17,5 +23,22 @@ void MainMenuView::willUnmount() {
 }
 
 void MainMenuView::didSelect() {
+  auto menuItem = getItem(getSelectedIndex());
+  String key = menuItem->key;
+  if (key.equals("NIGHT_MODE")) {
+    Settings.setNightMode(!Settings.isNightMode());
+    getItem(0)->text = Settings.isNightMode() ? "Exit Night Mode" : "Enter Night Mode";
+    if (Settings.isNightMode()) {
+      Screen.dim();
+    }
+    Application.popView();
+  } else if (key.equals("ALARM")) {
+    Application.pushView(AlarmView::getInstance());
+  } else if (key.equals("BRIGHTNESS")) {
 
+  } else if (key.equals("NETWORK")) {
+
+  } else if (key.equals("RESTART")) {
+    ESP.restart();
+  }
 }

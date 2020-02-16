@@ -10,6 +10,7 @@
 #include <espix-design.h>
 
 #include "examples/config.h"
+#include "examples/settings/Settings.h"
 
 #include "examples/alarm/Alarm.h"
 #include "examples/root/views/RootView.h"
@@ -64,6 +65,7 @@ void handleKeyPress(KeyEventArgs *e) {
 
 void setupApp() {
   Alarm.begin();
+  Settings.begin();
   Application.begin();
   Application.onKeyPress(handleKeyPress);
 }

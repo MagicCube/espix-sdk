@@ -1,6 +1,7 @@
 #include "AlarmView.h"
 
 #include "../Alarm.h"
+#include "../../settings/Settings.h"
 
 AlarmView::AlarmView() {
 }
@@ -12,9 +13,9 @@ AlarmView *AlarmView::getInstance() {
 
 void AlarmView::willMount() {
   _step = AlarmSetupStep::SETTING_HOURS;
-  _hours = Alarm.getSettings().hours;
-  _minutes = Alarm.getSettings().minutes;
-  _mode = (uint8_t)Alarm.getSettings().mode;
+  _hours = Settings.getAlarmSettings().hours;
+  _minutes = Settings.getAlarmSettings().minutes;
+  _mode = (uint8_t)Settings.getAlarmSettings().mode;
   Application.showStatusBar();
 }
 
@@ -119,7 +120,7 @@ void AlarmView::_nextStep() {
     _step = AlarmSetupStep::SETTING_MODE;
     setDirty();
   } else {
-    Alarm.saveSettings({.mode = (AlarmMode)_mode, .hours = _hours, .minutes = _minutes});
+    Settings.saveAlarmSettings({.mode = (AlarmMode)_mode, .hours = _hours, .minutes = _minutes});
     Application.popView();
   }
 }
