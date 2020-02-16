@@ -15,6 +15,8 @@ public:
   MenuListView();
   MenuListView(initializer_list<MenuItem> l);
 
+  int getSelectedIndex();
+
   ReadonlyList<MenuItem> getItems();
   MenuItem getItem(int index);
   void addItem(MenuItem item);

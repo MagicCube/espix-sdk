@@ -8,6 +8,10 @@ MenuListView::MenuListView(initializer_list<MenuItem> l) : _items(l) {
   setDirty();
 }
 
+int MenuListView::getSelectedIndex() {
+  return _selectedIndex;
+}
+
 ReadonlyList<MenuItem> MenuListView::getItems() {
   return _items;
 }
@@ -106,9 +110,9 @@ void MenuListView::handleKeyPress(KeyEventArgs *e) {
 
 void MenuListView::handleScroll(ScrollEventArgs *e) {
   if (e->delta > 0) {
-    selectPrevItem();
-  } else {
     selectNextItem();
+  } else {
+    selectPrevItem();
   }
 }
 
