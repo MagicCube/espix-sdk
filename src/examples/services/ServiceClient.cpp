@@ -17,6 +17,7 @@ void ServiceClientClass::update() {
       // Routine Update
       _lastUpdateTime = millis();
       Serial.println("Fetching from my-cloudflare-services.you-fm.workers.dev...");
+      _isLoading = true;
       _ajax.open("GET", "http://my-cloudflare-services.you-fm.workers.dev/");
       _ajax.send();
     } else {
@@ -26,12 +27,17 @@ void ServiceClientClass::update() {
         if (millis() - _lastUpdateTime > 1.5 * 60 * 1000) {
           _lastUpdateTime = millis();
           Serial.println("Fetching from my-cloudflare-services.you-fm.workers.dev/stock...");
+          _isLoading = true;
           _ajax.open("GET", "http://my-cloudflare-services.you-fm.workers.dev/stock");
           _ajax.send();
         }
       }
     }
   }
+}
+
+bool ServiceClientClass::isLoading() {
+  return _isLoading;
 }
 
 Stock ServiceClientClass::getStock(uint8_t index) {
@@ -47,6 +53,8 @@ WeatherForecast ServiceClientClass::getWeatherForecast(uint8_t day) {
 }
 
 void ServiceClientClass::handleCallback(asyncHTTPrequest *request) {
+  _isLoading = false;
+
   Serial.print("Response HTTP Code: ");
   Serial.println(request->responseHTTPcode());
   Serial.println();

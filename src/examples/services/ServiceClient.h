@@ -17,6 +17,8 @@ public:
   void begin();
   void update();
 
+  bool isLoading();
+
   WeatherForecast getWeatherNow();
   WeatherForecast getWeatherForecast(uint8_t day);
   Stock getStock(uint8_t index);
@@ -28,6 +30,7 @@ private:
   unsigned long UPDATE_TIMEOUT = 60 * 1000;
 
   bool _initialized = false;
+  bool _isLoading = false;
   unsigned long _lastUpdateTime = 0;
 
   asyncHTTPrequest _ajax;
