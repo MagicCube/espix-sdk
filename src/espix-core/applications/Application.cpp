@@ -156,7 +156,9 @@ void ApplicationClass::_fireKeyPressEvent(KeyEventArgs *e) {
 
 void ApplicationClass::_handleScroll(ScrollEventArgs *e) {
   _fireScrollEvent(e);
-  _rootViewContainer->handleScroll(e);
+  if (!e->isDefaultPrevented()) {
+    _rootViewContainer->handleScroll(e);
+  }
 }
 
 void ApplicationClass::_fireScrollEvent(ScrollEventArgs *e) {
