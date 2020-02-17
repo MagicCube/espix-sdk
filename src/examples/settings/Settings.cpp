@@ -9,7 +9,7 @@ void SettingsClass::begin() {
   if (EEPROM.read(0) != RESET_FLAG) {
     EEPROM.write(0, RESET_FLAG);
     saveAlarmSettings({.mode = AlarmMode::OFF, .hours = 0, .minutes = 0});
-    saveDisplaySettings({.isNightMode = false, .dayTimeBrightness = 40, .nightTimeBrightness = 15});
+    saveDisplaySettings({.isNightMode = false, .isPreviewing = false, .dayTimeBrightness = 40, .nightTimeBrightness = 15});
   }
   _alarmSettings.mode = (AlarmMode)EEPROM.read(1);
   _alarmSettings.hours = EEPROM.read(2);
