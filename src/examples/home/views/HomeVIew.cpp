@@ -27,10 +27,12 @@ bool HomeView::shouldUpdate() {
   if (isDirty()) {
     return true;
   }
-  if (millis() - getLastUpdate() > 1000) {
+  if (millis() - getLastUpdate() > 500) {
+    _blinking = !_blinking;
     return true;
   }
-  if (_millisSinceLastSideViewIndexChanged == 0 || millis() - _millisSinceLastSideViewIndexChanged > 8 * 1000) {
+  if (_millisSinceLastSideViewIndexChanged == 0 ||
+      millis() - _millisSinceLastSideViewIndexChanged > 8 * 1000) {
     _millisSinceLastSideViewIndexChanged = millis();
     if (_sideViewIndex == 0) {
       _sideViewIndex = 1;
@@ -56,7 +58,9 @@ void HomeView::render(CanvasContext *context) {
   _drawWeather(context);
   _drawStocks(context);
   if (ServiceClient.isLoading()) {
-    context->fillCircle(getClientWidth() / 2, 2, 2);
+    if (!_blinking) {
+      context->fillCircle(getClientWidth() / 2, 2, 2);
+    }
   }
 }
 
@@ -73,7 +77,13 @@ void HomeView::_drawDateTime(CanvasContext *context) {
 
   // Time
   context->setFontSize(FontSize::H1);
-  context->drawString(_timeString, getClientWidth() - PADDING_RIGHT, 20);
+  context->setTextAlign(TextAlign::RIGHT);
+  context->drawString(_timeString.substring(0, 2), getClientWidth() - PADDING_RIGHT - 30, 20);
+  context->setTextAlign(TextAlign::LEFT);
+  if (_blinking) {
+    context->drawString(":", getClientWidth() - PADDING_RIGHT - 30, 18);
+  }
+  context->drawString(_timeString.substring(3), getClientWidth() - PADDING_RIGHT - 24, 20);
 }
 
 void HomeView::_drawWeather(CanvasContext *context) {

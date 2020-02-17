@@ -18,9 +18,10 @@ public:
   void render(CanvasContext *context);
 
 private:
-  String _timeString = "-- : --";
+  String _timeString = "00:00";
   uint8_t _sideViewIndex = 0;
   long _millisSinceLastSideViewIndexChanged = 0;
+  bool _blinking = false;
 
   void _drawDateTime(CanvasContext *context);
   void _drawWeather(CanvasContext *context);
