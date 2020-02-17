@@ -9,13 +9,13 @@ void SettingsClass::begin() {
   if (EEPROM.read(0) != RESET_FLAG) {
     EEPROM.write(0, RESET_FLAG);
     saveAlarmSettings({.mode = AlarmMode::OFF, .hours = 0, .minutes = 0});
-    saveBrightnessSettings({.isNightMode = false, .dayTimeBrightness = 40, .nightTimeBrightness = 15});
+    saveDisplaySettings({.isNightMode = false, .dayTimeBrightness = 40, .nightTimeBrightness = 15});
   }
   _alarmSettings.mode = (AlarmMode)EEPROM.read(1);
   _alarmSettings.hours = EEPROM.read(2);
   _alarmSettings.minutes = EEPROM.read(3);
-  _brightnessSettings.dayTimeBrightness = EEPROM.read(4);
-  _brightnessSettings.nightTimeBrightness = EEPROM.read(5);
+  _displaySettings.dayTimeBrightness = EEPROM.read(4);
+  _displaySettings.nightTimeBrightness = EEPROM.read(5);
 }
 
 AlarmSettings *SettingsClass::getAlarmSettings() {
@@ -30,14 +30,14 @@ void SettingsClass::saveAlarmSettings(AlarmSettings settings) {
   EEPROM.commit();
 }
 
-BrightnessSettings *SettingsClass::getBrightnessSettings() {
-  return &_brightnessSettings;
+DisplaySettings *SettingsClass::getDisplaySettings() {
+  return &_displaySettings;
 }
 
-void SettingsClass::saveBrightnessSettings(BrightnessSettings settings) {
-  _brightnessSettings = settings;
-  EEPROM.write(4, _brightnessSettings.dayTimeBrightness);
-  EEPROM.write(5, _brightnessSettings.nightTimeBrightness);
+void SettingsClass::saveDisplaySettings(DisplaySettings settings) {
+  _displaySettings = settings;
+  EEPROM.write(4, _displaySettings.dayTimeBrightness);
+  EEPROM.write(5, _displaySettings.nightTimeBrightness);
   EEPROM.commit();
 }
 

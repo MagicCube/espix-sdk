@@ -1,7 +1,7 @@
 #pragma once
 
 #include "AlarmSettings.h"
-#include "BrightnessSettings.h"
+#include "DisplaySettings.h"
 
 class SettingsClass {
 public:
@@ -10,12 +10,12 @@ public:
   AlarmSettings *getAlarmSettings();
   void saveAlarmSettings(AlarmSettings settings);
 
-  BrightnessSettings *getBrightnessSettings();
-  void saveBrightnessSettings(BrightnessSettings settings);
+  DisplaySettings *getDisplaySettings();
+  void saveDisplaySettings(DisplaySettings settings);
 
 private:
   AlarmSettings _alarmSettings;
-  BrightnessSettings _brightnessSettings;
+  DisplaySettings _displaySettings;
 };
 
 extern SettingsClass Settings;

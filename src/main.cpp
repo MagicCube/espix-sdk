@@ -57,8 +57,8 @@ void setupDevices() {
 }
 
 bool isNightMode() {
-  auto brightnessSettings = Settings.getBrightnessSettings();
-  if (brightnessSettings->isNightMode) {
+  auto displaySettings = Settings.getDisplaySettings();
+  if (displaySettings->isNightMode) {
     return true;
   } else {
     auto hours = TimeClient.now().getHours();
@@ -77,16 +77,16 @@ void activateScreen() {
 
 void dimScreen() {
   isActive = false;
-  auto brightnessSettings = Settings.getBrightnessSettings();
-  uint8_t dimmerBrightness = Settings.getBrightnessSettings()->dayTimeBrightness;
+  auto displaySettings = Settings.getDisplaySettings();
+  uint8_t dimmerBrightness = Settings.getDisplaySettings()->dayTimeBrightness;
   if (isNightMode()) {
-    dimmerBrightness = brightnessSettings->nightTimeBrightness;
+    dimmerBrightness = displaySettings->nightTimeBrightness;
     Serial.print("NIGHT MODE: ");
     Serial.println(dimmerBrightness);
   } else {
     auto hours = TimeClient.now().getHours();
     if (hours == 7 || hours >= 23) {
-      dimmerBrightness = round(brightnessSettings->dayTimeBrightness * 0.62);
+      dimmerBrightness = round(displaySettings->dayTimeBrightness * 0.62);
     }
   }
   Screen.setBrightness(dimmerBrightness);
