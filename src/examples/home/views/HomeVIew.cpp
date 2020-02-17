@@ -31,6 +31,18 @@ bool HomeView::shouldUpdate() {
     _blinking = !_blinking;
     return true;
   }
+  if (ServiceClient.isLoading() && (millis() - getLastUpdate() > 250)) {
+    _loadingBlinking = !_loadingBlinking;
+    return true;
+  }
+  return false;
+}
+
+void HomeView::update() {
+  if (TimeClient.isReady()) {
+    _timeString = TimeClient.now().toString("%H:%M");
+  }
+
   if (_millisSinceLastSideViewIndexChanged == 0 ||
       millis() - _millisSinceLastSideViewIndexChanged > 8 * 1000) {
     _millisSinceLastSideViewIndexChanged = millis();
@@ -39,13 +51,6 @@ bool HomeView::shouldUpdate() {
     } else {
       _sideViewIndex = 0;
     }
-  }
-  return false;
-}
-
-void HomeView::update() {
-  if (TimeClient.isReady()) {
-    _timeString = TimeClient.now().toString("%H:%M");
   }
 }
 
@@ -58,32 +63,30 @@ void HomeView::render(CanvasContext *context) {
   _drawWeather(context);
   _drawStocks(context);
   if (ServiceClient.isLoading()) {
-    if (!_blinking) {
+    if (!_loadingBlinking) {
       context->fillCircle(getClientWidth() / 2, 2, 2);
     }
   }
 }
 
 void HomeView::_drawDateTime(CanvasContext *context) {
-  const int PADDING_RIGHT = 2;
-
   context->setTextAlign(TextAlign::RIGHT);
 
   // Date
   context->setFontSize(FontSize::NORMAL);
   String date = TimeClient.now().toString("%a %d");
   date.toUpperCase();
-  context->drawString(date, getClientWidth() - PADDING_RIGHT, 0);
+  context->drawString(date, getClientWidth(), 0);
 
   // Time
   context->setFontSize(FontSize::H1);
   context->setTextAlign(TextAlign::RIGHT);
-  context->drawString(_timeString.substring(0, 2), getClientWidth() - PADDING_RIGHT - 30, 20);
+  context->drawString(_timeString.substring(0, 2), getClientWidth() - 35, 20);
   context->setTextAlign(TextAlign::LEFT);
   if (_blinking) {
-    context->drawString(":", getClientWidth() - PADDING_RIGHT - 30, 18);
+    context->drawString(":", getClientWidth() - 33, 18);
   }
-  context->drawString(_timeString.substring(3), getClientWidth() - PADDING_RIGHT - 24, 20);
+  context->drawString(_timeString.substring(3), getClientWidth() - 25, 20);
 }
 
 void HomeView::_drawWeather(CanvasContext *context) {

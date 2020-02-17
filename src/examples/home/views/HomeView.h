@@ -4,6 +4,8 @@
 
 #include <espix-core.h>
 
+#include "../../../config.h"
+
 class HomeView : public View {
 public:
   HomeView();
@@ -18,10 +20,16 @@ public:
   void render(CanvasContext *context);
 
 private:
-  String _timeString = "00:00";
+  #ifndef DEBUG_LOCAL
+  String _timeString = "  :  ";
+  #else
+  String _timeString = "19:43";
+  #endif
+
   uint8_t _sideViewIndex = 0;
   long _millisSinceLastSideViewIndexChanged = 0;
   bool _blinking = false;
+  bool _loadingBlinking = false;
 
   void _drawDateTime(CanvasContext *context);
   void _drawWeather(CanvasContext *context);
