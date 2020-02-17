@@ -1,7 +1,9 @@
 #include "MainMenuView.h"
 
-#include "../../alarm/views/AlarmView.h"
 #include "../../settings/Settings.h"
+
+#include "../../alarm/views/AlarmView.h"
+#include "../../network/views/NetworkView.h"
 
 MainMenuView::MainMenuView()
     : MenuListView({MenuItem("NIGHT_MODE", "Enter Night Mode"), MenuItem("ALARM", "Alarm"),
@@ -37,7 +39,7 @@ void MainMenuView::didSelect() {
   } else if (key.equals("BRIGHTNESS")) {
 
   } else if (key.equals("NETWORK")) {
-
+    Application.pushView(NetworkView::getInstance());
   } else if (key.equals("RESTART")) {
     ESP.restart();
   }
