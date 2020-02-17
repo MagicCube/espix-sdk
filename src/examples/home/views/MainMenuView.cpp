@@ -3,11 +3,12 @@
 #include "../../settings/Settings.h"
 
 #include "../../alarm/views/AlarmView.h"
+#include "../../display/views/DisplayView.h"
 #include "../../network/views/NetworkView.h"
 
 MainMenuView::MainMenuView()
     : MenuListView({MenuItem("NIGHT_MODE", "Enter Night Mode"), MenuItem("ALARM", "Alarm"),
-                    MenuItem("BRIGHTNESS", "Brightness"), MenuItem("NETWORK", "Network"),
+                    MenuItem("DISPLAY", "Display"), MenuItem("NETWORK", "Network"),
                     MenuItem("RESTART", "Restart")}) {
 }
 
@@ -34,8 +35,8 @@ void MainMenuView::didSelect() {
     Application.popView();
   } else if (key.equals("ALARM")) {
     Application.pushView(AlarmView::getInstance());
-  } else if (key.equals("BRIGHTNESS")) {
-
+  } else if (key.equals("DISPLAY")) {
+    Application.pushView(DisplayView::getInstance());
   } else if (key.equals("NETWORK")) {
     Application.pushView(NetworkView::getInstance());
   } else if (key.equals("RESTART")) {
