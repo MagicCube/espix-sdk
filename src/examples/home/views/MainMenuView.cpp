@@ -30,9 +30,6 @@ void MainMenuView::didSelect() {
   if (key.equals("NIGHT_MODE")) {
     Settings.setNightMode(!Settings.isNightMode());
     getItem(0)->text = Settings.isNightMode() ? "Exit Night Mode" : "Enter Night Mode";
-    if (Settings.isNightMode()) {
-      Screen.dim();
-    }
     Application.popView();
   } else if (key.equals("ALARM")) {
     Application.pushView(AlarmView::getInstance());

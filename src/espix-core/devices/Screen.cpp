@@ -2,9 +2,6 @@
 
 #include "../timing/TimeClient.h"
 
-// TODO: DELETE
-#include "../../examples/settings/Settings.h"
-
 ScreenClass::ScreenClass() {
 }
 
@@ -20,10 +17,6 @@ bool ScreenClass::isOn() {
   return _isOn;
 }
 
-bool ScreenClass::isActive() {
-  return _isActive;
-}
-
 uint8_t ScreenClass::getBrightness() {
   return _brightness;
 }
@@ -33,25 +26,6 @@ void ScreenClass::setBrightness(uint8_t percentage) {
     _brightness = percentage;
     _display->setBrightness(percentage * 255 / 100);
   }
-}
-
-void ScreenClass::dim() {
-  uint8_t percentage = 40;
-  int hours = TimeClient.now().getHours();
-  if (hours <= 6 || Settings.isNightMode()) {
-    percentage = 15;
-    _isOn = false;
-  } else {
-    if (hours >= 23) {
-      // After 11pm, and before 0am
-      percentage = 20;
-    } else if (hours >= 20) {
-      // After 8pm, and before 9
-      percentage = 25;
-    }
-  }
-  setBrightness(percentage);
-  _isActive = false;
 }
 
 bool ScreenClass::isFlipped() {
@@ -98,10 +72,6 @@ void ScreenClass::update() {
   if (_canvas) {
     _canvas->update();
   }
-
-  if (millis() - _lastActiveTime > 5 * 1000) {
-    dim();
-  }
 }
 
 void ScreenClass::turnOn() {
@@ -121,15 +91,6 @@ void ScreenClass::clearBuffer() {
 void ScreenClass::clear() {
   clearBuffer();
   _display->display();
-}
-
-void ScreenClass::activate() {
-  if (!isOn()) {
-    turnOn();
-  }
-  setBrightness(100);
-  _isActive = true;
-  _lastActiveTime = millis();
 }
 
 ScreenClass Screen;

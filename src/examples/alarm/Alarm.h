@@ -17,4 +17,6 @@ private:
   bool _isBeeping = false;
 };
 
+void handleEasyBuzzerCallback();
+
 extern AlarmClass Alarm;

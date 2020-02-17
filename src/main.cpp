@@ -17,6 +17,8 @@
 #include "examples/services/ServiceClient.h"
 
 bool connecting = false;
+bool isActive = true;
+unsigned long lastActiveTime = 0;
 
 SH1106Wire display(0x3c, OLED_SDA_PIN, OLED_CLK_PIN);
 

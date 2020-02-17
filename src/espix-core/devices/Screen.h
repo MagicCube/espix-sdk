@@ -28,8 +28,6 @@ public:
   // Gets true if the screen is on.
   bool isOn();
 
-  bool isActive();
-
   // Gets true if the screen is flipped vertically.
   bool isFlipped();
 
@@ -63,22 +61,13 @@ public:
   // Turns off.
   void turnOff();
 
-  // Dim screen to minimum brightness.
-  void dim();
-
-  // Reset auto dim timer.
-  void activate();
-
-
 private:
   OLEDDisplay *_display;
   Canvas *_canvas;
   bool _isOn = true;
-  bool _isActive = true;
   int _brightness = 255;
   bool _flipped = false;
   bool _mirrored = false;
-  uint32_t _lastActiveTime = millis();
 };
 
 extern ScreenClass Screen;

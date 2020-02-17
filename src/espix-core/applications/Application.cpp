@@ -142,14 +142,9 @@ void ApplicationClass::_loop() {
 }
 
 void ApplicationClass::_handleKeyPress(KeyEventArgs *e) {
-  if (!Screen.isOn()) {
-    Screen.activate();
-  } else {
-    Screen.activate();
-    _fireKeyPressEvent(e);
-    if (!e->isDefaultPrevented()) {
-      _rootViewContainer->handleKeyPress(e);
-    }
+  _fireKeyPressEvent(e);
+  if (!e->isDefaultPrevented()) {
+    _rootViewContainer->handleKeyPress(e);
   }
 }
 
@@ -160,13 +155,8 @@ void ApplicationClass::_fireKeyPressEvent(KeyEventArgs *e) {
 }
 
 void ApplicationClass::_handleScroll(ScrollEventArgs *e) {
-  if (!Screen.isOn()) {
-    Screen.activate();
-  } else {
-    Screen.activate();
-    _fireScrollEvent(e);
-    _rootViewContainer->handleScroll(e);
-  }
+  _fireScrollEvent(e);
+  _rootViewContainer->handleScroll(e);
 }
 
 void ApplicationClass::_fireScrollEvent(ScrollEventArgs *e) {

@@ -45,12 +45,12 @@ void AlarmClass::startBeep() {
                   80,   // Off Duration in milliseconds(ms).
                   4,    // The number of beeps per cycle.
                   500,  // Pause duration.
-                  20    // The number of cycle.
+                  20,    // The number of cycle.
+                  handleEasyBuzzerCallback
   );
   if (!Screen.isOn()) {
     Screen.turnOn();
   }
-  Screen.activate();
   digitalWrite(LED_PIN, HIGH);
 }
 
@@ -65,6 +65,10 @@ void AlarmClass::stopBeep() {
   );
   digitalWrite(LED_PIN, LOW);
   _isBeeping = false;
+}
+
+void handleEasyBuzzerCallback() {
+  Alarm.stopBeep();
 }
 
 AlarmClass Alarm;
