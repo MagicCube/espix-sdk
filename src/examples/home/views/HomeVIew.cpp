@@ -55,6 +55,9 @@ void HomeView::render(CanvasContext *context) {
   _drawDateTime(context);
   _drawWeather(context);
   _drawStocks(context);
+  if (ServiceClient.isLoading()) {
+    context->fillCircle(getClientWidth() / 2, 2, 2);
+  }
 }
 
 void HomeView::_drawDateTime(CanvasContext *context) {
