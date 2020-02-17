@@ -24,18 +24,15 @@ void HomeView::willUnmount() {
 }
 
 bool HomeView::shouldUpdate() {
+  bool result = false;
   if (isDirty()) {
-    return true;
+    result = true;
   }
   if (millis() - getLastUpdate() > 500) {
     _blinking = !_blinking;
-    return true;
+    result = true;
   }
-  if (ServiceClient.isLoading() && (millis() - getLastUpdate() > 250)) {
-    _loadingBlinking = !_loadingBlinking;
-    return true;
-  }
-  return false;
+  return result;
 }
 
 void HomeView::update() {
@@ -63,7 +60,7 @@ void HomeView::render(CanvasContext *context) {
   _drawWeather(context);
   _drawStocks(context);
   if (ServiceClient.isLoading()) {
-    if (!_loadingBlinking) {
+    if (!_blinking) {
       context->fillCircle(getClientWidth() / 2, 2, 2);
     }
   }

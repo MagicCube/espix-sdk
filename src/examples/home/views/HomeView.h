@@ -29,7 +29,6 @@ private:
   uint8_t _sideViewIndex = 0;
   long _millisSinceLastSideViewIndexChanged = 0;
   bool _blinking = false;
-  bool _loadingBlinking = false;
 
   void _drawDateTime(CanvasContext *context);
   void _drawWeather(CanvasContext *context);
