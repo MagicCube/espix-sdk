@@ -88,7 +88,7 @@ void HomeView::_drawWeather(CanvasContext *context) {
 
       context->setTextAlign(TextAlign::LEFT);
       context->setFont(Meteocons_Plain_42);
-      context->drawString(now.dayCondCode, PADDING_LEFT, 12);
+      context->drawString(now.dayCondCode, PADDING_LEFT, 11);
     } else {
       context->setTextAlign(TextAlign::CENTER);
       context->setFontSize(FontSize::NORMAL);
