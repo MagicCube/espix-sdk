@@ -56,7 +56,47 @@ void setupDevices() {
   EasyBuzzer.setPin(BUZZER_PIN);
 }
 
+void activateScreen() {
+  isActive = true;
+  lastActiveTime = millis();
+  Screen.setBrightness(100);
+}
+
+void dimScreen() {
+  isActive = false;
+  auto brightnessSettings = Settings.getBrightnessSettings();
+  uint8_t dimmerBrightness = Settings.getBrightnessSettings()->dayTimeBrightness;
+  if (brightnessSettings->isNightMode) {
+    dimmerBrightness = brightnessSettings->nightTimeBrightness;
+    Serial.print("NIGHT MODE: ");
+    Serial.println(dimmerBrightness);
+  } else {
+    auto hours = TimeClient.now().getHours();
+    if (hours <= 6) {
+      dimmerBrightness = brightnessSettings->nightTimeBrightness;
+    } else if (hours == 7 || hours >= 23) {
+      dimmerBrightness = round(brightnessSettings->dayTimeBrightness * 0.62);
+    }
+  }
+  Screen.setBrightness(dimmerBrightness);
+}
+
+void checkScreenBrightness() {
+  if (Alarm.isBeeping()) {
+    isActive = true;
+    Screen.setBrightness(100);
+  } else {
+    if (isActive) {
+      if (millis() > lastActiveTime + 5 * 1000) {
+        dimScreen();
+      }
+    }
+  }
+}
+
 void handleKeyPress(KeyEventArgs *e) {
+  activateScreen();
+
   if (e->keyCode == KEY_ESC) {
     if (Alarm.isBeeping()) {
       e->preventDefault();
@@ -65,11 +105,16 @@ void handleKeyPress(KeyEventArgs *e) {
   }
 }
 
+void handleScroll(ScrollEventArgs *e) {
+  activateScreen();
+}
+
 void setupApp() {
   Alarm.begin();
   Settings.begin();
   Application.begin();
   Application.onKeyPress(handleKeyPress);
+  Application.onScroll(handleScroll);
 }
 
 void setup() {
@@ -89,6 +134,8 @@ void loop() {
   Alarm.update();
   EasyBuzzer.update();
   ServiceClient.update();
+  checkScreenBrightness();
+
   int timeBudget = Application.update();
   if (timeBudget > 0) {
     delay(timeBudget);

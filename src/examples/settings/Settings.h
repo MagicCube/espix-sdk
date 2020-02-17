@@ -1,21 +1,21 @@
 #pragma once
 
 #include "AlarmSettings.h"
+#include "BrightnessSettings.h"
 
 class SettingsClass {
 public:
   void begin();
 
-  AlarmSettings getAlarmSettings();
+  AlarmSettings *getAlarmSettings();
   void saveAlarmSettings(AlarmSettings settings);
 
-  bool isNightMode();
-  void setNightMode(bool nightMode);
+  BrightnessSettings *getBrightnessSettings();
+  void saveBrightnessSettings(BrightnessSettings settings);
 
 private:
-  bool _isNightMode = false;
-
   AlarmSettings _alarmSettings;
+  BrightnessSettings _brightnessSettings;
 };
 
 extern SettingsClass Settings;

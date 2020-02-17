@@ -13,9 +13,10 @@ AlarmView *AlarmView::getInstance() {
 
 void AlarmView::willMount() {
   _step = AlarmSetupStep::SETTING_HOURS;
-  _hours = Settings.getAlarmSettings().hours;
-  _minutes = Settings.getAlarmSettings().minutes;
-  _mode = (uint8_t)Settings.getAlarmSettings().mode;
+  auto settings = Settings.getAlarmSettings();
+  _hours = settings->hours;
+  _minutes = settings->minutes;
+  _mode = (uint8_t)settings->mode;
   Application.showStatusBar();
 }
 

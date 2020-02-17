@@ -28,8 +28,9 @@ void MainMenuView::didSelect() {
   auto menuItem = getItem(getSelectedIndex());
   String key = menuItem->key;
   if (key.equals("NIGHT_MODE")) {
-    Settings.setNightMode(!Settings.isNightMode());
-    getItem(0)->text = Settings.isNightMode() ? "Exit Night Mode" : "Enter Night Mode";
+    auto brightnessSettings = Settings.getBrightnessSettings();
+    brightnessSettings->isNightMode = !brightnessSettings->isNightMode;
+    getItem(0)->text = brightnessSettings->isNightMode ? "Exit Night Mode" : "Enter Night Mode";
     Application.popView();
   } else if (key.equals("ALARM")) {
     Application.pushView(AlarmView::getInstance());

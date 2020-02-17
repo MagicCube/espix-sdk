@@ -11,15 +11,15 @@ void AlarmClass::begin() {
 
 void AlarmClass::update() {
   auto settings = Settings.getAlarmSettings();
-  if (settings.mode != AlarmMode::OFF && !isBeeping()) {
+  if (settings->mode != AlarmMode::OFF && !isBeeping()) {
     if (_lastUpdateTime == 0 || millis() >= _lastUpdateTime + 1000) {
       _lastUpdateTime = millis();
       auto now = TimeClient.now();
-      if (now.getHours() == settings.hours && now.getMinutes() == settings.minutes) {
+      if (now.getHours() == settings->hours && now.getMinutes() == settings->minutes) {
         bool rightDay = false;
-        if (settings.mode == AlarmMode::EVERYDAY) {
+        if (settings->mode == AlarmMode::EVERYDAY) {
           rightDay = true;
-        } else if (settings.mode == AlarmMode::WEEKDAY) {
+        } else if (settings->mode == AlarmMode::WEEKDAY) {
           int day = now.getDay();
           if (day != 0 && day != 6) {
             rightDay = true;
