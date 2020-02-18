@@ -4,7 +4,7 @@
 
 #include <espix-core.h>
 
-#include "../../../config.h"
+#include "../../config.h"
 
 class HomeView : public View {
 public:
@@ -20,10 +20,10 @@ public:
   void render(CanvasContext *context);
 
 private:
-  #ifndef DEBUG_LOCAL
-  String _timeString = "  :  ";
-  #else
+  #ifdef DEBUG_LOCAL
   String _timeString = "19:43";
+  #else
+  String _timeString = " T:T ";
   #endif
 
   uint8_t _sideViewIndex = 0;
