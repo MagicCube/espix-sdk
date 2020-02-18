@@ -16,7 +16,7 @@ void DisplayView::willMount() {
   settings->isPreviewing = true;
   _dayTimeBrightness = settings->dayTimeBrightness;
   _nightTimeBrightness = settings->nightTimeBrightness;
-  setText("Day Time Brightness");
+  setText("Day Time Brightness " + String(_dayTimeBrightness) + "%");
   setProgress(_dayTimeBrightness);
   Application.showStatusBar();
 }
@@ -45,6 +45,7 @@ void DisplayView::handleScroll(ScrollEventArgs *e) {
     }
     setProgress(_dayTimeBrightness);
     Screen.setBrightness(_dayTimeBrightness);
+    setText("Day Time Brightness " + String(_dayTimeBrightness) + "%");
   } else if (_step == DisplaySetupStep::SETTING_NIGHT_TIME_BRIGHTNESS) {
     if (e->delta < 0) {
       _nightTimeBrightness -= 1;
@@ -59,13 +60,14 @@ void DisplayView::handleScroll(ScrollEventArgs *e) {
     }
     setProgress(_nightTimeBrightness);
     Screen.setBrightness(_nightTimeBrightness);
+    setText("Night Time Brightness " + String(_nightTimeBrightness) + "%");
   }
 }
 
 void DisplayView::_nextStep() {
   if (_step == DisplaySetupStep::SETTING_DAY_TIME_BRIGHTNESS) {
     _step = DisplaySetupStep::SETTING_NIGHT_TIME_BRIGHTNESS;
-    setText("Night Time Brightness");
+    setText("Night Time Brightness " + String(_nightTimeBrightness) + "%");
     setProgress(_nightTimeBrightness);
   } else {
     auto displaySettings = Settings.getDisplaySettings();
