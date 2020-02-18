@@ -18,6 +18,7 @@
 
 bool connecting = false;
 bool isActive = true;
+bool lastTimeNightMode = false;
 unsigned long lastActiveTime = 0;
 
 SH1106Wire display(0x3c, OLED_SDA_PIN, OLED_CLK_PIN);
@@ -97,12 +98,17 @@ void checkScreenBrightness() {
     isActive = true;
     Screen.setBrightness(100);
   } else {
-    if (isActive) {
-      if (millis() > lastActiveTime + 5 * 1000) {
-        dimScreen();
+    if (!lastTimeNightMode && isNightMode()) {
+      dimScreen();
+    } else {
+      if (isActive) {
+        if (millis() > lastActiveTime + 5 * 1000) {
+          dimScreen();
+        }
       }
     }
   }
+  lastTimeNightMode = isNightMode();
 }
 
 void handleKeyPress(KeyEventArgs *e) {
