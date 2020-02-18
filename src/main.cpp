@@ -1,15 +1,20 @@
 #include <Arduino.h>
 
+#include "examples/config.h"
+
 #include <EEPROM.h>
 #include <ESP8266HTTPClient.h>
 
 #include <EasyBuzzer.h>
+#ifndef OLED_SSD1306
 #include <SH1106Wire.h>
+#else
+#include <SSD1306Wire.h>
+#endif
 
 #include <espix-core.h>
 #include <espix-design.h>
 
-#include "examples/config.h"
 #include "examples/settings/Settings.h"
 
 #include "examples/alarm/Alarm.h"
@@ -21,7 +26,11 @@ bool isActive = true;
 bool lastTimeNightMode = false;
 unsigned long lastActiveTime = 0;
 
+#ifndef OLED_SSD1306
 SH1106Wire display(0x3c, OLED_SDA_PIN, OLED_CLK_PIN);
+#else
+SSD1306Wire display(0x3c, OLED_CLK_PIN, OLED_SDA_PIN);
+#endif
 
 StatusBar statusBar;
 RootView rootView;

@@ -1,5 +1,8 @@
 #pragma once
 
+// #define OLED_SSD1306
+// #define DISPLAY_ALWAYS_ON
+
 #define OLED_SDA_PIN D1
 #define OLED_CLK_PIN D2
 
@@ -17,7 +20,5 @@
 
 #define WIFI_2_SSID "Henry's Living Room 2.4GHz"
 #define WIFI_2_PWD "13913954971"
-
-// #define DISPLAY_ALWAYS_ON
 
 // #define DEBUG_LOCAL
