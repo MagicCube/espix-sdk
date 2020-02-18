@@ -69,11 +69,13 @@ void HomeView::render(CanvasContext *context) {
 void HomeView::_drawDateTime(CanvasContext *context) {
   context->setTextAlign(TextAlign::RIGHT);
 
-  // Date
-  context->setFontSize(FontSize::NORMAL);
-  String date = TimeClient.now().toString("%a %d");
-  date.toUpperCase();
-  context->drawString(date, getClientWidth(), 0);
+  if (TimeClient.isReady()) {
+    // Date
+    context->setFontSize(FontSize::NORMAL);
+    String date = TimeClient.now().toString("%a %d");
+    date.toUpperCase();
+    context->drawString(date, getClientWidth(), 0);
+  }
 
   // Time
   context->setFontSize(FontSize::H1);
