@@ -45,7 +45,7 @@ void AlarmClass::startBeep() {
                   80,   // Off Duration in milliseconds(ms).
                   4,    // The number of beeps per cycle.
                   500,  // Pause duration.
-                  20,    // The number of cycle.
+                  40,    // The number of cycle.
                   handleEasyBuzzerCallback
   );
   if (!Screen.isOn()) {
