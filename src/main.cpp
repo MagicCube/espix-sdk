@@ -72,7 +72,7 @@ bool isNightMode() {
     return true;
   } else {
     auto hours = TimeClient.now().getHours();
-    if (hours <= 6) {
+    if (hours == 23 || hours <= 6) {
       return true;
     }
   }
@@ -93,11 +93,6 @@ void dimScreen() {
     dimmerBrightness = displaySettings->nightTimeBrightness;
     Serial.print("NIGHT MODE: ");
     Serial.println(dimmerBrightness);
-  } else {
-    auto hours = TimeClient.now().getHours();
-    if (hours == 7 || hours >= 23) {
-      dimmerBrightness = round(displaySettings->dayTimeBrightness * 0.62);
-    }
   }
   Screen.setBrightness(dimmerBrightness);
 }
