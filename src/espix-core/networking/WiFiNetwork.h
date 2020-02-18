@@ -17,7 +17,7 @@ public:
   WiFiNetworkClass();
 
   bool isConnected();
-  wl_status_t getStatus();
+  WiFiConnectionState getStatus();
   String getLocalIP();
 
   void addToPreferredList(WiFiConnectionSetting setting);

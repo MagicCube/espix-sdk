@@ -12,8 +12,8 @@ bool WiFiNetworkClass::isConnected() {
   return WiFi.status() == WL_CONNECTED;
 }
 
-wl_status_t WiFiNetworkClass::getStatus() {
-  return WiFi.status();
+WiFiConnectionState WiFiNetworkClass::getStatus() {
+  return _connectionState;
 }
 
 String WiFiNetworkClass::getLocalIP() {
