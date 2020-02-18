@@ -18,4 +18,6 @@
 #define WIFI_2_SSID "Henry's Living Room 2.4GHz"
 #define WIFI_2_PWD "13913954971"
 
-// #define DEBUG_LOCAL
+#define DISPLAY_ALWAYS_ON
+
+#define DEBUG_LOCAL

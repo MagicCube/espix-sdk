@@ -160,7 +160,9 @@ void loop() {
   Alarm.update();
   EasyBuzzer.update();
   ServiceClient.update();
+#ifndef DISPLAY_ALWAYS_ON
   checkScreenBrightness();
+#endif
 
   int timeBudget = Application.update();
   if (timeBudget > 0) {
