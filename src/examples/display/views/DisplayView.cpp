@@ -33,12 +33,12 @@ void DisplayView::didSelect() {
 void DisplayView::handleScroll(ScrollEventArgs *e) {
   if (_step == DisplaySetupStep::SETTING_DAY_TIME_BRIGHTNESS) {
     if (e->delta < 0) {
-      _dayTimeBrightness -= 2;
+      _dayTimeBrightness -= 1;
       if (_dayTimeBrightness < 0) {
         _dayTimeBrightness = 0;
       }
     } else {
-      _dayTimeBrightness += 2;
+      _dayTimeBrightness += 1;
       if (_dayTimeBrightness > 100) {
         _dayTimeBrightness = 100;
       }
@@ -47,12 +47,12 @@ void DisplayView::handleScroll(ScrollEventArgs *e) {
     Screen.setBrightness(_dayTimeBrightness);
   } else if (_step == DisplaySetupStep::SETTING_NIGHT_TIME_BRIGHTNESS) {
     if (e->delta < 0) {
-      _nightTimeBrightness -= 2;
+      _nightTimeBrightness -= 1;
       if (_nightTimeBrightness < 0) {
         _nightTimeBrightness = 0;
       }
     } else {
-      _nightTimeBrightness += 2;
+      _nightTimeBrightness += 1;
       if (_nightTimeBrightness > 100) {
         _nightTimeBrightness = 100;
       }
