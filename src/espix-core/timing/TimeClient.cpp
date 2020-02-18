@@ -68,7 +68,7 @@ void TimeClientClass::_internalUpdate() {
     return;
   }
   _updateStart = millis();
-  configTime(0, 0, "0.cn.pool.ntp.org", "1.cn.pool.ntp.org", "2.cn.pool.ntp.org");
+  configTime(0, 0, "ntp.aliyun.com", "ntp1.aliyun.com", "ntp2.aliyun.com");
 }
 
 TimeClientClass TimeClient(8 * 60 * 60 * 1000);
