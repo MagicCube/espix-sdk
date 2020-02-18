@@ -2,7 +2,7 @@
 
 #include <EEPROM.h>
 
-#define RESET_FLAG 81
+#define RESET_FLAG 84
 
 void SettingsClass::begin() {
   EEPROM.begin(16);
