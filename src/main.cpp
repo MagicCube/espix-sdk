@@ -24,7 +24,7 @@ SH1106Wire display(0x3c, OLED_SDA_PIN, OLED_CLK_PIN);
 
 StatusBar statusBar;
 RootView rootView;
-ProgressView connectionView("Connecting to WiFi...", ProgressMode::INDETERMINATE);
+ProgressView connectionView("Setup WiFi connections...", ProgressMode::INDETERMINATE);
 
 void onConnected() {
   connecting = false;
@@ -163,6 +163,15 @@ void loop() {
 #ifndef DISPLAY_ALWAYS_ON
   checkScreenBrightness();
 #endif
+
+  if (connecting) {
+    auto state = WiFiNetwork.getConnectionState();
+    if (state == WiFiConnectionState::SCANNING) {
+      connectionView.setText("Scanning WiFi...");
+    } else if (state == WiFiConnectionState::CONNECTING) {
+      connectionView.setText("Connecting to WiFi...");
+    }
+  }
 
   int timeBudget = Application.update();
   if (timeBudget > 0) {

@@ -12,7 +12,7 @@ bool WiFiNetworkClass::isConnected() {
   return WiFi.status() == WL_CONNECTED;
 }
 
-WiFiConnectionState WiFiNetworkClass::getStatus() {
+WiFiConnectionState WiFiNetworkClass::getConnectionState() {
   return _connectionState;
 }
 
