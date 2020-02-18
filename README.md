@@ -4,7 +4,7 @@ The core library of Espix.
 
 ## About the Project
 
-I always try to build a tiny system with user friendly UI from sketch, even when I was a 13 years old boy. In 1997, I implemented a MS-Editor-like console application by using Quick Basic.
+I always try to build tiny system from sketch, even when I was a 13-years-old boy. In 1997, I implemented a MS-Editor-like console application by using Quick Basic.
 
 ### espix-core
 
